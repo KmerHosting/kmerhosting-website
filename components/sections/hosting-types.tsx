@@ -38,7 +38,7 @@ const hostingTypes = [
   },
   {
     icon: Cloud,
-    title: "VPS Hosting",
+    title: "Cloud VPS Hosting",
     description:
       "Full control with dedicated resources. Scale your applications with powerful virtual private servers.",
     features: [

@@ -28,6 +28,16 @@ export function CookieBanner() {
         setCookiePreferences(JSON.parse(preferences))
       }
     }
+
+    // Listen for custom event to show banner
+    const handleShowBanner = () => {
+      setShowBanner(true)
+    }
+    window.addEventListener('showCookieBanner', handleShowBanner)
+
+    return () => {
+      window.removeEventListener('showCookieBanner', handleShowBanner)
+    }
   }, [])
 
   const handleAcceptAll = () => {

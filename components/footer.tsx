@@ -3,7 +3,7 @@
 import type React from "react"
 
 import Link from "next/link"
-import { ArrowUp, Mail, Phone } from "lucide-react"
+import { ArrowUp, Mail, Phone, Slack, Twitter, Facebook, Linkedin, Github, Instagram, Youtube } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useLanguage } from "@/components/language-provider"
@@ -108,7 +108,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link href="/vps" className="hover:text-accent transition-colors">
-                    VPS Hosting
+                    Cloud VPS Hosting
                   </Link>
                 </li>
               </ul>
@@ -132,6 +132,24 @@ export function Footer() {
                   <Link href="/free-hosting" className="hover:text-accent transition-colors">
                     {t("nav.freeHosting")}
                   </Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="hover:text-accent transition-colors">
+                    {t("nav.blog")}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/forum" className="hover:text-accent transition-colors">
+                    {t("nav.forum")}
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={() => window.dispatchEvent(new CustomEvent('showCookieBanner'))}
+                    className="hover:text-accent transition-colors text-left"
+                  >
+                    {t("footer.manageCookies")}
+                  </button>
                 </li>
               </ul>
             </div>
@@ -202,10 +220,88 @@ export function Footer() {
 
           {/* Bottom Bar */}
           <div className="mt-12 pt-8 border-t">
-            <div className="text-center text-sm text-muted-foreground">
-              <p>
-                &copy; {new Date().getFullYear()} KmerHosting. {t("footer.allRightsReserved")}
-              </p>
+            <div className="flex items-center justify-between">
+              {/* Social Media Icons */}
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://slack.kmerhosting.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  aria-label="Join our Slack community"
+                >
+                  <Slack className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://twitter.com/kmerhosting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  aria-label="Follow us on Twitter"
+                >
+                  <Twitter className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://facebook.com/kmerhosting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  aria-label="Follow us on Facebook"
+                >
+                  <Facebook className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://linkedin.com/company/kmerhosting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  aria-label="Connect with us on LinkedIn"
+                >
+                  <Linkedin className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://github.com/kmerhosting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  aria-label="View our GitHub"
+                >
+                  <Github className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://instagram.com/kmerhosting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  aria-label="Follow us on Instagram"
+                >
+                  <Instagram className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://youtube.com/@kmerhosting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  aria-label="Subscribe to our YouTube channel"
+                >
+                  <Youtube className="h-5 w-5" />
+                </a>
+              </div>
+
+              {/* Copyright */}
+              <div className="text-sm text-muted-foreground">
+                <p>
+                  KmerHosting &copy; 2023-{new Date().getFullYear()}
+                </p>
+              </div>
+
+              {/* Status Indicator */}
+              <div className="flex items-center gap-2 text-sm">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-green-600 dark:text-green-400 font-medium">
+                  {t("footer.status")}
+                </span>
+              </div>
             </div>
           </div>
         </div>

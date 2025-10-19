@@ -10,7 +10,7 @@ import Link from "next/link"
 const plans = [
   {
     name: "VPS Basic",
-    price: "120,000 FCFA",
+    price: "90,000 FCFA",
     description: "Perfect for small applications",
     features: [
       "2 CPU cores",
@@ -27,7 +27,7 @@ const plans = [
   },
   {
     name: "VPS Pro",
-    price: "240,000 FCFA",
+    price: "150,000 FCFA",
     description: "For growing applications",
     badge: "Popular",
     features: [
@@ -35,7 +35,7 @@ const plans = [
       "8 GB RAM",
       "160 GB SSD NVMe",
       "4 TB bandwidth",
-      "2 IPv4 addresses",
+      "1 IPv4 address",
       "Full root access",
       "Choice of OS",
       "DDoS protection",
@@ -47,14 +47,14 @@ const plans = [
   },
   {
     name: "VPS Enterprise",
-    price: "480,000 FCFA",
+    price: "220,000 FCFA",
     description: "For demanding workloads",
     features: [
       "8 CPU cores",
       "16 GB RAM",
       "320 GB SSD NVMe",
       "8 TB bandwidth",
-      "4 IPv4 addresses",
+      "1 IPv4 address",
       "Full root access",
       "Choice of OS",
       "DDoS protection",
@@ -123,7 +123,7 @@ export default function VPSPage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
               <Badge variant="secondary" className="mb-6 px-4 py-1.5">
-                VPS Hosting
+                Cloud VPS Hosting
               </Badge>
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6 text-balance">
                 Powerful VPS hosting with dedicated resources

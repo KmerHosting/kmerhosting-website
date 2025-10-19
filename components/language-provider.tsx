@@ -29,6 +29,8 @@ const translations = {
     "nav.language": "Language",
     "nav.domainSearch": "Domain Search",
     "nav.freeHosting": "Free Plan",
+    "nav.blog": "Blog",
+    "nav.forum": "Forum",
 
     // Common
     "common.getStarted": "Get Started",
@@ -68,10 +70,11 @@ const translations = {
     "footer.allRightsReserved": "All rights reserved.",
     "footer.backToTop": "Back to Top",
     "footer.status": "Service Status",
+    "footer.manageCookies": "Manage Cookies",
 
     // Auth
-    "auth.login.title": "Login to Your Account",
-    "auth.login.subtitle": "Welcome back! Please sign in to continue.",
+    "auth.login.title": "Welcome back!",
+    "auth.login.subtitle": "Please sign in to continue.",
     "auth.login.email": "Email",
     "auth.login.password": "Password",
     "auth.login.submit": "Sign In",
@@ -139,6 +142,8 @@ const translations = {
     "nav.language": "Langue",
     "nav.domainSearch": "Recherche de domaine",
     "nav.freeHosting": "Plan gratuit",
+    "nav.blog": "Blog",
+    "nav.forum": "Forum",
 
     // Common
     "common.getStarted": "Commencer",
@@ -183,10 +188,11 @@ const translations = {
     "footer.allRightsReserved": "Tous droits réservés.",
     "footer.backToTop": "Retour en haut",
     "footer.status": "État des services",
+    "footer.manageCookies": "Gérer les cookies",
 
     // Auth
-    "auth.login.title": "Connectez-vous à votre compte",
-    "auth.login.subtitle": "Bon retour ! Veuillez vous connecter pour continuer.",
+    "auth.login.title": "Bon retour !",
+    "auth.login.subtitle": "Veuillez vous connecter pour continuer.",
     "auth.login.email": "E-mail",
     "auth.login.password": "Mot de passe",
     "auth.login.submit": "Se connecter",

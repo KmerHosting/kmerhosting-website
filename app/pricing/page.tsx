@@ -302,7 +302,7 @@ const wordpressPlans = [
 const vpsPlans = [
   {
     name: "VPS Basic",
-    price: "120,000 FCFA",
+    price: "90,000 FCFA",
     description: "For small applications",
     features: {
       cpu: "2 cores",
@@ -318,7 +318,7 @@ const vpsPlans = [
   },
   {
     name: "VPS Pro",
-    price: "240,000 FCFA",
+    price: "150,000 FCFA",
     description: "For growing apps",
     badge: "Popular",
     features: {
@@ -326,7 +326,7 @@ const vpsPlans = [
       ram: "8 GB",
       storage: "160 GB NVMe",
       bandwidth: "4 TB",
-      ipv4: "2",
+      ipv4: "1",
       rootAccess: true,
       ddos: true,
       backups: true,
@@ -335,14 +335,14 @@ const vpsPlans = [
   },
   {
     name: "VPS Enterprise",
-    price: "480,000 FCFA",
+    price: "220,000 FCFA",
     description: "For enterprise apps",
     features: {
       cpu: "8 cores",
       ram: "16 GB",
       storage: "320 GB NVMe",
       bandwidth: "8 TB",
-      ipv4: "4",
+      ipv4: "1",
       rootAccess: true,
       ddos: true,
       backups: true,
@@ -648,7 +648,7 @@ export default function PricingPage() {
                           </li>
                           <li className="flex items-start gap-2 text-sm">
                             <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.ipv4} IPv4 address(es)</span>
+                            <span>{plan.features.ipv4} IPv4 address</span>
                           </li>
                           <li className="flex items-start gap-2 text-sm">
                             {plan.features.rootAccess ? (
