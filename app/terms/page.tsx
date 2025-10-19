@@ -140,7 +140,7 @@ export default function TermsPage() {
               <section>
                 <h2 className="text-2xl font-semibold mb-4">12. Contact Information</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  If you have questions about these Terms of Service, please contact us at support@kmerhosting.site.
+                  If you have questions about these Terms of Service, please contact us at hello@kmerhosting.site.
                 </p>
               </section>
             </div>

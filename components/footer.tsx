@@ -164,8 +164,8 @@ export function Footer() {
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
-                  <a href="mailto:support@kmerhosting.site" className="hover:text-accent transition-colors">
-                    support@kmerhosting.site
+                  <a href="mailto:hello@kmerhosting.site" className="hover:text-accent transition-colors">
+                    hello@kmerhosting.site
                   </a>
                 </li>
                 <li className="flex items-center gap-2">

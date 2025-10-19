@@ -57,8 +57,8 @@ export default function ContactPage() {
                   </div>
                   <h3 className="font-semibold mb-2">Email Us</h3>
                   <p className="text-sm text-muted-foreground mb-3">Send us an email anytime</p>
-                  <a href="mailto:support@kmerhosting.site" className="text-sm text-primary hover:underline break-all">
-                    support@kmerhosting.site
+                  <a href="mailto:hello@kmerhosting.site" className="text-sm text-primary hover:underline break-all">
+                    hello@kmerhosting.site
                   </a>
                 </CardContent>
               </Card>
