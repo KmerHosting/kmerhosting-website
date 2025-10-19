@@ -32,7 +32,7 @@ export function Header() {
         <div className="flex h-14 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-gray-100">
+            <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center">
               <img 
                 src="/kmerhosting-logo.svg" 
                 alt="KmerHosting" 

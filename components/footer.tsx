@@ -302,7 +302,7 @@ export function Footer() {
         <Button
           onClick={scrollToTop}
           size="icon"
-          className="fixed bottom-8 right-8 rounded-full shadow-lg z-50"
+          className="fixed bottom-8 right-8 rounded-full z-50"
           aria-label={t("footer.backToTop")}
         >
           <ArrowUp className="h-5 w-5" />
