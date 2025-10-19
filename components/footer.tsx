@@ -294,14 +294,6 @@ export function Footer() {
                   KmerHosting &copy; 2023-{new Date().getFullYear()}
                 </p>
               </div>
-
-              {/* Status Indicator */}
-              <div className="flex items-center gap-2 text-sm">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-green-600 dark:text-green-400 font-medium">
-                  {t("footer.status")}
-                </span>
-              </div>
             </div>
           </div>
         </div>
