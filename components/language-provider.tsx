@@ -67,6 +67,7 @@ const translations = {
     "footer.subscribe": "Subscribe",
     "footer.allRightsReserved": "All rights reserved.",
     "footer.backToTop": "Back to Top",
+    "footer.status": "Service Status",
 
     // Auth
     "auth.login.title": "Login to Your Account",
@@ -181,6 +182,7 @@ const translations = {
     "footer.subscribe": "S'abonner",
     "footer.allRightsReserved": "Tous droits réservés.",
     "footer.backToTop": "Retour en haut",
+    "footer.status": "État des services",
 
     // Auth
     "auth.login.title": "Connectez-vous à votre compte",
