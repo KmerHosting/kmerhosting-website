@@ -73,7 +73,7 @@ const translations = {
     "features.mainSubtitle": "Powerful features and tools to help you build, grow, and manage your online presence with confidence.",
 
     // Expert Help Section
-    "expert.title": "Need help to choose?",
+    "expert.title": "Need help to choose your plan?",
     "expert.subtitle": "Talk directly to our experts and get personalized recommendations for your hosting needs.",
     "expert.liveChat": "Start Live Chat",
     "expert.whatsapp": "Whatsapp chat",
@@ -250,7 +250,7 @@ const translations = {
     "features.mainSubtitle": "Des fonctionnalités et outils puissants pour vous aider à construire, développer et gérer votre présence en ligne avec confiance.",
 
     // Expert Help Section
-    "expert.title": "Besoin d'aide pour choisir ?",
+    "expert.title": "Besoin d'aide pour choisir votre plan?",
     "expert.subtitle": "Parlez directement à nos experts et obtenez des recommandations personnalisées pour vos besoins d'hébergement.",
     "expert.liveChat": "Démarrer le chat en direct",
     "expert.whatsapp": "Chat WhatsApp",

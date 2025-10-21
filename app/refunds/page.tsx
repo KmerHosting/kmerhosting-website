@@ -220,9 +220,9 @@ export default function RefundsPage() {
                     </div>
 
                     <div>
-                      <h4 className="font-semibold mb-2">Account Termination</h4>
+                      <h4 className="font-semibold mb-2">Domain Registration Deduction</h4>
                       <p className="text-sm text-muted-foreground">
-                        Upon account termination, any remaining credit will be refunded according to our proration policy.
+                        Please note that a deduction of 10,000 FCFA will be applied per hosting plan for domain registration fees, as domain names cannot be canceled or refunded once registered with the domain registry.
                       </p>
                     </div>
                   </div>
@@ -249,7 +249,7 @@ export default function RefundsPage() {
                     <div className="text-center">
                       <h4 className="font-semibold mb-2">Email</h4>
                       <p className="text-sm text-muted-foreground">
-                        support@kmerhosting.site
+                        hello@kmerhosting.site
                       </p>
                     </div>
 
@@ -262,6 +262,10 @@ export default function RefundsPage() {
                   </div>
                 </CardContent>
               </Card>
+
+              <p className="text-sm text-muted-foreground text-center mt-8">
+                Last updated: January 2025
+              </p>
             </div>
           </div>
         </section>
