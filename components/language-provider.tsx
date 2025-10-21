@@ -52,7 +52,7 @@ const translations = {
 
     // Hero
     "hero.title": "Professional Web Hosting Solutions",
-    "hero.subtitle": "Each plan includes free SSL, domain, and email addresses. Built for developers and businesses.",
+    "hero.subtitle": "Multiple Affordable Hosting services to suit you perfectly. Built for developers and businesses.",
 
     // Features
     "features.security.title": "Advanced Security",
@@ -225,7 +225,7 @@ const translations = {
     // Hero
     "hero.title": "Solutions d'hébergement web professionnelles",
     "hero.subtitle":
-      "Chaque plan inclut SSL, domaine et adresses emails gratuits. Conçu pour les développeurs et les entreprises.",
+      "Plusieurs services d’hébergement abordables pour vous convenir parfaitement. Conçu pour les développeurs et les entreprises.",
 
     // Features
     "features.security.title": "Sécurité avancée",

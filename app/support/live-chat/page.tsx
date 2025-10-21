@@ -318,6 +318,16 @@ export default function LiveChatPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Legal Disclaimer */}
+      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-10">
+        <p className="text-xs text-muted-foreground text-center">
+          By using our live chat, you agree to our{" "}
+          <a href="/terms" className="underline hover:text-primary">terms of service</a>{" "}
+          and{" "}
+          <a href="/privacy" className="underline hover:text-primary">privacy policy</a>
+        </p>
+      </div>
     </>
   )
 }

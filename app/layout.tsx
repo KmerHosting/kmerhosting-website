@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s | KmerHosting",
   },
   description:
-    "Each plan includes free SSL, domain, and email addresses. PHP, Node.js, Python, WordPress, and VPS hosting plans starting at 13,900 FCFA/year.",
+    "Multiple Affordable Hosting services to suit you perfectly. PHP, Node.js, Python, WordPress, and VPS hosting plans starting at 13,900 FCFA/year.",
   keywords: [
     "web hosting",
     "cloud hosting",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://kmerhosting.site",
   },
-    generator: 'v0.app'
+    generator: 'KmerHosting'
 }
 
 export default function RootLayout({
