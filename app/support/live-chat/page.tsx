@@ -305,7 +305,7 @@ export default function LiveChatPage() {
             <DialogTitle>Close Chat</DialogTitle>
             <DialogDescription>
               Are you sure you want to close this chat? Your conversation will be lost.
-              Instead you keep it open i return anytime to check for response.
+              Instead you can keep it open and simply return anytime to check for response.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>

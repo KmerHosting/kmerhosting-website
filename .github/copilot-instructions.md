@@ -1,29 +1,46 @@
-# KmerHosting Copilot Instructions
+# Copilot Instructions for KmerHosting Website
 
 ## Architecture Overview
-This is a Next.js 15 application using the app router for a web hosting company's marketing site. It features static pages for services like pricing, products, and contact, with no backend API - all content is client-side rendered.
+This is a Next.js 15 application using the App Router for routing. The project follows a component-based architecture with:
+- **Pages**: Located in `app/` directory (e.g., `app/page.tsx` for homepage, `app/about/page.tsx` for about page)
+- **Components**: Reusable UI in `components/` (e.g., `header.tsx`, `footer.tsx`)
+- **Sections**: Page-specific sections in `components/sections/` (e.g., `hero.tsx`, `features.tsx`)
+- **UI Library**: shadcn/ui components in `components/ui/` (Radix UI primitives with Tailwind styling)
+- **Styling**: Tailwind CSS with CSS variables for theming, configured via `components.json`
+- **Providers**: Theme and language providers wrap the app in `app/layout.tsx`
 
-## Key Components
-- **Layout**: Root layout in `app/layout.tsx` wraps pages with `ThemeProvider` and `LanguageProvider` for dark/light themes and en/fr localization.
-- **Pages**: Each route in `app/` directory uses section components from `components/sections/` (e.g., Hero, Features) composed in page components.
-- **UI Library**: shadcn/ui components in `components/ui/`, configured via `components.json` with "new-york" style and Lucide icons.
+Key data flows: Static pages with no backend; all content is client-side rendered. External integrations include Vercel Analytics.
 
-## Patterns & Conventions
-- **Styling**: Tailwind CSS v4 with CSS variables for theming. Use `cn()` from `@/lib/utils` for conditional classes.
-- **Internationalization**: Custom `LanguageProvider` context with `t(key)` function. Translations in `language-provider.tsx` object.
-- **Theming**: `next-themes` with `useTheme()` hook. Supports system preference.
-- **Imports**: `@/` alias for root imports (configured in `tsconfig.json`).
-- **Components**: Client components marked with `"use client"`. Server components by default.
+## Developer Workflows
+- **Package Management**: Use `pnpm` (lockfile: `pnpm-lock.yaml`)
+- **Development**: `npm run dev` (uses Turbopack for faster builds)
+- **Build**: `npm run build` (Next.js production build)
+- **Linting**: `npm run lint` (ESLint)
+- **Start**: `npm run start` (production server)
+- **Debugging**: Standard Next.js dev tools; check browser console for client errors, terminal for build issues
 
-## Workflows
-- **Development**: `pnpm dev` starts dev server on localhost:3000.
-- **Build**: `pnpm build` compiles for production. TypeScript errors are ignored (`next.config.mjs`).
-- **Linting**: `pnpm lint` runs ESLint.
-- **No Tests**: Project has no test suite currently.
+Ignore TypeScript build errors in dev (configured in `next.config.mjs`).
+
+## Project Conventions
+- **Imports**: Use `@/` aliases (e.g., `@/components/header` instead of relative paths)
+- **Component Structure**: Export default function components; use TypeScript interfaces for props
+- **Styling**: Tailwind classes directly in JSX; CSS variables for themes (defined in `app/globals.css`)
+- **Icons**: Lucide React icons (imported as needed)
+- **Forms**: React Hook Form with resolvers (e.g., for validation)
+- **Theming**: next-themes for dark/light mode support
+- **Internationalization**: Custom language provider (check `language-provider.tsx`)
+
+Avoid adding new dependencies unless necessary; prefer shadcn/ui components for UI elements.
+
+## Integration Points
+- **Analytics**: Vercel Analytics in `layout.tsx`
+- **SEO**: Metadata configured in `layout.tsx` and individual pages
+- **External Links**: No APIs; static site with links to external services
+
+When adding new pages, create in `app/` with `page.tsx`; import shared components from `components/`.
 
 ## Examples
-- Adding a new page: Create `app/new-page/page.tsx`, import sections from `components/sections/`, wrap with Header/Footer.
-- Using translations: `const { t } = useLanguage(); <p>{t("nav.home")}</p>`
-- Theming: `const { theme, setTheme } = useTheme();` in client components.
-
-Reference: `app/page.tsx` for home page structure, `components/header.tsx` for navigation with i18n.
+- Adding a new section: Create in `components/sections/`, import in page component (see `app/page.tsx`)
+- Styling: Use Tailwind utilities; extend via `globals.css` if needed
+- Component: Follow shadcn pattern (e.g., `components/ui/button.tsx`)</content>
+<parameter name="filePath">c:\Users\OpendMind Technology\Desktop\kmerhosting\.github\copilot-instructions.md
