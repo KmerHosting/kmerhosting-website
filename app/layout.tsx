@@ -4,6 +4,7 @@ import { Inter, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
+import { Toaster } from "@/components/ui/sonner"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s | KmerHosting",
   },
   description:
-    "Reliable cloud hosting with free SSL, domain, and email. PHP, Node.js, Python, WordPress, and VPS hosting plans starting at 13,900 FCFA/year.",
+    "Each plan includes free SSL, domain, and email addresses. PHP, Node.js, Python, WordPress, and VPS hosting plans starting at 13,900 FCFA/year.",
   keywords: [
     "web hosting",
     "cloud hosting",
@@ -51,13 +52,13 @@ export const metadata: Metadata = {
     alternateLocale: "fr_FR",
     url: "https://kmerhosting.site",
     title: "KmerHosting - Professional Web Hosting Solutions",
-    description: "Reliable cloud hosting with free SSL, domain, and email. Built for developers and businesses.",
+    description: "Every plan include free SSL, domain, and email. Built for developers and businesses.",
     siteName: "KmerHosting",
   },
   twitter: {
     card: "summary_large_image",
     title: "KmerHosting - Professional Web Hosting Solutions",
-    description: "Reliable cloud hosting with free SSL, domain, and email. Built for developers and businesses.",
+    description: "Every plan include free SSL, domain, and email. Built for developers and businesses.",
   },
   verification: {
     google: "your-google-verification-code",
@@ -79,6 +80,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>
+        <Toaster />
         <Analytics />
       </body>
     </html>

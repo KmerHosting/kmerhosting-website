@@ -23,7 +23,7 @@ export function Header() {
     { href: "/products", label: t("nav.products") },
     { href: "/free-hosting", label: t("nav.freeHosting") },
     { href: "/about", label: t("nav.about") },
-    { href: "/contact", label: t("nav.contact") },
+    { href: "/blog", label: t("nav.blog") },
   ]
 
   return (

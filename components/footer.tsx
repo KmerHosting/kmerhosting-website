@@ -89,6 +89,16 @@ export function Footer() {
                     Support
                   </Link>
                 </li>
+                <li>
+                  <Link href="/support/live-chat" className="hover:text-accent transition-colors">
+                    Live Chat
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/faq" className="hover:text-accent transition-colors">
+                    FAQ
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -98,25 +108,35 @@ export function Footer() {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/products/shared" className="hover:text-accent transition-colors">
-                    Shared Web Hosting
+                    {t("hosting.shared.title")}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/wordpress" className="hover:text-accent transition-colors">
-                    WordPress Hosting
+                  <Link href="/products/wordpress" className="hover:text-accent transition-colors">
+                    {t("hosting.wordpress.title")}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/vps" className="hover:text-accent transition-colors">
+                  <Link href="/products/vps" className="hover:text-accent transition-colors">
                     Cloud VPS Hosting
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/products/n8n" className="hover:text-accent transition-colors">
+                    Self-hosted n8n
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/products/llm" className="hover:text-accent transition-colors">
+                    LLM Hosting
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Tools */}
+            {/* Quick Link */}
             <div>
-              <h4 className="font-semibold mb-4">Others</h4>
+              <h4 className="font-semibold mb-4">Quick Link</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/pricing" className="hover:text-accent transition-colors">
@@ -146,7 +166,7 @@ export function Footer() {
                 <li>
                   <button
                     onClick={() => window.dispatchEvent(new CustomEvent('showCookieBanner'))}
-                    className="hover:text-accent transition-colors text-left"
+                    className="hover:text-accent transition-colors text-left cursor-pointer"
                   >
                     {t("footer.manageCookies")}
                   </button>
@@ -171,6 +191,11 @@ export function Footer() {
                 <li>
                   <Link href="/cookies" className="hover:text-accent transition-colors">
                     Cookie Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/refunds" className="hover:text-accent transition-colors">
+                    Refunds Policy
                   </Link>
                 </li>
               </ul>

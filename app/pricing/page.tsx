@@ -351,6 +351,41 @@ const vpsPlans = [
   },
 ]
 
+const aiPlans = [
+  {
+    name: "Self-hosted n8n",
+    originalPrice: "119,000 FCFA",
+    price: "29,000 FCFA",
+    description: "AI workflow automation platform",
+    badge: "Limited Time",
+    features: {
+      installation: "Complete n8n setup",
+      automation: "AI workflow automation",
+      deployment: "Auto-deployment on domain",
+      integrations: "Pre-configured integrations",
+      templates: "Workflow templates included",
+      updates: "Regular updates & security",
+      support: "24/7 technical support",
+    },
+  },
+  {
+    name: "LLM Hosting",
+    originalPrice: "89,000 FCFA",
+    price: "23,000 FCFA",
+    description: "Open-source LLM access with API",
+    badge: "Limited Time",
+    features: {
+      models: "Multiple open-source LLMs",
+      usage: "Free usage with fair limits",
+      api: "Full API access for integration",
+      infrastructure: "Pre-installed on our servers",
+      endpoints: "RESTful API endpoints",
+      fineTuning: "Custom model fine-tuning",
+      security: "Enterprise-grade security",
+    },
+  },
+]
+
 export default function PricingPage() {
   const [selectedTech, setSelectedTech] = useState<"php" | "nodejs" | "python">("php")
 
@@ -379,10 +414,11 @@ export default function PricingPage() {
         <section className="py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <Tabs defaultValue="shared" className="w-full">
-              <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-12">
+              <TabsList className="grid w-full max-w-lg mx-auto grid-cols-4 mb-12">
                 <TabsTrigger value="shared">Shared</TabsTrigger>
                 <TabsTrigger value="wordpress">WordPress</TabsTrigger>
                 <TabsTrigger value="vps">VPS</TabsTrigger>
+                <TabsTrigger value="ai">AI & ML</TabsTrigger>
               </TabsList>
 
               {/* Shared Web Hosting Plans */}
@@ -685,6 +721,49 @@ export default function PricingPage() {
                         </ul>
                         <Button className="w-full" asChild>
                           <Link href="/contact">Get Started</Link>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </TabsContent>
+
+              {/* AI & ML Plans */}
+              <TabsContent value="ai">
+                <div className="grid lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                  {aiPlans.map((plan, index) => (
+                    <Card key={index} className="relative flex flex-col">
+                      {plan.badge && (
+                        <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-red-500 hover:bg-red-600">
+                          {plan.badge}
+                        </Badge>
+                      )}
+                      <CardHeader>
+                        <CardTitle className="text-xl">{plan.name}</CardTitle>
+                        <CardDescription>{plan.description}</CardDescription>
+                        <div className="pt-4">
+                          <div className="text-3xl font-bold">
+                            <span className="line-through text-muted-foreground text-2xl mr-2">
+                              {plan.originalPrice}
+                            </span>
+                            {plan.price}
+                            <span className="text-base font-normal text-muted-foreground">/year</span>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="flex-1 flex flex-col">
+                        <ul className="space-y-3 mb-8 flex-1">
+                          {Object.entries(plan.features).map(([key, value], idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-sm">
+                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                              <span>{value}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <Button className="w-full" asChild>
+                          <Link href={plan.name === "Self-hosted n8n" ? "/products/n8n" : "/products/llm"}>
+                            Get Started
+                          </Link>
                         </Button>
                       </CardContent>
                     </Card>

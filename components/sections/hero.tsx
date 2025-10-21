@@ -32,8 +32,8 @@ export function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button size="lg" className="text-base" asChild>
               <Link href="/pricing">
-                {t("common.getStarted")}
                 <Globe className="ml-2 h-4 w-4" />
+                {t("common.getStarted")}
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="text-base bg-transparent" asChild>

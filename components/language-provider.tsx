@@ -44,10 +44,15 @@ const translations = {
     "common.unlimitedWebsites": "Unlimited Websites",
     "common.dailyBackups": "Daily Backups",
     "common.ssdStorage": "SSD NVMe Storage",
+    "common.viewAllPlans": "View All Plans",
+    "products.n8n.title": "Self-hosted n8n",
+    "products.n8n.description": "Open-source n8n for AI workflow automation. Auto-installed on your domain after purchase.",
+    "products.llm.title": "LLM Hosting",
+    "products.llm.description": "Access almost all open-source LLMs for free with API integration. Pre-installed on our servers.",
 
     // Hero
     "hero.title": "Professional Web Hosting Solutions",
-    "hero.subtitle": "Reliable cloud hosting with free SSL, domain, and email. Built for developers and businesses.",
+    "hero.subtitle": "Each plan includes free SSL, domain, and email addresses. Built for developers and businesses.",
 
     // Features
     "features.security.title": "Advanced Security",
@@ -62,6 +67,30 @@ const translations = {
     "features.storage.desc": "Start small and grow with flexible storage options that scale with your needs.",
     "features.support.title": "24/7 Support",
     "features.support.desc": "Expert technical support available around the clock to help you succeed.",
+
+    // Features Section
+    "features.mainTitle": "Everything you need to succeed online",
+    "features.mainSubtitle": "Powerful features and tools to help you build, grow, and manage your online presence with confidence.",
+
+    // Expert Help Section
+    "expert.title": "Need help to choose?",
+    "expert.subtitle": "Talk directly to our experts and get personalized recommendations for your hosting needs.",
+    "expert.liveChat": "Start Live Chat",
+    "expert.whatsapp": "Whatsapp chat",
+
+    // Hosting Types
+    "hosting.types.title": "Choose your hosting solution",
+    "hosting.types.subtitle": "From personal blogs to enterprise applications, we have the perfect hosting plan for your needs.",
+    "hosting.shared.title": "Shared Web Hosting",
+    "hosting.shared.description": "Perfect for personal websites and small businesses. Get started with affordable, reliable hosting.",
+    "hosting.wordpress.title": "WordPress Hosting",
+    "hosting.wordpress.description": "Optimized for WordPress with automatic updates, enhanced security, and blazing-fast performance.",
+    "hosting.vps.title": "Cloud VPS Hosting",
+    "hosting.vps.description": "Full control with dedicated resources. Scale your applications with powerful virtual private servers.",
+    "hosting.n8n.title": "Self-hosted n8n",
+    "hosting.n8n.description": "Open-source n8n for AI workflow automation. Auto-installed on your domain after purchase.",
+    "hosting.llm.title": "LLM Hosting",
+    "hosting.llm.description": "Access almost all open-source LLMs for free with API integration. Pre-installed on our servers.",
 
     // Footer
     "footer.newsletter": "Subscribe to our newsletter",
@@ -157,11 +186,16 @@ const translations = {
     "common.unlimitedWebsites": "Sites web illimités",
     "common.dailyBackups": "Sauvegardes quotidiennes",
     "common.ssdStorage": "Stockage SSD NVMe",
+    "common.viewAllPlans": "Voir tous les plans",
+    "products.n8n.title": "n8n auto-hébergé",
+    "products.n8n.description": "n8n open-source pour l'automatisation de workflows IA. Installation automatique sur votre domaine après achat.",
+    "products.llm.title": "Hébergement LLM",
+    "products.llm.description": "Accédez à presque tous les LLM open-source gratuitement avec intégration API. Préinstallé sur nos serveurs.",
 
     // Hero
     "hero.title": "Solutions d'hébergement web professionnelles",
     "hero.subtitle":
-      "Hébergement cloud fiable avec SSL, domaine et email gratuits. Conçu pour les développeurs et les entreprises.",
+      "Chaque plan inclut SSL, domaine et adresses emails gratuits. Conçu pour les développeurs et les entreprises.",
 
     // Features
     "features.security.title": "Sécurité avancée",
@@ -180,6 +214,30 @@ const translations = {
       "Commencez petit et grandissez avec des options de stockage flexibles qui évoluent avec vos besoins.",
     "features.support.title": "Support 24/7",
     "features.support.desc": "Support technique expert disponible 24h/24 pour vous aider à réussir.",
+
+    // Features Section
+    "features.mainTitle": "Tout ce dont vous avez besoin pour réussir en ligne",
+    "features.mainSubtitle": "Des fonctionnalités et outils puissants pour vous aider à construire, développer et gérer votre présence en ligne avec confiance.",
+
+    // Expert Help Section
+    "expert.title": "Besoin d'aide pour choisir ?",
+    "expert.subtitle": "Parlez directement à nos experts et obtenez des recommandations personnalisées pour vos besoins d'hébergement.",
+    "expert.liveChat": "Démarrer le chat en direct",
+    "expert.whatsapp": "Chat WhatsApp",
+
+    // Hosting Types
+    "hosting.types.title": "Choisissez votre solution d'hébergement",
+    "hosting.types.subtitle": "Des blogs personnels aux applications d'entreprise, nous avons le plan d'hébergement parfait pour vos besoins.",
+    "hosting.shared.title": "Hébergement web partagé",
+    "hosting.shared.description": "Parfait pour les sites personnels et les petites entreprises. Commencez avec un hébergement abordable et fiable.",
+    "hosting.wordpress.title": "Hébergement WordPress",
+    "hosting.wordpress.description": "Optimisé pour WordPress avec mises à jour automatiques, sécurité renforcée et performances ultra-rapides.",
+    "hosting.vps.title": "Hébergement VPS Cloud",
+    "hosting.vps.description": "Contrôle total avec ressources dédiées. Faites évoluer vos applications avec de puissants serveurs privés virtuels.",
+    "hosting.n8n.title": "n8n auto-hébergé",
+    "hosting.n8n.description": "n8n open-source pour l'automatisation de workflows IA. Installation automatique sur votre domaine après achat.",
+    "hosting.llm.title": "Hébergement LLM",
+    "hosting.llm.description": "Accédez à presque tous les LLM open-source gratuitement avec intégration API. Préinstallé sur nos serveurs.",
 
     // Footer
     "footer.newsletter": "Abonnez-vous à notre newsletter",
@@ -244,6 +302,11 @@ const translations = {
     "free.features.storage": "Stockage 10MB",
     "free.features.subdomain": "Sous-domaine .kmerhosting.site gratuit",
     "free.features.support": "Support communautaire",
+
+    // Products Page
+    "products.shared.longDesc": "Solution d'hébergement fiable et abordable parfaite pour les sites web personnels, les petites entreprises et les startups.",
+    "products.wordpress.longDesc": "Environnement d'hébergement optimisé spécifiquement conçu pour les sites WordPress avec sécurité renforcée.",
+    "products.vps.longDesc": "Puissants serveurs privés virtuels avec contrôle total et ressources dédiées.",
   },
 }
 

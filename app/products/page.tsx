@@ -1,77 +1,85 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CookieBanner } from "@/components/cookie-banner"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Server, Compass as Wordpress, Cloud, Database, Mail, Shield, ArrowRight, Check, Filter } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Server, Compass as Wordpress, Cloud, Workflow, Brain, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
-const products = [
+const webHostingProducts = [
   {
     icon: Server,
     title: "Shared Web Hosting",
-    description: "Perfect for personal websites and small businesses. Get started with affordable, reliable hosting.",
+    description: "Reliable and affordable hosting solution perfect for personal websites, small businesses, and startups.",
     features: [
-      "Free .com domain + SSL", 
-      "10+ Free Pro email accounts", 
-      "PHP, Node.js, Python support",
-      "KmerHosting control panel",
-      "1-click app installer",
-      "12 fair share CPU (per User)",
-      "JetBackup Included"
+      "Free .com domain + SSL certificate",
+      "10+ Professional email accounts",
+      "Support for PHP, Node.js, Python",
+      "User-friendly control panel",
+      "1-click application installer"
     ],
-    startingPrice: "13,900 FCFA",
+    color: "from-blue-500 to-blue-600",
     href: "/products/shared",
   },
   {
     icon: Wordpress,
     title: "WordPress Hosting",
-    description: "Optimized for WordPress with automatic updates, enhanced security, and blazing-fast performance.",
+    description: "Optimized hosting environment specifically designed for WordPress sites with enhanced security.",
     features: [
-      "Free .com domain + SSL", 
-      "10+ Free Pro email accounts", 
-      "1-click WordPress install",
+      "1-click WordPress installation",
       "Automatic WordPress updates",
       "WordPress-optimized caching",
-      "Staging environment",
-      "Malware scanning & removal"
+      "Enhanced security features",
+      "Staging environment"
     ],
-    startingPrice: "13,900 FCFA",
-    href: "/wordpress",
+    color: "from-purple-500 to-purple-600",
+    href: "/products/wordpress",
   },
   {
     icon: Cloud,
     title: "Cloud VPS Hosting",
-    description: "Full control with dedicated resources. Scale your applications with powerful virtual private servers.",
+    description: "Powerful virtual private servers with full control and dedicated resources.",
     features: [
-      "Free .com domain + SSL", 
-      "10+ Free Pro email accounts", 
       "Full root/administrator access",
-      "Dedicated CPU & RAM",
-      "Choice of OS (Linux/Windows)",
+      "Dedicated CPU & RAM resources",
       "SSD NVMe storage",
+      "Choice of operating systems",
       "DDoS protection included"
     ],
-    startingPrice: "120,000 FCFA",
-    href: "/vps",
+    color: "from-orange-500 to-orange-600",
+    href: "/products/vps",
   },
 ]
 
-const additionalServices = [
+const aiProducts = [
   {
-    icon: Database,
-    title: "Database Hosting",
-    description: "Managed MySQL and PostgreSQL databases with automatic backups and optimization.",
+    icon: Workflow,
+    title: "Self-hosted n8n",
+    description: "Open-source workflow automation platform for AI-powered business processes.",
+    features: [
+      "Complete n8n installation",
+      "AI workflow automation",
+      "Auto-deployment on your domain",
+      "Pre-configured integrations",
+      "Workflow templates included"
+    ],
+    color: "from-red-500 to-red-600",
+    href: "/products/n8n",
   },
   {
-    icon: Mail,
-    title: "Email Hosting",
-    description: "Professional email hosting with spam protection and unlimited storage.",
-  },
-  {
-    icon: Shield,
-    title: "Security Services",
-    description: "Advanced security features including DDoS protection, malware scanning, and SSL certificates.",
+    icon: Brain,
+    title: "LLM Hosting",
+    description: "Access to powerful open-source Large Language Models with full API integration.",
+    features: [
+      "Multiple open-source LLMs",
+      "Full API access for integration",
+      "RESTful API endpoints",
+      "Pre-installed infrastructure",
+      "Custom model fine-tuning"
+    ],
+    color: "from-black to-gray-900",
+    href: "/products/llm",
   },
 ]
 
@@ -85,110 +93,111 @@ export default function ProductsPage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6 text-balance">
-                Hosting solutions for every need
+                Complete Hosting Solutions
               </h1>
-              <p className="text-lg text-muted-foreground text-balance">
-                From personal blogs to enterprise applications, we have the perfect hosting solution to power your
-                online presence.
+              <p className="text-lg text-muted-foreground text-balance mb-8">
+                From personal websites to enterprise applications, discover our comprehensive range of hosting services designed to power your digital presence.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Main Products */}
+        {/* Products Tabs */}
         <section className="py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-3 gap-8">
-              {products.map((product, index) => {
-                const Icon = product.icon
-                return (
-                  <Card key={index} className="relative flex flex-col">
-                    <CardHeader>
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                        <Icon className="h-6 w-6 text-primary" />
-                      </div>
-                      <CardTitle className="text-2xl">{product.title}</CardTitle>
-                      <CardDescription className="text-base">{product.description}</CardDescription>
-                    </CardHeader>
-                    <CardContent className="flex-1 flex flex-col">
-                      <div className="mb-6">
-                        <div className="text-3xl font-bold">
-                          {product.startingPrice}
-                          <span className="text-base font-normal text-muted-foreground">/year</span>
-                        </div>
-                      </div>
+            <Tabs defaultValue="web-hosting" className="w-full">
+              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12">
+                <TabsTrigger value="web-hosting">Web Hosting</TabsTrigger>
+                <TabsTrigger value="ai">AI Solutions</TabsTrigger>
+              </TabsList>
 
-                      <ul className="space-y-3 mb-8 flex-1">
-                        {product.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-sm">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
+              {/* Web Hosting Products */}
+              <TabsContent value="web-hosting">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {webHostingProducts.map((product, index) => {
+                    const Icon = product.icon
+                    return (
+                      <Card key={index} className="relative overflow-hidden group hover:shadow-lg transition-shadow">
+                        <div className={`h-2 bg-gradient-to-r ${product.color}`}></div>
+                        <CardContent className="p-6">
+                          <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                            <Icon className="h-6 w-6 text-primary" />
+                          </div>
+                          <h3 className="text-xl font-bold mb-2">{product.title}</h3>
+                          <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{product.description}</p>
+                          <ul className="space-y-1 mb-6">
+                            {product.features.slice(0, 3).map((feature, idx) => (
+                              <li key={idx} className="flex items-center gap-2 text-sm">
+                                <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0"></div>
+                                <span className="text-muted-foreground">{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                          <Button variant="outline" size="sm" className="w-full" asChild>
+                            <Link href={product.href}>
+                              Learn More
+                              <ArrowRight className="ml-2 h-3 w-3" />
+                            </Link>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    )
+                  })}
+                </div>
+              </TabsContent>
 
-                      <Button className="w-full" asChild>
-                        <Link href={product.href}>
-                          View Plans
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                      </Button>
-                    </CardContent>
-                  </Card>
-                )
-              })}
-            </div>
+              {/* AI Products */}
+              <TabsContent value="ai">
+                <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                  {aiProducts.map((product, index) => {
+                    const Icon = product.icon
+                    return (
+                      <Card key={index} className="relative overflow-hidden group hover:shadow-lg transition-shadow">
+                        <div className={`h-2 bg-gradient-to-r ${product.color}`}></div>
+                        <CardContent className="p-6">
+                          <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                            <Icon className="h-6 w-6 text-primary" />
+                          </div>
+                          <h3 className="text-xl font-bold mb-2">{product.title}</h3>
+                          <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{product.description}</p>
+                          <ul className="space-y-1 mb-6">
+                            {product.features.slice(0, 3).map((feature, idx) => (
+                              <li key={idx} className="flex items-center gap-2 text-sm">
+                                <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0"></div>
+                                <span className="text-muted-foreground">{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                          <Button variant="outline" size="sm" className="w-full" asChild>
+                            <Link href={product.href}>
+                              Learn More
+                              <ArrowRight className="ml-2 h-3 w-3" />
+                            </Link>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    )
+                  })}
+                </div>
+              </TabsContent>
+            </Tabs>
           </div>
         </section>
 
-        {/* Additional Services */}
-        <section className="py-20 bg-muted/30">
+        {/* CTA Section */}
+        <section className="py-20 bg-primary text-primary-foreground">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold tracking-tight mb-4">Additional Services</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-                Enhance your hosting with our premium add-on services.
+            <div className="max-w-2xl mx-auto text-center">
+              <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+              <p className="text-primary-foreground/80 mb-8 text-lg">
+                Choose the perfect hosting solution for your needs and take your online presence to the next level.
               </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              {additionalServices.map((service, index) => {
-                const Icon = service.icon
-                return (
-                  <Card key={index}>
-                    <CardContent className="p-6">
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                        <Icon className="h-6 w-6 text-primary" />
-                      </div>
-                      <h3 className="font-semibold mb-2">{service.title}</h3>
-                      <p className="text-sm text-muted-foreground">{service.description}</p>
-                    </CardContent>
-                  </Card>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Comparison CTA */}
-        <section className="py-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl font-bold tracking-tight mb-4">Not sure which plan is right for you?</h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                Compare all our hosting plans side-by-side or contact our sales team for personalized recommendations.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" asChild>
-                  <Link href="/pricing">
-                    Compare All Plans
-                    <Filter className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button size="lg" variant="outline" className="bg-transparent" asChild>
-                  <Link href="/contact">Contact Sales</Link>
-                </Button>
-              </div>
+              <Button variant="secondary" size="lg" asChild>
+                <Link href="/pricing">
+                  View Pricing & Plans
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
             </div>
           </div>
         </section>
