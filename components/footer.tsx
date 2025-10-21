@@ -72,31 +72,31 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {/* Company */}
             <div>
-              <h4 className="font-semibold mb-4">KmerHosting</h4>
+              <h4 className="font-semibold mb-4">{t("footer.company.title")}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/about" className="hover:text-accent transition-colors">
-                    About Us
+                    {t("footer.company.about")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/contact" className="hover:text-accent transition-colors">
-                    Contact
+                    {t("footer.company.contact")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/support" className="hover:text-accent transition-colors">
-                    Support
+                    {t("footer.company.support")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/support/live-chat" className="hover:text-accent transition-colors">
-                    Live Chat
+                    {t("footer.company.liveChat")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/faq" className="hover:text-accent transition-colors">
-                    FAQ
+                    {t("footer.company.faq")}
                   </Link>
                 </li>
               </ul>
@@ -104,7 +104,7 @@ export function Footer() {
 
             {/* Products */}
             <div>
-              <h4 className="font-semibold mb-4">Products</h4>
+              <h4 className="font-semibold mb-4">{t("footer.products.title")}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/products/shared" className="hover:text-accent transition-colors">
@@ -118,17 +118,17 @@ export function Footer() {
                 </li>
                 <li>
                   <Link href="/products/vps" className="hover:text-accent transition-colors">
-                    Cloud VPS Hosting
+                    {t("hosting.vps.title")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/products/n8n" className="hover:text-accent transition-colors">
-                    Self-hosted n8n
+                    {t("hosting.n8n.title")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/products/llm" className="hover:text-accent transition-colors">
-                    LLM Hosting
+                    {t("hosting.llm.title")}
                   </Link>
                 </li>
               </ul>
@@ -136,7 +136,7 @@ export function Footer() {
 
             {/* Quick Link */}
             <div>
-              <h4 className="font-semibold mb-4">Quick Link</h4>
+              <h4 className="font-semibold mb-4">{t("footer.quickLink.title")}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/pricing" className="hover:text-accent transition-colors">
@@ -176,26 +176,26 @@ export function Footer() {
 
             {/* Legal */}
             <div>
-              <h4 className="font-semibold mb-4">Legal</h4>
+              <h4 className="font-semibold mb-4">{t("footer.legal.title")}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/terms" className="hover:text-accent transition-colors">
-                    Terms of Use
+                    {t("footer.legal.terms")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/privacy" className="hover:text-accent transition-colors">
-                    Privacy Policy
+                    {t("footer.legal.privacy")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/cookies" className="hover:text-accent transition-colors">
-                    Cookie Policy
+                    {t("footer.legal.cookies")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/refunds" className="hover:text-accent transition-colors">
-                    Refunds Policy
+                    {t("footer.legal.refunds")}
                   </Link>
                 </li>
               </ul>
@@ -203,7 +203,7 @@ export function Footer() {
 
             {/* Contact */}
             <div>
-              <h4 className="font-semibold mb-4">Contact Us</h4>
+              <h4 className="font-semibold mb-4">{t("footer.contact.title")}</h4>
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />

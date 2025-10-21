@@ -6,12 +6,13 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Server, Compass as Wordpress, Cloud, Workflow, Brain, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import { useLanguage } from "@/components/language-provider"
 
 const webHostingProducts = [
   {
     icon: Server,
-    title: "Shared Web Hosting",
-    description: "Reliable and affordable hosting solution perfect for personal websites, small businesses, and startups.",
+    titleKey: "hosting.shared.title",
+    descriptionKey: "products.shared.longDesc",
     features: [
       "Free .com domain + SSL certificate",
       "10+ Professional email accounts",
@@ -24,8 +25,8 @@ const webHostingProducts = [
   },
   {
     icon: Wordpress,
-    title: "WordPress Hosting",
-    description: "Optimized hosting environment specifically designed for WordPress sites with enhanced security.",
+    titleKey: "hosting.wordpress.title",
+    descriptionKey: "products.wordpress.longDesc",
     features: [
       "1-click WordPress installation",
       "Automatic WordPress updates",
@@ -38,8 +39,8 @@ const webHostingProducts = [
   },
   {
     icon: Cloud,
-    title: "Cloud VPS Hosting",
-    description: "Powerful virtual private servers with full control and dedicated resources.",
+    titleKey: "hosting.vps.title",
+    descriptionKey: "products.vps.longDesc",
     features: [
       "Full root/administrator access",
       "Dedicated CPU & RAM resources",
@@ -55,8 +56,8 @@ const webHostingProducts = [
 const aiProducts = [
   {
     icon: Workflow,
-    title: "Self-hosted n8n",
-    description: "Open-source workflow automation platform for AI-powered business processes.",
+    titleKey: "hosting.n8n.title",
+    descriptionKey: "hosting.n8n.description",
     features: [
       "Complete n8n installation",
       "AI workflow automation",
@@ -69,8 +70,8 @@ const aiProducts = [
   },
   {
     icon: Brain,
-    title: "LLM Hosting",
-    description: "Access to powerful open-source Large Language Models with full API integration.",
+    titleKey: "hosting.llm.title",
+    descriptionKey: "hosting.llm.description",
     features: [
       "Multiple open-source LLMs",
       "Full API access for integration",
@@ -84,6 +85,8 @@ const aiProducts = [
 ]
 
 export default function ProductsPage() {
+  const { t } = useLanguage()
+
   return (
     <>
       <Header />
@@ -93,10 +96,10 @@ export default function ProductsPage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6 text-balance">
-                Complete Hosting Solutions
+                {t("products.hero.title")}
               </h1>
               <p className="text-lg text-muted-foreground text-balance mb-8">
-                From personal websites to enterprise applications, discover our comprehensive range of hosting services designed to power your digital presence.
+                {t("products.hero.subtitle")}
               </p>
             </div>
           </div>
@@ -107,8 +110,8 @@ export default function ProductsPage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <Tabs defaultValue="web-hosting" className="w-full">
               <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12">
-                <TabsTrigger value="web-hosting">Web Hosting</TabsTrigger>
-                <TabsTrigger value="ai">AI Solutions</TabsTrigger>
+                <TabsTrigger value="web-hosting">{t("products.tabs.webHosting")}</TabsTrigger>
+                <TabsTrigger value="ai">{t("products.tabs.ai")}</TabsTrigger>
               </TabsList>
 
               {/* Web Hosting Products */}
@@ -123,8 +126,8 @@ export default function ProductsPage() {
                           <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                             <Icon className="h-6 w-6 text-primary" />
                           </div>
-                          <h3 className="text-xl font-bold mb-2">{product.title}</h3>
-                          <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{product.description}</p>
+                          <h3 className="text-xl font-bold mb-2">{t(product.titleKey)}</h3>
+                          <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{t(product.descriptionKey)}</p>
                           <ul className="space-y-1 mb-6">
                             {product.features.slice(0, 3).map((feature, idx) => (
                               <li key={idx} className="flex items-center gap-2 text-sm">
@@ -135,7 +138,7 @@ export default function ProductsPage() {
                           </ul>
                           <Button variant="outline" size="sm" className="w-full" asChild>
                             <Link href={product.href}>
-                              Learn More
+                              {t("products.learnMore")}
                               <ArrowRight className="ml-2 h-3 w-3" />
                             </Link>
                           </Button>
@@ -158,8 +161,8 @@ export default function ProductsPage() {
                           <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                             <Icon className="h-6 w-6 text-primary" />
                           </div>
-                          <h3 className="text-xl font-bold mb-2">{product.title}</h3>
-                          <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{product.description}</p>
+                          <h3 className="text-xl font-bold mb-2">{t(product.titleKey)}</h3>
+                          <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{t(product.descriptionKey)}</p>
                           <ul className="space-y-1 mb-6">
                             {product.features.slice(0, 3).map((feature, idx) => (
                               <li key={idx} className="flex items-center gap-2 text-sm">
@@ -170,7 +173,7 @@ export default function ProductsPage() {
                           </ul>
                           <Button variant="outline" size="sm" className="w-full" asChild>
                             <Link href={product.href}>
-                              Learn More
+                              {t("products.learnMore")}
                               <ArrowRight className="ml-2 h-3 w-3" />
                             </Link>
                           </Button>
@@ -188,13 +191,13 @@ export default function ProductsPage() {
         <section className="py-20 bg-primary text-primary-foreground">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-2xl mx-auto text-center">
-              <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+              <h2 className="text-3xl font-bold mb-4">{t("products.cta.title")}</h2>
               <p className="text-primary-foreground/80 mb-8 text-lg">
-                Choose the perfect hosting solution for your needs and take your online presence to the next level.
+                {t("products.cta.subtitle")}
               </p>
               <Button variant="secondary" size="lg" asChild>
                 <Link href="/pricing">
-                  View Pricing & Plans
+                  {t("products.cta.button")}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>

@@ -101,6 +101,36 @@ const translations = {
     "footer.status": "Service Status",
     "footer.manageCookies": "Manage Cookies",
 
+    // Footer Sections
+    "footer.company.title": "Company",
+    "footer.company.about": "About Us",
+    "footer.company.contact": "Contact",
+    "footer.company.support": "Support",
+    "footer.company.liveChat": "Live Chat",
+    "footer.company.faq": "FAQ",
+
+    "footer.products.title": "Products",
+
+    "footer.quickLink.title": "Quick Link",
+
+    "footer.legal.title": "Legal",
+    "footer.legal.terms": "Terms of Use",
+    "footer.legal.privacy": "Privacy Policy",
+    "footer.legal.cookies": "Cookie Policy",
+    "footer.legal.refunds": "Refunds Policy",
+
+    "footer.contact.title": "Contact Us",
+
+    // Products Page
+    "products.hero.title": "Complete Hosting Solutions",
+    "products.hero.subtitle": "From personal websites to enterprise applications, discover our comprehensive range of hosting services designed to power your digital presence.",
+    "products.tabs.webHosting": "Web Hosting",
+    "products.tabs.ai": "AI Solutions",
+    "products.cta.title": "Ready to Get Started?",
+    "products.cta.subtitle": "Choose the perfect hosting solution for your needs and take your online presence to the next level.",
+    "products.cta.button": "View Pricing & Plans",
+    "products.learnMore": "Learn More",
+
     // Auth
     "auth.login.title": "Welcome back!",
     "auth.login.subtitle": "Please sign in to continue.",
@@ -247,6 +277,36 @@ const translations = {
     "footer.backToTop": "Retour en haut",
     "footer.status": "État des services",
     "footer.manageCookies": "Gérer les cookies",
+
+    // Footer Sections
+    "footer.company.title": "Entreprise",
+    "footer.company.about": "À propos de nous",
+    "footer.company.contact": "Contact",
+    "footer.company.support": "Support",
+    "footer.company.liveChat": "Chat en direct",
+    "footer.company.faq": "FAQ",
+
+    "footer.products.title": "Produits",
+
+    "footer.quickLink.title": "Lien rapide",
+
+    "footer.legal.title": "Légal",
+    "footer.legal.terms": "Conditions d'utilisation",
+    "footer.legal.privacy": "Politique de confidentialité",
+    "footer.legal.cookies": "Politique des cookies",
+    "footer.legal.refunds": "Politique de remboursement",
+
+    "footer.contact.title": "Contactez-nous",
+
+    // Products Page
+    "products.hero.title": "Solutions d'hébergement complètes",
+    "products.hero.subtitle": "Des sites web personnels aux applications d'entreprise, découvrez notre gamme complète de services d'hébergement conçus pour alimenter votre présence numérique.",
+    "products.tabs.webHosting": "Hébergement web",
+    "products.tabs.ai": "Solutions IA",
+    "products.cta.title": "Prêt à commencer ?",
+    "products.cta.subtitle": "Choisissez la solution d'hébergement parfaite pour vos besoins et faites passer votre présence en ligne au niveau supérieur.",
+    "products.cta.button": "Voir les tarifs et plans",
+    "products.learnMore": "En savoir plus",
 
     // Auth
     "auth.login.title": "Bon retour !",

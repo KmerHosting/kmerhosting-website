@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Globe, Check } from "lucide-react"
+import { Globe, Check, ArrowLeftCircle, ArrowRightCircle } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import Link from "next/link"
 
@@ -32,7 +32,7 @@ export function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button size="lg" className="text-base" asChild>
               <Link href="/pricing">
-                <Globe className="ml-2 h-4 w-4" />
+                <ArrowRightCircle className="ml-2 h-4 w-4" />
                 {t("common.getStarted")}
               </Link>
             </Button>
