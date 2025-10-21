@@ -315,7 +315,7 @@ export function Footer() {
             {/* Centered Copyright */}
             <div className="text-center text-sm text-muted-foreground">
               <p>
-                KmerHosting &copy; 2023-{new Date().getFullYear()}
+                KmerHosting &copy; 2019-{new Date().getFullYear()}
               </p>
             </div>
           </div>
