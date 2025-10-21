@@ -36,9 +36,7 @@ export function HostingTypes() {
         t("common.freeEmail"),
         "WordPress auto-updates",
         "Enhanced security",
-        "1-click WordPress installer",
-        "WP-CLI access",
-        "Staging environment"
+        "1-click WordPress installer"
       ],
       link: "/products/wordpress",
       color: "from-purple-500 to-purple-600"

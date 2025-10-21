@@ -258,7 +258,7 @@ const translations = {
     // Hosting Types
     "hosting.types.title": "Choisissez votre solution d'hébergement",
     "hosting.types.subtitle": "Des blogs personnels aux applications d'entreprise, nous avons le plan d'hébergement parfait pour vos besoins.",
-    "hosting.shared.title": "Hébergement web partagé",
+    "hosting.shared.title": "Hébergement web mutualisé",
     "hosting.shared.description": "Parfait pour les sites personnels et les petites entreprises. Commencez avec un hébergement abordable et fiable.",
     "hosting.wordpress.title": "Hébergement WordPress",
     "hosting.wordpress.description": "Optimisé pour WordPress avec mises à jour automatiques, sécurité renforcée et performances ultra-rapides.",

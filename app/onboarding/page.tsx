@@ -62,7 +62,7 @@ export default function OnboardingPage() {
         >
           <Server className="h-6 w-6 text-blue-500 mb-2" />
           <h4 className="font-semibold mb-1">Types d'Hébergement</h4>
-          <p className="text-sm">Découvrez nos solutions : Partagé, WordPress, VPS, et bien plus ! Chaque plan est optimisé pour vos besoins.</p>
+          <p className="text-sm">Découvrez nos solutions : Mutualisé, WordPress, VPS, et bien plus ! Chaque plan est optimisé pour vos besoins.</p>
         </motion.div>
       ),
       placement: 'bottom' as const,
@@ -237,7 +237,7 @@ export default function OnboardingPage() {
 
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                  { icon: Globe, title: "Hébergement Partagé", desc: "Parfait pour débuter", price: "13 900 FCFA/an" },
+                  { icon: Globe, title: "Hébergement Mutualisé", desc: "Parfait pour débuter", price: "13 900 FCFA/an" },
                   { icon: Server, title: "WordPress Hosting", desc: "Optimisé pour WP", price: "15 000 FCFA/an" },
                   { icon: Zap, title: "VPS Hosting", desc: "Puissance maximale", price: "25 000 FCFA/an" },
                   { icon: Crown, title: "Cloud Hosting", desc: "Évolutif et fiable", price: "35 000 FCFA/an" },

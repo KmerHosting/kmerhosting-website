@@ -6,6 +6,7 @@ import { ExpertHelp } from "@/components/sections/expert-help"
 import { Features } from "@/components/sections/features"
 import { HostingTypes } from "@/components/sections/hosting-types"
 import { WhyChooseUs } from "@/components/sections/why-choose-us"
+import { Partners } from "@/components/sections/partners"
 import { Testimonials } from "@/components/sections/testimonials"
 import { CTA } from "@/components/sections/cta"
 
@@ -16,6 +17,7 @@ export default function HomePage() {
       <main>
         <Hero />
         <ExpertHelp />
+        <Partners />
         <Features />
         <HostingTypes />
         <WhyChooseUs />
