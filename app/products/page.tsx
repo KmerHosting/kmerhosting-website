@@ -6,7 +6,7 @@ import { CookieBanner } from "@/components/cookie-banner"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Server, Compass as Wordpress, Cloud, Workflow, Brain, ArrowRight } from "lucide-react"
+import { Server, Compass as Wordpress, Cloud, Workflow, Brain, ArrowRight, Users } from "lucide-react"
 import Link from "next/link"
 import { useLanguage } from "@/components/language-provider"
 
@@ -52,6 +52,20 @@ const webHostingProducts = [
     ],
     color: "from-orange-500 to-orange-600",
     href: "/products/vps",
+  },
+  {
+    icon: Users,
+    titleKey: "hosting.reseller.title",
+    descriptionKey: "hosting.reseller.description",
+    features: [
+      "DirectAdmin control panel",
+      "White-label branding options",
+      "Free SSL for all clients",
+      "Private nameservers included",
+      "Blesta billing integration"
+    ],
+    color: "from-green-500 to-green-600",
+    href: "/products/reseller",
   },
 ]
 

@@ -173,6 +173,11 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/products/reseller" className="hover:text-accent transition-colors">
+                    {t("hosting.reseller.title")}
+                  </Link>
+                </li>
+                <li>
                   <Link href="/products/n8n" className="hover:text-accent transition-colors">
                     {t("hosting.n8n.title")}
                   </Link>
@@ -214,14 +219,6 @@ export function Footer() {
                     {t("nav.forum")}
                   </Link>
                 </li>
-                <li>
-                  <button
-                    onClick={() => window.dispatchEvent(new CustomEvent('showCookieBanner'))}
-                    className="hover:text-accent transition-colors text-left cursor-pointer"
-                  >
-                    {t("footer.manageCookies")}
-                  </button>
-                </li>
               </ul>
             </div>
 
@@ -243,6 +240,14 @@ export function Footer() {
                   <Link href="/cookies" className="hover:text-accent transition-colors">
                     {t("footer.legal.cookies")}
                   </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={() => window.dispatchEvent(new CustomEvent('showCookieBanner'))}
+                    className="hover:text-accent transition-colors text-left cursor-pointer"
+                  >
+                    {t("footer.manageCookies")}
+                  </button>
                 </li>
                 <li>
                   <Link href="/refunds" className="hover:text-accent transition-colors">

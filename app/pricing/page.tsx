@@ -367,6 +367,114 @@ const vpsPlans = [
   },
 ]
 
+const resellerPlans = [
+  {
+    name: "Reseller Bronze",
+    price: "35,000 FCFA",
+    description: "Perfect for getting started",
+    features: {
+      diskSpace: "10 GB SSD",
+      bandwidth: "300 GB",
+      directAdminAccounts: "10",
+      inodes: "Unlimited",
+      websites: "Unlimited",
+      databases: "Unlimited",
+      whiteLabeled: true,
+      freeSSL: true,
+      blesta: false,
+      privateDNS: true,
+      siteBuilder: true,
+      liteSpeed: true,
+      multiLanguage: true,
+      noRenewalHikes: true,
+      imunify360: true,
+      panelCustomization: true,
+      backups: true,
+      support: "24/7",
+      migration: true,
+    },
+  },
+  {
+    name: "Reseller Silver",
+    price: "80,000 FCFA",
+    description: "Start your hosting business",
+    features: {
+      diskSpace: "50 GB SSD",
+      bandwidth: "Unlimited",
+      directAdminAccounts: "25",
+      inodes: "Unlimited",
+      websites: "Unlimited",
+      databases: "Unlimited",
+      whiteLabeled: true,
+      freeSSL: true,
+      blesta: false,
+      privateDNS: true,
+      siteBuilder: true,
+      liteSpeed: true,
+      multiLanguage: true,
+      noRenewalHikes: true,
+      imunify360: true,
+      panelCustomization: true,
+      backups: true,
+      support: "24/7",
+      migration: true,
+    },
+  },
+  {
+    name: "Reseller Gold",
+    price: "120,000 FCFA",
+    description: "For growing reseller business",
+    badge: "Popular",
+    features: {
+      diskSpace: "200 GB SSD",
+      bandwidth: "Unlimited",
+      directAdminAccounts: "50",
+      inodes: "Unlimited",
+      websites: "Unlimited",
+      databases: "Unlimited",
+      whiteLabeled: true,
+      freeSSL: true,
+      blesta: true,
+      privateDNS: true,
+      siteBuilder: true,
+      liteSpeed: true,
+      multiLanguage: true,
+      noRenewalHikes: true,
+      imunify360: true,
+      panelCustomization: true,
+      backups: true,
+      support: "Priority",
+      migration: true,
+    },
+  },
+  {
+    name: "Reseller Platinum",
+    price: "300,000 FCFA",
+    description: "For enterprise resellers",
+    features: {
+      diskSpace: "Unlimited SSD",
+      bandwidth: "Unlimited",
+      directAdminAccounts: "Unlimited",
+      inodes: "Unlimited",
+      websites: "Unlimited",
+      databases: "Unlimited",
+      whiteLabeled: true,
+      freeSSL: true,
+      blesta: true,
+      privateDNS: true,
+      siteBuilder: true,
+      liteSpeed: true,
+      multiLanguage: true,
+      noRenewalHikes: true,
+      imunify360: true,
+      panelCustomization: true,
+      backups: true,
+      support: "Priority",
+      migration: true,
+    },
+  },
+]
+
 const aiPlans = [
   {
     name: "Self-hosted n8n",
@@ -450,10 +558,11 @@ export default function PricingPage() {
         <section className="py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <Tabs defaultValue="shared" className="w-full">
-              <TabsList className="grid w-full max-w-lg mx-auto grid-cols-4 mb-12">
+              <TabsList className="grid w-full max-w-3xl mx-auto grid-cols-5 mb-12">
                 <TabsTrigger value="shared">Shared</TabsTrigger>
                 <TabsTrigger value="wordpress">WordPress</TabsTrigger>
                 <TabsTrigger value="vps">VPS</TabsTrigger>
+                <TabsTrigger value="reseller">Reseller</TabsTrigger>
                 <TabsTrigger value="ai">AI & ML</TabsTrigger>
               </TabsList>
 
@@ -753,6 +862,162 @@ export default function PricingPage() {
                               <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
                             )}
                             <span>Managed services</span>
+                          </li>
+                        </ul>
+                        <Button className="w-full" asChild>
+                          <Link href="/contact">Get Started</Link>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </TabsContent>
+
+              {/* Reseller Hosting Plans */}
+              <TabsContent value="reseller" id="reseller">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                  {resellerPlans.map((plan, index) => (
+                    <Card key={index} className="relative flex flex-col">
+                      {plan.badge && (
+                        <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1">{plan.badge}</Badge>
+                      )}
+                      <CardHeader>
+                        <CardTitle className="text-2xl">{plan.name}</CardTitle>
+                        <CardDescription>{plan.description}</CardDescription>
+                        <div className="pt-4">
+                          <div className="text-4xl font-bold">
+                            {plan.price}
+                            <span className="text-base font-normal text-muted-foreground">
+                              /year
+                            </span>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="flex-1 flex flex-col">
+                        <ul className="space-y-3 mb-8 flex-1">
+                          <li className="flex items-start gap-2 text-sm">
+                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            <span>{plan.features.diskSpace} disk space</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            <span>{plan.features.bandwidth} monthly bandwidth</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            <span>{plan.features.directAdminAccounts} DirectAdmin accounts</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            <span>{plan.features.inodes} inodes</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            <span>{plan.features.websites} websites</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            <span>{plan.features.databases} databases</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            {plan.features.whiteLabeled ? (
+                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            ) : (
+                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                            )}
+                            <span>100% White labeled</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            {plan.features.freeSSL ? (
+                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            ) : (
+                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                            )}
+                            <span>Free SSL for all clients</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            {plan.features.privateDNS ? (
+                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            ) : (
+                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                            )}
+                            <span>Private nameservers</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            {plan.features.blesta ? (
+                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            ) : (
+                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                            )}
+                            <span>Free Blesta license</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            {plan.features.siteBuilder ? (
+                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            ) : (
+                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                            )}
+                            <span>Premium Site Builder</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            {plan.features.liteSpeed ? (
+                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            ) : (
+                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                            )}
+                            <span>LiteSpeed Enterprise</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            {plan.features.multiLanguage ? (
+                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            ) : (
+                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                            )}
+                            <span>Multiple PHP, Node.js & Python Selector</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            {plan.features.noRenewalHikes ? (
+                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            ) : (
+                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                            )}
+                            <span>No Renewal Price Hikes</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            {plan.features.imunify360 ? (
+                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            ) : (
+                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                            )}
+                            <span>Real-time Protection by Imunify360</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            {plan.features.panelCustomization ? (
+                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            ) : (
+                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                            )}
+                            <span>Full Panel Customization</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            {plan.features.backups ? (
+                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            ) : (
+                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                            )}
+                            <span>JetBackup</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            <span>{plan.features.support} support</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            {plan.features.migration ? (
+                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            ) : (
+                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                            )}
+                            <span>Free migration service</span>
                           </li>
                         </ul>
                         <Button className="w-full" asChild>

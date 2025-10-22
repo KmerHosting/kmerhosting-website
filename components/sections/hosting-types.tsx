@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Server, Compass as Wordpress, Cloud, ArrowRight, Workflow, Brain } from "lucide-react"
+import { Server, Compass as Wordpress, Cloud, ArrowRight, Workflow, Brain, Users } from "lucide-react"
 import Link from "next/link"
 import { useLanguage } from "@/components/language-provider"
 
@@ -56,6 +56,22 @@ export function HostingTypes() {
       ],
       link: "/products/vps",
       color: "from-orange-500 to-orange-600"
+    },
+    {
+      icon: Users,
+      titleKey: "hosting.reseller.title",
+      descriptionKey: "hosting.reseller.description",
+      features: [
+        "DirectAdmin control panel",
+        "White-label branding",
+        "Free SSL for clients",
+        "Private nameservers",
+        "Blesta billing system",
+        "Priority support",
+        "4 reseller packages"
+      ],
+      link: "/products/reseller",
+      color: "from-green-500 to-green-600"
     },
     {
       icon: Workflow,
