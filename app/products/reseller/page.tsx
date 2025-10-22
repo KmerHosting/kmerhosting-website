@@ -158,7 +158,7 @@ export default function ResellerHostingPage() {
                   Ready to Start Your Hosting Business?
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                  Choose from our Silver, Gold, or Platinum reseller plans and start hosting clients today.
+                  Choose from our Bronze, Silver, Gold, or Platinum reseller plans and start hosting clients today.
                   All plans include free migration and 30-day money-back guarantee.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -560,10 +560,10 @@ export default function PricingPage() {
             <Tabs defaultValue="shared" className="w-full">
               <TabsList className="grid w-full max-w-3xl mx-auto grid-cols-5 mb-12">
                 <TabsTrigger value="shared">Shared</TabsTrigger>
-                <TabsTrigger value="wordpress">WordPress</TabsTrigger>
+                <TabsTrigger value="wordpress">WP</TabsTrigger>
                 <TabsTrigger value="vps">VPS</TabsTrigger>
                 <TabsTrigger value="reseller">Reseller</TabsTrigger>
-                <TabsTrigger value="ai">AI & ML</TabsTrigger>
+                <TabsTrigger value="ai">AI</TabsTrigger>
               </TabsList>
 
               {/* Shared Web Hosting Plans */}
