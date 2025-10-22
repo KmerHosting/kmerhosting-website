@@ -91,6 +91,16 @@ const features = [
     icon: RotateCcw,
     title: "Refund",
     description: "30-Day Refund Policy. We believe that you should get the service that you pay for or we don't deserve your money. We will refund your payment within the first 30 days if you are not happy with our product or service."
+  },
+  {
+    icon: Shield,
+    title: "Security - CPGuard",
+    description: "Advanced malware protection and monitoring. CPGuard provides real-time website security scanning, malware detection, and automatic cleanup to keep your websites safe from threats and vulnerabilities."
+  },
+  {
+    icon: CheckCircle,
+    title: "Security - Immunify360",
+    description: "Comprehensive security suite for complete protection. Immunify360 offers advanced firewall protection, intrusion detection and prevention, proactive defense against emerging threats, and automated malware removal to ensure your hosting environment stays secure 24/7."
   }
 ]
 
@@ -108,13 +118,30 @@ export function Features() {
   }
 
   return (
-    <section className="py-20 sm:py-32 bg-muted/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      className="py-20 sm:py-32 bg-muted/30 relative overflow-hidden"
+      style={{
+        backgroundImage: 'url(/map.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-background/95"></div>
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Everything you need to succeed online</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance mb-6">
             Professional hosting features designed for performance, security, and reliability
           </p>
+          <div className="flex items-center justify-center gap-2 text-primary">
+            <Globe className="h-5 w-5" />
+            <p className="text-base font-semibold">
+              10+ Datacenters across North America, Europe, Asia, and Africa
+            </p>
+          </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {features.map((feature, index) => {

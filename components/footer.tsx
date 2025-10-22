@@ -42,30 +42,81 @@ export function Footer() {
 
   return (
     <>
+      {/* Structured Data for Newsletter */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "KmerHosting",
+            "url": "https://kmerhosting.site",
+            "potentialAction": {
+              "@type": "SubscribeAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://kmerhosting.site/#newsletter"
+              }
+            }
+          })
+        }}
+      />
+
       <footer className="border-t bg-muted/30">
-        {/* Newsletter Bar */}
-        <div className="border-b bg-primary text-primary-foreground">
+        {/* Newsletter Section - Simple & Transparent */}
+        <section 
+          id="newsletter"
+          className="border-b"
+          aria-labelledby="newsletter-heading"
+        >
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="text-center md:text-left">
-                <h3 className="text-lg font-semibold">{t("footer.newsletter")}</h3>
-              </div>
-              <form onSubmit={handleNewsletterSubmit} className="flex w-full md:w-auto gap-2">
+            <div className="max-w-2xl">
+              <h3 
+                id="newsletter-heading"
+                className="text-lg font-semibold mb-4"
+              >
+                Subscribe to Our Newsletter
+              </h3>
+              
+              <form 
+                onSubmit={handleNewsletterSubmit} 
+                className="flex flex-col sm:flex-row gap-2 max-w-md mb-3"
+                method="post"
+                action="#newsletter"
+              >
                 <Input
                   type="email"
+                  name="email"
                   placeholder={t("footer.newsletterPlaceholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-primary-foreground text-foreground w-full md:w-64"
+                  className="flex-1"
                   required
+                  aria-label="Email address for newsletter"
+                  autoComplete="email"
                 />
-                <Button type="submit" variant="secondary">
+                <Button 
+                  type="submit" 
+                  variant="default"
+                >
                   {t("footer.subscribe")}
                 </Button>
               </form>
+              
+              <p className="text-muted-foreground text-xs">
+                Unsubscribe anytime. By subscribing, you agree to our{" "}
+                <Link href="/terms" className="underline" title="Read our Terms of Service">
+                  Terms of Service
+                </Link>
+                {" "}and{" "}
+                <Link href="/privacy" className="underline" title="Read our Privacy Policy">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* Main Footer */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">

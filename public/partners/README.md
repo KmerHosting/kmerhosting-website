@@ -13,6 +13,7 @@ Place the following SVG files in this directory:
 5. `softaculous.svg` - Softaculous Auto Installer
 6. `cloudflare.svg` - Cloudflare CDN
 7. `white_directadmin.svg` - DirectAdmin Control Panel
+8. `jetbackup.svg` - JetBackup Backup Solution
 
 ## Logo Requirements
 
@@ -26,13 +27,14 @@ Place the following SVG files in this directory:
 
 Most partner logos can be downloaded from:
 
-1. **Sectigo**: https://sectigo.com/company/brand-assets
-2. **LiteSpeed**: https://www.litespeedtech.com/company/press-center
-3. **CloudLinux**: https://www.cloudlinux.com/company/press-center
-4. **WHMCS**: https://www.whmcs.com/company/media-kit
-5. **Softaculous**: https://www.softaculous.com/media
-6. **Cloudflare**: https://www.cloudflare.com/press/
-7. **DirectAdmin**: https://www.directadmin.com/company/media-kit
+1. **Sectigo**: <https://sectigo.com/company/brand-assets>
+2. **LiteSpeed**: <https://www.litespeedtech.com/company/press-center>
+3. **CloudLinux**: <https://www.cloudlinux.com/company/press-center>
+4. **WHMCS**: <https://www.whmcs.com/company/media-kit>
+5. **Softaculous**: <https://www.softaculous.com/media>
+6. **Cloudflare**: <https://www.cloudflare.com/press/>
+7. **DirectAdmin**: <https://www.directadmin.com/company/media-kit>
+8. **JetBackup**: <https://www.jetbackup.com/company/media-kit>
 
 ## Image Optimization
 

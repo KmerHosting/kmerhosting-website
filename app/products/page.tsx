@@ -1,3 +1,5 @@
+"use client"
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CookieBanner } from "@/components/cookie-banner"
@@ -43,7 +45,7 @@ const webHostingProducts = [
     descriptionKey: "products.vps.longDesc",
     features: [
       "Full root/administrator access",
-      "Dedicated CPU & RAM resources",
+      "Dedicated CPU & RAM usage limit resources",
       "SSD NVMe storage",
       "Choice of operating systems",
       "DDoS protection included"

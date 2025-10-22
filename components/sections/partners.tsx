@@ -1,4 +1,4 @@
-import Image from "next/image"
+"use client"
 
 export function Partners() {
   const partners = [
@@ -39,7 +39,7 @@ export function Partners() {
     },
     {
       name: "Cloudflare",
-      logo: "/partners/cloudflare.svg",
+      logo: "https://www.cloudflare.com/img/logo-cloudflare-dark.svg",
       alt: "Cloudflare CDN - Content delivery network and DDoS protection",
       url: "https://www.cloudflare.com",
       description: "CDN & Security"
@@ -50,6 +50,13 @@ export function Partners() {
       alt: "DirectAdmin Control Panel - User-friendly hosting control panel",
       url: "https://www.directadmin.com",
       description: "Control Panel"
+    },
+    {
+      name: "JetBackup",
+      logo: "/partners/jetbackup.svg",
+      alt: "JetBackup - Professional backup solution for cPanel and DirectAdmin",
+      url: "https://www.jetbackup.com",
+      description: "Backup Solution"
     }
   ]
 
@@ -124,7 +131,7 @@ export function Partners() {
                     href={partner.url}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="flex items-center justify-center h-full p-6 rounded-lg bg-card border border-border/50 hover:border-border transition-colors"
+                    className="flex items-center justify-center h-full p-6 rounded-lg border border-border/50 hover:border-border transition-colors bg-[#06a467] dark:bg-card"
                     aria-label={`Visit ${partner.name} - ${partner.description}`}
                     title={partner.name}
                   >

@@ -19,6 +19,7 @@ const sharedPlans = {
       description: "Perfect for starter PHP projects",
       features: {
         websites: "1",
+        ram: "8 GB",
         storage: "5 GB",
         bandwidth: "50 GB",
         email: "10",
@@ -36,6 +37,7 @@ const sharedPlans = {
       description: "Great for personal websites",
       features: {
         websites: "3",
+        ram: "8 GB",
         storage: "30 GB",
         bandwidth: "100 GB",
         email: "10",
@@ -54,10 +56,11 @@ const sharedPlans = {
       badge: "Popular",
       features: {
         websites: "10",
+        ram: "8 GB",
         storage: "80 GB",
         bandwidth: "Unlimited",
         email: "25",
-        databases: "10",
+        databases: "30",
         phpVersion: "8.4",
         ssl: true,
         backups: true,
@@ -71,7 +74,8 @@ const sharedPlans = {
       description: "For demanding PHP applications",
       features: {
         websites: "Unlimited",
-        storage: "50 GB",
+        ram: "8 GB",
+        storage: "Unlimited",
         bandwidth: "Unlimited",
         email: "Unlimited",
         databases: "Unlimited",
@@ -90,9 +94,11 @@ const sharedPlans = {
       description: "Perfect for starter Node.js apps",
       features: {
         websites: "1",
+        ram: "8 GB",
         storage: "5 GB",
         bandwidth: "50 GB",
         email: "10",
+        databases: "5",
         nodeVersion: "20.x",
         npmPackages: "Unlimited",
         ssl: true,
@@ -107,9 +113,11 @@ const sharedPlans = {
       description: "Great for small Node.js projects",
       features: {
         websites: "3",
+        ram: "8 GB",
         storage: "10 GB",
         bandwidth: "100 GB",
         email: "10",
+        databases: "10",
         nodeVersion: "20.x",
         npmPackages: "Unlimited",
         ssl: true,
@@ -125,9 +133,11 @@ const sharedPlans = {
       badge: "Popular",
       features: {
         websites: "10",
-        storage: "25 GB",
+        ram: "8 GB",
+        storage: "80 GB",
         bandwidth: "Unlimited",
         email: "25",
+        databases: "30",
         nodeVersion: "20.x",
         npmPackages: "Unlimited",
         ssl: true,
@@ -142,9 +152,11 @@ const sharedPlans = {
       description: "For high-traffic Node.js applications",
       features: {
         websites: "Unlimited",
-        storage: "50 GB",
+        ram: "8 GB",
+        storage: "Unlimited",
         bandwidth: "Unlimited",
         email: "Unlimited",
+        databases: "Unlimited",
         nodeVersion: "20.x",
         npmPackages: "Unlimited",
         ssl: true,
@@ -161,9 +173,11 @@ const sharedPlans = {
       description: "Perfect for starter Python apps",
       features: {
         websites: "1",
+        ram: "8 GB",
         storage: "5 GB",
         bandwidth: "50 GB",
         email: "10",
+        databases: "5",
         pythonVersion: "3.11",
         pipPackages: "Unlimited",
         ssl: true,
@@ -178,9 +192,11 @@ const sharedPlans = {
       description: "Great for small Python projects",
       features: {
         websites: "3",
+        ram: "8 GB",
         storage: "10 GB",
         bandwidth: "100 GB",
         email: "10",
+        databases: "10",
         pythonVersion: "3.11",
         pipPackages: "Unlimited",
         ssl: true,
@@ -196,9 +212,11 @@ const sharedPlans = {
       badge: "Popular",
       features: {
         websites: "10",
-        storage: "25 GB",
+        ram: "8 GB",
+        storage: "80 GB",
         bandwidth: "Unlimited",
         email: "25",
+        databases: "30",
         pythonVersion: "3.11",
         pipPackages: "Unlimited",
         ssl: true,
@@ -213,9 +231,11 @@ const sharedPlans = {
       description: "For high-performance Python applications",
       features: {
         websites: "Unlimited",
-        storage: "50 GB",
+        ram: "8 GB",
+        storage: "Unlimited",
         bandwidth: "Unlimited",
         email: "Unlimited",
+        databases: "Unlimited",
         pythonVersion: "3.11",
         pipPackages: "Unlimited",
         ssl: true,
@@ -230,70 +250,66 @@ const sharedPlans = {
 const wordpressPlans = [
   {
     name: "WP Discover",
-    price: "20,000 FCFA",
+    price: "15,000 FCFA",
     description: "For starter WordPress blogs",
     features: {
-      websites: "1",
-      storage: "10 GB",
+      websites: "5",
+      ram: "8 GB",
+      storage: "20 GB",
       bandwidth: "50 GB",
-      email: "5",
+      email: "15",
       ssl: true,
       backups: false,
       support: "24/7",
-      wpCli: false,
-      staging: false,
       autoUpdates: true,
     },
   },
   {
     name: "WP Plus",
-    price: "30,000 FCFA",
+    price: "18,000 FCFA",
     description: "For personal blogs",
     features: {
-      websites: "3",
-      storage: "25 GB",
+      websites: "10",
+      ram: "8 GB",
+      storage: "30 GB",
       bandwidth: "Unlimited",
       email: "15",
       ssl: true,
       backups: true,
       support: "24/7",
-      wpCli: false,
-      staging: false,
       autoUpdates: true,
     },
   },
   {
     name: "WP Pro",
-    price: "50,000 FCFA",
+    price: "39,900 FCFA",
     description: "For business sites",
     badge: "Popular",
     features: {
-      websites: "10",
-      storage: "75 GB",
+      websites: "20",
+      ram: "8 GB",
+      storage: "80 GB",
       bandwidth: "Unlimited",
       email: "50",
       ssl: true,
       backups: true,
       support: "Priority",
-      wpCli: true,
-      staging: true,
       autoUpdates: true,
     },
   },
   {
     name: "WP Gold",
-    price: "80,000 FCFA",
+    price: "65,000 FCFA",
     description: "For agencies & enterprises",
     features: {
       websites: "Unlimited",
-      storage: "150 GB",
+      ram: "8 GB",
+      storage: "Unlimited",
       bandwidth: "Unlimited",
       email: "Unlimited",
       ssl: true,
       backups: true,
       support: "Priority",
-      wpCli: true,
-      staging: true,
       autoUpdates: true,
     },
   },
@@ -306,7 +322,7 @@ const vpsPlans = [
     description: "For small applications",
     features: {
       cpu: "2 cores",
-      ram: "4 GB",
+      ram: "8 GB",
       storage: "80 GB NVMe",
       bandwidth: "2 TB",
       ipv4: "1",
@@ -318,7 +334,7 @@ const vpsPlans = [
   },
   {
     name: "VPS Pro",
-    price: "150,000 FCFA",
+    price: "119,000 FCFA",
     description: "For growing apps",
     badge: "Popular",
     features: {
@@ -335,7 +351,7 @@ const vpsPlans = [
   },
   {
     name: "VPS Enterprise",
-    price: "220,000 FCFA",
+    price: "150,000 FCFA",
     description: "For enterprise apps",
     features: {
       cpu: "8 cores",
@@ -354,10 +370,11 @@ const vpsPlans = [
 const aiPlans = [
   {
     name: "Self-hosted n8n",
-    originalPrice: "119,000 FCFA",
-    price: "29,000 FCFA",
+    originalPrice: "89,000 FCFA",
+    price: "49,000 FCFA",
     description: "AI workflow automation platform",
     badge: "Limited Time",
+    billingPeriod: "/year",
     features: {
       installation: "Complete n8n setup",
       automation: "AI workflow automation",
@@ -369,11 +386,30 @@ const aiPlans = [
     },
   },
   {
+    name: "LLM Hosting Free",
+    price: "0 FCFA",
+    description: "Get started with limited LLM access",
+    badge: null,
+    billingPeriod: "/month",
+    isFree: true,
+    features: {
+      requests: "20 requests per day",
+      models: "Access to only 5 models",
+      imageToText: "Limited image-to-text models",
+      speechToText: "Limited speech-to-text access",
+      webSearch: "Limited web search tools",
+      browserAutomation: "Limited web browser automation tools",
+      api: "Free API integration",
+      apiLimit: "10 API requests per 10 days (5 models only)",
+    },
+  },
+  {
     name: "LLM Hosting",
-    originalPrice: "89,000 FCFA",
-    price: "23,000 FCFA",
+    originalPrice: "10,000 FCFA",
+    price: "4,000 FCFA",
     description: "Open-source LLM access with API",
     badge: "Limited Time",
+    billingPeriod: "/month",
     features: {
       models: "Multiple open-source LLMs",
       usage: "Free usage with fair limits",
@@ -401,7 +437,7 @@ export default function PricingPage() {
                 Simple, transparent pricing
               </h1>
               <p className="text-lg text-muted-foreground text-balance mb-8">
-                Choose the perfect plan for your needs. All plans include free SSL, daily backups, and 24/7 support.
+                Choose and get a free .com domain
               </p>
               <p className="text-sm text-muted-foreground">
                 All prices are yearly billing in FCFA (Central African CFA Franc)
@@ -479,6 +515,10 @@ export default function PricingPage() {
                           </li>
                           <li className="flex items-start gap-2">
                             <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            <span>{(plan.features as any).ram} RAM usage limit</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
                             <span>{plan.features.storage} SSD storage</span>
                           </li>
                           <li className="flex items-start gap-2">
@@ -508,6 +548,10 @@ export default function PricingPage() {
                             <>
                               <li className="flex items-start gap-2">
                                 <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                                <span>{(plan.features as any).databases} MySQL database(s)</span>
+                              </li>
+                              <li className="flex items-start gap-2">
+                                <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
                                 <span>Node.js {(plan.features as any).nodeVersion}</span>
                               </li>
                               <li className="flex items-start gap-2">
@@ -519,6 +563,10 @@ export default function PricingPage() {
                           
                           {selectedTech === "python" && (
                             <>
+                              <li className="flex items-start gap-2">
+                                <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                                <span>{(plan.features as any).databases} MySQL database(s)</span>
+                              </li>
                               <li className="flex items-start gap-2">
                                 <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
                                 <span>Python {(plan.features as any).pythonVersion}</span>
@@ -596,6 +644,10 @@ export default function PricingPage() {
                           </li>
                           <li className="flex items-start gap-1.5 text-xs">
                             <Check className="h-3 w-3 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                            <span>{(plan.features as any).ram} RAM usage limit</span>
+                          </li>
+                          <li className="flex items-start gap-1.5 text-xs">
+                            <Check className="h-3 w-3 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
                             <span>{plan.features.storage} SSD storage</span>
                           </li>
                           <li className="flex items-start gap-1.5 text-xs">
@@ -613,22 +665,6 @@ export default function PricingPage() {
                               <X className="h-3 w-3 text-muted-foreground mt-0.5 flex-shrink-0" />
                             )}
                             <span>Automatic updates</span>
-                          </li>
-                          <li className="flex items-start gap-1.5 text-xs">
-                            {plan.features.wpCli ? (
-                              <Check className="h-3 w-3 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-3 w-3 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>WP-CLI access</span>
-                          </li>
-                          <li className="flex items-start gap-1.5 text-xs">
-                            {plan.features.staging ? (
-                              <Check className="h-3 w-3 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-3 w-3 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Staging environment</span>
                           </li>
                           <li className="flex items-start gap-1.5 text-xs">
                             <Check className="h-3 w-3 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
@@ -672,7 +708,7 @@ export default function PricingPage() {
                           </li>
                           <li className="flex items-start gap-2 text-sm">
                             <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.ram} RAM</span>
+                            <span>{plan.features.ram} RAM usage limit</span>
                           </li>
                           <li className="flex items-start gap-2 text-sm">
                             <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
@@ -730,7 +766,7 @@ export default function PricingPage() {
 
               {/* AI & ML Plans */}
               <TabsContent value="ai">
-                <div className="grid lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <div className="grid lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                   {aiPlans.map((plan, index) => (
                     <Card key={index} className="relative flex flex-col">
                       {plan.badge && (
@@ -738,17 +774,34 @@ export default function PricingPage() {
                           {plan.badge}
                         </Badge>
                       )}
+                      {plan.isFree && (
+                        <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-green-500 hover:bg-green-600">
+                          Free Plan
+                        </Badge>
+                      )}
                       <CardHeader>
                         <CardTitle className="text-xl">{plan.name}</CardTitle>
                         <CardDescription>{plan.description}</CardDescription>
                         <div className="pt-4">
-                          <div className="text-3xl font-bold">
-                            <span className="line-through text-muted-foreground text-2xl mr-2">
-                              {plan.originalPrice}
-                            </span>
-                            {plan.price}
-                            <span className="text-base font-normal text-muted-foreground">/year</span>
-                          </div>
+                          {plan.isFree ? (
+                            <div className="text-3xl font-bold">
+                              {plan.price}
+                              <span className="text-base font-normal text-muted-foreground">{plan.billingPeriod}</span>
+                            </div>
+                          ) : plan.originalPrice ? (
+                            <div className="text-3xl font-bold">
+                              <span className="line-through text-muted-foreground text-2xl mr-2">
+                                {plan.originalPrice}
+                              </span>
+                              {plan.price}
+                              <span className="text-base font-normal text-muted-foreground">{plan.billingPeriod}</span>
+                            </div>
+                          ) : (
+                            <div className="text-3xl font-bold">
+                              {plan.price}
+                              <span className="text-base font-normal text-muted-foreground">{plan.billingPeriod}</span>
+                            </div>
+                          )}
                         </div>
                       </CardHeader>
                       <CardContent className="flex-1 flex flex-col">
@@ -760,9 +813,9 @@ export default function PricingPage() {
                             </li>
                           ))}
                         </ul>
-                        <Button className="w-full" asChild>
+                        <Button className="w-full" variant={plan.isFree ? "outline" : "default"} asChild>
                           <Link href={plan.name === "Self-hosted n8n" ? "/products/n8n" : "/products/llm"}>
-                            Get Started
+                            {plan.isFree ? "Get Started Free" : "Get Started"}
                           </Link>
                         </Button>
                       </CardContent>
