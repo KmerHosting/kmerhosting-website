@@ -291,9 +291,9 @@ export function Footer() {
 
           {/* Bottom Bar */}
           <div className="mt-12 pt-8 border-t">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
               {/* Social Media Icons */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 order-1 sm:order-1">
                 <a
                   href="https://slack.kmerhosting.com"
                   target="_blank"
@@ -360,7 +360,7 @@ export function Footer() {
               </div>
 
               {/* Status Indicator */}
-              <div className="flex items-center gap-2 text-sm">
+              <div className="flex items-center gap-2 text-sm order-2 sm:order-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                 <span className="text-green-600 dark:text-green-400 font-medium">
                   {t("footer.status")}
