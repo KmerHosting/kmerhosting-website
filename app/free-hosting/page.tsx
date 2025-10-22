@@ -50,16 +50,11 @@ export default function FreeHostingPage() {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      'text/html': ['.html', '.htm'],
-      'text/css': ['.css'],
-      'text/javascript': ['.js'],
-      'application/javascript': ['.js'],
-      'image/*': ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp'],
-      'font/*': ['.woff', '.woff2', '.ttf', '.otf'],
-      'application/json': ['.json'],
-      'text/plain': ['.txt', '.md']
+      'application/zip': ['.zip'],
+      'application/x-zip-compressed': ['.zip']
     },
-    multiple: true
+    multiple: false,
+    maxFiles: 1
   })
 
   const removeFile = (index: number) => {
@@ -366,7 +361,7 @@ export default function FreeHostingPage() {
                   <ul className="space-y-3 text-sm">
                     <li className="flex items-start gap-2">
                       <Check className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
-                      <span><strong>Static files only:</strong> HTML, CSS, JavaScript, images, fonts</span>
+                      <span><strong>Upload format:</strong> Upload a .zip file containing your project with files at the first three directory levels (HTML, CSS, JavaScript, images, fonts)</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />

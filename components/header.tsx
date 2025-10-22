@@ -117,6 +117,24 @@ export function Header() {
 
           {/* Mobile Menu */}
           <div className="md:hidden flex items-center space-x-2">
+            {/* Language Toggle for Mobile */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-9 w-9">
+                  <Globe className="h-4 w-4" />
+                  <span className="sr-only">Toggle language</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => setLanguage("en")}>
+                  English {language === "en" && "✓"}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLanguage("fr")}>
+                  Français {language === "fr" && "✓"}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             {/* Theme Toggle for Mobile */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -154,7 +172,22 @@ export function Header() {
                 <SheetHeader>
                   <SheetTitle>Navigation</SheetTitle>
                 </SheetHeader>
-                <div className="flex flex-col space-y-4 mt-8">
+                <div className="flex flex-col space-y-4 mt-6">
+                  {/* Auth Buttons - Moved to Top */}
+                  <div className="px-4 space-y-2 pb-4 border-b">
+                    <Link href="/login" onClick={() => setIsOpen(false)}>
+                      <Button variant="outline" className="w-full">
+                        {t("nav.login")}
+                      </Button>
+                    </Link>
+                    <Link href="/signup" onClick={() => setIsOpen(false)}>
+                      <Button className="w-full">
+                        {t("nav.signup")}
+                      </Button>
+                    </Link>
+                  </div>
+
+                  {/* Navigation Links */}
                   {navItems.map((item) => (
                     <Link
                       key={item.href}
@@ -168,43 +201,6 @@ export function Header() {
                       {item.label}
                     </Link>
                   ))}
-                  
-                  <div className="border-t pt-4 space-y-4">
-                    {/* Language Toggle */}
-                    <div className="px-4">
-                      <p className="text-sm font-medium mb-2">{t("nav.language")}</p>
-                      <div className="flex space-x-2">
-                        <Button
-                          variant={language === "en" ? "default" : "outline"}
-                          size="sm"
-                          onClick={() => setLanguage("en")}
-                        >
-                          English
-                        </Button>
-                        <Button
-                          variant={language === "fr" ? "default" : "outline"}
-                          size="sm"
-                          onClick={() => setLanguage("fr")}
-                        >
-                          Français
-                        </Button>
-                      </div>
-                    </div>
-
-                    {/* Auth Buttons */}
-                    <div className="px-4 space-y-3">
-                      <Link href="/login" onClick={() => setIsOpen(false)}>
-                        <Button variant="outline" className="w-full">
-                          {t("nav.login")}
-                        </Button>
-                      </Link>
-                      <Link href="/signup" onClick={() => setIsOpen(false)}>
-                        <Button className="w-full">
-                          {t("nav.signup")}
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
                 </div>
               </SheetContent>
             </Sheet>
