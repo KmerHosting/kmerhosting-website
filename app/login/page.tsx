@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CookieBanner } from "@/components/cookie-banner"
@@ -9,12 +10,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useLanguage } from "@/components/language-provider"
 import { Eye, EyeOff } from "lucide-react"
 
-export default function LoginPage() {
-  const { t } = useLanguage()
-  const [email, setEmail] = useState("")
+export default function LoginPage() {const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -43,20 +41,22 @@ export default function LoginPage() {
               {/* Logo */}
               <div className="flex justify-center">
                 <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center shadow-sm border border-gray-100">
-                  <img 
+                  <Image 
                     src="/kmerhosting-logo.svg" 
-                    alt="KmerHosting" 
-                    className="h-7 w-7 object-contain"
+                    alt="KmerHosting Logo" 
+                    width={28}
+                    height={28}
+                    className="object-contain"
                   />
                 </div>
               </div>
-              <CardTitle className="text-xl font-semibold">{t("auth.login.title")}</CardTitle>
-              <CardDescription className="text-sm">{t("auth.login.subtitle")}</CardDescription>
+              <CardTitle className="text-xl font-semibold">{"Welcome Back"}</CardTitle>
+              <CardDescription className="text-sm">{"Login to your account"}</CardDescription>
             </CardHeader>
             <CardContent className="pt-2 pb-4">
               <form onSubmit={handleSubmit} className="space-y-3">
                 <div className="space-y-1">
-                  <Label htmlFor="email" className="text-sm">{t("auth.login.email")}</Label>
+                  <Label htmlFor="email" className="text-sm">{"Email Address"}</Label>
                   <Input
                     id="email"
                     type="email"
@@ -69,7 +69,7 @@ export default function LoginPage() {
                 </div>
                 
                 <div className="space-y-1">
-                  <Label htmlFor="password" className="text-sm">{t("auth.login.password")}</Label>
+                  <Label htmlFor="password" className="text-sm">{"Password"}</Label>
                   <div className="relative">
                     <Input
                       id="password"
@@ -102,7 +102,7 @@ export default function LoginPage() {
                     href="/forgot-password"
                     className="text-xs text-primary hover:underline"
                   >
-                    {t("auth.login.forgotPassword")}
+                    {"Forgot password?"}
                   </Link>
                 </div>
 
@@ -111,16 +111,16 @@ export default function LoginPage() {
                   className="w-full h-9"
                   disabled={isLoading}
                 >
-                  {isLoading ? "..." : t("auth.login.submit")}
+                  {isLoading ? "..." : "Login"}
                 </Button>
               </form>
 
               <div className="mt-4 text-center text-xs">
                 <span className="text-muted-foreground">
-                  {t("auth.login.noAccount")}{" "}
+                  {"Don't have an account?"}{" "}
                 </span>
                 <Link href="/signup" className="text-primary hover:underline">
-                  {t("auth.login.signUpLink")}
+                  {"Sign up here"}
                 </Link>
               </div>
             </CardContent>

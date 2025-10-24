@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { Inter, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
-import { LanguageProvider } from "@/components/language-provider"
 import { Toaster } from "@/components/ui/sonner"
 import "./globals.css"
 
@@ -11,13 +10,13 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kmerhosting.site"),
+  metadataBase: new URL("https://kmerhosting.com"),
   title: {
     default: "KmerHosting - Professional Web Hosting Solutions",
     template: "%s | KmerHosting",
   },
   description:
-    "Multiple Affordable Hosting services to suit you perfectly. PHP, Node.js, Python, WordPress, and VPS hosting plans starting at 13,900 FCFA/year.",
+    "Multiple Affordable Hosting services to suit you perfectly. PHP, Node.js, Python, WordPress, and VPS hosting plans starting at 1,158 FCFA/month.",
   keywords: [
     "web hosting",
     "cloud hosting",
@@ -49,8 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    alternateLocale: "fr_FR",
-    url: "https://kmerhosting.site",
+    url: "https://kmerhosting.com",
     title: "KmerHosting - Professional Web Hosting Solutions",
     description: "Every plan include free SSL, domain, and email. Built for developers and businesses.",
     siteName: "KmerHosting",
@@ -64,7 +62,7 @@ export const metadata: Metadata = {
     google: "your-google-verification-code",
   },
   alternates: {
-    canonical: "https://kmerhosting.site",
+    canonical: "https://kmerhosting.com",
   },
     generator: 'KmerHosting'
 }
@@ -76,9 +74,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className={`${inter.variable} ${geistMono.variable} font-sans antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <LanguageProvider>{children}</LanguageProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          {children}
         </ThemeProvider>
         <Toaster />
         <Analytics />

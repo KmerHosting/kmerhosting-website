@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CookieBanner } from "@/components/cookie-banner"
@@ -7,1123 +8,1704 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Check, X } from "lucide-react"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { Check, ArrowRight, Sparkles, ChevronDown } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
 
-const sharedPlans = {
-  php: [
-    {
-      name: "Discover",
-      price: "13,900 FCFA",
-      description: "Perfect for starter PHP projects",
-      features: {
-        websites: "1",
-        ram: "8 GB",
-        storage: "5 GB",
-        bandwidth: "50 GB",
-        email: "10",
-        databases: "5",
-        phpVersion: "8.4",
-        ssl: true,
-        backups: false,
-        support: "24/7",
-        migration: false,
-      },
-    },
-    {
-      name: "Plus",
-      price: "15,000 FCFA",
-      description: "Great for personal websites",
-      features: {
-        websites: "3",
-        ram: "8 GB",
-        storage: "30 GB",
-        bandwidth: "100 GB",
-        email: "10",
-        databases: "10",
-        phpVersion: "8.4",
-        ssl: true,
-        backups: true,
-        support: "24/7",
-        migration: false,
-      },
-    },
-    {
-      name: "Pro",
-      price: "25,000 FCFA",
-      description: "Ideal for business websites",
-      badge: "Popular",
-      features: {
-        websites: "10",
-        ram: "8 GB",
-        storage: "80 GB",
-        bandwidth: "Unlimited",
-        email: "25",
-        databases: "30",
-        phpVersion: "8.4",
-        ssl: true,
-        backups: true,
-        support: "Priority",
-        migration: true,
-      },
-    },
-    {
-      name: "Gold",
-      price: "50,000 FCFA",
-      description: "For demanding PHP applications",
-      features: {
-        websites: "Unlimited",
-        ram: "8 GB",
-        storage: "Unlimited",
-        bandwidth: "Unlimited",
-        email: "Unlimited",
-        databases: "Unlimited",
-        phpVersion: "8.4",
-        ssl: true,
-        backups: true,
-        support: "Priority",
-        migration: true,
-      },
-    },
-  ],
-  nodejs: [
-    {
-      name: "Discover",
-      price: "13,900 FCFA",
-      description: "Perfect for starter Node.js apps",
-      features: {
-        websites: "1",
-        ram: "8 GB",
-        storage: "5 GB",
-        bandwidth: "50 GB",
-        email: "10",
-        databases: "5",
-        nodeVersion: "20.x",
-        npmPackages: "Unlimited",
-        ssl: true,
-        backups: false,
-        support: "24/7",
-        migration: false,
-      },
-    },
-    {
-      name: "Plus",
-      price: "15,000 FCFA",
-      description: "Great for small Node.js projects",
-      features: {
-        websites: "3",
-        ram: "8 GB",
-        storage: "10 GB",
-        bandwidth: "100 GB",
-        email: "10",
-        databases: "10",
-        nodeVersion: "20.x",
-        npmPackages: "Unlimited",
-        ssl: true,
-        backups: true,
-        support: "24/7",
-        migration: false,
-      },
-    },
-    {
-      name: "Pro",
-      price: "25,000 FCFA",
-      description: "Ideal for production Node.js apps",
-      badge: "Popular",
-      features: {
-        websites: "10",
-        ram: "8 GB",
-        storage: "80 GB",
-        bandwidth: "Unlimited",
-        email: "25",
-        databases: "30",
-        nodeVersion: "20.x",
-        npmPackages: "Unlimited",
-        ssl: true,
-        backups: true,
-        support: "Priority",
-        migration: true,
-      },
-    },
-    {
-      name: "Gold",
-      price: "50,000 FCFA",
-      description: "For high-traffic Node.js applications",
-      features: {
-        websites: "Unlimited",
-        ram: "8 GB",
-        storage: "Unlimited",
-        bandwidth: "Unlimited",
-        email: "Unlimited",
-        databases: "Unlimited",
-        nodeVersion: "20.x",
-        npmPackages: "Unlimited",
-        ssl: true,
-        backups: true,
-        support: "Priority",
-        migration: true,
-      },
-    },
-  ],
-  python: [
-    {
-      name: "Discover",
-      price: "13,900 FCFA",
-      description: "Perfect for starter Python apps",
-      features: {
-        websites: "1",
-        ram: "8 GB",
-        storage: "5 GB",
-        bandwidth: "50 GB",
-        email: "10",
-        databases: "5",
-        pythonVersion: "3.11",
-        pipPackages: "Unlimited",
-        ssl: true,
-        backups: false,
-        support: "24/7",
-        migration: false,
-      },
-    },
-    {
-      name: "Plus",
-      price: "15,000 FCFA",
-      description: "Great for small Python projects",
-      features: {
-        websites: "3",
-        ram: "8 GB",
-        storage: "10 GB",
-        bandwidth: "100 GB",
-        email: "10",
-        databases: "10",
-        pythonVersion: "3.11",
-        pipPackages: "Unlimited",
-        ssl: true,
-        backups: true,
-        support: "24/7",
-        migration: false,
-      },
-    },
-    {
-      name: "Pro",
-      price: "25,000 FCFA",
-      description: "Ideal for production Python apps",
-      badge: "Popular",
-      features: {
-        websites: "10",
-        ram: "8 GB",
-        storage: "80 GB",
-        bandwidth: "Unlimited",
-        email: "25",
-        databases: "30",
-        pythonVersion: "3.11",
-        pipPackages: "Unlimited",
-        ssl: true,
-        backups: true,
-        support: "Priority",
-        migration: true,
-      },
-    },
-    {
-      name: "Gold",
-      price: "50,000 FCFA",
-      description: "For high-performance Python applications",
-      features: {
-        websites: "Unlimited",
-        ram: "8 GB",
-        storage: "Unlimited",
-        bandwidth: "Unlimited",
-        email: "Unlimited",
-        databases: "Unlimited",
-        pythonVersion: "3.11",
-        pipPackages: "Unlimited",
-        ssl: true,
-        backups: true,
-        support: "Priority",
-        migration: true,
-      },
-    },
-  ],
+interface PricingPlan {
+  name: string
+  price: string
+  period: string
+  description: string
+  features: string[]
+  popular?: boolean
+  cta: string
+  href: string
 }
 
-const wordpressPlans = [
+function PricingCard({ plan }: { plan: PricingPlan }) {
+  return (
+    <Card className={plan.popular ? "border-primary shadow-lg relative" : ""}>
+      {plan.popular && (
+        <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary">
+          Most Popular
+        </Badge>
+      )}
+      <CardHeader>
+        <CardTitle className="text-2xl">{plan.name}</CardTitle>
+        <CardDescription>{plan.description}</CardDescription>
+        <div className="pt-4">
+          <span className="text-4xl font-bold">{plan.price}</span>
+          <span className="text-muted-foreground ml-2">{plan.period}</span>
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <ul className="space-y-3">
+          {plan.features.map((feature, idx) => (
+            <li key={idx} className="flex items-start gap-2">
+              <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+              <span className="text-sm">{feature}</span>
+            </li>
+          ))}
+        </ul>
+        <Button className="w-full" size="lg" asChild>
+          <Link href={plan.href}>{plan.cta}</Link>
+        </Button>
+      </CardContent>
+    </Card>
+  )
+}
+
+// Generic Shared Hosting Plan (same for all types)
+const getSharedHostingPlans = (type: string): PricingPlan[] => [
   {
-    name: "WP Discover",
-    price: "15,000 FCFA",
-    description: "For starter WordPress blogs",
-    features: {
-      websites: "5",
-      ram: "8 GB",
-      storage: "20 GB",
-      bandwidth: "50 GB",
-      email: "15",
-      ssl: true,
-      backups: false,
-      support: "24/7",
-      autoUpdates: true,
-    },
+    name: `${type} Starter`,
+    price: "1,158 FCFA",
+    period: "/month",
+    description: `Perfect for ${type.toLowerCase()} websites`,
+    features: [
+      "1 Website",
+      "10 GB SSD Storage",
+      "Unlimited Bandwidth",
+      "Free SSL Certificate",
+      `Optimized for ${type}`,
+      "cPanel Control Panel",
+      "99.9% Uptime Guarantee",
+    ],
+    cta: "Get Started",
+    href: "/signup",
   },
   {
-    name: "WP Plus",
-    price: "18,000 FCFA",
-    description: "For personal blogs",
-    features: {
-      websites: "10",
-      ram: "8 GB",
-      storage: "30 GB",
-      bandwidth: "Unlimited",
-      email: "15",
-      ssl: true,
-      backups: true,
-      support: "24/7",
-      autoUpdates: true,
-    },
+    name: `${type} Business`,
+    price: "2,500 FCFA",
+    period: "/month",
+    description: `Professional ${type.toLowerCase()} hosting`,
+    features: [
+      "5 Websites",
+      "50 GB SSD Storage",
+      "Unlimited Bandwidth",
+      "Free SSL + Domain",
+      "10 Email Accounts",
+      "LiteSpeed + Redis",
+      `${type} Optimizations`,
+      "Priority Support",
+    ],
+    popular: true,
+    cta: "Get Started",
+    href: "/signup",
   },
   {
-    name: "WP Pro",
-    price: "39,900 FCFA",
-    description: "For business sites",
-    badge: "Popular",
-    features: {
-      websites: "20",
-      ram: "8 GB",
-      storage: "80 GB",
-      bandwidth: "Unlimited",
-      email: "50",
-      ssl: true,
-      backups: true,
-      support: "Priority",
-      autoUpdates: true,
-    },
-  },
-  {
-    name: "WP Gold",
-    price: "65,000 FCFA",
-    description: "For agencies & enterprises",
-    features: {
-      websites: "Unlimited",
-      ram: "8 GB",
-      storage: "Unlimited",
-      bandwidth: "Unlimited",
-      email: "Unlimited",
-      ssl: true,
-      backups: true,
-      support: "Priority",
-      autoUpdates: true,
-    },
+    name: `${type} Premium`,
+    price: "5,000 FCFA",
+    period: "/month",
+    description: `Maximum ${type.toLowerCase()} performance`,
+    features: [
+      "Unlimited Websites",
+      "100 GB SSD Storage",
+      "Unlimited Everything",
+      "Free SSL + Domain",
+      "Advanced Security",
+      "Daily Backups",
+      "24/7 Premium Support",
+    ],
+    cta: "Get Started",
+    href: "/signup",
   },
 ]
 
-const vpsPlans = [
+// DirectAdmin versions (slightly cheaper)
+const getDirectAdminPlans = (type: string): PricingPlan[] => [
   {
-    name: "VPS Basic",
+    name: `${type} Starter`,
+    price: "950 FCFA",
+    period: "/month",
+    description: `Budget-friendly ${type.toLowerCase()} hosting`,
+    features: [
+      "1 Website",
+      "10 GB SSD Storage",
+      "Unlimited Bandwidth",
+      "Free SSL Certificate",
+      `Optimized for ${type}`,
+      "DirectAdmin Panel",
+      "99.9% Uptime",
+    ],
+    cta: "Get Started",
+    href: "/signup",
+  },
+  {
+    name: `${type} Pro`,
+    price: "2,000 FCFA",
+    period: "/month",
+    description: `Professional ${type.toLowerCase()} hosting`,
+    features: [
+      "5 Websites",
+      "50 GB SSD Storage",
+      "Unlimited Bandwidth",
+      "Free SSL + Domain",
+      "10 Email Accounts",
+      "LiteSpeed Server",
+      `${type} Optimizations`,
+    ],
+    popular: true,
+    cta: "Get Started",
+    href: "/signup",
+  },
+  {
+    name: `${type} Enterprise`,
+    price: "4,500 FCFA",
+    period: "/month",
+    description: `Enterprise ${type.toLowerCase()} solution`,
+    features: [
+      "Unlimited Websites",
+      "100 GB SSD Storage",
+      "Unlimited Bandwidth",
+      "Free SSL + Domain",
+      "Advanced Features",
+      "Priority Support",
+    ],
+    cta: "Get Started",
+    href: "/signup",
+  },
+]
+
+// cPanel Reseller Plans - 4 levels each for 3 tiers
+const cPanelResellerBronze: PricingPlan[] = [
+  {
+    name: "Bronze Reseller",
+    price: "10,000 FCFA",
+    period: "/month",
+    description: "Entry-level reseller hosting",
+    features: [
+      "30 GB SSD Storage",
+      "300 GB Bandwidth",
+      "Free WHMCS License",
+      "cPanel/WHM Control",
+      "White Label Hosting",
+      "Unlimited Client Accounts",
+      "Free SSL Certificates",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Silver Reseller",
+    price: "15,000 FCFA",
+    period: "/month",
+    description: "Growing reseller business",
+    features: [
+      "60 GB SSD Storage",
+      "600 GB Bandwidth",
+      "Free WHMCS License",
+      "cPanel/WHM Control",
+      "White Label Hosting",
+      "Unlimited Client Accounts",
+      "Free SSL Certificates",
+      "LiteSpeed Server",
+    ],
+    popular: true,
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Gold Reseller",
+    price: "22,000 FCFA",
+    period: "/month",
+    description: "Professional reseller platform",
+    features: [
+      "100 GB SSD Storage",
+      "1 TB Bandwidth",
+      "Free WHMCS License",
+      "cPanel/WHM Control",
+      "White Label Hosting",
+      "Unlimited Client Accounts",
+      "Free SSL Certificates",
+      "LiteSpeed + Redis",
+      "Priority Support",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Platinum Reseller",
+    price: "30,000 FCFA",
+    period: "/month",
+    description: "Premium reseller solution",
+    features: [
+      "150 GB SSD Storage",
+      "1.5 TB Bandwidth",
+      "Free WHMCS License",
+      "cPanel/WHM Control",
+      "White Label Hosting",
+      "Unlimited Client Accounts",
+      "Free SSL Certificates",
+      "LiteSpeed + Redis",
+      "Priority Support",
+      "Daily Backups",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+]
+
+const cPanelMasterResellerBronze: PricingPlan[] = [
+  {
+    name: "Bronze Master",
+    price: "20,000 FCFA",
+    period: "/month",
+    description: "Start master reselling",
+    features: [
+      "80 GB SSD Storage",
+      "800 GB Bandwidth",
+      "Free WHMCS License",
+      "Master Reseller Access",
+      "Create Sub-Resellers",
+      "cPanel/WHM Control",
+      "White Label Hosting",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Silver Master",
+    price: "30,000 FCFA",
+    period: "/month",
+    description: "Scale your reseller network",
+    features: [
+      "150 GB SSD Storage",
+      "1.5 TB Bandwidth",
+      "Free WHMCS License",
+      "Master Reseller Access",
+      "Create Sub-Resellers",
+      "LiteSpeed + Redis",
+      "Priority Support",
+    ],
+    popular: true,
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Gold Master",
+    price: "42,000 FCFA",
+    period: "/month",
+    description: "Professional master reseller",
+    features: [
+      "250 GB SSD Storage",
+      "2.5 TB Bandwidth",
+      "Free WHMCS License",
+      "Master Reseller Access",
+      "Unlimited Sub-Resellers",
+      "LiteSpeed + Redis",
+      "Priority Support",
+      "Daily Backups",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Platinum Master",
+    price: "55,000 FCFA",
+    period: "/month",
+    description: "Elite master reseller platform",
+    features: [
+      "400 GB SSD Storage",
+      "4 TB Bandwidth",
+      "Free WHMCS License",
+      "Master Reseller Access",
+      "Unlimited Sub-Resellers",
+      "LiteSpeed + Redis",
+      "Dedicated Support",
+      "Daily Backups",
+      "99.99% SLA",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+]
+
+const cPanelAlphaResellerBronze: PricingPlan[] = [
+  {
+    name: "Bronze Alpha",
+    price: "40,000 FCFA",
+    period: "/month",
+    description: "Entry alpha reseller",
+    features: [
+      "200 GB SSD Storage",
+      "2 TB Bandwidth",
+      "Free WHMCS License",
+      "Alpha Reseller Rights",
+      "Unlimited Sub-Resellers",
+      "cPanel/WHM Control",
+      "White Label Hosting",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Silver Alpha",
+    price: "60,000 FCFA",
+    period: "/month",
+    description: "Growing alpha network",
+    features: [
+      "350 GB SSD Storage",
+      "3.5 TB Bandwidth",
+      "Free WHMCS License",
+      "Alpha Reseller Rights",
+      "Unlimited Sub-Resellers",
+      "LiteSpeed + Redis",
+      "Priority Support",
+      "Daily Backups",
+    ],
+    popular: true,
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Gold Alpha",
+    price: "85,000 FCFA",
+    period: "/month",
+    description: "Professional alpha platform",
+    features: [
+      "500 GB SSD Storage",
+      "5 TB Bandwidth",
+      "Free WHMCS License",
+      "Alpha Reseller Rights",
+      "Unlimited Everything",
+      "LiteSpeed + Redis",
+      "Dedicated Support Team",
+      "Daily Backups",
+      "99.99% SLA",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Platinum Alpha",
+    price: "110,000 FCFA",
+    period: "/month",
+    description: "Ultimate alpha enterprise",
+    features: [
+      "750 GB SSD Storage",
+      "7.5 TB Bandwidth",
+      "Free WHMCS License",
+      "Alpha Reseller Rights",
+      "Unlimited Everything",
+      "LiteSpeed + Redis + Memcached",
+      "Dedicated Account Manager",
+      "Hourly Backups",
+      "99.99% SLA",
+      "Custom Configurations",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+]
+
+// DirectAdmin Reseller Plans - 4 levels each for 3 tiers (cheaper than cPanel)
+const directAdminResellerBronze: PricingPlan[] = [
+  {
+    name: "Bronze Reseller",
+    price: "8,000 FCFA",
+    period: "/month",
+    description: "Budget reseller hosting",
+    features: [
+      "30 GB SSD Storage",
+      "300 GB Bandwidth",
+      "DirectAdmin Control",
+      "White Label Hosting",
+      "Unlimited Clients",
+      "Free SSL Certificates",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Silver Reseller",
+    price: "12,000 FCFA",
+    period: "/month",
+    description: "Affordable reseller growth",
+    features: [
+      "60 GB SSD Storage",
+      "600 GB Bandwidth",
+      "DirectAdmin Control",
+      "White Label Hosting",
+      "Unlimited Clients",
+      "Free SSL Certificates",
+      "LiteSpeed Server",
+    ],
+    popular: true,
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Gold Reseller",
+    price: "18,000 FCFA",
+    period: "/month",
+    description: "Professional reseller hosting",
+    features: [
+      "100 GB SSD Storage",
+      "1 TB Bandwidth",
+      "DirectAdmin Control",
+      "White Label Hosting",
+      "Unlimited Clients",
+      "Free SSL Certificates",
+      "LiteSpeed Server",
+      "Priority Support",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Platinum Reseller",
+    price: "25,000 FCFA",
+    period: "/month",
+    description: "Premium reseller platform",
+    features: [
+      "150 GB SSD Storage",
+      "1.5 TB Bandwidth",
+      "DirectAdmin Control",
+      "White Label Hosting",
+      "Unlimited Clients",
+      "Free SSL Certificates",
+      "LiteSpeed Server",
+      "Priority Support",
+      "Daily Backups",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+]
+
+const directAdminMasterResellerBronze: PricingPlan[] = [
+  {
+    name: "Bronze Master",
+    price: "16,000 FCFA",
+    period: "/month",
+    description: "Entry master reseller",
+    features: [
+      "80 GB SSD Storage",
+      "800 GB Bandwidth",
+      "DirectAdmin Control",
+      "Master Reseller Access",
+      "Create Sub-Resellers",
+      "White Label Hosting",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Silver Master",
+    price: "25,000 FCFA",
+    period: "/month",
+    description: "Growing master network",
+    features: [
+      "150 GB SSD Storage",
+      "1.5 TB Bandwidth",
+      "DirectAdmin Control",
+      "Master Reseller Access",
+      "Create Sub-Resellers",
+      "LiteSpeed Server",
+      "Priority Support",
+    ],
+    popular: true,
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Gold Master",
+    price: "35,000 FCFA",
+    period: "/month",
+    description: "Professional master platform",
+    features: [
+      "250 GB SSD Storage",
+      "2.5 TB Bandwidth",
+      "DirectAdmin Control",
+      "Master Reseller Access",
+      "Unlimited Sub-Resellers",
+      "LiteSpeed Server",
+      "Priority Support",
+      "Daily Backups",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Platinum Master",
+    price: "45,000 FCFA",
+    period: "/month",
+    description: "Elite master reseller",
+    features: [
+      "400 GB SSD Storage",
+      "4 TB Bandwidth",
+      "DirectAdmin Control",
+      "Master Reseller Access",
+      "Unlimited Sub-Resellers",
+      "LiteSpeed Server",
+      "Dedicated Support",
+      "Daily Backups",
+      "99.99% SLA",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+]
+
+const directAdminAlphaResellerBronze: PricingPlan[] = [
+  {
+    name: "Bronze Alpha",
+    price: "32,000 FCFA",
+    period: "/month",
+    description: "Budget alpha reseller",
+    features: [
+      "200 GB SSD Storage",
+      "2 TB Bandwidth",
+      "DirectAdmin Control",
+      "Alpha Reseller Rights",
+      "Unlimited Sub-Resellers",
+      "White Label Hosting",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Silver Alpha",
+    price: "50,000 FCFA",
+    period: "/month",
+    description: "Affordable alpha network",
+    features: [
+      "350 GB SSD Storage",
+      "3.5 TB Bandwidth",
+      "DirectAdmin Control",
+      "Alpha Reseller Rights",
+      "Unlimited Sub-Resellers",
+      "LiteSpeed Server",
+      "Priority Support",
+      "Daily Backups",
+    ],
+    popular: true,
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Gold Alpha",
+    price: "70,000 FCFA",
+    period: "/month",
+    description: "Professional alpha solution",
+    features: [
+      "500 GB SSD Storage",
+      "5 TB Bandwidth",
+      "DirectAdmin Control",
+      "Alpha Reseller Rights",
+      "Unlimited Everything",
+      "LiteSpeed Server",
+      "Dedicated Support Team",
+      "Daily Backups",
+      "99.99% SLA",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+  {
+    name: "Platinum Alpha",
     price: "90,000 FCFA",
-    description: "For small applications",
-    features: {
-      cpu: "2 cores",
-      ram: "8 GB",
-      storage: "80 GB NVMe",
-      bandwidth: "2 TB",
-      ipv4: "1",
-      rootAccess: true,
-      ddos: true,
-      backups: false,
-      managed: false,
-    },
+    period: "/month",
+    description: "Ultimate alpha enterprise",
+    features: [
+      "750 GB SSD Storage",
+      "7.5 TB Bandwidth",
+      "DirectAdmin Control",
+      "Alpha Reseller Rights",
+      "Unlimited Everything",
+      "LiteSpeed + Advanced Cache",
+      "Dedicated Account Manager",
+      "Hourly Backups",
+      "99.99% SLA",
+      "Custom Configurations",
+    ],
+    cta: "Start Reselling",
+    href: "/signup",
+  },
+]
+
+// Cloud VPS Plans - Unmanaged (cheaper)
+const cloudVpsUnmanagedPlans: PricingPlan[] = [
+  {
+    name: "VPS Starter",
+    price: "8,000 FCFA",
+    period: "/month",
+    description: "Self-managed entry VPS",
+    features: [
+      "2 vCPU Cores",
+      "4 GB RAM",
+      "50 GB SSD",
+      "2 TB Bandwidth",
+      "Full Root Access",
+      "Choice of OS",
+      "Community Support",
+    ],
+    cta: "Deploy Now",
+    href: "/signup",
   },
   {
     name: "VPS Pro",
-    price: "119,000 FCFA",
-    description: "For growing apps",
-    badge: "Popular",
-    features: {
-      cpu: "4 cores",
-      ram: "8 GB",
-      storage: "160 GB NVMe",
-      bandwidth: "4 TB",
-      ipv4: "1",
-      rootAccess: true,
-      ddos: true,
-      backups: true,
-      managed: false,
-    },
+    price: "15,000 FCFA",
+    period: "/month",
+    description: "Self-managed production VPS",
+    features: [
+      "4 vCPU Cores",
+      "8 GB RAM",
+      "100 GB SSD",
+      "4 TB Bandwidth",
+      "Full Root Access",
+      "DDoS Protection",
+      "Priority Support",
+    ],
+    popular: true,
+    cta: "Deploy Now",
+    href: "/signup",
   },
   {
     name: "VPS Enterprise",
-    price: "150,000 FCFA",
-    description: "For enterprise apps",
-    features: {
-      cpu: "8 cores",
-      ram: "16 GB",
-      storage: "320 GB NVMe",
-      bandwidth: "8 TB",
-      ipv4: "1",
-      rootAccess: true,
-      ddos: true,
-      backups: true,
-      managed: true,
-    },
+    price: "30,000 FCFA",
+    period: "/month",
+    description: "Self-managed high-performance",
+    features: [
+      "8 vCPU Cores",
+      "16 GB RAM",
+      "200 GB SSD",
+      "8 TB Bandwidth",
+      "Full Root Access",
+      "Advanced DDoS Protection",
+      "99.99% SLA",
+    ],
+    cta: "Deploy Now",
+    href: "/signup",
   },
 ]
 
-const resellerPlans = [
+// Cloud VPS Plans - Managed (more expensive)
+const cloudVpsManagedPlans: PricingPlan[] = [
   {
-    name: "Reseller Bronze",
+    name: "VPS Starter",
+    price: "12,000 FCFA",
+    period: "/month",
+    description: "Fully managed entry VPS",
+    features: [
+      "2 vCPU Cores",
+      "4 GB RAM",
+      "50 GB SSD",
+      "2 TB Bandwidth",
+      "Full Root Access",
+      "Choice of OS",
+      "Managed by Experts",
+      "Security Updates Included",
+    ],
+    cta: "Deploy Now",
+    href: "/signup",
+  },
+  {
+    name: "VPS Pro",
+    price: "22,000 FCFA",
+    period: "/month",
+    description: "Fully managed production VPS",
+    features: [
+      "4 vCPU Cores",
+      "8 GB RAM",
+      "100 GB SSD",
+      "4 TB Bandwidth",
+      "Free cPanel License",
+      "Managed Support 24/7",
+      "DDoS Protection",
+      "Performance Optimization",
+    ],
+    popular: true,
+    cta: "Deploy Now",
+    href: "/signup",
+  },
+  {
+    name: "VPS Enterprise",
+    price: "42,000 FCFA",
+    period: "/month",
+    description: "Fully managed high-performance",
+    features: [
+      "8 vCPU Cores",
+      "16 GB RAM",
+      "200 GB SSD",
+      "8 TB Bandwidth",
+      "Free cPanel License",
+      "Dedicated Support Team",
+      "Advanced DDoS Protection",
+      "Daily Backups",
+      "99.99% SLA",
+    ],
+    cta: "Deploy Now",
+    href: "/signup",
+  },
+]
+
+// Dedicated VPS Plans - Unmanaged (cheaper)
+const dedicatedVpsUnmanagedPlans: PricingPlan[] = [
+  {
+    name: "Dedicated VPS Basic",
+    price: "25,000 FCFA",
+    period: "/month",
+    description: "Self-managed dedicated VPS",
+    features: [
+      "4 Dedicated CPU Cores",
+      "16 GB Dedicated RAM",
+      "150 GB NVMe SSD",
+      "5 TB Bandwidth",
+      "Full Root Access",
+      "Advanced DDoS Protection",
+      "99.9% Uptime SLA",
+    ],
+    cta: "Deploy Now",
+    href: "/signup",
+  },
+  {
+    name: "Dedicated VPS Pro",
+    price: "45,000 FCFA",
+    period: "/month",
+    description: "Self-managed high-performance",
+    features: [
+      "8 Dedicated CPU Cores",
+      "32 GB Dedicated RAM",
+      "300 GB NVMe SSD",
+      "10 TB Bandwidth",
+      "Full Root Access",
+      "Advanced DDoS Protection",
+      "Priority Support",
+      "99.99% SLA",
+    ],
+    popular: true,
+    cta: "Deploy Now",
+    href: "/signup",
+  },
+]
+
+// Dedicated VPS Plans - Managed (more expensive)
+const dedicatedVpsManagedPlans: PricingPlan[] = [
+  {
+    name: "Dedicated VPS Basic",
     price: "35,000 FCFA",
-    description: "Perfect for getting started",
-    features: {
-      diskSpace: "10 GB SSD",
-      bandwidth: "300 GB",
-      directAdminAccounts: "10",
-      inodes: "Unlimited",
-      websites: "Unlimited",
-      databases: "Unlimited",
-      whiteLabeled: true,
-      freeSSL: true,
-      blesta: false,
-      privateDNS: true,
-      siteBuilder: true,
-      liteSpeed: true,
-      multiLanguage: true,
-      noRenewalHikes: true,
-      imunify360: true,
-      panelCustomization: true,
-      backups: true,
-      support: "24/7",
-      migration: true,
-    },
+    period: "/month",
+    description: "Fully managed dedicated VPS",
+    features: [
+      "4 Dedicated CPU Cores",
+      "16 GB Dedicated RAM",
+      "150 GB NVMe SSD",
+      "5 TB Bandwidth",
+      "Fully Managed 24/7",
+      "Advanced DDoS Protection",
+      "Security Updates Included",
+      "99.9% Uptime SLA",
+    ],
+    cta: "Deploy Now",
+    href: "/signup",
   },
   {
-    name: "Reseller Silver",
-    price: "80,000 FCFA",
-    description: "Start your hosting business",
-    features: {
-      diskSpace: "50 GB SSD",
-      bandwidth: "Unlimited",
-      directAdminAccounts: "25",
-      inodes: "Unlimited",
-      websites: "Unlimited",
-      databases: "Unlimited",
-      whiteLabeled: true,
-      freeSSL: true,
-      blesta: false,
-      privateDNS: true,
-      siteBuilder: true,
-      liteSpeed: true,
-      multiLanguage: true,
-      noRenewalHikes: true,
-      imunify360: true,
-      panelCustomization: true,
-      backups: true,
-      support: "24/7",
-      migration: true,
-    },
-  },
-  {
-    name: "Reseller Gold",
-    price: "120,000 FCFA",
-    description: "For growing reseller business",
-    badge: "Popular",
-    features: {
-      diskSpace: "200 GB SSD",
-      bandwidth: "Unlimited",
-      directAdminAccounts: "50",
-      inodes: "Unlimited",
-      websites: "Unlimited",
-      databases: "Unlimited",
-      whiteLabeled: true,
-      freeSSL: true,
-      blesta: true,
-      privateDNS: true,
-      siteBuilder: true,
-      liteSpeed: true,
-      multiLanguage: true,
-      noRenewalHikes: true,
-      imunify360: true,
-      panelCustomization: true,
-      backups: true,
-      support: "Priority",
-      migration: true,
-    },
-  },
-  {
-    name: "Reseller Platinum",
-    price: "300,000 FCFA",
-    description: "For enterprise resellers",
-    features: {
-      diskSpace: "Unlimited SSD",
-      bandwidth: "Unlimited",
-      directAdminAccounts: "Unlimited",
-      inodes: "Unlimited",
-      websites: "Unlimited",
-      databases: "Unlimited",
-      whiteLabeled: true,
-      freeSSL: true,
-      blesta: true,
-      privateDNS: true,
-      siteBuilder: true,
-      liteSpeed: true,
-      multiLanguage: true,
-      noRenewalHikes: true,
-      imunify360: true,
-      panelCustomization: true,
-      backups: true,
-      support: "Priority",
-      migration: true,
-    },
+    name: "Dedicated VPS Pro",
+    price: "60,000 FCFA",
+    period: "/month",
+    description: "Fully managed enterprise VPS",
+    features: [
+      "8 Dedicated CPU Cores",
+      "32 GB Dedicated RAM",
+      "300 GB NVMe SSD",
+      "10 TB Bandwidth",
+      "Fully Managed 24/7",
+      "Dedicated Support Team",
+      "Daily Backups",
+      "Performance Optimization",
+      "99.99% SLA",
+    ],
+    popular: true,
+    cta: "Deploy Now",
+    href: "/signup",
   },
 ]
 
-const aiPlans = [
+// Bare Metal Server Plans - Unmanaged (cheaper)
+const bareMetalUnmanagedPlans: PricingPlan[] = [
   {
-    name: "Self-hosted n8n",
-    originalPrice: "89,000 FCFA",
-    price: "49,000 FCFA",
-    description: "AI workflow automation platform",
-    badge: "Limited Time",
-    billingPeriod: "/year",
-    features: {
-      installation: "Complete n8n setup",
-      automation: "AI workflow automation",
-      deployment: "Auto-deployment on domain",
-      integrations: "Pre-configured integrations",
-      templates: "Workflow templates included",
-      updates: "Regular updates & security",
-      support: "24/7 technical support",
-    },
+    name: "Server E3",
+    price: "75,000 FCFA",
+    period: "/month",
+    description: "Self-managed dedicated server",
+    features: [
+      "Intel Xeon E3 Processor",
+      "32 GB DDR4 RAM",
+      "1 TB NVMe SSD",
+      "20 TB Bandwidth",
+      "Full Hardware Control",
+      "Root Access",
+      "99.9% Uptime SLA",
+    ],
+    cta: "Order Now",
+    href: "/signup",
   },
   {
-    name: "LLM Hosting Free",
-    price: "0 FCFA",
-    description: "Get started with limited LLM access",
-    badge: null,
-    billingPeriod: "/month",
-    isFree: true,
-    features: {
-      requests: "20 requests per day",
-      models: "Access to only 5 models",
-      imageToText: "Limited image-to-text models",
-      speechToText: "Limited speech-to-text access",
-      webSearch: "Limited web search tools",
-      browserAutomation: "Limited web browser automation tools",
-      api: "Free API integration",
-      apiLimit: "10 API requests per 10 days (5 models only)",
-    },
+    name: "Server E5",
+    price: "150,000 FCFA",
+    period: "/month",
+    description: "Self-managed high-performance",
+    features: [
+      "Intel Xeon E5 Processor",
+      "64 GB DDR4 RAM",
+      "2x 1TB NVMe SSD RAID",
+      "Unlimited Bandwidth",
+      "Full Hardware Control",
+      "Root Access",
+      "99.99% Uptime SLA",
+    ],
+    popular: true,
+    cta: "Order Now",
+    href: "/signup",
+  },
+]
+
+// Bare Metal Server Plans - Managed (more expensive)
+const bareMetalManagedPlans: PricingPlan[] = [
+  {
+    name: "Server E3",
+    price: "95,000 FCFA",
+    period: "/month",
+    description: "Fully managed dedicated server",
+    features: [
+      "Intel Xeon E3 Processor",
+      "32 GB DDR4 RAM",
+      "1 TB NVMe SSD",
+      "20 TB Bandwidth",
+      "Full Hardware Control",
+      "Managed 24/7",
+      "Security Updates",
+      "Daily Backups",
+      "99.9% Uptime SLA",
+    ],
+    cta: "Order Now",
+    href: "/signup",
   },
   {
-    name: "LLM Hosting",
-    originalPrice: "10,000 FCFA",
-    price: "4,000 FCFA",
-    description: "Open-source LLM access with API",
-    badge: "Limited Time",
-    billingPeriod: "/month",
-    features: {
-      models: "Multiple open-source LLMs",
-      usage: "Free usage with fair limits",
-      api: "Full API access for integration",
-      infrastructure: "Pre-installed on our servers",
-      endpoints: "RESTful API endpoints",
-      fineTuning: "Custom model fine-tuning",
-      security: "Enterprise-grade security",
-    },
+    name: "Server E5",
+    price: "190,000 FCFA",
+    period: "/month",
+    description: "Fully managed enterprise server",
+    features: [
+      "Intel Xeon E5 Processor",
+      "64 GB DDR4 RAM",
+      "2x 1TB NVMe SSD RAID",
+      "Unlimited Bandwidth",
+      "Fully Managed 24/7",
+      "Dedicated Support Team",
+      "Enterprise Security",
+      "Hourly Backups",
+      "99.99% Uptime SLA",
+    ],
+    popular: true,
+    cta: "Order Now",
+    href: "/signup",
+  },
+]
+
+// AI Services Plans
+const aiFreeModels: PricingPlan[] = [
+  {
+    name: "Free AI Access",
+    price: "Free",
+    period: "forever",
+    description: "Access to 8 AI models",
+    features: [
+      "Llama Series",
+      "Deepseek Series",
+      "GPT Series",
+      "Qwen, Mistral, Gemma",
+      "Phi & Code Llama",
+      "Limited Daily Requests",
+    ],
+    cta: "Start Free",
+    href: "/signup",
+  },
+]
+
+const aiPaidModels: PricingPlan[] = [
+  {
+    name: "AI Pro",
+    price: "10,000 FCFA",
+    period: "/month",
+    description: "Premium AI models",
+    features: [
+      "All Free Models",
+      "Claude Series",
+      "Command R+",
+      "GPT-4 & GPT-4 Turbo",
+      "Unlimited Requests",
+      "API Access",
+      "Priority Processing",
+    ],
+    popular: true,
+    cta: "Upgrade Now",
+    href: "/signup",
+  },
+  {
+    name: "AI Enterprise",
+    price: "Custom",
+    period: "pricing",
+    description: "Custom AI solutions",
+    features: [
+      "All Premium Models",
+      "Dedicated Resources",
+      "Custom Model Training",
+      "SLA Guarantees",
+      "Dedicated Support",
+      "On-Premise Options",
+    ],
+    cta: "Contact Sales",
+    href: "/support",
+  },
+]
+
+// Additional Services
+const additionalServices: PricingPlan[] = [
+  {
+    name: "SSL Certificate",
+    price: "5,000 FCFA",
+    period: "/year",
+    description: "Secure your website",
+    features: [
+      "Domain Validation",
+      "256-bit Encryption",
+      "Trust Seal",
+      "Unlimited Reissues",
+    ],
+    cta: "Buy Now",
+    href: "/products/ssl-certificates",
+  },
+  {
+    name: "Email Hosting",
+    price: "2,000 FCFA",
+    period: "/month",
+    description: "Professional email",
+    features: [
+      "Custom Domain Email",
+      "10 GB Storage",
+      "Spam Protection",
+      "Webmail Access",
+    ],
+    cta: "Get Started",
+    href: "/products/email-hosting",
+  },
+  {
+    name: "Database Hosting",
+    price: "3,000 FCFA",
+    period: "/month",
+    description: "Managed databases",
+    features: [
+      "MySQL/PostgreSQL",
+      "Automatic Backups",
+      "High Availability",
+      "Performance Tuning",
+    ],
+    cta: "Get Started",
+    href: "/products/database-hosting",
+  },
+  {
+    name: "n8n Workflow",
+    price: "8,000 FCFA",
+    period: "/month",
+    description: "Self-hosted automation",
+    features: [
+      "Visual Workflow Editor",
+      "400+ Integrations",
+      "Self-hosted Solution",
+      "Full Privacy Control",
+    ],
+    cta: "Deploy Now",
+    href: "/signup",
   },
 ]
 
 export default function PricingPage() {
-  const [selectedTech, setSelectedTech] = useState<"php" | "nodejs" | "python">("php")
+  const [cloudVpsType, setCloudVpsType] = useState<"unmanaged" | "managed">("unmanaged")
+  const [dedicatedVpsType, setDedicatedVpsType] = useState<"unmanaged" | "managed">("unmanaged")
+  const [bareMetalType, setBareMetalType] = useState<"unmanaged" | "managed">("unmanaged")
 
   return (
     <>
       <Header />
-      <main>
+      <main className="min-h-screen">
         {/* Hero Section */}
-        <section className="py-20 sm:py-32 bg-gradient-to-b from-background to-muted/30">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6 text-balance">
-                Simple, transparent pricing
+        <section className="border-b bg-gradient-to-b from-muted/50 to-background">
+          <div className="container py-16 md:py-24">
+            <div className="max-w-3xl mx-auto text-center space-y-4">
+              <Badge variant="outline" className="mb-4">
+                <Sparkles className="h-3 w-3 mr-1" />
+                Transparent Pricing
+              </Badge>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+                Choose Your Perfect Plan
               </h1>
-              <p className="text-lg text-muted-foreground text-balance mb-8">
-                Choose and get a free .com domain
-              </p>
-              <p className="text-sm text-muted-foreground">
-                All prices are yearly billing in FCFA (Central African CFA Franc)
+              <p className="text-xl text-muted-foreground">
+                Comprehensive pricing for all our hosting, VPS, AI services, and more. All plans include 24/7 support.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Pricing Tables */}
-        <section className="py-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <Tabs defaultValue="shared" className="w-full">
-              <TabsList className="grid w-full max-w-3xl mx-auto grid-cols-5 mb-12">
-                <TabsTrigger value="shared">Shared</TabsTrigger>
-                <TabsTrigger value="wordpress">WP</TabsTrigger>
-                <TabsTrigger value="vps">VPS</TabsTrigger>
-                <TabsTrigger value="reseller">Reseller</TabsTrigger>
-                <TabsTrigger value="ai">AI</TabsTrigger>
-              </TabsList>
+        {/* Main Pricing Content */}
+        <section className="container py-16 md:py-24">
+          <Tabs defaultValue="shared" className="w-full">
+            <TabsList className="grid w-full max-w-4xl mx-auto grid-cols-2 md:grid-cols-4 lg:grid-cols-6 h-auto mb-12 gap-2">
+              <TabsTrigger value="shared" className="text-xs md:text-sm py-2">
+                Shared Hosting
+              </TabsTrigger>
+              <TabsTrigger value="reseller" className="text-xs md:text-sm py-2">
+                Reseller
+              </TabsTrigger>
+              <TabsTrigger value="vps" className="text-xs md:text-sm py-2">
+                VPS
+              </TabsTrigger>
+              <TabsTrigger value="dedicated" className="text-xs md:text-sm py-2">
+                Dedicated
+              </TabsTrigger>
+              <TabsTrigger value="ai" className="text-xs md:text-sm py-2">
+                AI Services
+              </TabsTrigger>
+              <TabsTrigger value="extras" className="text-xs md:text-sm py-2">
+                Extras
+              </TabsTrigger>
+            </TabsList>
 
-              {/* Shared Web Hosting Plans */}
-              <TabsContent value="shared">
-                {/* Technology Toggle */}
-                <div className="flex justify-center mb-8">
-                  <div className="inline-flex items-center gap-2 p-1 bg-muted rounded-lg">
-                    <button
-                      onClick={() => setSelectedTech("php")}
-                      className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                        selectedTech === "php" ? "bg-background shadow-sm" : "text-muted-foreground"
-                      }`}
-                    >
-                      PHP
-                    </button>
-                    <button
-                      onClick={() => setSelectedTech("nodejs")}
-                      className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                        selectedTech === "nodejs" ? "bg-background shadow-sm" : "text-muted-foreground"
-                      }`}
-                    >
-                      Node.js
-                    </button>
-                    <button
-                      onClick={() => setSelectedTech("python")}
-                      className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                        selectedTech === "python" ? "bg-background shadow-sm" : "text-muted-foreground"
-                      }`}
-                    >
-                      Python
-                    </button>
-                  </div>
-                </div>
+            {/* SHARED HOSTING TAB */}
+            <TabsContent value="shared" className="space-y-8">
+              <div className="text-center max-w-2xl mx-auto mb-8">
+                <h2 className="text-3xl font-bold mb-2">Shared Hosting Plans</h2>
+                <p className="text-muted-foreground">
+                  Choose your hosting type and control panel
+                </p>
+              </div>
 
-                <div className="grid lg:grid-cols-4 gap-6">
-                  {sharedPlans[selectedTech].map((plan, index) => (
-                    <Card key={index} className="relative flex flex-col">
-                      {plan.badge && (
-                        <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1">{plan.badge}</Badge>
-                      )}
-                      <CardHeader>
-                        <CardTitle className="text-xl">{plan.name}</CardTitle>
-                        <CardDescription>{plan.description}</CardDescription>
-                        <div className="pt-4">
-                          <div className="text-3xl font-bold">
-                            {plan.price}
-                            <span className="text-base font-normal text-muted-foreground">
-                              /year
-                            </span>
+              <Accordion type="single" collapsible className="max-w-7xl mx-auto space-y-4">
+                {/* cPanel Shared Hosting */}
+                <AccordionItem value="cpanel" className="border-2 border-green-500/20 rounded-lg px-4">
+                  <AccordionTrigger className="hover:no-underline">
+                    <div className="flex flex-col items-start gap-2 w-full">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl font-semibold">cPanel Shared Hosting</span>
+                        <Badge>Popular</Badge>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                        <ChevronDown className="h-4 w-4" />
+                        <span>Click here to show more plans</span>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="pt-6 space-y-8">
+                    {/* WordPress Hosting */}
+                    <div>
+                      <h4 className="text-lg font-semibold mb-4 text-center">WordPress Hosting</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {getSharedHostingPlans("WordPress").map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Node.js Hosting */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">Node.js Hosting</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {getSharedHostingPlans("Node.js").map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* PHP Hosting */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">PHP Hosting</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {getSharedHostingPlans("PHP").map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Python Hosting */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">Python Hosting</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {getSharedHostingPlans("Python").map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Ruby Hosting */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">Ruby Hosting</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {getSharedHostingPlans("Ruby").map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* E-commerce Hosting */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">E-commerce Hosting</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {getSharedHostingPlans("E-commerce").map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* WooCommerce Hosting */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">WooCommerce Hosting</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {getSharedHostingPlans("WooCommerce").map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+
+                {/* DirectAdmin Shared Hosting */}
+                <AccordionItem value="directadmin" className="border-2 border-green-500/20 rounded-lg px-4">
+                  <AccordionTrigger className="hover:no-underline">
+                    <div className="flex flex-col items-start gap-2 w-full">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl font-semibold">DirectAdmin Shared Hosting</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                        <ChevronDown className="h-4 w-4" />
+                        <span>Click here to show more plans</span>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="pt-6 space-y-8">
+                    {/* WordPress Hosting */}
+                    <div>
+                      <h4 className="text-lg font-semibold mb-4 text-center">WordPress Hosting</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {getDirectAdminPlans("WordPress").map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Node.js Hosting */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">Node.js Hosting</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {getDirectAdminPlans("Node.js").map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* PHP Hosting */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">PHP Hosting</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {getDirectAdminPlans("PHP").map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Python Hosting */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">Python Hosting</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {getDirectAdminPlans("Python").map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* E-commerce Hosting */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">E-commerce Hosting</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {getDirectAdminPlans("E-commerce").map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* WooCommerce Hosting */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">WooCommerce Hosting</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {getDirectAdminPlans("WooCommerce").map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </TabsContent>
+
+            {/* RESELLER HOSTING TAB */}
+            <TabsContent value="reseller" className="space-y-8">
+              <div className="text-center max-w-2xl mx-auto mb-8">
+                <h2 className="text-3xl font-bold mb-2">Reseller Hosting Plans</h2>
+                <p className="text-muted-foreground">
+                  4-tier plans (Bronze, Silver, Gold, Platinum) for each reseller level
+                </p>
+              </div>
+
+              <Accordion type="single" collapsible className="max-w-7xl mx-auto space-y-4">
+                {/* cPanel Reseller */}
+                <AccordionItem value="reseller-cpanel" className="border-2 border-green-500/20 rounded-lg px-4">
+                  <AccordionTrigger className="hover:no-underline">
+                    <div className="flex flex-col items-start gap-2 w-full">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl font-semibold">cPanel Reseller Hosting</span>
+                        <Badge variant="secondary">Most Popular</Badge>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                        <ChevronDown className="h-4 w-4" />
+                        <span>Click here to show more plans</span>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="pt-6 space-y-8">
+                    {/* Standard Reseller */}
+                    <div>
+                      <h4 className="text-lg font-semibold mb-4 text-center">Standard Reseller</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {cPanelResellerBronze.map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Master Reseller */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">Master Reseller</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {cPanelMasterResellerBronze.map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Alpha Reseller */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">Alpha Reseller</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {cPanelAlphaResellerBronze.map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+
+                {/* DirectAdmin Reseller */}
+                <AccordionItem value="reseller-directadmin" className="border-2 border-green-500/20 rounded-lg px-4">
+                  <AccordionTrigger className="hover:no-underline">
+                    <div className="flex flex-col items-start gap-2 w-full">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl font-semibold">DirectAdmin Reseller Hosting</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                        <ChevronDown className="h-4 w-4" />
+                        <span>Click here to show more plans</span>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="pt-6 space-y-8">
+                    {/* Standard Reseller */}
+                    <div>
+                      <h4 className="text-lg font-semibold mb-4 text-center">Standard Reseller</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {directAdminResellerBronze.map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Master Reseller */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">Master Reseller</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {directAdminMasterResellerBronze.map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Alpha Reseller */}
+                    <div className="border-t pt-8">
+                      <h4 className="text-lg font-semibold mb-4 text-center">Alpha Reseller</h4>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {directAdminAlphaResellerBronze.map((plan) => (
+                          <PricingCard key={plan.name} plan={plan} />
+                        ))}
+                      </div>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+
+                {/* Cloud VPS Reseller */}
+                <AccordionItem value="reseller-cloudvps" className="border-2 border-green-500/20 rounded-lg px-4">
+                  <AccordionTrigger className="hover:no-underline">
+                    <div className="flex flex-col items-start gap-2 w-full">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl font-semibold">Cloud VPS Reseller</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                        <ChevronDown className="h-4 w-4" />
+                        <span>Click here to show more plans</span>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="pt-6">
+                      <Card className="max-w-md mx-auto">
+                        <CardHeader>
+                          <CardTitle className="text-2xl">Cloud VPS Reseller</CardTitle>
+                          <CardDescription>Resell VPS instances with full control</CardDescription>
+                          <div className="pt-4">
+                            <span className="text-4xl font-bold">Custom</span>
+                            <span className="text-muted-foreground ml-2">pricing</span>
                           </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="flex-1 flex flex-col">
-                        <ul className="space-y-2 mb-6 flex-1 text-sm">
-                          <li className="flex items-start gap-2">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.websites} website(s)</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{(plan.features as any).ram} RAM usage limit</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.storage} SSD storage</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.bandwidth} monthly bandwidth</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.email} email accounts</span>
-                          </li>
-                          
-                          {/* Technology-specific features */}
-                          {selectedTech === "php" && (
-                            <>
-                              <li className="flex items-start gap-2">
-                                <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                                <span>{(plan.features as any).databases} MySQL database(s)</span>
-                              </li>
-                              <li className="flex items-start gap-2">
-                                <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                                <span>PHP {(plan.features as any).phpVersion}</span>
-                              </li>
-                            </>
-                          )}
-                          
-                          {selectedTech === "nodejs" && (
-                            <>
-                              <li className="flex items-start gap-2">
-                                <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                                <span>{(plan.features as any).databases} MySQL database(s)</span>
-                              </li>
-                              <li className="flex items-start gap-2">
-                                <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                                <span>Node.js {(plan.features as any).nodeVersion}</span>
-                              </li>
-                              <li className="flex items-start gap-2">
-                                <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                                <span>{(plan.features as any).npmPackages} NPM packages</span>
-                              </li>
-                            </>
-                          )}
-                          
-                          {selectedTech === "python" && (
-                            <>
-                              <li className="flex items-start gap-2">
-                                <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                                <span>{(plan.features as any).databases} MySQL database(s)</span>
-                              </li>
-                              <li className="flex items-start gap-2">
-                                <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                                <span>Python {(plan.features as any).pythonVersion}</span>
-                              </li>
-                              <li className="flex items-start gap-2">
-                                <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                                <span>{(plan.features as any).pipPackages} PIP packages</span>
-                              </li>
-                            </>
-                          )}
-
-                          <li className="flex items-start gap-2">
-                            {plan.features.ssl ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Free SSL certificate</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            {plan.features.backups ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Daily backups</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.support} support</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            {plan.features.migration ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Free migration</span>
-                          </li>
-                        </ul>
-                        <Button className="w-full" size="sm" asChild>
-                          <Link href="/signup">Get Started</Link>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </TabsContent>
-
-              {/* WordPress Plans */}
-              <TabsContent value="wordpress">
-                <div className="grid lg:grid-cols-4 gap-6">
-                  {wordpressPlans.map((plan, index) => (
-                    <Card key={index} className="relative flex flex-col">
-                      {plan.badge && (
-                        <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1">{plan.badge}</Badge>
-                      )}
-                      <CardHeader>
-                        <CardTitle className="text-xl">{plan.name}</CardTitle>
-                        <CardDescription>{plan.description}</CardDescription>
-                        <div className="pt-4">
-                          <div className="text-3xl font-bold">
-                            {plan.price}
-                            <span className="text-base font-normal text-muted-foreground">
-                              /year
-                            </span>
-                          </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="flex-1 flex flex-col p-4">
-                        <ul className="space-y-1.5 mb-4 flex-1">
-                          <li className="flex items-start gap-1.5 text-xs">
-                            <Check className="h-3 w-3 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.websites} WordPress site(s)</span>
-                          </li>
-                          <li className="flex items-start gap-1.5 text-xs">
-                            <Check className="h-3 w-3 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{(plan.features as any).ram} RAM usage limit</span>
-                          </li>
-                          <li className="flex items-start gap-1.5 text-xs">
-                            <Check className="h-3 w-3 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.storage} SSD storage</span>
-                          </li>
-                          <li className="flex items-start gap-1.5 text-xs">
-                            <Check className="h-3 w-3 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.bandwidth} monthly bandwidth</span>
-                          </li>
-                          <li className="flex items-start gap-1.5 text-xs">
-                            <Check className="h-3 w-3 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.email} email accounts</span>
-                          </li>
-                          <li className="flex items-start gap-1.5 text-xs">
-                            {plan.features.autoUpdates ? (
-                              <Check className="h-3 w-3 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-3 w-3 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Automatic updates</span>
-                          </li>
-                          <li className="flex items-start gap-1.5 text-xs">
-                            <Check className="h-3 w-3 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.support} support</span>
-                          </li>
-                        </ul>
-                        <Button className="w-full" size="sm" asChild>
-                          <Link href="/contact">Get Started</Link>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </TabsContent>
-
-              {/* VPS Plans */}
-              <TabsContent value="vps">
-                <div className="grid lg:grid-cols-3 gap-8">
-                  {vpsPlans.map((plan, index) => (
-                    <Card key={index} className="relative flex flex-col">
-                      {plan.badge && (
-                        <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1">{plan.badge}</Badge>
-                      )}
-                      <CardHeader>
-                        <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                        <CardDescription>{plan.description}</CardDescription>
-                        <div className="pt-4">
-                          <div className="text-4xl font-bold">
-                            {plan.price}
-                            <span className="text-base font-normal text-muted-foreground">
-                              /year
-                            </span>
-                          </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="flex-1 flex flex-col">
-                        <ul className="space-y-3 mb-8 flex-1">
-                          <li className="flex items-start gap-2 text-sm">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.cpu} CPU</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.ram} RAM usage limit</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.storage} storage</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.bandwidth} monthly bandwidth</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.ipv4} IPv4 address</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.rootAccess ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Full root access</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.ddos ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>DDoS protection</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.backups ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Free backups</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.managed ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Managed services</span>
-                          </li>
-                        </ul>
-                        <Button className="w-full" asChild>
-                          <Link href="/contact">Get Started</Link>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </TabsContent>
-
-              {/* Reseller Hosting Plans */}
-              <TabsContent value="reseller" id="reseller">
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-                  {resellerPlans.map((plan, index) => (
-                    <Card key={index} className="relative flex flex-col">
-                      {plan.badge && (
-                        <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1">{plan.badge}</Badge>
-                      )}
-                      <CardHeader>
-                        <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                        <CardDescription>{plan.description}</CardDescription>
-                        <div className="pt-4">
-                          <div className="text-4xl font-bold">
-                            {plan.price}
-                            <span className="text-base font-normal text-muted-foreground">
-                              /year
-                            </span>
-                          </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="flex-1 flex flex-col">
-                        <ul className="space-y-3 mb-8 flex-1">
-                          <li className="flex items-start gap-2 text-sm">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.diskSpace} disk space</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.bandwidth} monthly bandwidth</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.directAdminAccounts} DirectAdmin accounts</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.inodes} inodes</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.websites} websites</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.databases} databases</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.whiteLabeled ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>100% White labeled</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.freeSSL ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Free SSL for all clients</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.privateDNS ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Private nameservers</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.blesta ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Free Blesta license</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.siteBuilder ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Premium Site Builder</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.liteSpeed ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>LiteSpeed Enterprise</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.multiLanguage ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Multiple PHP, Node.js & Python Selector</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.noRenewalHikes ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>No Renewal Price Hikes</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.imunify360 ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Real-time Protection by Imunify360</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.panelCustomization ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Full Panel Customization</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.backups ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>JetBackup</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{plan.features.support} support</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm">
-                            {plan.features.migration ? (
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                            ) : (
-                              <X className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                            )}
-                            <span>Free migration service</span>
-                          </li>
-                        </ul>
-                        <Button className="w-full" asChild>
-                          <Link href="/contact">Get Started</Link>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </TabsContent>
-
-              {/* AI & ML Plans */}
-              <TabsContent value="ai">
-                <div className="grid lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                  {aiPlans.map((plan, index) => (
-                    <Card key={index} className="relative flex flex-col">
-                      {plan.badge && (
-                        <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-red-500 hover:bg-red-600">
-                          {plan.badge}
-                        </Badge>
-                      )}
-                      {plan.isFree && (
-                        <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-green-500 hover:bg-green-600">
-                          Free Plan
-                        </Badge>
-                      )}
-                      <CardHeader>
-                        <CardTitle className="text-xl">{plan.name}</CardTitle>
-                        <CardDescription>{plan.description}</CardDescription>
-                        <div className="pt-4">
-                          {plan.isFree ? (
-                            <div className="text-3xl font-bold">
-                              {plan.price}
-                              <span className="text-base font-normal text-muted-foreground">{plan.billingPeriod}</span>
-                            </div>
-                          ) : plan.originalPrice ? (
-                            <div className="text-3xl font-bold">
-                              <span className="line-through text-muted-foreground text-2xl mr-2">
-                                {plan.originalPrice}
-                              </span>
-                              {plan.price}
-                              <span className="text-base font-normal text-muted-foreground">{plan.billingPeriod}</span>
-                            </div>
-                          ) : (
-                            <div className="text-3xl font-bold">
-                              {plan.price}
-                              <span className="text-base font-normal text-muted-foreground">{plan.billingPeriod}</span>
-                            </div>
-                          )}
-                        </div>
-                      </CardHeader>
-                      <CardContent className="flex-1 flex flex-col">
-                        <ul className="space-y-3 mb-8 flex-1">
-                          {Object.entries(plan.features).map(([key, value], idx) => (
-                            <li key={idx} className="flex items-start gap-2 text-sm">
-                              <Check className="h-4 w-4 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
-                              <span>{value}</span>
+                        </CardHeader>
+                        <CardContent className="space-y-6">
+                          <ul className="space-y-3">
+                            <li className="flex items-start gap-2">
+                              <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                              <span className="text-sm">Resell VPS Instances</span>
                             </li>
-                          ))}
-                        </ul>
-                        <Button className="w-full" variant={plan.isFree ? "outline" : "default"} asChild>
-                          <Link href={plan.name === "Self-hosted n8n" ? "/products/n8n" : "/products/llm"}>
-                            {plan.isFree ? "Get Started Free" : "Get Started"}
-                          </Link>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  ))}
+                            <li className="flex items-start gap-2">
+                              <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                              <span className="text-sm">Custom Resource Allocation</span>
+                            </li>
+                            <li className="flex items-start gap-2">
+                              <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                              <span className="text-sm">White Label Solution</span>
+                            </li>
+                            <li className="flex items-start gap-2">
+                              <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                              <span className="text-sm">API Access</span>
+                            </li>
+                          </ul>
+                          <Button className="w-full" size="lg" asChild>
+                            <Link href="/support">Contact Sales</Link>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </TabsContent>
+
+            {/* VPS TAB */}
+            <TabsContent value="vps" className="space-y-8">
+              <div className="text-center max-w-2xl mx-auto mb-8">
+                <h2 className="text-3xl font-bold mb-2">VPS Hosting Plans</h2>
+                <p className="text-muted-foreground">
+                  Scalable virtual private servers with full control
+                </p>
+              </div>
+
+              <Accordion type="single" collapsible defaultValue="cloud-vps" className="max-w-7xl mx-auto space-y-4">
+                <AccordionItem value="cloud-vps" className="border-2 border-green-500/20 rounded-lg px-4">
+                  <AccordionTrigger className="hover:no-underline">
+                    <div className="flex flex-col items-start gap-2 w-full">
+                      <span className="text-xl font-semibold">Cloud VPS Hosting</span>
+                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                        <ChevronDown className="h-4 w-4" />
+                        <span>Click here to show more plans</span>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    {/* Toggle for Managed/Unmanaged */}
+                    <div className="flex justify-center mb-6">
+                      <div className="inline-flex rounded-lg border border-border p-1 bg-muted/50">
+                        <button
+                          onClick={() => setCloudVpsType("unmanaged")}
+                          className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
+                            cloudVpsType === "unmanaged"
+                              ? "bg-primary text-primary-foreground shadow-sm"
+                              : "text-muted-foreground hover:text-foreground"
+                          }`}
+                        >
+                          Unmanaged
+                        </button>
+                        <button
+                          onClick={() => setCloudVpsType("managed")}
+                          className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
+                            cloudVpsType === "managed"
+                              ? "bg-primary text-primary-foreground shadow-sm"
+                              : "text-muted-foreground hover:text-foreground"
+                          }`}
+                        >
+                          Managed
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
+                      {(cloudVpsType === "unmanaged" ? cloudVpsUnmanagedPlans : cloudVpsManagedPlans).map((plan) => (
+                        <PricingCard key={plan.name} plan={plan} />
+                      ))}
+                    </div>
+                    <p className="text-sm text-muted-foreground mt-6 text-center">
+                      {cloudVpsType === "unmanaged" 
+                        ? "Self-managed plans - You have full control and responsibility" 
+                        : "Fully managed plans - We handle server management and updates"}
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="dedicated-vps" className="border-2 border-green-500/20 rounded-lg px-4">
+                  <AccordionTrigger className="hover:no-underline">
+                    <div className="flex flex-col items-start gap-2 w-full">
+                      <span className="text-xl font-semibold">Dedicated VPS</span>
+                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                        <ChevronDown className="h-4 w-4" />
+                        <span>Click here to show more plans</span>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    {/* Toggle for Managed/Unmanaged */}
+                    <div className="flex justify-center mb-6">
+                      <div className="inline-flex rounded-lg border border-border p-1 bg-muted/50">
+                        <button
+                          onClick={() => setDedicatedVpsType("unmanaged")}
+                          className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
+                            dedicatedVpsType === "unmanaged"
+                              ? "bg-primary text-primary-foreground shadow-sm"
+                              : "text-muted-foreground hover:text-foreground"
+                          }`}
+                        >
+                          Unmanaged
+                        </button>
+                        <button
+                          onClick={() => setDedicatedVpsType("managed")}
+                          className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
+                            dedicatedVpsType === "managed"
+                              ? "bg-primary text-primary-foreground shadow-sm"
+                              : "text-muted-foreground hover:text-foreground"
+                          }`}
+                        >
+                          Managed
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
+                      {(dedicatedVpsType === "unmanaged" ? dedicatedVpsUnmanagedPlans : dedicatedVpsManagedPlans).map((plan) => (
+                        <PricingCard key={plan.name} plan={plan} />
+                      ))}
+                    </div>
+                    <p className="text-sm text-muted-foreground mt-6 text-center">
+                      {dedicatedVpsType === "unmanaged"
+                        ? "Self-managed with dedicated CPU and RAM resources"
+                        : "Fully managed with dedicated resources and 24/7 support"}
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </TabsContent>
+
+            {/* DEDICATED SERVERS TAB */}
+            <TabsContent value="dedicated" className="space-y-8">
+              <div className="text-center max-w-2xl mx-auto mb-8">
+                <h2 className="text-3xl font-bold mb-2">Bare Metal Servers</h2>
+                <p className="text-muted-foreground">
+                  Ultimate performance with dedicated physical hardware
+                </p>
+              </div>
+
+              {/* Toggle for Managed/Unmanaged */}
+              <div className="flex justify-center mb-8">
+                <div className="inline-flex rounded-lg border border-border p-1 bg-muted/50">
+                  <button
+                    onClick={() => setBareMetalType("unmanaged")}
+                    className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
+                      bareMetalType === "unmanaged"
+                        ? "bg-primary text-primary-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    Unmanaged
+                  </button>
+                  <button
+                    onClick={() => setBareMetalType("managed")}
+                    className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
+                      bareMetalType === "managed"
+                        ? "bg-primary text-primary-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    Managed
+                  </button>
                 </div>
-              </TabsContent>
-            </Tabs>
-          </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+                {(bareMetalType === "unmanaged" ? bareMetalUnmanagedPlans : bareMetalManagedPlans).map((plan) => (
+                  <PricingCard key={plan.name} plan={plan} />
+                ))}
+              </div>
+              <p className="text-sm text-muted-foreground mt-6 text-center">
+                {bareMetalType === "unmanaged"
+                  ? "Self-managed dedicated servers - Full hardware control and responsibility"
+                  : "Fully managed dedicated servers - We handle all server management 24/7"}
+                {" | Custom configurations available."}
+              </p>
+            </TabsContent>
+
+            {/* AI SERVICES TAB */}
+            <TabsContent value="ai" className="space-y-8">
+              <div className="text-center max-w-2xl mx-auto mb-8">
+                <h2 className="text-3xl font-bold mb-2">AI Services</h2>
+                <p className="text-muted-foreground">
+                  Access cutting-edge AI models and automation tools
+                </p>
+              </div>
+
+              <Accordion type="single" collapsible className="max-w-7xl mx-auto space-y-4">
+                <AccordionItem value="ai-models" className="border-2 border-green-500/20 rounded-lg px-4">
+                  <AccordionTrigger className="hover:no-underline">
+                    <div className="flex flex-col items-start gap-2 w-full">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl font-semibold">KmerHosting AI - Model Access</span>
+                        <Badge>Popular</Badge>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                        <ChevronDown className="h-4 w-4" />
+                        <span>Click here to show more plans</span>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="space-y-8 pt-6">
+                      <div>
+                        <h4 className="text-lg font-semibold mb-4">Free Access Plan</h4>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {aiFreeModels.map((plan) => (
+                            <PricingCard key={plan.name} plan={plan} />
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold mb-4">Paid Access Plans</h4>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {aiPaidModels.map((plan) => (
+                            <PricingCard key={plan.name} plan={plan} />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="ai-builder" className="border-2 border-green-500/20 rounded-lg px-4">
+                  <AccordionTrigger className="hover:no-underline">
+                    <div className="flex flex-col items-start gap-2 w-full">
+                      <span className="text-xl font-semibold">AI Website Builder</span>
+                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                        <ChevronDown className="h-4 w-4" />
+                        <span>Click here to show more plans</span>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="pt-6">
+                      <Card className="max-w-md mx-auto">
+                        <CardHeader>
+                          <CardTitle className="text-2xl">AI Website Builder</CardTitle>
+                          <CardDescription>Build websites with AI assistance</CardDescription>
+                          <div className="pt-4">
+                            <span className="text-4xl font-bold">Included</span>
+                            <span className="text-muted-foreground ml-2">with hosting</span>
+                          </div>
+                        </CardHeader>
+                        <CardContent className="space-y-6">
+                          <ul className="space-y-3">
+                            <li className="flex items-start gap-2">
+                              <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                              <span className="text-sm">AI-Powered Design</span>
+                            </li>
+                            <li className="flex items-start gap-2">
+                              <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                              <span className="text-sm">Content Generation</span>
+                            </li>
+                            <li className="flex items-start gap-2">
+                              <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                              <span className="text-sm">Drag & Drop Editor</span>
+                            </li>
+                          </ul>
+                          <Button className="w-full" size="lg" asChild>
+                            <Link href="/signup">Try it for free</Link>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </TabsContent>
+
+            {/* EXTRAS TAB */}
+            <TabsContent value="extras" className="space-y-8">
+              <div className="text-center max-w-2xl mx-auto mb-8">
+                <h2 className="text-3xl font-bold mb-2">Additional Services</h2>
+                <p className="text-muted-foreground">
+                  Enhance your hosting with premium add-ons
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                {additionalServices.map((plan) => (
+                  <PricingCard key={plan.name} plan={plan} />
+                ))}
+              </div>
+
+              <div className="mt-8 p-6 bg-muted/50 rounded-lg max-w-2xl mx-auto text-center">
+                <h3 className="text-lg font-semibold mb-2">Domain Registration</h3>
+                <p className="text-muted-foreground mb-4">
+                  Register your perfect domain from 6,500 FCFA/year
+                </p>
+                <Button asChild>
+                  <Link href="/domain-search">Search Domains</Link>
+                </Button>
+              </div>
+            </TabsContent>
+          </Tabs>
         </section>
 
-        {/* FAQ Section */}
-        <section className="py-20 bg-muted/30">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">Frequently asked questions</h2>
-              <div className="space-y-6">
-                <div>
-                  <h3 className="font-semibold mb-2">Can I upgrade my plan later?</h3>
-                  <p className="text-muted-foreground">
-                    Yes, you can upgrade your hosting plan at any time. The upgrade is instant and you'll only pay the
-                    prorated difference.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-2">Do you offer refunds?</h3>
-                  <p className="text-muted-foreground">
-                    We offer a 30-day money-back guarantee on all hosting plans. If you're not satisfied, contact us for
-                    a full refund.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-2">What payment methods do you accept?</h3>
-                  <p className="text-muted-foreground">
-                    We accept all major credit cards, PayPal, and bank transfers for annual plans.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-2">Is there a setup fee?</h3>
-                  <p className="text-muted-foreground">
-                    No, there are no setup fees. The price you see is the price you pay.
-                  </p>
-                </div>
+        {/* CTA Section */}
+        <section className="border-t bg-primary text-primary-foreground">
+          <div className="container py-16 md:py-24">
+            <div className="max-w-3xl mx-auto text-center space-y-6">
+              <h2 className="text-3xl md:text-4xl font-bold">
+                Need Help Choosing?
+              </h2>
+              <p className="text-lg opacity-90">
+                Our expert team is ready to help you find the perfect solution
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" variant="secondary" asChild>
+                  <Link href="/support">
+                    Contact Sales Team
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary" asChild>
+                  <Link href="/products">View All Products</Link>
+                </Button>
               </div>
             </div>
           </div>

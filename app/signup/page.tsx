@@ -10,12 +10,9 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
-import { useLanguage } from "@/components/language-provider"
 import { Eye, EyeOff } from "lucide-react"
 
-export default function SignupPage() {
-  const { t } = useLanguage()
-  const [formData, setFormData] = useState({
+export default function SignupPage() {const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
@@ -62,13 +59,13 @@ export default function SignupPage() {
         <div className="w-full max-w-sm">
           <Card className="border-0 shadow-md">
             <CardHeader className="space-y-2 text-center pb-3">
-              <CardTitle className="text-xl font-semibold">{t("auth.signup.title")}</CardTitle>
-              <CardDescription className="text-sm">{t("auth.signup.subtitle")}</CardDescription>
+              <CardTitle className="text-xl font-semibold">{"Create Account"}</CardTitle>
+              <CardDescription className="text-sm">{"Sign up for KmerHosting"}</CardDescription>
             </CardHeader>
             <CardContent className="pt-2 pb-4">
               <form onSubmit={handleSubmit} className="space-y-3">
                 <div className="space-y-1">
-                  <Label htmlFor="name" className="text-sm">{t("auth.signup.name")}</Label>
+                  <Label htmlFor="name" className="text-sm">{"Full Name"}</Label>
                   <Input
                     id="name"
                     type="text"
@@ -81,7 +78,7 @@ export default function SignupPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <Label htmlFor="email" className="text-sm">{t("auth.signup.email")}</Label>
+                  <Label htmlFor="email" className="text-sm">{"Email Address"}</Label>
                   <Input
                     id="email"
                     type="email"
@@ -94,7 +91,7 @@ export default function SignupPage() {
                 </div>
                 
                 <div className="space-y-1">
-                  <Label htmlFor="password" className="text-sm">{t("auth.signup.password")}</Label>
+                  <Label htmlFor="password" className="text-sm">{"Password"}</Label>
                   <div className="relative">
                     <Input
                       id="password"
@@ -123,7 +120,7 @@ export default function SignupPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <Label htmlFor="confirmPassword" className="text-sm">{t("auth.signup.confirmPassword")}</Label>
+                  <Label htmlFor="confirmPassword" className="text-sm">{"Confirm Password"}</Label>
                   <div className="relative">
                     <Input
                       id="confirmPassword"
@@ -159,13 +156,13 @@ export default function SignupPage() {
                     disabled={isLoading}
                   />
                   <Label htmlFor="terms" className="text-xs leading-relaxed peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                    {t("auth.signup.terms")}{" "}
+                    {"I agree to the"}{" "}
                     <Link href="/terms" className="text-primary hover:underline">
-                      {t("auth.signup.termsLink")}
+                      {"Terms of Service"}
                     </Link>{" "}
-                    {t("auth.signup.and")}{" "}
+                    {"and"}{" "}
                     <Link href="/privacy" className="text-primary hover:underline">
-                      {t("auth.signup.privacyLink")}
+                      {"Privacy Policy"}
                     </Link>
                   </Label>
                 </div>
@@ -175,16 +172,16 @@ export default function SignupPage() {
                   className="w-full h-9"
                   disabled={isLoading || !agreedToTerms}
                 >
-                  {isLoading ? "..." : t("auth.signup.submit")}
+                  {isLoading ? "..." : "Sign Up"}
                 </Button>
               </form>
 
               <div className="mt-4 text-center text-xs">
                 <span className="text-muted-foreground">
-                  {t("auth.signup.hasAccount")}{" "}
+                  {"Already have an account?"}{" "}
                 </span>
                 <Link href="/login" className="text-primary hover:underline">
-                  {t("auth.signup.loginLink")}
+                  {"Login here"}
                 </Link>
               </div>
             </CardContent>

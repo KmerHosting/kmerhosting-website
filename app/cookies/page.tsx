@@ -4,8 +4,19 @@ import { CookieBanner } from "@/components/cookie-banner"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Cookie Policy - KmerHosting",
-  description: "Learn about how KmerHosting uses cookies and similar technologies on our website.",
+  title: "Cookie Policy - How We Use Cookies | KmerHosting",
+  description: "Learn about KmerHosting cookie policy. Understand how we use cookies, tracking technologies, and how to manage your cookie preferences.",
+  keywords: ["cookie policy", "cookies usage", "tracking", "privacy"],
+  openGraph: {
+    title: "Cookie Policy - KmerHosting",
+    description: "Information about how we use cookies and similar technologies.",
+    url: "https://kmerhosting.com/cookies",
+    siteName: "KmerHosting",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://kmerhosting.com/cookies",
+  },
 }
 
 export default function CookiesPage() {
@@ -154,7 +165,7 @@ export default function CookiesPage() {
               <section>
                 <h2 className="text-2xl font-semibold mb-4">8. Contact Us</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  If you have questions about our use of cookies, please contact us at hello@kmerhosting.site.
+                  If you have questions about our use of cookies, please contact us at support@kmerhosting.com.
                 </p>
               </section>
             </div>

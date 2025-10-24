@@ -4,8 +4,19 @@ import { CookieBanner } from "@/components/cookie-banner"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - KmerHosting",
-  description: "Learn how KmerHosting collects, uses, and protects your personal information.",
+  title: "Privacy Policy - Data Protection & Security | KmerHosting",
+  description: "KmerHosting privacy policy. Learn how we collect, use, and protect your personal information, cookies, and data security practices.",
+  keywords: ["privacy policy", "data protection", "GDPR compliance", "privacy statement"],
+  openGraph: {
+    title: "Privacy Policy - KmerHosting",
+    description: "Our commitment to protecting your privacy and personal information.",
+    url: "https://kmerhosting.com/privacy",
+    siteName: "KmerHosting",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://kmerhosting.com/privacy",
+  },
 }
 
 export default function PrivacyPage() {
@@ -114,7 +125,7 @@ export default function PrivacyPage() {
                   <li>Withdraw consent for marketing communications</li>
                 </ul>
                 <p className="text-muted-foreground leading-relaxed mt-4">
-                  To exercise these rights, please contact us at hello@kmerhosting.site.
+                  To exercise these rights, please contact us at support@kmerhosting.com.
                 </p>
               </section>
 
@@ -169,7 +180,7 @@ export default function PrivacyPage() {
                 </p>
                 <div className="mt-4 p-4 bg-muted/30 rounded-lg">
                   <p className="text-muted-foreground">
-                    <strong>Email:</strong> hello@kmerhosting.site
+                    <strong>Email:</strong> support@kmerhosting.com
                   </p>
                   <p className="text-muted-foreground mt-2">
                     <strong>Phone:</strong> +237 6 94 19 34 93

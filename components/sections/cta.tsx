@@ -2,19 +2,15 @@
 
 import { Button } from "@/components/ui/button"
 import { MessageSquare } from "lucide-react"
-import { useLanguage } from "@/components/language-provider"
 import Link from "next/link"
 
-export function CTA() {
-  const { t } = useLanguage()
-
-  // Structured data for SEO
+export function CTA() {// Structured data for SEO
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Offer",
     "name": "KmerHosting Web Hosting Services",
     "description": "Professional web hosting services with 99.9% uptime, SSL certificates, and 24/7 support",
-    "url": "https://kmerhosting.site/pricing",
+    "url": "https://kmerhosting.com/pricing",
     "seller": {
       "@type": "Organization",
       "name": "KmerHosting"
@@ -70,7 +66,7 @@ export function CTA() {
                 className="text-base font-semibold px-8 w-full sm:w-auto"
                 asChild
               >
-                <Link href="/contact" title="Contact KmerHosting sales team">
+                <Link href="/support" title="Contact KmerHosting sales team">
                   <MessageSquare className="mr-2 h-5 w-5" />
                   Talk to Sales
                 </Link>

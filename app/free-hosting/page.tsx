@@ -10,7 +10,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { useLanguage } from "@/components/language-provider"
 import { Upload, Check, AlertCircle, Globe, Shield, Zap, HardDrive, Link, Users } from "lucide-react"
 import { useDropzone } from "react-dropzone"
 
@@ -20,9 +19,7 @@ interface UploadedFile {
   type: string
 }
 
-export default function FreeHostingPage() {
-  const { t } = useLanguage()
-  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([])
+export default function FreeHostingPage() {const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([])
   const [subdomain, setSubdomain] = useState("")
   const [isDeploying, setIsDeploying] = useState(false)
   const [deploymentProgress, setDeploymentProgress] = useState(0)
@@ -105,32 +102,32 @@ export default function FreeHostingPage() {
   const features = [
     {
       icon: Shield,
-      title: t("free.features.ssl"),
+      title: "Free SSL Certificate",
       description: "Automatic HTTPS"
     },
     {
       icon: Zap,
-      title: t("free.features.cdn"),
+      title: "Global CDN",
       description: "Fast worldwide delivery"
     },
     {
       icon: Globe,
-      title: t("free.features.bandwidth"),
+      title: "Unlimited Bandwidth",
       description: "No traffic limits"
     },
     {
       icon: HardDrive,
-      title: t("free.features.storage"),
+      title: "10 MB Storage",
       description: "Perfect for static sites"
     },
     {
       icon: Link,
-      title: t("free.features.subdomain"),
+      title: "Free Subdomain",
       description: "Professional URL"
     },
     {
       icon: Users,
-      title: t("free.features.support"),
+      title: "Community Support",
       description: "Help when you need it"
     }
   ]
@@ -144,10 +141,10 @@ export default function FreeHostingPage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
-                {t("free.title")}
+                {"Free Website Hosting"}
               </h1>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                {t("free.subtitle")}
+                {"Deploy your static website for free"}
               </p>
             </div>
 
@@ -159,9 +156,9 @@ export default function FreeHostingPage() {
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
                         <Upload className="h-5 w-5" />
-                        {t("free.upload.title")}
+                        {"Upload Your Website"}
                       </CardTitle>
-                      <CardDescription>{t("free.upload.subtitle")}</CardDescription>
+                      <CardDescription>{"Upload your HTML, CSS, JS files"}</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div
@@ -180,10 +177,10 @@ export default function FreeHostingPage() {
                               Drag & drop files here, or click to browse
                             </p>
                             <p className="text-sm text-muted-foreground mb-4">
-                              {t("free.upload.requirements")}
+                              {"Maximum 10MB total file size"}
                             </p>
                             <p className="text-sm text-muted-foreground">
-                              {t("free.upload.supported")}
+                              {"Supports: HTML, CSS, JS, images"}
                             </p>
                           </div>
                         )}
@@ -228,7 +225,7 @@ export default function FreeHostingPage() {
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
                         <Globe className="h-5 w-5" />
-                        {t("free.subdomain.title")}
+                        {"Choose Your Subdomain"}
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -248,7 +245,7 @@ export default function FreeHostingPage() {
                             </div>
                           </div>
                           <p className="text-sm text-muted-foreground mt-1">
-                            {t("free.subdomain.example")}
+                            {"Example: mysite.kmerhosting.site"}
                           </p>
                         </div>
 
@@ -267,7 +264,7 @@ export default function FreeHostingPage() {
                           className="w-full"
                           disabled={!subdomain.trim() || uploadedFiles.length === 0 || isDeploying}
                         >
-                          {isDeploying ? "Deploying..." : t("free.deploy.button")}
+                          {isDeploying ? "Deploying..." : "Deploy Now"}
                         </Button>
                       </div>
                     </CardContent>
@@ -324,7 +321,7 @@ export default function FreeHostingPage() {
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">{t("free.features.title")}</h2>
+              <h2 className="text-3xl font-bold mb-4">{"What You Get"}</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

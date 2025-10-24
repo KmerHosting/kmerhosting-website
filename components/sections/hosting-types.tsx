@@ -4,36 +4,32 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Server, Compass as Wordpress, Cloud, ArrowRight, Workflow, Brain, Users } from "lucide-react"
 import Link from "next/link"
-import { useLanguage } from "@/components/language-provider"
-
 export function HostingTypes() {
-  const { t } = useLanguage()
-
   const hostingTypes = [
     {
       icon: Server,
-      titleKey: "hosting.shared.title",
-      descriptionKey: "hosting.shared.description",
+      title: "Shared Hosting",
+      description: "Perfect for starter websites",
       features: [
-        t("common.freeDomain"),
-        t("common.freeSSL"),
-        t("common.freeEmail"),
-        t("common.unlimitedBandwidth"),
-        t("common.unlimitedWebsites"),
-        t("common.dailyBackups"),
-        t("common.ssdStorage")
+        "Free .com Domain",
+        "Free SSL Certificate",
+        "10+ Pro Email Addresses",
+        "Unlimited Bandwidth",
+        "Unlimited Websites",
+        "Daily Backups",
+        "SSD NVMe Storage"
       ],
       link: "/products/shared",
       color: "from-blue-500 to-blue-600"
     },
     {
       icon: Wordpress,
-      titleKey: "hosting.wordpress.title",
-      descriptionKey: "hosting.wordpress.description",
+      title: "WordPress Hosting",
+      description: "Optimized for WordPress sites",
       features: [
-        t("common.freeDomain"),
-        t("common.freeSSL"),
-        t("common.freeEmail"),
+        "Free .com Domain",
+        "Free SSL Certificate",
+        "10+ Pro Email Addresses",
         "WordPress auto-updates",
         "Enhanced security",
         "1-click WordPress installer"
@@ -43,8 +39,8 @@ export function HostingTypes() {
     },
     {
       icon: Cloud,
-      titleKey: "hosting.vps.title",
-      descriptionKey: "hosting.vps.description",
+      title: "VPS Hosting",
+      description: "Scalable virtual private servers",
       features: [
         "Full root access",
         "Dedicated resources",
@@ -59,8 +55,8 @@ export function HostingTypes() {
     },
     {
       icon: Users,
-      titleKey: "hosting.reseller.title",
-      descriptionKey: "hosting.reseller.description",
+      title: "Reseller Hosting",
+      description: "Start your hosting business",
       features: [
         "DirectAdmin control panel",
         "White-label branding",
@@ -75,8 +71,8 @@ export function HostingTypes() {
     },
     {
       icon: Workflow,
-      titleKey: "hosting.n8n.title",
-      descriptionKey: "hosting.n8n.description",
+      title: "Self-hosted n8n",
+      description: "AI workflow automation",
       features: [
         "Auto-installed n8n",
         "API integration ready",
@@ -91,8 +87,8 @@ export function HostingTypes() {
     },
     {
       icon: Brain,
-      titleKey: "hosting.llm.title",
-      descriptionKey: "hosting.llm.description",
+      title: "LLM Hosting",
+      description: "Host your language models",
       features: [
         "Multiple LLM models",
         "API access included",
@@ -112,10 +108,10 @@ export function HostingTypes() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-            {t("hosting.types.title")}
+            {"Choose Your Perfect Hosting Solution"}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-            {t("hosting.types.subtitle")}
+            {"From shared hosting to VPS, we have the right plan for you"}
           </p>
         </div>
 
@@ -129,8 +125,8 @@ export function HostingTypes() {
                   <div className="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                     <Icon className="h-8 w-8 text-primary" />
                   </div>
-                  <CardTitle>{t(type.titleKey)}</CardTitle>
-                  <CardDescription className="text-base">{t(type.descriptionKey)}</CardDescription>
+                  <CardTitle>{type.title}</CardTitle>
+                  <CardDescription className="text-base">{type.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2 mb-6">
@@ -143,7 +139,7 @@ export function HostingTypes() {
                   </ul>
                   <Button asChild className="w-full group-hover:bg-primary/90 transition-colors">
                     <Link href={type.link}>
-                      {t("common.learnMore")}
+                      {"Learn More"}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>

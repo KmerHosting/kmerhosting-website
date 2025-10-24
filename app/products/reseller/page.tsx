@@ -7,11 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Users, ArrowRight, CheckCircle2, Server, Globe, Shield, Zap, HeadphonesIcon, DollarSign } from "lucide-react"
 import Link from "next/link"
-import { useLanguage } from "@/components/language-provider"
 
 export default function ResellerHostingPage() {
-  const { t } = useLanguage()
-
   const features = [
     {
       icon: Server,
@@ -70,7 +67,7 @@ export default function ResellerHostingPage() {
                 <Users className="h-10 w-10 text-green-600" />
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-                {t("hosting.reseller.title")}
+                Reseller Hosting
               </h1>
               <p className="text-lg text-muted-foreground text-balance mb-8 max-w-2xl mx-auto">
                 Start your own web hosting business with our powerful white-label reseller hosting plans.

@@ -2,13 +2,10 @@
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Globe, Check, ArrowLeftCircle, ArrowRightCircle, IceCreamBowlIcon, PlaneTakeoff } from "lucide-react"
-import { useLanguage } from "@/components/language-provider"
+import { Globe, Check, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 export function Hero() {
-  const { t } = useLanguage()
-
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/30 py-20 sm:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -20,29 +17,27 @@ export function Hero() {
 
           {/* Heading */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-balance mb-6">
-            {t("hero.title")}
+            Powerful Web Hosting for Everyone
           </h1>
 
           {/* Subtitle */}
           <p className="text-lg sm:text-xl text-muted-foreground text-balance mb-8 max-w-2xl mx-auto">
-            {t("hero.subtitle")}
+            Fast, reliable, and secure hosting with 99.9% uptime guarantee. Get started in minutes with our automated setup.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button size="lg" className="text-base" asChild>
-              <Link href="/pricing">
-                {t("common.getStarted")}
+          {/* CTA Button */}
+          <div className="flex justify-center mb-12">
+            <Button size="lg" variant="outline" className="text-base bg-transparent px-8 py-6 w-full sm:w-auto sm:min-w-[300px]" asChild>
+              <Link href="/pricing" className="flex items-center justify-center gap-2">
+                Get Started
+                <ArrowRight className="h-5 w-5" />
               </Link>
-            </Button>
-            <Button size="lg" variant="outline" className="text-base bg-transparent" asChild>
-              <Link href="/contact">{t("common.contactSales")}</Link>
             </Button>
           </div>
 
           {/* Key Features List */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
-            {[t("common.freeDomain"), t("common.freeSSL"), t("common.freeEmail")].map((feature, index) => (
+            {["Free .com Domain", "Free SSL Certificate", "10+ Pro Email Addresses"].map((feature, index) => (
               <div key={index} className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                 <Check className="h-4 w-4 text-green-600 dark:text-green-500 flex-shrink-0" />
                 <span>{feature}</span>

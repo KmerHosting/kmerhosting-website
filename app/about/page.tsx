@@ -4,6 +4,23 @@ import { CookieBanner } from "@/components/cookie-banner"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Target, Users, Award, TrendingUp } from "lucide-react"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "About Us - Professional Web Hosting Since 2019 | KmerHosting",
+  description: "Learn about KmerHosting's mission to provide reliable, affordable web hosting. Serving 10,000+ customers worldwide with 99.9% uptime and 24/7 support since 2019.",
+  keywords: ["about KmerHosting", "web hosting company", "hosting provider", "reliable hosting", "web hosting Africa"],
+  openGraph: {
+    title: "About KmerHosting - Your Trusted Hosting Partner",
+    description: "Professional web hosting services since 2019. Join 10,000+ satisfied customers worldwide.",
+    url: "https://kmerhosting.com/about",
+    siteName: "KmerHosting",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://kmerhosting.com/about",
+  },
+}
 
 export default function AboutPage() {
   return (

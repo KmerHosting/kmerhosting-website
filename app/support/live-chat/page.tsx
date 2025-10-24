@@ -195,7 +195,7 @@ export default function LiveChatPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="max-w-4xl mx-auto">
             {/* Chat Header */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
               <div className="flex items-center gap-3">
                 <Avatar>
                   <AvatarFallback className="bg-primary/10 text-primary">
@@ -203,11 +203,11 @@ export default function LiveChatPage() {
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <h1 className="text-2xl font-bold">Chatting with {selectedAgent.name}</h1>
+                  <h1 className="text-xl sm:text-2xl font-bold">Chatting with {selectedAgent.name}</h1>
                   <p className="text-sm text-muted-foreground">{selectedAgent.role}</p>
                 </div>
               </div>
-              <Button variant="outline" size="sm" onClick={closeConversation}>
+              <Button variant="outline" size="sm" onClick={closeConversation} className="w-full sm:w-auto">
                 <X className="h-4 w-4 mr-2" />
                 Close Chat
               </Button>

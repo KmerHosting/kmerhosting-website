@@ -6,6 +6,30 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, User, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Blog - Web Hosting Tips & Tutorials | KmerHosting",
+  description: "Expert articles on web hosting, WordPress, security, performance optimization, and website management. Stay updated with the latest hosting industry trends.",
+  keywords: [
+    "hosting blog",
+    "web hosting tips",
+    "WordPress tutorials",
+    "website security",
+    "hosting guides",
+    "server optimization",
+  ],
+  openGraph: {
+    title: "KmerHosting Blog - Hosting Tips & Tutorials",
+    description: "Expert guides and tutorials on web hosting, WordPress, security, and website performance.",
+    url: "https://kmerhosting.com/blog",
+    siteName: "KmerHosting",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://kmerhosting.com/blog",
+  },
+}
 
 const blogPosts = [
   {

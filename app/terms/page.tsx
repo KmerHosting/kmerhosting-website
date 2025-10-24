@@ -4,8 +4,19 @@ import { CookieBanner } from "@/components/cookie-banner"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Terms of Service - KmerHosting",
-  description: "Read our terms of service and understand the rules and regulations for using KmerHosting services.",
+  title: "Terms of Service - Service Agreement | KmerHosting",
+  description: "KmerHosting terms of service. Read our service agreement, acceptable use policy, and terms governing the use of our web hosting services.",
+  keywords: ["terms of service", "service agreement", "acceptable use policy", "hosting terms"],
+  openGraph: {
+    title: "Terms of Service - KmerHosting",
+    description: "Terms and conditions for using KmerHosting web hosting services.",
+    url: "https://kmerhosting.com/terms",
+    siteName: "KmerHosting",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://kmerhosting.com/terms",
+  },
 }
 
 export default function TermsPage() {
@@ -140,7 +151,7 @@ export default function TermsPage() {
               <section>
                 <h2 className="text-2xl font-semibold mb-4">12. Contact Information</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  If you have questions about these Terms of Service, please contact us at hello@kmerhosting.site.
+                  If you have questions about these Terms of Service, please contact us at support@kmerhosting.com.
                 </p>
               </section>
             </div>

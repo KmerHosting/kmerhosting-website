@@ -1,29 +1,217 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Moon, Sun, Globe, Menu } from "lucide-react"
+import { Moon, Sun, Menu, ChevronDown } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuLabel, DropdownMenuGroup } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet"
-import { useLanguage } from "@/components/language-provider"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { cn } from "@/lib/utils"
 import { useState } from "react"
 
 export function Header() {
   const pathname = usePathname()
   const { theme, setTheme } = useTheme()
-  const { language, setLanguage, t } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
+  const [productsOpen, setProductsOpen] = useState(false)
 
   const navItems = [
-    { href: "/", label: t("nav.home") },
-    { href: "/pricing", label: t("nav.pricing") },
-    { href: "/products", label: t("nav.products") },
-    { href: "/free-hosting", label: t("nav.freeHosting") },
-    { href: "/about", label: t("nav.about") },
-    { href: "/blog", label: t("nav.blog") },
+    { href: "/", label: "Home" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/forum", label: "Forum" },
+    { href: "/faq", label: "FAQ" },
+    { href: "/about", label: "About Us" },
+    { href: "/blog", label: "Blog" },
+  ]
+
+  // State for nested mobile collapsibles
+  const [hostingOpen, setHostingOpen] = useState(false)
+  const [sharedOpen, setSharedOpen] = useState(false)
+  const [resellerOpen, setResellerOpen] = useState(false)
+  const [vpsOpen, setVpsOpen] = useState(false)
+  const [dedicatedVpsOpen, setDedicatedVpsOpen] = useState(false)
+  const [dedicatedOpen, setDedicatedOpen] = useState(false)
+  const [aiOpen, setAiOpen] = useState(false)
+  const [freeAiOpen, setFreeAiOpen] = useState(false)
+  const [paidAiOpen, setPaidAiOpen] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
+  const [toolsOpen, setToolsOpen] = useState(false)
+  const [extrasOpen, setExtrasOpen] = useState(false)
+  
+  // State for desktop nested dropdowns
+  const [desktopExpandedCategory, setDesktopExpandedCategory] = useState<string | null>(null)
+  const [desktopExpandedSubcategory, setDesktopExpandedSubcategory] = useState<string | null>(null)
+  const [desktopExpandedAiSub, setDesktopExpandedAiSub] = useState<string | null>(null)
+
+  const productCategories = [
+    {
+      label: "Hosting Services",
+      popular: true,
+      items: [
+        { 
+          label: "Shared Hosting",
+          nested: [
+            { 
+              label: "cPanel",
+              items: [
+                { href: "/products/shared/cpanel/wordpress", label: "WordPress Hosting" },
+                { href: "/products/shared/cpanel/nodejs", label: "Node.js Hosting" },
+                { href: "/products/shared/cpanel/php", label: "PHP Hosting" },
+                { href: "/products/shared/cpanel/python", label: "Python Hosting" },
+                { href: "/products/shared/cpanel/ruby", label: "Ruby Hosting" },
+                { href: "/products/shared/cpanel/ecommerce", label: "E-commerce Hosting" },
+                { href: "/products/shared/cpanel/woocommerce", label: "WooCommerce Hosting" },
+              ]
+            },
+            { 
+              label: "DirectAdmin",
+              items: [
+                { href: "/products/shared/directadmin/wordpress", label: "WordPress Hosting" },
+                { href: "/products/shared/directadmin/nodejs", label: "Node.js Hosting" },
+                { href: "/products/shared/directadmin/php", label: "PHP Hosting" },
+                { href: "/products/shared/directadmin/python", label: "Python Hosting" },
+                { href: "/products/shared/directadmin/ecommerce", label: "E-commerce Hosting" },
+                { href: "/products/shared/directadmin/woocommerce", label: "WooCommerce Hosting" },
+              ]
+            },
+          ]
+        },
+        { 
+          label: "Reseller Hosting",
+          nested: [
+            { 
+              label: "cPanel",
+              popular: true,
+              items: [
+                { href: "/products/reseller/cpanel/alpha", label: "Alpha Reseller" },
+                { href: "/products/reseller/cpanel/master", label: "Master Reseller" },
+                { href: "/products/reseller/cpanel/reseller", label: "Reseller" },
+              ]
+            },
+            { 
+              label: "DirectAdmin",
+              items: [
+                { href: "/products/reseller/directadmin/alpha", label: "Alpha Reseller" },
+                { href: "/products/reseller/directadmin/master", label: "Master Reseller" },
+                { href: "/products/reseller/directadmin/reseller", label: "Reseller" },
+              ]
+            },
+            { 
+              label: "Cloud VPS Reseller",
+              items: [
+                { href: "/products/reseller/cloud-vps", label: "Cloud VPS Reseller" },
+              ]
+            },
+          ]
+        },
+      ]
+    },
+    {
+      label: "Cloud VPS Hosting",
+      items: [
+        { href: "/products/vps/managed", label: "Managed VPS" },
+        { href: "/products/vps/unmanaged", label: "Unmanaged VPS" },
+      ]
+    },
+    {
+      label: "Dedicated VPS",
+      items: [
+        { href: "/products/dedicated-vps/managed", label: "Managed Dedicated VPS" },
+        { href: "/products/dedicated-vps/unmanaged", label: "Unmanaged Dedicated VPS" },
+      ]
+    },
+    {
+      label: "Bare Metal Servers",
+      items: [
+        { href: "/products/dedicated-servers/managed", label: "Managed Servers" },
+        { href: "/products/dedicated-servers/unmanaged", label: "Unmanaged Servers" },
+      ]
+    },
+    {
+      label: "KmerHosting AI",
+      popular: true,
+      items: [
+        { href: "/products/ai/website-builder", label: "AI Website Builder" },
+        { 
+          label: "Free Access Plan",
+          nested: [
+            { 
+              label: "Available Models",
+              items: [
+                { href: "/products/ai/free/llama", label: "Llama Series" },
+                { href: "/products/ai/free/deepseek", label: "Deepseek Series" },
+                { href: "/products/ai/free/gpt", label: "GPT Series" },
+                { href: "/products/ai/free/qwen", label: "Qwen" },
+                { href: "/products/ai/free/mistral", label: "Mistral" },
+                { href: "/products/ai/free/gemma", label: "Gemma" },
+                { href: "/products/ai/free/phi", label: "Phi" },
+                { href: "/products/ai/free/codellama", label: "Code Llama" },
+              ]
+            },
+          ]
+        },
+        { 
+          label: "Paid Access",
+          nested: [
+            { 
+              label: "Premium Models",
+              items: [
+                { href: "/products/ai/paid/llama", label: "Llama Series" },
+                { href: "/products/ai/paid/deepseek", label: "Deepseek Series" },
+                { href: "/products/ai/paid/gpt", label: "GPT Series" },
+                { href: "/products/ai/paid/qwen", label: "Qwen" },
+                { href: "/products/ai/paid/mistral", label: "Mistral" },
+                { href: "/products/ai/paid/gemma", label: "Gemma" },
+                { href: "/products/ai/paid/phi", label: "Phi" },
+                { href: "/products/ai/paid/codellama", label: "Code Llama" },
+                { href: "/products/ai/paid/claude", label: "Claude" },
+                { href: "/products/ai/paid/command", label: "Command R+" },
+              ]
+            },
+          ]
+        },
+      ]
+    },
+    {
+      label: "Self-hosted n8n",
+      popular: true,
+      href: "/products/n8n"
+    },
+    {
+      label: "Other Services",
+      items: [
+        { 
+          label: "Tools",
+          nested: [
+            { 
+              label: "Available Tools",
+              items: [
+                { href: "/domain-search", label: "Domain Search" },
+                { href: "/tools/whois-lookup", label: "WHOIS Lookup" },
+              ]
+            },
+          ]
+        },
+        { 
+          label: "Extra Services",
+          nested: [
+            { 
+              label: "Additional Offerings",
+              items: [
+                { href: "/products/ai/website-builder", label: "AI Website Builder" },
+                { href: "/products/ssl-certificates", label: "SSL Certificates" },
+                { href: "/products/email-hosting", label: "Email Hosting" },
+                { href: "/products/database-hosting", label: "Database Hosting" },
+                { href: "/products/free-static-hosting", label: "Free Static Site Hosting" },
+              ]
+            },
+          ]
+        },
+      ]
+    },
   ]
 
   return (
@@ -33,10 +221,13 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center">
-              <img 
+              <Image 
                 src="/kmerhosting-logo.svg" 
-                alt="KmerHosting" 
-                className="h-6 w-6 object-contain"
+                alt="KmerHosting Logo" 
+                width={24}
+                height={24}
+                className="object-contain"
+                priority
               />
             </div>
             <span className="font-bold text-lg text-foreground">KmerHosting</span>
@@ -44,7 +235,139 @@ export function Header() {
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
-            {navItems.map((item) => (
+            {navItems.slice(0, 2).map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "px-3 py-2 text-sm font-medium transition-colors hover:text-accent",
+                  pathname === item.href ? "text-foreground" : "text-muted-foreground",
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+            
+            {/* Products Dropdown - Moved after Pricing */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  className={cn(
+                    "px-3 py-2 text-sm font-medium transition-colors hover:text-accent",
+                    pathname.startsWith('/products') ? "text-foreground" : "text-muted-foreground",
+                  )}
+                >
+                  Products
+                  <ChevronDown className="ml-1 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-80 max-h-[600px] overflow-y-auto">
+                {productCategories.map((category, index) => (
+                  <div key={index}>
+                    {category.href ? (
+                      // Single link category (like Self-hosted n8n)
+                      <>
+                        <DropdownMenuItem asChild>
+                          <Link href={category.href} className="cursor-pointer text-green-600 dark:text-green-500 font-bold flex items-center gap-2">
+                            {category.label}
+                            {category.popular && (
+                              <span className="text-xs bg-orange-500 text-white px-2 py-0.5 rounded-full font-semibold">
+                                Popular
+                              </span>
+                            )}
+                          </Link>
+                        </DropdownMenuItem>
+                        {index < productCategories.length - 1 && <DropdownMenuSeparator />}
+                      </>
+                    ) : category.items ? (
+                      // Category with items - make it collapsible
+                      <Collapsible
+                        open={desktopExpandedCategory === category.label}
+                        onOpenChange={(open) => {
+                          setDesktopExpandedCategory(open ? category.label : null)
+                          if (!open) {
+                            setDesktopExpandedSubcategory(null)
+                            setDesktopExpandedAiSub(null)
+                          }
+                        }}
+                      >
+                        <CollapsibleTrigger className="flex items-center justify-between w-full px-2 py-1.5 text-sm font-bold text-green-600 dark:text-green-500 hover:bg-accent rounded-sm">
+                          <span className="flex items-center gap-2">
+                            {category.label}
+                            {category.popular && (
+                              <span className="text-xs bg-orange-500 text-white px-2 py-0.5 rounded-full font-semibold">
+                                Popular
+                              </span>
+                            )}
+                          </span>
+                          <ChevronDown className={cn(
+                            "h-4 w-4 transition-transform",
+                            desktopExpandedCategory === category.label && "rotate-180"
+                          )} />
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="pl-2">
+                          {category.items.map((item: any) => (
+                            item.nested ? (
+                              // Nested subcategories (like Shared Hosting with cPanel/DirectAdmin or AI models)
+                              <Collapsible
+                                key={item.label}
+                                open={desktopExpandedSubcategory === item.label}
+                                onOpenChange={(open) => {
+                                  setDesktopExpandedSubcategory(open ? item.label : null)
+                                  if (!open) setDesktopExpandedAiSub(null)
+                                }}
+                              >
+                                <CollapsibleTrigger className="flex items-center justify-between w-full px-2 py-1.5 text-sm font-semibold text-foreground hover:bg-accent rounded-sm">
+                                  {item.label}
+                                  <ChevronDown className={cn(
+                                    "h-4 w-4 transition-transform",
+                                    desktopExpandedSubcategory === item.label && "rotate-180"
+                                  )} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent className="pl-2">
+                                  {item.nested.map((subcat: any) => (
+                                    subcat.items ? (
+                                      <div key={subcat.label} className="mb-2">
+                                        <div className="text-xs font-medium text-primary py-1 px-2 flex items-center gap-2">
+                                          {subcat.label}
+                                          {subcat.popular && (
+                                            <span className="text-[10px] bg-blue-500 text-white px-1.5 py-0.5 rounded-full font-semibold">
+                                              Most Popular
+                                            </span>
+                                          )}
+                                        </div>
+                                        {subcat.items.map((subitem: any) => (
+                                          <DropdownMenuItem key={subitem.href} asChild>
+                                            <Link href={subitem.href} className="cursor-pointer pl-4 text-xs">
+                                              {subitem.label}
+                                            </Link>
+                                          </DropdownMenuItem>
+                                        ))}
+                                      </div>
+                                    ) : null
+                                  ))}
+                                </CollapsibleContent>
+                              </Collapsible>
+                            ) : item.href ? (
+                              // Simple item with link
+                              <DropdownMenuItem key={item.href} asChild>
+                                <Link href={item.href} className="cursor-pointer">
+                                  {item.label}
+                                </Link>
+                              </DropdownMenuItem>
+                            ) : null
+                          ))}
+                        </CollapsibleContent>
+                        {index < productCategories.length - 1 && <DropdownMenuSeparator />}
+                      </Collapsible>
+                    ) : null}
+                  </div>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
+            {navItems.slice(2).map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -60,24 +383,6 @@ export function Header() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-2">
-            {/* Language Toggle */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="h-9 w-9">
-                  <Globe className="h-4 w-4" />
-                  <span className="sr-only">Toggle language</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setLanguage("en")}>
-                  English {language === "en" && "✓"}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLanguage("fr")}>
-                  Français {language === "fr" && "✓"}
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
             {/* Theme Toggle */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -88,53 +393,26 @@ export function Header() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
-                  Light {theme === "light" && "✓"}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
-                  Dark {theme === "dark" && "✓"}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
-                  System {theme === "system" && "✓"}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")} className="border-t">
-                  Default theme {theme === "dark" && "✓"}
-                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("system")}>System</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
             <Link href="/login">
               <Button variant="ghost" size="sm">
-                {t("nav.login")}
+                Login
               </Button>
             </Link>
             <Link href="/signup">
               <Button size="sm">
-                {t("nav.signup")}
+                Sign Up
               </Button>
             </Link>
           </div>
 
           {/* Mobile Menu */}
           <div className="md:hidden flex items-center space-x-2">
-            {/* Language Toggle for Mobile */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="h-9 w-9">
-                  <Globe className="h-4 w-4" />
-                  <span className="sr-only">Toggle language</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setLanguage("en")}>
-                  English {language === "en" && "✓"}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLanguage("fr")}>
-                  Français {language === "fr" && "✓"}
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
             {/* Theme Toggle for Mobile */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -145,18 +423,9 @@ export function Header() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
-                  Light {theme === "light" && "✓"}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
-                  Dark {theme === "dark" && "✓"}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
-                  System {theme === "system" && "✓"}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")} className="border-t">
-                  Default theme {theme === "dark" && "✓"}
-                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("system")}>System</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -172,23 +441,8 @@ export function Header() {
                 <SheetHeader>
                   <SheetTitle>Navigation</SheetTitle>
                 </SheetHeader>
-                <div className="flex flex-col space-y-4 mt-6">
-                  {/* Auth Buttons - Moved to Top */}
-                  <div className="px-4 space-y-2 pb-4 border-b">
-                    <Link href="/login" onClick={() => setIsOpen(false)}>
-                      <Button variant="outline" className="w-full">
-                        {t("nav.login")}
-                      </Button>
-                    </Link>
-                    <Link href="/signup" onClick={() => setIsOpen(false)}>
-                      <Button className="w-full">
-                        {t("nav.signup")}
-                      </Button>
-                    </Link>
-                  </div>
-
-                  {/* Navigation Links */}
-                  {navItems.map((item) => (
+                <div className="flex flex-col space-y-4 mt-8">
+                  {navItems.slice(0, 2).map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
@@ -201,6 +455,403 @@ export function Header() {
                       {item.label}
                     </Link>
                   ))}
+                  
+                  {/* Products Collapsible with Nested Categories */}
+                  <Collapsible open={productsOpen} onOpenChange={setProductsOpen}>
+                    <CollapsibleTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        className={cn(
+                          "w-full justify-between text-lg font-medium py-2 px-4 rounded-md transition-colors hover:bg-accent",
+                          pathname.startsWith('/products') ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                        )}
+                      >
+                        Products
+                        <ChevronDown className={cn("h-4 w-4 transition-transform", productsOpen && "rotate-180")} />
+                      </Button>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="space-y-2 mt-2 ml-4">
+                      {/* Hosting Services */}
+                      <Collapsible open={hostingOpen} onOpenChange={setHostingOpen}>
+                        <CollapsibleTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            className="w-full justify-between text-sm font-semibold text-green-600 dark:text-green-500 py-2 px-4"
+                          >
+                            <span className="flex items-center gap-2">
+                              Hosting Services
+                              <span className="text-xs bg-orange-500 text-white px-2 py-0.5 rounded-full font-semibold">
+                                Popular
+                              </span>
+                            </span>
+                            <ChevronDown className={cn("h-3 w-3 transition-transform", hostingOpen && "rotate-180")} />
+                          </Button>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="space-y-1 ml-4">
+                          {/* Shared Hosting with nested cPanel/DirectAdmin */}
+                          <Collapsible open={sharedOpen} onOpenChange={setSharedOpen}>
+                            <CollapsibleTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                className="w-full justify-between text-xs font-medium py-1.5 px-3"
+                              >
+                                Shared Hosting
+                                <ChevronDown className={cn("h-3 w-3 transition-transform", sharedOpen && "rotate-180")} />
+                              </Button>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent className="space-y-2 ml-4 mt-1">
+                              {productCategories[0].items && productCategories[0].items[0] && 'nested' in productCategories[0].items[0] && productCategories[0].items[0].nested?.map((panel: any) => (
+                                <div key={panel.label}>
+                                  <div className="text-xs font-semibold text-primary py-1 px-3">
+                                    {panel.label}
+                                  </div>
+                                  {panel.items.map((item: any) => (
+                                    <Link
+                                      key={item.href}
+                                      href={item.href}
+                                      onClick={() => setIsOpen(false)}
+                                      className={cn(
+                                        "block text-xs py-1.5 px-4 rounded-md transition-colors hover:bg-accent",
+                                        pathname === item.href ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                                      )}
+                                    >
+                                      {item.label}
+                                    </Link>
+                                  ))}
+                                </div>
+                              ))}
+                            </CollapsibleContent>
+                          </Collapsible>
+
+                          {/* Reseller Hosting with nested cPanel/DirectAdmin */}
+                          <Collapsible open={resellerOpen} onOpenChange={setResellerOpen}>
+                            <CollapsibleTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                className="w-full justify-between text-xs font-medium py-1.5 px-3"
+                              >
+                                Reseller Hosting
+                                <ChevronDown className={cn("h-3 w-3 transition-transform", resellerOpen && "rotate-180")} />
+                              </Button>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent className="space-y-2 ml-4 mt-1">
+                              {productCategories[0].items && productCategories[0].items[1] && 'nested' in productCategories[0].items[1] && productCategories[0].items[1].nested?.map((panel: any) => (
+                                <div key={panel.label}>
+                                  <div className="text-xs font-semibold text-primary py-1 px-3 flex items-center gap-2">
+                                    {panel.label}
+                                    {panel.popular && (
+                                      <span className="text-[10px] bg-blue-500 text-white px-1.5 py-0.5 rounded-full font-semibold">
+                                        Most Popular
+                                      </span>
+                                    )}
+                                  </div>
+                                  {panel.items.map((item: any) => (
+                                    <Link
+                                      key={item.href}
+                                      href={item.href}
+                                      onClick={() => setIsOpen(false)}
+                                      className={cn(
+                                        "block text-xs py-1.5 px-4 rounded-md transition-colors hover:bg-accent",
+                                        pathname === item.href ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                                      )}
+                                    >
+                                      {item.label}
+                                    </Link>
+                                  ))}
+                                </div>
+                              ))}
+                            </CollapsibleContent>
+                          </Collapsible>
+                        </CollapsibleContent>
+                      </Collapsible>
+
+                      {/* Cloud VPS Hosting */}
+                      <Collapsible open={vpsOpen} onOpenChange={setVpsOpen}>
+                        <CollapsibleTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            className="w-full justify-between text-sm font-semibold text-green-600 dark:text-green-500 py-2 px-4"
+                          >
+                            Cloud VPS Hosting
+                            <ChevronDown className={cn("h-3 w-3 transition-transform", vpsOpen && "rotate-180")} />
+                          </Button>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="space-y-1 ml-4">
+                          {productCategories[1].items && productCategories[1].items.map((item: any) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              onClick={() => setIsOpen(false)}
+                              className={cn(
+                                "block text-sm py-2 px-4 rounded-md transition-colors hover:bg-accent",
+                                pathname === item.href ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                              )}
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </CollapsibleContent>
+                      </Collapsible>
+
+                      {/* Dedicated VPS */}
+                      <Collapsible open={dedicatedVpsOpen} onOpenChange={setDedicatedVpsOpen}>
+                        <CollapsibleTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            className="w-full justify-between text-sm font-semibold text-green-600 dark:text-green-500 py-2 px-4"
+                          >
+                            Dedicated VPS
+                            <ChevronDown className={cn("h-3 w-3 transition-transform", dedicatedVpsOpen && "rotate-180")} />
+                          </Button>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="space-y-1 ml-4">
+                          {productCategories[2].items && productCategories[2].items.map((item: any) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              onClick={() => setIsOpen(false)}
+                              className={cn(
+                                "block text-sm py-2 px-4 rounded-md transition-colors hover:bg-accent",
+                                pathname === item.href ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                              )}
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </CollapsibleContent>
+                      </Collapsible>
+
+                      {/* Bare Metal Servers */}
+                      <Collapsible open={dedicatedOpen} onOpenChange={setDedicatedOpen}>
+                        <CollapsibleTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            className="w-full justify-between text-sm font-semibold text-green-600 dark:text-green-500 py-2 px-4"
+                          >
+                            Bare Metal Servers
+                            <ChevronDown className={cn("h-3 w-3 transition-transform", dedicatedOpen && "rotate-180")} />
+                          </Button>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="space-y-1 ml-4">
+                          {productCategories[3].items && productCategories[3].items.map((item: any) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              onClick={() => setIsOpen(false)}
+                              className={cn(
+                                "block text-sm py-2 px-4 rounded-md transition-colors hover:bg-accent",
+                                pathname === item.href ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                              )}
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </CollapsibleContent>
+                      </Collapsible>
+
+                      {/* KmerHosting AI - Popular */}
+                      <Collapsible open={aiOpen} onOpenChange={setAiOpen}>
+                        <CollapsibleTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            className="w-full justify-between text-sm font-semibold text-green-600 dark:text-green-500 py-2 px-4"
+                          >
+                            <span className="flex items-center gap-2">
+                              KmerHosting AI
+                              <span className="text-xs bg-orange-500 text-white px-2 py-0.5 rounded-full font-semibold">
+                                Popular
+                              </span>
+                            </span>
+                            <ChevronDown className={cn("h-3 w-3 transition-transform", aiOpen && "rotate-180")} />
+                          </Button>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="space-y-2 ml-4 mt-1">
+                          {/* AI Website Builder */}
+                          <Link
+                            href="/products/ai/website-builder"
+                            onClick={() => setIsOpen(false)}
+                            className={cn(
+                              "block text-sm py-2 px-4 rounded-md transition-colors hover:bg-accent",
+                              pathname === "/products/ai/website-builder" ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                            )}
+                          >
+                            AI Website Builder
+                          </Link>
+
+                          {/* Free Access Plan */}
+                          <Collapsible open={freeAiOpen} onOpenChange={setFreeAiOpen}>
+                            <CollapsibleTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                className="w-full justify-between text-xs font-medium py-1.5 px-3"
+                              >
+                                Free Access Plan
+                                <ChevronDown className={cn("h-3 w-3 transition-transform", freeAiOpen && "rotate-180")} />
+                              </Button>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent className="space-y-1 ml-4">
+                              {productCategories[4].items && productCategories[4].items[1] && 'nested' in productCategories[4].items[1] && productCategories[4].items[1].nested?.[0].items.map((model: any) => (
+                                <Link
+                                  key={model.href}
+                                  href={model.href}
+                                  onClick={() => setIsOpen(false)}
+                                  className={cn(
+                                    "block text-xs py-1.5 px-4 rounded-md transition-colors hover:bg-accent",
+                                    pathname === model.href ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                                  )}
+                                >
+                                  {model.label}
+                                </Link>
+                              ))}
+                            </CollapsibleContent>
+                          </Collapsible>
+
+                          {/* Paid Access */}
+                          <Collapsible open={paidAiOpen} onOpenChange={setPaidAiOpen}>
+                            <CollapsibleTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                className="w-full justify-between text-xs font-medium py-1.5 px-3"
+                              >
+                                Paid Access
+                                <ChevronDown className={cn("h-3 w-3 transition-transform", paidAiOpen && "rotate-180")} />
+                              </Button>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent className="space-y-1 ml-4">
+                              {productCategories[4].items && productCategories[4].items[2] && 'nested' in productCategories[4].items[2] && productCategories[4].items[2].nested?.[0].items.map((model: any) => (
+                                <Link
+                                  key={model.href}
+                                  href={model.href}
+                                  onClick={() => setIsOpen(false)}
+                                  className={cn(
+                                    "block text-xs py-1.5 px-4 rounded-md transition-colors hover:bg-accent",
+                                    pathname === model.href ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                                  )}
+                                >
+                                  {model.label}
+                                </Link>
+                              ))}
+                            </CollapsibleContent>
+                          </Collapsible>
+                        </CollapsibleContent>
+                      </Collapsible>
+
+                      {/* Self-hosted n8n - Popular */}
+                      <Link
+                        href={productCategories[5].href || '/products/n8n'}
+                        onClick={() => setIsOpen(false)}
+                        className={cn(
+                          "flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-500 py-2 px-4 rounded-md transition-colors hover:bg-accent",
+                          pathname === (productCategories[5].href || '/products/n8n') ? "bg-accent" : "",
+                        )}
+                      >
+                        {productCategories[5].label}
+                        <span className="text-xs bg-orange-500 text-white px-2 py-0.5 rounded-full font-semibold">
+                          Popular
+                        </span>
+                      </Link>
+
+                      {/* Other Services */}
+                      <Collapsible open={servicesOpen} onOpenChange={setServicesOpen}>
+                        <CollapsibleTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            className="w-full justify-between text-sm font-semibold text-green-600 dark:text-green-500 py-2 px-4"
+                          >
+                            Other Services
+                            <ChevronDown className={cn("h-3 w-3 transition-transform", servicesOpen && "rotate-180")} />
+                          </Button>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="space-y-2 ml-4 mt-1">
+                          {/* Tools */}
+                          <Collapsible open={toolsOpen} onOpenChange={setToolsOpen}>
+                            <CollapsibleTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                className="w-full justify-between text-xs font-medium py-1.5 px-3"
+                              >
+                                Tools
+                                <ChevronDown className={cn("h-3 w-3 transition-transform", toolsOpen && "rotate-180")} />
+                              </Button>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent className="space-y-1 ml-4">
+                              {productCategories[6].items && productCategories[6].items[0] && 'nested' in productCategories[6].items[0] && productCategories[6].items[0].nested?.[0].items.map((tool: any) => (
+                                <Link
+                                  key={tool.href}
+                                  href={tool.href}
+                                  onClick={() => setIsOpen(false)}
+                                  className={cn(
+                                    "block text-xs py-1.5 px-4 rounded-md transition-colors hover:bg-accent",
+                                    pathname === tool.href ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                                  )}
+                                >
+                                  {tool.label}
+                                </Link>
+                              ))}
+                            </CollapsibleContent>
+                          </Collapsible>
+
+                          {/* Extra Services */}
+                          <Collapsible open={extrasOpen} onOpenChange={setExtrasOpen}>
+                            <CollapsibleTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                className="w-full justify-between text-xs font-medium py-1.5 px-3"
+                              >
+                                Extra Services
+                                <ChevronDown className={cn("h-3 w-3 transition-transform", extrasOpen && "rotate-180")} />
+                              </Button>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent className="space-y-1 ml-4">
+                              {productCategories[6].items && productCategories[6].items[1] && 'nested' in productCategories[6].items[1] && productCategories[6].items[1].nested?.[0].items.map((extra: any) => (
+                                <Link
+                                  key={extra.href}
+                                  href={extra.href}
+                                  onClick={() => setIsOpen(false)}
+                                  className={cn(
+                                    "block text-xs py-1.5 px-4 rounded-md transition-colors hover:bg-accent",
+                                    pathname === extra.href ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                                  )}
+                                >
+                                  {extra.label}
+                                </Link>
+                              ))}
+                            </CollapsibleContent>
+                          </Collapsible>
+                        </CollapsibleContent>
+                      </Collapsible>
+                    </CollapsibleContent>
+                  </Collapsible>
+                  
+                  {navItems.slice(2).map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsOpen(false)}
+                      className={cn(
+                        "text-lg font-medium py-2 px-4 rounded-md transition-colors hover:bg-accent",
+                        pathname === item.href ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                  
+                  <div className="border-t pt-4 space-y-4">
+                    {/* Auth Buttons */}
+                    <div className="px-4 space-y-3">
+                      <Link href="/login" onClick={() => setIsOpen(false)}>
+                        <Button variant="outline" className="w-full">
+                          Login
+                        </Button>
+                      </Link>
+                      <Link href="/signup" onClick={() => setIsOpen(false)}>
+                        <Button className="w-full">
+                          Sign Up
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>

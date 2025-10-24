@@ -25,7 +25,11 @@ const reasons = [
   },
   {
     title: "Developer-Friendly Tools",
-    description: "SSH access, Git integration, WP-CLI, and support for PHP, Node.js, and Python.",
+    description: "SSH access, Git integration, WP-CLI, and support for PHP, Node.js, Ruby and Python.",
+  },
+  {
+    title: "Multiple Database Options",
+    description: "Full support for MySQL/MariaDB, PostgreSQL, and Redis caching for optimal performance.",
   },
 ]
 

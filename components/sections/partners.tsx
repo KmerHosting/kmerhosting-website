@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 export function Partners() {
   const partners = [
     {
@@ -24,6 +26,13 @@ export function Partners() {
       description: "Linux Operating System"
     },
     {
+      name: "cPanel",
+      logo: "/partners/cpanel-logo.svg",
+      alt: "cPanel Control Panel - Industry-standard web hosting control panel",
+      url: "https://www.cpanel.net",
+      description: "Control Panel"
+    },
+    {
       name: "WHMCS",
       logo: "/partners/whmcs.svg",
       alt: "WHMCS Billing Platform - Web hosting billing and automation",
@@ -39,7 +48,7 @@ export function Partners() {
     },
     {
       name: "Cloudflare",
-      logo: "https://www.cloudflare.com/img/logo-cloudflare-dark.svg",
+      logo: "/partners/cloudflare.svg",
       alt: "Cloudflare CDN - Content delivery network and DDoS protection",
       url: "https://www.cloudflare.com",
       description: "CDN & Security"
@@ -68,7 +77,7 @@ export function Partners() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "KmerHosting",
-    "url": "https://kmerhosting.site",
+    "url": "https://kmerhosting.com",
     "partner": partners.map(partner => ({
       "@type": "Organization",
       "name": partner.name,
@@ -135,14 +144,13 @@ export function Partners() {
                     aria-label={`Visit ${partner.name} - ${partner.description}`}
                     title={partner.name}
                   >
-                    <img
+                    <Image
                       src={partner.logo}
                       alt={partner.alt}
-                      width="192"
-                      height="96"
+                      width={192}
+                      height={96}
                       className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100"
                       loading="lazy"
-                      decoding="async"
                     />
                   </a>
                 </article>

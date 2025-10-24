@@ -8,7 +8,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { useLanguage } from "@/components/language-provider"
 import { Search, Check, X, ShoppingCart } from "lucide-react"
 
 interface DomainResult {
@@ -27,9 +26,7 @@ const popularTlds = [
   { ext: ".co", price: "15,000 FCFA" },
 ]
 
-export default function DomainSearchPage() {
-  const { t } = useLanguage()
-  const [searchTerm, setSearchTerm] = useState("")
+export default function DomainSearchPage() {const [searchTerm, setSearchTerm] = useState("")
   const [searchResults, setSearchResults] = useState<DomainResult[]>([])
   const [isSearching, setIsSearching] = useState(false)
   const [hasSearched, setHasSearched] = useState(false)
@@ -73,10 +70,10 @@ export default function DomainSearchPage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
-                {t("domain.search.title")}
+                {"Find Your Perfect Domain"}
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                {t("domain.search.subtitle")}
+                {"Search for available domains"}
               </p>
             </div>
 
@@ -89,7 +86,7 @@ export default function DomainSearchPage() {
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                       <Input
                         type="text"
-                        placeholder={t("domain.search.placeholder")}
+                        placeholder="Enter your domain name"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="pl-10"
@@ -97,7 +94,7 @@ export default function DomainSearchPage() {
                       />
                     </div>
                     <Button type="submit" disabled={isSearching || !searchTerm.trim()}>
-                      {isSearching ? "..." : t("domain.search.button")}
+                      {isSearching ? "..." : "Search"}
                     </Button>
                   </form>
                 </CardContent>
@@ -110,7 +107,7 @@ export default function DomainSearchPage() {
         <section className="pb-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-2xl font-bold mb-4">{t("domain.search.popularExtensions")}</h2>
+              <h2 className="text-2xl font-bold mb-4">Popular Extensions</h2>
               <div className="flex flex-wrap justify-center gap-4">
                 {popularTlds.map((ext) => (
                   <Badge key={ext.ext} variant="outline" className="px-4 py-2 text-sm">
@@ -170,7 +167,7 @@ export default function DomainSearchPage() {
                                   result.available ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
                                 }
                               >
-                                {result.available ? t("domain.search.available") : t("domain.search.unavailable")}
+                                {result.available ? "Available" : "Unavailable"}
                               </Badge>
                             </div>
                             
@@ -183,7 +180,7 @@ export default function DomainSearchPage() {
                                     size="sm"
                                   >
                                     <ShoppingCart className="h-4 w-4 mr-2" />
-                                    {t("domain.search.addToCart")}
+                                    Add to Cart
                                   </Button>
                                 </>
                               )}
@@ -200,7 +197,7 @@ export default function DomainSearchPage() {
                   <div className="mt-12">
                     <Card>
                       <CardHeader>
-                        <CardTitle>{t("domain.search.suggestions")}</CardTitle>
+                        <CardTitle>Alternative Suggestions</CardTitle>
                         <CardDescription>
                           Try these alternative domain names that are available:
                         </CardDescription>
@@ -216,7 +213,7 @@ export default function DomainSearchPage() {
                                 <span className="font-mono">{altDomain}</span>
                                 <div className="flex items-center space-x-2">
                                   <Badge className="bg-green-100 text-green-800">
-                                    {t("domain.search.available")}
+                                    Available
                                   </Badge>
                                   <Button size="sm" variant="outline">
                                     <ShoppingCart className="h-4 w-4 mr-1" />

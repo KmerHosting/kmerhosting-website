@@ -4,6 +4,23 @@ import { CookieBanner } from "@/components/cookie-banner"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Clock, CreditCard, Shield, AlertTriangle } from "lucide-react"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Refund Policy - Money-Back Guarantee | KmerHosting",
+  description: "KmerHosting refund policy. Learn about our 30-day money-back guarantee, refund process, eligibility, and terms for web hosting services.",
+  keywords: ["refund policy", "money back guarantee", "hosting refunds", "30-day guarantee"],
+  openGraph: {
+    title: "Refund Policy - 30-Day Money-Back Guarantee",
+    description: "Our commitment to customer satisfaction with a 30-day money-back guarantee.",
+    url: "https://kmerhosting.com/refunds",
+    siteName: "KmerHosting",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://kmerhosting.com/refunds",
+  },
+}
 
 export default function RefundsPage() {
   return (
@@ -249,7 +266,7 @@ export default function RefundsPage() {
                     <div className="text-center">
                       <h4 className="font-semibold mb-2">Email</h4>
                       <p className="text-sm text-muted-foreground">
-                        hello@kmerhosting.site
+                        support@kmerhosting.com
                       </p>
                     </div>
 

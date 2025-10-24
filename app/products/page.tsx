@@ -1,222 +1,361 @@
-"use client"
-
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CookieBanner } from "@/components/cookie-banner"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Server, Compass as Wordpress, Cloud, Workflow, Brain, ArrowRight, Users } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { 
+  Server, 
+  Cloud, 
+  Users, 
+  Database, 
+  Mail, 
+  Lock, 
+  Globe, 
+  Zap,
+  Bot,
+  Workflow,
+  ArrowRight,
+  Sparkles,
+  CheckCircle2
+} from "lucide-react"
 import Link from "next/link"
-import { useLanguage } from "@/components/language-provider"
+import type { Metadata } from "next"
 
-const webHostingProducts = [
+export const metadata: Metadata = {
+  title: "Our Products - Web Hosting, VPS, AI Services | KmerHosting",
+  description: "Explore KmerHosting's comprehensive range of hosting solutions, from shared hosting to dedicated servers, plus AI-powered tools and premium services.",
+  keywords: "hosting products, VPS hosting, shared hosting, dedicated servers, AI services, reseller hosting, Cameroon",
+}
+
+interface Product {
+  icon: React.ElementType
+  title: string
+  description: string
+  features: string[]
+  href: string
+  badge?: string
+  badgeVariant?: "default" | "secondary" | "destructive" | "outline"
+}
+
+const hostingProducts: Product[] = [
   {
     icon: Server,
-    titleKey: "hosting.shared.title",
-    descriptionKey: "products.shared.longDesc",
+    title: "Shared Hosting",
+    description: "Perfect for websites and blogs with support for WordPress, PHP, Python, Node.js, and Ruby",
     features: [
-      "Free .com domain + SSL certificate",
-      "10+ Professional email accounts",
-      "Support for PHP, Node.js, Python",
-      "User-friendly control panel",
-      "1-click application installer"
+      "cPanel or DirectAdmin",
+      "Free SSL & Domain",
+      "LiteSpeed Web Server",
+      "99.9% Uptime Guarantee"
     ],
-    color: "from-blue-500 to-blue-600",
-    href: "/products/shared",
-  },
-  {
-    icon: Wordpress,
-    titleKey: "hosting.wordpress.title",
-    descriptionKey: "products.wordpress.longDesc",
-    features: [
-      "1-click WordPress installation",
-      "Automatic WordPress updates",
-      "WordPress-optimized caching",
-      "Enhanced security features",
-      "Staging environment"
-    ],
-    color: "from-purple-500 to-purple-600",
-    href: "/products/wordpress",
-  },
-  {
-    icon: Cloud,
-    titleKey: "hosting.vps.title",
-    descriptionKey: "products.vps.longDesc",
-    features: [
-      "Full root/administrator access",
-      "Dedicated CPU & RAM usage limit resources",
-      "SSD NVMe storage",
-      "Choice of operating systems",
-      "DDoS protection included"
-    ],
-    color: "from-orange-500 to-orange-600",
-    href: "/products/vps",
+    href: "/pricing",
+    badge: "Popular",
+    badgeVariant: "default"
   },
   {
     icon: Users,
-    titleKey: "hosting.reseller.title",
-    descriptionKey: "hosting.reseller.description",
+    title: "Reseller Hosting",
+    description: "Start your own hosting business with white-label solutions and WHMCS",
     features: [
-      "DirectAdmin control panel",
-      "White-label branding options",
-      "Free SSL for all clients",
-      "Private nameservers included",
-      "Blesta billing integration"
+      "Free WHMCS License",
+      "White Label Hosting",
+      "cPanel/WHM or DirectAdmin",
+      "Unlimited Client Accounts"
     ],
-    color: "from-green-500 to-green-600",
     href: "/products/reseller",
+    badge: "Most Popular",
+    badgeVariant: "secondary"
+  },
+  {
+    icon: Cloud,
+    title: "Cloud VPS Hosting",
+    description: "Scalable virtual private servers with full root access and your choice of OS",
+    features: [
+      "Full Root Access",
+      "Managed & Unmanaged Options",
+      "DDoS Protection",
+      "99.9% Uptime SLA"
+    ],
+    href: "/products/vps/managed"
+  },
+  {
+    icon: Zap,
+    title: "Dedicated VPS",
+    description: "High-performance dedicated virtual servers for demanding applications",
+    features: [
+      "Dedicated Resources",
+      "Advanced DDoS Protection",
+      "Priority Support",
+      "99.99% Uptime SLA"
+    ],
+    href: "/products/vps/managed"
+  },
+  {
+    icon: Server,
+    title: "Bare Metal Servers",
+    description: "Ultimate performance with dedicated physical servers for your business",
+    features: [
+      "100% Dedicated Hardware",
+      "Enterprise-Grade Performance",
+      "Custom Configurations",
+      "Managed Services Available"
+    ],
+    href: "/products/dedicated-servers/managed"
   },
 ]
 
-const aiProducts = [
+const aiProducts: Product[] = [
+  {
+    icon: Bot,
+    title: "KmerHosting AI",
+    description: "Access cutting-edge AI models including GPT-4, Claude 3, and Gemini",
+    features: [
+      "Free Access to 8 AI Models",
+      "Paid Access to 10+ Premium Models",
+      "GPT-4, Claude 3 Opus, Gemini Pro",
+      "API Access & Unlimited Requests"
+    ],
+    href: "/pricing",
+    badge: "Popular",
+    badgeVariant: "default"
+  },
+  {
+    icon: Sparkles,
+    title: "AI Website Builder",
+    description: "Build stunning websites in minutes with AI-powered design and content generation",
+    features: [
+      "AI-Powered Design",
+      "Instant Content Generation",
+      "Drag & Drop Editor",
+      "Mobile Responsive"
+    ],
+    href: "/signup"
+  },
   {
     icon: Workflow,
-    titleKey: "hosting.n8n.title",
-    descriptionKey: "hosting.n8n.description",
+    title: "Self-hosted n8n",
+    description: "Powerful workflow automation platform hosted on your own infrastructure",
     features: [
-      "Complete n8n installation",
-      "AI workflow automation",
-      "Auto-deployment on your domain",
-      "Pre-configured integrations",
-      "Workflow templates included"
+      "Visual Workflow Editor",
+      "400+ Integrations",
+      "Self-hosted Solution",
+      "Full Control & Privacy"
     ],
-    color: "from-red-500 to-red-600",
-    href: "/products/n8n",
-  },
-  {
-    icon: Brain,
-    titleKey: "hosting.llm.title",
-    descriptionKey: "hosting.llm.description",
-    features: [
-      "Multiple open-source LLMs",
-      "Full API access for integration",
-      "RESTful API endpoints",
-      "Pre-installed infrastructure",
-      "Custom model fine-tuning"
-    ],
-    color: "from-black to-gray-900",
-    href: "/products/llm",
+    href: "/signup",
+    badge: "Popular",
+    badgeVariant: "default"
   },
 ]
 
-export default function ProductsPage() {
-  const { t } = useLanguage()
+const additionalServices: Product[] = [
+  {
+    icon: Lock,
+    title: "SSL Certificates",
+    description: "Secure your website with industry-standard SSL/TLS certificates",
+    features: [
+      "Domain Validation (DV)",
+      "Organization Validation (OV)",
+      "Extended Validation (EV)",
+      "Wildcard SSL Available"
+    ],
+    href: "/products/ssl-certificates"
+  },
+  {
+    icon: Mail,
+    title: "Email Hosting",
+    description: "Professional email hosting with advanced spam protection",
+    features: [
+      "Custom Domain Email",
+      "Advanced Spam Filter",
+      "Webmail Access",
+      "IMAP/POP3/SMTP Support"
+    ],
+    href: "/products/email-hosting"
+  },
+  {
+    icon: Database,
+    title: "Database Hosting",
+    description: "Managed database hosting for MySQL, PostgreSQL, and MariaDB",
+    features: [
+      "MySQL & PostgreSQL",
+      "Automatic Backups",
+      "High Availability",
+      "Performance Optimization"
+    ],
+    href: "/products/database-hosting"
+  },
+  {
+    icon: Globe,
+    title: "Domain Registration",
+    description: "Register your perfect domain name from hundreds of extensions",
+    features: [
+      ".com, .net, .org & More",
+      "Free WHOIS Privacy",
+      "Easy DNS Management",
+      "Competitive Pricing"
+    ],
+    href: "/products/domain-registration"
+  },
+]
 
+function ProductCard({ product }: { product: Product }) {
+  const Icon = product.icon
+  
+  return (
+    <Card className="h-full flex flex-col hover:shadow-lg transition-shadow">
+      <CardHeader>
+        <div className="flex items-start justify-between">
+          <div className="p-3 rounded-lg bg-primary/10 w-fit">
+            <Icon className="h-6 w-6 text-primary" />
+          </div>
+          {product.badge && (
+            <Badge variant={product.badgeVariant || "default"}>
+              {product.badge}
+            </Badge>
+          )}
+        </div>
+        <CardTitle className="text-xl mt-4">{product.title}</CardTitle>
+        <CardDescription className="text-base">{product.description}</CardDescription>
+      </CardHeader>
+      <CardContent className="flex-1 flex flex-col justify-between space-y-4">
+        <ul className="space-y-2">
+          {product.features.map((feature, idx) => (
+            <li key={idx} className="flex items-start gap-2 text-sm">
+              <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+        <Button asChild className="w-full">
+          <Link href={product.href}>Learn More</Link>
+        </Button>
+      </CardContent>
+    </Card>
+  )
+}
+
+export default function ProductsPage() {
   return (
     <>
       <Header />
-      <main>
+      <main className="min-h-screen">
         {/* Hero Section */}
-        <section className="py-20 sm:py-32 bg-gradient-to-b from-background to-muted/30">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6 text-balance">
-                {t("products.hero.title")}
+        <section className="border-b bg-gradient-to-b from-muted/50 to-background">
+          <div className="container py-16 md:py-24">
+            <div className="max-w-3xl mx-auto text-center space-y-6">
+              <Badge variant="outline" className="text-sm px-4 py-1">
+                Complete Hosting Solutions
+              </Badge>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+                Everything You Need to Succeed Online
               </h1>
-              <p className="text-lg text-muted-foreground text-balance mb-8">
-                {t("products.hero.subtitle")}
+              <p className="text-xl text-muted-foreground">
+                From powerful hosting solutions to cutting-edge AI tools, we provide the complete infrastructure for your digital success
               </p>
             </div>
           </div>
         </section>
 
-        {/* Products Tabs */}
-        <section className="py-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <Tabs defaultValue="web-hosting" className="w-full">
-              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12">
-                <TabsTrigger value="web-hosting">{t("products.tabs.webHosting")}</TabsTrigger>
-                <TabsTrigger value="ai">{t("products.tabs.ai")}</TabsTrigger>
-              </TabsList>
-
-              {/* Web Hosting Products */}
-              <TabsContent value="web-hosting">
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {webHostingProducts.map((product, index) => {
-                    const Icon = product.icon
-                    return (
-                      <Card key={index} className="relative overflow-hidden group hover:shadow-lg transition-shadow">
-                        <div className={`h-2 bg-gradient-to-r ${product.color}`}></div>
-                        <CardContent className="p-6">
-                          <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                            <Icon className="h-6 w-6 text-primary" />
-                          </div>
-                          <h3 className="text-xl font-bold mb-2">{t(product.titleKey)}</h3>
-                          <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{t(product.descriptionKey)}</p>
-                          <ul className="space-y-1 mb-6">
-                            {product.features.slice(0, 3).map((feature, idx) => (
-                              <li key={idx} className="flex items-center gap-2 text-sm">
-                                <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0"></div>
-                                <span className="text-muted-foreground">{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                          <Button variant="outline" size="sm" className="w-full" asChild>
-                            <Link href={product.href}>
-                              {t("products.learnMore")}
-                              <ArrowRight className="ml-2 h-3 w-3" />
-                            </Link>
-                          </Button>
-                        </CardContent>
-                      </Card>
-                    )
-                  })}
-                </div>
-              </TabsContent>
-
-              {/* AI Products */}
-              <TabsContent value="ai">
-                <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                  {aiProducts.map((product, index) => {
-                    const Icon = product.icon
-                    return (
-                      <Card key={index} className="relative overflow-hidden group hover:shadow-lg transition-shadow">
-                        <div className={`h-2 bg-gradient-to-r ${product.color}`}></div>
-                        <CardContent className="p-6">
-                          <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                            <Icon className="h-6 w-6 text-primary" />
-                          </div>
-                          <h3 className="text-xl font-bold mb-2">{t(product.titleKey)}</h3>
-                          <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{t(product.descriptionKey)}</p>
-                          <ul className="space-y-1 mb-6">
-                            {product.features.slice(0, 3).map((feature, idx) => (
-                              <li key={idx} className="flex items-center gap-2 text-sm">
-                                <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0"></div>
-                                <span className="text-muted-foreground">{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                          <Button variant="outline" size="sm" className="w-full" asChild>
-                            <Link href={product.href}>
-                              {t("products.learnMore")}
-                              <ArrowRight className="ml-2 h-3 w-3" />
-                            </Link>
-                          </Button>
-                        </CardContent>
-                      </Card>
-                    )
-                  })}
-                </div>
-              </TabsContent>
-            </Tabs>
+        {/* Hosting Services */}
+        <section className="container py-16 md:py-24">
+          <div className="space-y-8">
+            <div className="text-center space-y-4 max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold">Hosting Services</h2>
+              <p className="text-lg text-muted-foreground">
+                Reliable, high-performance hosting solutions for every need
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {hostingProducts.map((product) => (
+                <ProductCard key={product.title} product={product} />
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20 bg-primary text-primary-foreground">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-2xl mx-auto text-center">
-              <h2 className="text-3xl font-bold mb-4">{t("products.cta.title")}</h2>
-              <p className="text-primary-foreground/80 mb-8 text-lg">
-                {t("products.cta.subtitle")}
+        {/* AI Services */}
+        <section className="border-t bg-muted/30">
+          <div className="container py-16 md:py-24">
+            <div className="space-y-8">
+              <div className="text-center space-y-4 max-w-3xl mx-auto">
+                <h2 className="text-3xl md:text-4xl font-bold">AI-Powered Services</h2>
+                <p className="text-lg text-muted-foreground">
+                  Harness the power of artificial intelligence for your projects
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {aiProducts.map((product) => (
+                  <ProductCard key={product.title} product={product} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Additional Services */}
+        <section className="border-t">
+          <div className="container py-16 md:py-24">
+            <div className="space-y-8">
+              <div className="text-center space-y-4 max-w-3xl mx-auto">
+                <h2 className="text-3xl md:text-4xl font-bold">Additional Services</h2>
+                <p className="text-lg text-muted-foreground">
+                  Enhance your hosting with premium add-ons and professional services
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {additionalServices.map((product) => (
+                  <ProductCard key={product.title} product={product} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section - Pricing */}
+        <section className="border-t bg-primary text-primary-foreground">
+          <div className="container py-16 md:py-24">
+            <div className="max-w-3xl mx-auto text-center space-y-6">
+              <h2 className="text-3xl md:text-4xl font-bold">
+                Ready to Get Started?
+              </h2>
+              <p className="text-lg opacity-90">
+                View our transparent pricing and choose the perfect plan for your needs
               </p>
-              <Button variant="secondary" size="lg" asChild>
+              <Button size="lg" variant="secondary" asChild className="text-lg px-8">
                 <Link href="/pricing">
-                  {t("products.cta.button")}
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  View Pricing Plans
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Sales Section */}
+        <section className="border-t bg-muted/50">
+          <div className="container py-16 md:py-24">
+            <div className="max-w-3xl mx-auto text-center space-y-6">
+              <h2 className="text-3xl md:text-4xl font-bold">
+                Can't Find What You're Looking For?
+              </h2>
+              <p className="text-xl text-muted-foreground">
+                Our expert sales team is ready to help you find the perfect solution for your unique requirements
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" asChild>
+                  <Link href="/support">
+                    Contact Sales Team
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/support/live-chat">Start Live Chat</Link>
+                </Button>
+              </div>
+              <p className="text-sm text-muted-foreground pt-4">
+                Available 24/7 to answer your questions and provide expert guidance
+              </p>
             </div>
           </div>
         </section>

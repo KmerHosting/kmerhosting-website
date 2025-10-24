@@ -6,6 +6,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { MessageCircle, Phone } from "lucide-react"
 import Link from "next/link"
+import { StructuredData, createFAQSchema } from "@/components/structured-data"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "FAQ - Frequently Asked Questions | KmerHosting",
+  description: "Find answers to common questions about web hosting, domain registration, email accounts, SSL certificates, backups, and more. Get help with KmerHosting services.",
+  keywords: ["hosting FAQ", "web hosting questions", "hosting help", "KmerHosting support", "hosting answers"],
+  openGraph: {
+    title: "Frequently Asked Questions - KmerHosting",
+    description: "Get answers to common questions about our hosting services, setup, and support.",
+    url: "https://kmerhosting.com/faq",
+    siteName: "KmerHosting",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://kmerhosting.com/faq",
+  },
+}
 
 const faqs = [
   {
@@ -51,8 +69,16 @@ const faqs = [
 ]
 
 export default function FAQPage() {
+  const faqSchema = createFAQSchema(
+    faqs.map(faq => ({
+      question: faq.question,
+      answer: faq.answer
+    }))
+  )
+
   return (
     <>
+      <StructuredData data={faqSchema} />
       <Header />
       <main>
         {/* Hero Section */}
