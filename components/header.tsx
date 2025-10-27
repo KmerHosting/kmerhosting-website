@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Moon, Sun, Menu, ChevronDown, Check } from "lucide-react"
+import { Moon, Sun, Menu, ChevronDown, Check, User, Ticket } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuLabel, DropdownMenuGroup } from "@/components/ui/dropdown-menu"
@@ -410,16 +410,30 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link href="/login">
-              <Button variant="outline" size="sm" className="bg-transparent px-8 py-3">
-                Login
-              </Button>
-            </Link>
-            <Link href="/signup">
-              <Button variant="outline" size="sm" className="bg-transparent px-8 py-3">
-                Sign Up
-              </Button>
-            </Link>
+            {/* User Menu */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="bg-transparent px-4 py-3 gap-2">
+                  <User className="h-4 w-4" />
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuItem asChild>
+                  <Link href="/login" className="cursor-pointer flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    Client Area
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/support" className="cursor-pointer flex items-center gap-2">
+                    <Ticket className="h-4 w-4" />
+                    Submit a Ticket
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Mobile Menu */}
@@ -862,18 +876,23 @@ export function Header() {
                   ))}
                   
                   <div className="border-t pt-4 space-y-4">
-                    {/* Auth Buttons */}
-                    <div className="px-4 space-y-3">
-                      <Link href="/login" onClick={() => setIsOpen(false)}>
-                        <Button variant="outline" className="w-full bg-transparent px-6 py-2">
-                          Login
-                        </Button>
-                      </Link>
-                      <Link href="/signup" onClick={() => setIsOpen(false)}>
-                        <Button variant="outline" className="w-full bg-transparent px-6 py-2">
-                          Sign Up
-                        </Button>
-                      </Link>
+                    {/* User Menu */}
+                    <div className="px-4">
+                      <h4 className="text-sm font-semibold mb-3 text-muted-foreground">Account</h4>
+                      <div className="space-y-2">
+                        <Link href="/login" onClick={() => setIsOpen(false)}>
+                          <Button variant="outline" className="w-full bg-transparent px-6 py-2 justify-start gap-2">
+                            <User className="h-4 w-4" />
+                            Client Area
+                          </Button>
+                        </Link>
+                        <Link href="/support" onClick={() => setIsOpen(false)}>
+                          <Button variant="outline" className="w-full bg-transparent px-6 py-2 justify-start gap-2">
+                            <Ticket className="h-4 w-4" />
+                            Submit a Ticket
+                          </Button>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>

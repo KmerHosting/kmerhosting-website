@@ -168,33 +168,39 @@ export function GlobalInfrastructure() {
           </div>
 
           {/* Features */}
-          <div className="grid sm:grid-cols-3 gap-6 mt-12">
-            <div className="text-center p-6 bg-card border border-border rounded-xl">
-              <div className="w-12 h-12 rounded-full bg-green-500/10 dark:bg-green-400/10 flex items-center justify-center mx-auto mb-4">
-                <Zap className="h-6 w-6 text-green-600 dark:text-green-400" />
+          <div className="grid sm:grid-cols-3 gap-3 mt-8">
+            <div className="flex items-center gap-3 p-4 bg-card/50 border border-border/50 rounded-lg hover:border-green-500/30 transition-colors">
+              <div className="w-10 h-10 rounded-lg bg-green-500/10 dark:bg-green-400/10 flex items-center justify-center flex-shrink-0">
+                <Zap className="h-5 w-5 text-green-600 dark:text-green-400" />
               </div>
-              <h3 className="font-bold mb-2">Ultra-Low Latency</h3>
-              <p className="text-sm text-muted-foreground">
-                Choose the datacenter closest to your audience for lightning-fast performance
-              </p>
+              <div className="min-w-0">
+                <h3 className="font-bold text-sm mb-0.5">Ultra-Low Latency</h3>
+                <p className="text-xs text-muted-foreground">
+                  Lightning-fast performance
+                </p>
+              </div>
             </div>
-            <div className="text-center p-6 bg-card border border-border rounded-xl">
-              <div className="w-12 h-12 rounded-full bg-green-500/10 dark:bg-green-400/10 flex items-center justify-center mx-auto mb-4">
-                <Server className="h-6 w-6 text-green-600 dark:text-green-400" />
+            <div className="flex items-center gap-3 p-4 bg-card/50 border border-border/50 rounded-lg hover:border-green-500/30 transition-colors">
+              <div className="w-10 h-10 rounded-lg bg-green-500/10 dark:bg-green-400/10 flex items-center justify-center flex-shrink-0">
+                <Server className="h-5 w-5 text-green-600 dark:text-green-400" />
               </div>
-              <h3 className="font-bold mb-2">99.9% Uptime SLA</h3>
-              <p className="text-sm text-muted-foreground">
-                Enterprise-grade infrastructure with redundant systems and 24/7 monitoring
-              </p>
+              <div className="min-w-0">
+                <h3 className="font-bold text-sm mb-0.5">99.9% Uptime SLA</h3>
+                <p className="text-xs text-muted-foreground">
+                  Enterprise-grade reliability
+                </p>
+              </div>
             </div>
-            <div className="text-center p-6 bg-card border border-border rounded-xl">
-              <div className="w-12 h-12 rounded-full bg-green-500/10 dark:bg-green-400/10 flex items-center justify-center mx-auto mb-4">
-                <MapPin className="h-6 w-6 text-green-600 dark:text-green-400" />
+            <div className="flex items-center gap-3 p-4 bg-card/50 border border-border/50 rounded-lg hover:border-green-500/30 transition-colors">
+              <div className="w-10 h-10 rounded-lg bg-green-500/10 dark:bg-green-400/10 flex items-center justify-center flex-shrink-0">
+                <MapPin className="h-5 w-5 text-green-600 dark:text-green-400" />
               </div>
-              <h3 className="font-bold mb-2">Global CDN</h3>
-              <p className="text-sm text-muted-foreground">
-                Automatic content distribution across our worldwide network for optimal speed
-              </p>
+              <div className="min-w-0">
+                <h3 className="font-bold text-sm mb-0.5">Global CDN</h3>
+                <p className="text-xs text-muted-foreground">
+                  Worldwide network
+                </p>
+              </div>
             </div>
           </div>
         </div>

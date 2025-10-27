@@ -6,6 +6,7 @@ import { GlobalInfrastructure } from "@/components/sections/global-infrastructur
 import { ExpertHelp } from "@/components/sections/expert-help"
 import { Features } from "@/components/sections/features"
 import { Partners } from "@/components/sections/partners"
+import { PopularPlans } from "@/components/sections/popular-plans"
 import { WhyChooseUs } from "@/components/sections/why-choose-us"
 import { Testimonials } from "@/components/sections/testimonials"
 import { CTA } from "@/components/sections/cta"
@@ -70,6 +71,7 @@ export default function HomePage() {
         <Features />
         <ExpertHelp />
         <Partners />
+        <PopularPlans />
         <WhyChooseUs />
         <Testimonials />
         <CTA />
