@@ -36,7 +36,7 @@ const billingDiscounts: Record<BillingPeriod, { discount: number; label: string;
 const nodejsPlans: PricingPlan[] = [
   {
     name: "Node.js Starter",
-    basePrice: 1500,
+    basePrice: 1175,
     description: "Perfect for Node.js applications",
     features: ["1 Node.js App", "10 GB SSD Storage", "Node.js 18/20/21", "Free SSL Certificate"],
     allFeatures: [
@@ -47,7 +47,7 @@ const nodejsPlans: PricingPlan[] = [
   },
   {
     name: "Node.js Plus",
-    basePrice: 3000,
+    basePrice: 1250,
     description: "Great for growing Node.js apps",
     badge: "Popular",
     color: "blue",
@@ -60,7 +60,7 @@ const nodejsPlans: PricingPlan[] = [
   },
   {
     name: "Node.js Pro",
-    basePrice: 6000,
+    basePrice: 2100,
     description: "For production Node.js apps",
     badge: "Best Value",
     color: "purple",
@@ -78,7 +78,7 @@ const nodejsPlans: PricingPlan[] = [
 const phpPlans: PricingPlan[] = [
   {
     name: "PHP Starter",
-    basePrice: 1200,
+    basePrice: 1175,
     description: "Perfect for PHP websites",
     features: ["1 Website", "10 GB SSD Storage", "PHP 7.4/8.0/8.1/8.2", "Free SSL Certificate"],
     allFeatures: [
@@ -89,7 +89,7 @@ const phpPlans: PricingPlan[] = [
   },
   {
     name: "PHP Plus",
-    basePrice: 2500,
+    basePrice: 1250,
     description: "Great for PHP applications",
     badge: "Popular",
     color: "blue",
@@ -103,7 +103,7 @@ const phpPlans: PricingPlan[] = [
   },
   {
     name: "PHP Pro",
-    basePrice: 5000,
+    basePrice: 2100,
     description: "For high-traffic PHP sites",
     badge: "Best Value",
     color: "purple",
@@ -121,7 +121,7 @@ const phpPlans: PricingPlan[] = [
 const wordpressPlans: PricingPlan[] = [
   {
     name: "WordPress Starter",
-    basePrice: 1800,
+    basePrice: 1175,
     description: "Perfect for WordPress blogs",
     features: ["1 WordPress Site", "10 GB SSD Storage", "WordPress Optimized", "Free SSL Certificate"],
     allFeatures: [
@@ -133,7 +133,7 @@ const wordpressPlans: PricingPlan[] = [
   },
   {
     name: "WordPress Plus",
-    basePrice: 3500,
+    basePrice: 1250,
     description: "Great for WordPress businesses",
     badge: "Popular",
     color: "blue",
@@ -147,7 +147,7 @@ const wordpressPlans: PricingPlan[] = [
   },
   {
     name: "WordPress Pro",
-    basePrice: 7000,
+    basePrice: 2100,
     description: "For WordPress agencies",
     badge: "Best Value",
     color: "purple",
@@ -165,7 +165,7 @@ const wordpressPlans: PricingPlan[] = [
 const woocommercePlans: PricingPlan[] = [
   {
     name: "WooCommerce Starter",
-    basePrice: 2500,
+    basePrice: 1175,
     description: "Perfect for new online stores",
     features: ["1 WooCommerce Store", "20 GB SSD Storage", "WooCommerce Optimized", "Free SSL Certificate"],
     allFeatures: [
@@ -177,7 +177,7 @@ const woocommercePlans: PricingPlan[] = [
   },
   {
     name: "WooCommerce Plus",
-    basePrice: 5000,
+    basePrice: 1250,
     description: "Great for growing stores",
     badge: "Popular",
     color: "blue",
@@ -191,7 +191,7 @@ const woocommercePlans: PricingPlan[] = [
   },
   {
     name: "WooCommerce Pro",
-    basePrice: 10000,
+    basePrice: 2100,
     description: "For high-volume stores",
     badge: "Best Value",
     color: "purple",
@@ -209,7 +209,7 @@ const woocommercePlans: PricingPlan[] = [
 const ecommercePlans: PricingPlan[] = [
   {
     name: "E-Commerce Starter",
-    basePrice: 2800,
+    basePrice: 1175,
     description: "Perfect for any e-commerce platform",
     features: ["1 Store", "25 GB SSD Storage", "Magento/PrestaShop/OpenCart", "Free SSL Certificate"],
     allFeatures: [
@@ -221,7 +221,7 @@ const ecommercePlans: PricingPlan[] = [
   },
   {
     name: "E-Commerce Plus",
-    basePrice: 5500,
+    basePrice: 1250,
     description: "Great for growing e-commerce",
     badge: "Popular",
     color: "blue",
@@ -235,7 +235,7 @@ const ecommercePlans: PricingPlan[] = [
   },
   {
     name: "E-Commerce Pro",
-    basePrice: 11000,
+    basePrice: 2100,
     description: "For enterprise e-commerce",
     badge: "Best Value",
     color: "purple",
@@ -253,7 +253,7 @@ const ecommercePlans: PricingPlan[] = [
 const pythonPlans: PricingPlan[] = [
   {
     name: "Python Starter",
-    basePrice: 1800,
+    basePrice: 1175,
     description: "Perfect for Python applications",
     features: ["1 Python App", "15 GB SSD Storage", "Python 3.9/3.10/3.11/3.12", "Free SSL Certificate"],
     allFeatures: [
@@ -265,7 +265,7 @@ const pythonPlans: PricingPlan[] = [
   },
   {
     name: "Python Plus",
-    basePrice: 3500,
+    basePrice: 1250,
     description: "Great for Python projects",
     badge: "Popular",
     color: "blue",
@@ -279,7 +279,7 @@ const pythonPlans: PricingPlan[] = [
   },
   {
     name: "Python Pro",
-    basePrice: 7000,
+    basePrice: 2100,
     description: "For production Python apps",
     badge: "Best Value",
     color: "purple",
@@ -297,7 +297,7 @@ const pythonPlans: PricingPlan[] = [
 const rubyPlans: PricingPlan[] = [
   {
     name: "Ruby Starter",
-    basePrice: 1800,
+    basePrice: 1175,
     description: "Perfect for Ruby applications",
     features: ["1 Ruby App", "15 GB SSD Storage", "Ruby 2.7/3.0/3.1/3.2", "Free SSL Certificate"],
     allFeatures: [
@@ -309,7 +309,7 @@ const rubyPlans: PricingPlan[] = [
   },
   {
     name: "Ruby Plus",
-    basePrice: 3500,
+    basePrice: 1250,
     description: "Great for Ruby on Rails",
     badge: "Popular",
     color: "blue",
@@ -323,7 +323,7 @@ const rubyPlans: PricingPlan[] = [
   },
   {
     name: "Ruby Pro",
-    basePrice: 7000,
+    basePrice: 2100,
     description: "For production Ruby apps",
     badge: "Best Value",
     color: "purple",
