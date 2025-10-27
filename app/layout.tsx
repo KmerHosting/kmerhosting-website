@@ -80,7 +80,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={`${inter.variable} ${geistMono.variable} font-sans antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="default" enableSystem disableTransitionOnChange themes={['light', 'dark', 'default']}>
           {children}
         </ThemeProvider>
         <Toaster />

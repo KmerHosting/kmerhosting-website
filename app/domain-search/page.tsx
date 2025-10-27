@@ -153,7 +153,7 @@ export default function DomainSearchPage() {const [searchTerm, setSearchTerm] = 
                             <div className="flex items-center space-x-4">
                               <div className="flex items-center space-x-2">
                                 {result.available ? (
-                                  <Check className="h-5 w-5 text-green-600" />
+                                  <Check className="h-5 w-5 text-green-500" />
                                 ) : (
                                   <X className="h-5 w-5 text-red-600" />
                                 )}
@@ -164,7 +164,7 @@ export default function DomainSearchPage() {const [searchTerm, setSearchTerm] = 
                               <Badge
                                 variant={result.available ? "default" : "secondary"}
                                 className={
-                                  result.available ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+                                  result.available ? "bg-green-100 text-green-500" : "bg-red-100 text-red-800"
                                 }
                               >
                                 {result.available ? "Available" : "Unavailable"}
@@ -212,7 +212,7 @@ export default function DomainSearchPage() {const [searchTerm, setSearchTerm] = 
                               <div key={i} className="flex items-center justify-between p-3 border rounded-lg">
                                 <span className="font-mono">{altDomain}</span>
                                 <div className="flex items-center space-x-2">
-                                  <Badge className="bg-green-100 text-green-800">
+                                  <Badge className="bg-green-100 text-green-500">
                                     Available
                                   </Badge>
                                   <Button size="sm" variant="outline">

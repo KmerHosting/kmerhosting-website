@@ -56,7 +56,7 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
                   className="bg-primary-foreground text-foreground w-full md:w-64"
                   required
                 />
-                <Button type="submit" variant="secondary">
+                <Button type="submit" variant="outline" className="bg-transparent px-6 py-2">
                   {"Subscribe"}
                 </Button>
               </form>
@@ -210,13 +210,23 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
                   </Link>
                 </li>
                 <li>
+                  <Link href="/docs" className="hover:text-accent transition-colors">
+                    {"Documentation"}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/knowledgebase" className="hover:text-accent transition-colors">
+                    {"Knowledge Base"}
+                  </Link>
+                </li>
+                <li>
                   <Link href="/blog" className="hover:text-accent transition-colors">
                     {"Blog"}
                   </Link>
                 </li>
                 <li>
                   <Link href="/forum" className="hover:text-accent transition-colors">
-                    {"Forum"}
+                    {"Community"}
                   </Link>
                 </li>
                 <li>
@@ -263,8 +273,8 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
-                  <a href="mailto:support@kmerhosting.com" className="hover:text-accent transition-colors">
-                    support@kmerhosting.com
+                  <a href="mailto:sales@kmerhosting.com" className="hover:text-accent transition-colors">
+                    sales@kmerhosting.com
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
@@ -350,7 +360,7 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
               {/* Status Indicator */}
               <div className="flex items-center gap-2 text-sm">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-green-600 dark:text-green-400 font-medium">
+                <span className="text-green-500 dark:text-green-500 font-medium">
                   {"Service status"}
                 </span>
               </div>

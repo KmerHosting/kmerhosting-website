@@ -125,7 +125,7 @@ export default function PrivacyPage() {
                   <li>Withdraw consent for marketing communications</li>
                 </ul>
                 <p className="text-muted-foreground leading-relaxed mt-4">
-                  To exercise these rights, please contact us at support@kmerhosting.com.
+                  To exercise these rights, please contact us at sales@kmerhosting.com.
                 </p>
               </section>
 
@@ -180,7 +180,7 @@ export default function PrivacyPage() {
                 </p>
                 <div className="mt-4 p-4 bg-muted/30 rounded-lg">
                   <p className="text-muted-foreground">
-                    <strong>Email:</strong> support@kmerhosting.com
+                    <strong>Email:</strong> sales@kmerhosting.com
                   </p>
                   <p className="text-muted-foreground mt-2">
                     <strong>Phone:</strong> +237 6 94 19 34 93

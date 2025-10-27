@@ -95,18 +95,18 @@ export function Partners() {
       />
 
       <section 
-        className="py-16 bg-gradient-to-b from-muted/50 to-background overflow-hidden"
+        className="py-16 bg-black text-white overflow-hidden"
         aria-labelledby="partners-heading"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <header className="text-center mb-12">
             <h2 
               id="partners-heading"
-              className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
+              className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-white"
             >
               Our Technology Partners
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
               Powered by industry-leading technologies to deliver exceptional hosting services
             </p>
           </header>
@@ -140,7 +140,7 @@ export function Partners() {
                     href={partner.url}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="flex items-center justify-center h-full p-6 rounded-lg border border-border/50 hover:border-border transition-colors bg-[#06a467] dark:bg-card"
+                    className="flex items-center justify-center h-full p-6 rounded-lg border border-gray-800 hover:border-gray-700 transition-colors bg-black"
                     aria-label={`Visit ${partner.name} - ${partner.description}`}
                     title={partner.name}
                   >
@@ -159,7 +159,7 @@ export function Partners() {
           </div>
 
           <footer className="mt-12 text-center">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-gray-400">
               Trusted partnerships delivering cutting-edge performance, security, and reliability
             </p>
           </footer>

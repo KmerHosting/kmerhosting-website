@@ -60,11 +60,11 @@ export default function ResellerHostingPage() {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="py-20 sm:py-32 bg-gradient-to-br from-green-500/10 via-green-600/5 to-green-500/10">
+        <section className="py-20 sm:py-32 bg-gradient-to-br from-green-500/10 via-green-500/5 to-green-500/10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <div className="w-20 h-20 rounded-2xl bg-green-500/10 flex items-center justify-center mx-auto mb-8">
-                <Users className="h-10 w-10 text-green-600" />
+                <Users className="h-10 w-10 text-green-500" />
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
                 Reseller Hosting
@@ -109,7 +109,7 @@ export default function ResellerHostingPage() {
                   <Card key={index} className="hover:shadow-lg transition-all duration-300">
                     <CardHeader>
                       <div className="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center mb-4">
-                        <Icon className="h-6 w-6 text-green-600" />
+                        <Icon className="h-6 w-6 text-green-500" />
                       </div>
                       <CardTitle className="text-xl">{feature.title}</CardTitle>
                       <CardDescription className="text-base">{feature.description}</CardDescription>
@@ -137,7 +137,7 @@ export default function ResellerHostingPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {benefits.map((benefit, index) => (
                   <div key={index} className="flex items-start">
-                    <CheckCircle2 className="h-6 w-6 text-green-600 mr-3 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-6 w-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
                     <span className="text-base">{benefit}</span>
                   </div>
                 ))}
@@ -149,7 +149,7 @@ export default function ResellerHostingPage() {
         {/* CTA Section */}
         <section className="py-20 sm:py-32">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <Card className="bg-gradient-to-br from-green-500/10 via-green-600/5 to-green-500/10 border-green-500/20">
+            <Card className="bg-gradient-to-br from-green-500/10 via-green-500/5 to-green-500/10 border-green-500/20">
               <CardContent className="p-12 text-center">
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
                   Ready to Start Your Hosting Business?

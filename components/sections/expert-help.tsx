@@ -26,14 +26,14 @@ export function ExpertHelp() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link href="/support/live-chat">
-              <Button size="lg" className="min-w-[200px]">
+              <Button variant="outline" size="lg" className="min-w-[200px] bg-transparent px-8 py-6">
                 <MessageCircle className="h-5 w-5 mr-2" />
                 {"Live Chat"}
               </Button>
             </Link>
 
             <Link href="/support">
-              <Button variant="outline" size="lg" className="min-w-[200px]">
+              <Button variant="outline" size="lg" className="min-w-[200px] bg-transparent px-8 py-6">
                 <Ticket className="h-5 w-5 mr-2" />
                 {"Open Ticket"}
               </Button>

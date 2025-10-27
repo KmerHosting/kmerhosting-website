@@ -70,13 +70,13 @@ export default function SupportPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="grid md:grid-cols-2 gap-4">
-                    <Button size="lg" className="w-full" asChild>
+                    <Button size="lg" variant="outline" className="w-full bg-transparent px-6 py-6" asChild>
                       <Link href="/support/live-chat">
                         <MessageCircle className="mr-2 h-5 w-5" />
                         Live chat
                       </Link>
                     </Button>
-                    <Button size="lg" variant="outline" className="w-full bg-transparent" asChild>
+                    <Button size="lg" variant="outline" className="w-full bg-transparent px-6 py-6" asChild>
                       <Link href="/support">
                         <Ticket className="mr-2 h-5 w-5" />
                         Open Support Ticket

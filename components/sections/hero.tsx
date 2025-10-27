@@ -7,7 +7,7 @@ import Link from "next/link"
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/30 py-20 sm:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/50 py-20 sm:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           {/* Badge */}
@@ -22,7 +22,7 @@ export function Hero() {
 
           {/* Subtitle */}
           <p className="text-lg sm:text-xl text-muted-foreground text-balance mb-8 max-w-2xl mx-auto">
-            Fast, reliable, and secure hosting with 99.9% uptime guarantee. Get started in minutes with our automated setup.
+            Fast, reliable, and secure hosting with 99.9% uptime guarantee powered by LiteSpeed and CloudLinux OS. DirectAdmin and cPanel
           </p>
 
           {/* CTA Button */}
@@ -33,13 +33,13 @@ export function Hero() {
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>
-          </div>
+          </div>  
 
           {/* Key Features List */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
-            {["Free .com Domain", "Free SSL Certificate", "10+ Pro Email Addresses"].map((feature, index) => (
+            {["Free .com Domain", "Free SSL Certificate", "SSH Access", "Git Access", "PostgreSQL/MySQL/MariaDB/Redis", "10+ Free Pro Email Addresses"].map((feature, index) => (
               <div key={index} className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                <Check className="h-4 w-4 text-green-600 dark:text-green-500 flex-shrink-0" />
+                <Check className="h-4 w-4 text-green-500 dark:text-green-500 flex-shrink-0" />
                 <span>{feature}</span>
               </div>
             ))}
@@ -47,8 +47,8 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Decorative gradient blur */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Decorative gradient blur - more visible in light mode */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 dark:bg-primary/5 rounded-full blur-3xl pointer-events-none" />
     </section>
   )
 }

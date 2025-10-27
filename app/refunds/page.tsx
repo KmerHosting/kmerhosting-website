@@ -266,7 +266,7 @@ export default function RefundsPage() {
                     <div className="text-center">
                       <h4 className="font-semibold mb-2">Email</h4>
                       <p className="text-sm text-muted-foreground">
-                        support@kmerhosting.com
+                        sales@kmerhosting.com
                       </p>
                     </div>
 

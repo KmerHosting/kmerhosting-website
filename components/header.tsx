@@ -217,30 +217,29 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-14 items-center justify-between">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center">
+          <Link href="/" className="flex items-center">
+            <div className="h-10 w-10 flex items-center justify-center">
               <Image 
                 src="/kmerhosting-logo.svg" 
                 alt="KmerHosting Logo" 
-                width={24}
-                height={24}
+                width={32}
+                height={32}
                 className="object-contain"
                 priority
               />
             </div>
-            <span className="font-bold text-lg text-foreground">KmerHosting</span>
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="hidden md:flex items-center space-x-2">
             {navItems.slice(0, 2).map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "px-3 py-2 text-sm font-medium transition-colors hover:text-accent",
+                  "px-5 py-3 text-sm font-medium transition-colors hover:text-accent",
                   pathname === item.href ? "text-foreground" : "text-muted-foreground",
                 )}
               >
@@ -254,7 +253,7 @@ export function Header() {
                 <Button 
                   variant="ghost" 
                   className={cn(
-                    "px-3 py-2 text-sm font-medium transition-colors hover:text-accent",
+                    "px-5 py-3 text-sm font-medium transition-colors hover:text-accent",
                     pathname.startsWith('/products') ? "text-foreground" : "text-muted-foreground",
                   )}
                 >
@@ -269,7 +268,7 @@ export function Header() {
                       // Single link category (like Self-hosted n8n)
                       <>
                         <DropdownMenuItem asChild>
-                          <Link href={category.href} className="cursor-pointer text-green-600 dark:text-green-500 font-bold flex items-center gap-2">
+                          <Link href={category.href} className="cursor-pointer text-green-500 dark:text-green-500 font-bold flex items-center gap-2">
                             {category.label}
                             {category.popular && (
                               <span className="text-xs bg-orange-500 text-white px-2 py-0.5 rounded-full font-semibold">
@@ -292,7 +291,7 @@ export function Header() {
                           }
                         }}
                       >
-                        <CollapsibleTrigger className="flex items-center justify-between w-full px-2 py-1.5 text-sm font-bold text-green-600 dark:text-green-500 hover:bg-accent rounded-sm">
+                        <CollapsibleTrigger className="flex items-center justify-between w-full px-2 py-1.5 text-sm font-bold text-green-500 dark:text-green-500 hover:bg-accent rounded-sm">
                           <span className="flex items-center gap-2">
                             {category.label}
                             {category.popular && (
@@ -372,7 +371,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "px-3 py-2 text-sm font-medium transition-colors hover:text-accent",
+                  "px-5 py-3 text-sm font-medium transition-colors hover:text-accent",
                   pathname === item.href ? "text-foreground" : "text-muted-foreground",
                 )}
               >
@@ -395,17 +394,17 @@ export function Header() {
               <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>System</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("default")}>Default</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
             <Link href="/login">
-              <Button variant="ghost" size="sm">
+              <Button variant="outline" size="sm" className="bg-transparent px-8 py-3">
                 Login
               </Button>
             </Link>
             <Link href="/signup">
-              <Button size="sm">
+              <Button variant="outline" size="sm" className="bg-transparent px-8 py-3">
                 Sign Up
               </Button>
             </Link>
@@ -476,7 +475,7 @@ export function Header() {
                         <CollapsibleTrigger asChild>
                           <Button
                             variant="ghost"
-                            className="w-full justify-between text-sm font-semibold text-green-600 dark:text-green-500 py-2 px-4"
+                            className="w-full justify-between text-sm font-semibold text-green-500 dark:text-green-500 py-2 px-4"
                           >
                             <span className="flex items-center gap-2">
                               Hosting Services
@@ -570,7 +569,7 @@ export function Header() {
                         <CollapsibleTrigger asChild>
                           <Button
                             variant="ghost"
-                            className="w-full justify-between text-sm font-semibold text-green-600 dark:text-green-500 py-2 px-4"
+                            className="w-full justify-between text-sm font-semibold text-green-500 dark:text-green-500 py-2 px-4"
                           >
                             Cloud VPS Hosting
                             <ChevronDown className={cn("h-3 w-3 transition-transform", vpsOpen && "rotate-180")} />
@@ -598,7 +597,7 @@ export function Header() {
                         <CollapsibleTrigger asChild>
                           <Button
                             variant="ghost"
-                            className="w-full justify-between text-sm font-semibold text-green-600 dark:text-green-500 py-2 px-4"
+                            className="w-full justify-between text-sm font-semibold text-green-500 dark:text-green-500 py-2 px-4"
                           >
                             Dedicated VPS
                             <ChevronDown className={cn("h-3 w-3 transition-transform", dedicatedVpsOpen && "rotate-180")} />
@@ -626,7 +625,7 @@ export function Header() {
                         <CollapsibleTrigger asChild>
                           <Button
                             variant="ghost"
-                            className="w-full justify-between text-sm font-semibold text-green-600 dark:text-green-500 py-2 px-4"
+                            className="w-full justify-between text-sm font-semibold text-green-500 dark:text-green-500 py-2 px-4"
                           >
                             Bare Metal Servers
                             <ChevronDown className={cn("h-3 w-3 transition-transform", dedicatedOpen && "rotate-180")} />
@@ -654,7 +653,7 @@ export function Header() {
                         <CollapsibleTrigger asChild>
                           <Button
                             variant="ghost"
-                            className="w-full justify-between text-sm font-semibold text-green-600 dark:text-green-500 py-2 px-4"
+                            className="w-full justify-between text-sm font-semibold text-green-500 dark:text-green-500 py-2 px-4"
                           >
                             <span className="flex items-center gap-2">
                               KmerHosting AI
@@ -741,7 +740,7 @@ export function Header() {
                         href={productCategories[5].href || '/products/n8n'}
                         onClick={() => setIsOpen(false)}
                         className={cn(
-                          "flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-500 py-2 px-4 rounded-md transition-colors hover:bg-accent",
+                          "flex items-center gap-2 text-sm font-semibold text-green-500 dark:text-green-500 py-2 px-4 rounded-md transition-colors hover:bg-accent",
                           pathname === (productCategories[5].href || '/products/n8n') ? "bg-accent" : "",
                         )}
                       >
@@ -756,7 +755,7 @@ export function Header() {
                         <CollapsibleTrigger asChild>
                           <Button
                             variant="ghost"
-                            className="w-full justify-between text-sm font-semibold text-green-600 dark:text-green-500 py-2 px-4"
+                            className="w-full justify-between text-sm font-semibold text-green-500 dark:text-green-500 py-2 px-4"
                           >
                             Other Services
                             <ChevronDown className={cn("h-3 w-3 transition-transform", servicesOpen && "rotate-180")} />
@@ -841,12 +840,12 @@ export function Header() {
                     {/* Auth Buttons */}
                     <div className="px-4 space-y-3">
                       <Link href="/login" onClick={() => setIsOpen(false)}>
-                        <Button variant="outline" className="w-full">
+                        <Button variant="outline" className="w-full bg-transparent px-6 py-2">
                           Login
                         </Button>
                       </Link>
                       <Link href="/signup" onClick={() => setIsOpen(false)}>
-                        <Button className="w-full">
+                        <Button variant="outline" className="w-full bg-transparent px-6 py-2">
                           Sign Up
                         </Button>
                       </Link>

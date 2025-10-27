@@ -13,7 +13,7 @@ export function HostingTypes() {
       features: [
         "Free .com Domain",
         "Free SSL Certificate",
-        "10+ Pro Email Addresses",
+        "10+ Free Pro Email Addresses",
         "Unlimited Bandwidth",
         "Unlimited Websites",
         "Daily Backups",
@@ -29,7 +29,7 @@ export function HostingTypes() {
       features: [
         "Free .com Domain",
         "Free SSL Certificate",
-        "10+ Pro Email Addresses",
+        "10+ Free Pro Email Addresses",
         "WordPress auto-updates",
         "Enhanced security",
         "1-click WordPress installer"
@@ -67,7 +67,7 @@ export function HostingTypes() {
         "4 reseller packages"
       ],
       link: "/products/reseller",
-      color: "from-green-500 to-green-600"
+      color: "from-green-500 to-green-500"
     },
     {
       icon: Workflow,

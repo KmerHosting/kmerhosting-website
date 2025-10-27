@@ -1092,7 +1092,7 @@ export default function PricingPage() {
                         <span className="text-xl font-semibold">cPanel Shared Hosting</span>
                         <Badge>Popular</Badge>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                      <div className="flex items-center gap-2 text-sm text-green-500 dark:text-green-500 font-medium">
                         <ChevronDown className="h-4 w-4" />
                         <span>Click here to show more plans</span>
                       </div>
@@ -1178,7 +1178,7 @@ export default function PricingPage() {
                       <div className="flex items-center gap-2">
                         <span className="text-xl font-semibold">DirectAdmin Shared Hosting</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                      <div className="flex items-center gap-2 text-sm text-green-500 dark:text-green-500 font-medium">
                         <ChevronDown className="h-4 w-4" />
                         <span>Click here to show more plans</span>
                       </div>
@@ -1267,7 +1267,7 @@ export default function PricingPage() {
                         <span className="text-xl font-semibold">cPanel Reseller Hosting</span>
                         <Badge variant="secondary">Most Popular</Badge>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                      <div className="flex items-center gap-2 text-sm text-green-500 dark:text-green-500 font-medium">
                         <ChevronDown className="h-4 w-4" />
                         <span>Click here to show more plans</span>
                       </div>
@@ -1313,7 +1313,7 @@ export default function PricingPage() {
                       <div className="flex items-center gap-2">
                         <span className="text-xl font-semibold">DirectAdmin Reseller Hosting</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                      <div className="flex items-center gap-2 text-sm text-green-500 dark:text-green-500 font-medium">
                         <ChevronDown className="h-4 w-4" />
                         <span>Click here to show more plans</span>
                       </div>
@@ -1359,7 +1359,7 @@ export default function PricingPage() {
                       <div className="flex items-center gap-2">
                         <span className="text-xl font-semibold">Cloud VPS Reseller</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                      <div className="flex items-center gap-2 text-sm text-green-500 dark:text-green-500 font-medium">
                         <ChevronDown className="h-4 w-4" />
                         <span>Click here to show more plans</span>
                       </div>
@@ -1420,7 +1420,7 @@ export default function PricingPage() {
                   <AccordionTrigger className="hover:no-underline">
                     <div className="flex flex-col items-start gap-2 w-full">
                       <span className="text-xl font-semibold">Cloud VPS Hosting</span>
-                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                      <div className="flex items-center gap-2 text-sm text-green-500 dark:text-green-500 font-medium">
                         <ChevronDown className="h-4 w-4" />
                         <span>Click here to show more plans</span>
                       </div>
@@ -1470,7 +1470,7 @@ export default function PricingPage() {
                   <AccordionTrigger className="hover:no-underline">
                     <div className="flex flex-col items-start gap-2 w-full">
                       <span className="text-xl font-semibold">Dedicated VPS</span>
-                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                      <div className="flex items-center gap-2 text-sm text-green-500 dark:text-green-500 font-medium">
                         <ChevronDown className="h-4 w-4" />
                         <span>Click here to show more plans</span>
                       </div>
@@ -1583,7 +1583,7 @@ export default function PricingPage() {
                         <span className="text-xl font-semibold">KmerHosting AI - Model Access</span>
                         <Badge>Popular</Badge>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                      <div className="flex items-center gap-2 text-sm text-green-500 dark:text-green-500 font-medium">
                         <ChevronDown className="h-4 w-4" />
                         <span>Click here to show more plans</span>
                       </div>
@@ -1615,7 +1615,7 @@ export default function PricingPage() {
                   <AccordionTrigger className="hover:no-underline">
                     <div className="flex flex-col items-start gap-2 w-full">
                       <span className="text-xl font-semibold">AI Website Builder</span>
-                      <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-medium">
+                      <div className="flex items-center gap-2 text-sm text-green-500 dark:text-green-500 font-medium">
                         <ChevronDown className="h-4 w-4" />
                         <span>Click here to show more plans</span>
                       </div>

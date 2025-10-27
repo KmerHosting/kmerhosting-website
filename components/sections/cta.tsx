@@ -52,7 +52,8 @@ export function CTA() {// Structured data for SEO
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button 
                 size="lg" 
-                className="text-base font-semibold px-8 group w-full sm:w-auto" 
+                variant="outline"
+                className="text-base font-semibold bg-transparent px-8 py-6 group w-full sm:w-auto sm:min-w-[250px]" 
                 asChild
               >
                 <Link href="/pricing" title="View KmerHosting pricing plans">
@@ -63,7 +64,7 @@ export function CTA() {// Structured data for SEO
               <Button
                 size="lg"
                 variant="outline"
-                className="text-base font-semibold px-8 w-full sm:w-auto"
+                className="text-base font-semibold bg-transparent px-8 py-6 w-full sm:w-auto sm:min-w-[250px]"
                 asChild
               >
                 <Link href="/support" title="Contact KmerHosting sales team">

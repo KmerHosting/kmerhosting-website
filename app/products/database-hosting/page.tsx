@@ -188,7 +188,7 @@ export default function DatabaseHostingPage() {
                     <ul className="space-y-2">
                       {plan.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-start gap-2">
-                          <Check className="h-5 w-5 text-green-600 dark:text-green-500 flex-shrink-0 mt-0.5" />
+                          <Check className="h-5 w-5 text-green-500 dark:text-green-500 flex-shrink-0 mt-0.5" />
                           <span className="text-sm">{feature}</span>
                         </li>
                       ))}
