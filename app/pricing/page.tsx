@@ -32,47 +32,307 @@ const billingDiscounts: Record<BillingPeriod, { discount: number; label: string;
   "annually": { discount: 15, label: "Annual", months: 12 },
 }
 
-// Shared Hosting Plans (used for both cPanel and DirectAdmin)
-const sharedHostingPlans: PricingPlan[] = [
+// Node.js Hosting Plans
+const nodejsPlans: PricingPlan[] = [
   {
-    name: "Starter",
+    name: "Node.js Starter",
     basePrice: 1500,
-    description: "Perfect for personal websites",
-    features: ["1 Website", "10 GB SSD Storage", "Unlimited Bandwidth", "Free SSL Certificate"],
+    description: "Perfect for Node.js applications",
+    features: ["1 Node.js App", "10 GB SSD Storage", "Node.js 18/20/21", "Free SSL Certificate"],
     allFeatures: [
-      "1 Website", "10 GB SSD Storage", "Unlimited Bandwidth", "Free SSL Certificate",
-      "LiteSpeed Web Server", "WordPress Optimized", "99.9% Uptime Guarantee",
-      "24/7 Support", "Free Website Migration", "Daily Backups", "1-Click Installer",
+      "1 Node.js Application", "10 GB SSD Storage", "Unlimited Bandwidth", "Node.js 18/20/21",
+      "Free SSL Certificate", "PM2 Process Manager", "NPM & Yarn Support",
+      "99.9% Uptime Guarantee", "24/7 Support", "Git Deployment", "Daily Backups",
     ],
   },
   {
-    name: "Business",
+    name: "Node.js Plus",
     basePrice: 3000,
-    description: "Great for small businesses",
-    popular: true,
+    description: "Great for growing Node.js apps",
     badge: "Popular",
     color: "blue",
-    features: ["5 Websites", "50 GB SSD Storage", "Unlimited Bandwidth", "Free SSL Certificate"],
+    features: ["5 Node.js Apps", "50 GB SSD Storage", "Node.js All Versions", "Free SSL Certificate"],
     allFeatures: [
-      "5 Websites", "50 GB SSD Storage", "Unlimited Bandwidth", "Free SSL Certificate",
-      "10 Email Accounts", "LiteSpeed + Redis Cache", "WordPress Optimized",
-      "99.9% Uptime Guarantee", "Priority Support", "Free Website Migration",
-      "Daily Backups", "Advanced Security", "1-Click Installer", "SSH Access",
+      "5 Node.js Applications", "50 GB SSD Storage", "Unlimited Bandwidth", "Node.js All Versions",
+      "Free SSL Certificate", "PM2 + Clustering", "NPM & Yarn Support", "MongoDB/Redis Access",
+      "99.9% Uptime Guarantee", "Priority Support", "Git + CI/CD", "Daily Backups", "SSH Access",
     ],
   },
   {
-    name: "Premium",
+    name: "Node.js Pro",
     basePrice: 6000,
-    description: "For high-traffic websites",
+    description: "For production Node.js apps",
     badge: "Best Value",
     color: "purple",
-    features: ["Unlimited Websites", "100 GB SSD Storage", "Unlimited Bandwidth", "Free SSL Certificate"],
+    features: ["Unlimited Apps", "100 GB SSD Storage", "All Node.js Versions", "Free SSL + CDN"],
     allFeatures: [
-      "Unlimited Websites", "100 GB SSD Storage", "Unlimited Bandwidth", "Free SSL Certificate",
-      "Unlimited Email Accounts", "LiteSpeed + Redis + Memcached", "WordPress Optimized",
-      "99.99% Uptime Guarantee", "VIP Support (24/7)", "Free Website Migration",
-      "Hourly Backups", "Advanced Security + Firewall", "1-Click Installer",
-      "SSH + WP-CLI Access", "Free CDN", "Staging Environment",
+      "Unlimited Node.js Apps", "100 GB SSD Storage", "Unlimited Bandwidth", "All Node.js Versions",
+      "Free SSL + CDN", "PM2 + Load Balancing", "NPM & Yarn Support", "MongoDB/Redis/PostgreSQL",
+      "99.99% Uptime SLA", "VIP Support (24/7)", "Advanced Git + CI/CD", "Hourly Backups",
+      "SSH + Root Access", "Staging Environment", "Auto-Scaling",
+    ],
+  },
+]
+
+// PHP Hosting Plans
+const phpPlans: PricingPlan[] = [
+  {
+    name: "PHP Starter",
+    basePrice: 1200,
+    description: "Perfect for PHP websites",
+    features: ["1 Website", "10 GB SSD Storage", "PHP 7.4/8.0/8.1/8.2", "Free SSL Certificate"],
+    allFeatures: [
+      "1 Website", "10 GB SSD Storage", "Unlimited Bandwidth", "PHP 7.4/8.0/8.1/8.2",
+      "Free SSL Certificate", "LiteSpeed Web Server", "MySQL Database",
+      "99.9% Uptime Guarantee", "24/7 Support", "Free Migration", "Daily Backups",
+    ],
+  },
+  {
+    name: "PHP Plus",
+    basePrice: 2500,
+    description: "Great for PHP applications",
+    badge: "Popular",
+    color: "blue",
+    features: ["5 Websites", "50 GB SSD Storage", "PHP All Versions", "Free SSL Certificate"],
+    allFeatures: [
+      "5 Websites", "50 GB SSD Storage", "Unlimited Bandwidth", "PHP All Versions",
+      "Free SSL Certificate", "LiteSpeed + Redis", "Unlimited MySQL Databases",
+      "99.9% Uptime Guarantee", "Priority Support", "Free Migration", "Daily Backups",
+      "SSH Access", "Composer Support", "OPcache Enabled",
+    ],
+  },
+  {
+    name: "PHP Pro",
+    basePrice: 5000,
+    description: "For high-traffic PHP sites",
+    badge: "Best Value",
+    color: "purple",
+    features: ["Unlimited Websites", "100 GB SSD Storage", "PHP All Versions", "Free SSL + CDN"],
+    allFeatures: [
+      "Unlimited Websites", "100 GB SSD Storage", "Unlimited Bandwidth", "PHP All Versions",
+      "Free SSL + CDN", "LiteSpeed + Redis + Memcached", "Unlimited MySQL/PostgreSQL",
+      "99.99% Uptime SLA", "VIP Support (24/7)", "Free Migration", "Hourly Backups",
+      "SSH + WP-CLI", "Composer Support", "Advanced Security", "Staging Environment",
+    ],
+  },
+]
+
+// WordPress Hosting Plans
+const wordpressPlans: PricingPlan[] = [
+  {
+    name: "WordPress Starter",
+    basePrice: 1800,
+    description: "Perfect for WordPress blogs",
+    features: ["1 WordPress Site", "10 GB SSD Storage", "WordPress Optimized", "Free SSL Certificate"],
+    allFeatures: [
+      "1 WordPress Site", "10 GB SSD Storage", "Unlimited Bandwidth", "WordPress Pre-installed",
+      "Free SSL Certificate", "LiteSpeed + LSCache", "Automatic Updates",
+      "99.9% Uptime Guarantee", "24/7 Support", "Free Migration", "Daily Backups",
+      "WordPress Hardening", "Malware Scanning",
+    ],
+  },
+  {
+    name: "WordPress Plus",
+    basePrice: 3500,
+    description: "Great for WordPress businesses",
+    badge: "Popular",
+    color: "blue",
+    features: ["5 WordPress Sites", "50 GB SSD Storage", "Advanced Optimization", "Free SSL Certificate"],
+    allFeatures: [
+      "5 WordPress Sites", "50 GB SSD Storage", "Unlimited Bandwidth", "WordPress Pre-installed",
+      "Free SSL Certificate", "LiteSpeed + Redis + Object Cache", "Automatic Updates",
+      "99.9% Uptime Guarantee", "Priority Support", "Free Migration", "Daily Backups",
+      "WP-CLI Access", "Staging Environment", "Advanced Security", "CDN Integration",
+    ],
+  },
+  {
+    name: "WordPress Pro",
+    basePrice: 7000,
+    description: "For WordPress agencies",
+    badge: "Best Value",
+    color: "purple",
+    features: ["Unlimited WP Sites", "100 GB SSD Storage", "Enterprise Optimization", "Free SSL + CDN"],
+    allFeatures: [
+      "Unlimited WordPress Sites", "100 GB SSD Storage", "Unlimited Bandwidth", "WordPress Pre-installed",
+      "Free SSL + Premium CDN", "LiteSpeed + Redis + Memcached + Object Cache", "Automatic Updates",
+      "99.99% Uptime SLA", "VIP Support (24/7)", "White Glove Migration", "Hourly Backups",
+      "SSH + WP-CLI", "Multiple Staging", "WAF + DDoS Protection", "Performance Monitoring",
+    ],
+  },
+]
+
+// WooCommerce Hosting Plans
+const woocommercePlans: PricingPlan[] = [
+  {
+    name: "WooCommerce Starter",
+    basePrice: 2500,
+    description: "Perfect for new online stores",
+    features: ["1 WooCommerce Store", "20 GB SSD Storage", "WooCommerce Optimized", "Free SSL Certificate"],
+    allFeatures: [
+      "1 WooCommerce Store", "20 GB SSD Storage", "Unlimited Bandwidth", "WooCommerce Pre-installed",
+      "Free SSL Certificate", "LiteSpeed + Redis", "Payment Gateway Support",
+      "99.9% Uptime Guarantee", "24/7 Support", "Free Migration", "Daily Backups",
+      "PCI Compliance Ready", "Product Import Tools",
+    ],
+  },
+  {
+    name: "WooCommerce Plus",
+    basePrice: 5000,
+    description: "Great for growing stores",
+    badge: "Popular",
+    color: "blue",
+    features: ["3 WooCommerce Stores", "60 GB SSD Storage", "Advanced Optimization", "Free SSL + CDN"],
+    allFeatures: [
+      "3 WooCommerce Stores", "60 GB SSD Storage", "Unlimited Bandwidth", "WooCommerce Pre-installed",
+      "Free SSL + CDN", "LiteSpeed + Redis + Object Cache", "All Payment Gateways",
+      "99.9% Uptime Guarantee", "Priority Support", "Free Migration", "Daily Backups",
+      "PCI Compliance", "Advanced Security", "Staging Environment", "Analytics Dashboard",
+    ],
+  },
+  {
+    name: "WooCommerce Pro",
+    basePrice: 10000,
+    description: "For high-volume stores",
+    badge: "Best Value",
+    color: "purple",
+    features: ["Unlimited Stores", "120 GB SSD Storage", "Enterprise Optimization", "Free SSL + Premium CDN"],
+    allFeatures: [
+      "Unlimited WooCommerce Stores", "120 GB SSD Storage", "Unlimited Bandwidth", "WooCommerce Pre-installed",
+      "Free SSL + Premium CDN", "LiteSpeed + Full Caching Stack", "All Payment Gateways",
+      "99.99% Uptime SLA", "VIP Support (24/7)", "White Glove Migration", "Hourly Backups",
+      "Full PCI Compliance", "WAF + DDoS Protection", "Multiple Staging", "Dedicated Resources",
+    ],
+  },
+]
+
+// E-Commerce Hosting Plans
+const ecommercePlans: PricingPlan[] = [
+  {
+    name: "E-Commerce Starter",
+    basePrice: 2800,
+    description: "Perfect for any e-commerce platform",
+    features: ["1 Store", "25 GB SSD Storage", "Magento/PrestaShop/OpenCart", "Free SSL Certificate"],
+    allFeatures: [
+      "1 E-Commerce Store", "25 GB SSD Storage", "Unlimited Bandwidth", "Magento/PrestaShop/OpenCart",
+      "Free SSL Certificate", "LiteSpeed + Redis", "Multi-Payment Support",
+      "99.9% Uptime Guarantee", "24/7 Support", "Free Migration", "Daily Backups",
+      "PCI Compliance Ready", "1-Click Installer",
+    ],
+  },
+  {
+    name: "E-Commerce Plus",
+    basePrice: 5500,
+    description: "Great for growing e-commerce",
+    badge: "Popular",
+    color: "blue",
+    features: ["3 Stores", "70 GB SSD Storage", "All E-Commerce Platforms", "Free SSL + CDN"],
+    allFeatures: [
+      "3 E-Commerce Stores", "70 GB SSD Storage", "Unlimited Bandwidth", "All E-Commerce Platforms",
+      "Free SSL + CDN", "LiteSpeed + Full Cache", "Multi-Currency Support",
+      "99.9% Uptime Guarantee", "Priority Support", "Free Migration", "Daily Backups",
+      "Full PCI Compliance", "Advanced Security", "Staging Environment", "Dedicated IP",
+    ],
+  },
+  {
+    name: "E-Commerce Pro",
+    basePrice: 11000,
+    description: "For enterprise e-commerce",
+    badge: "Best Value",
+    color: "purple",
+    features: ["Unlimited Stores", "150 GB SSD Storage", "Enterprise Optimization", "Free SSL + Premium CDN"],
+    allFeatures: [
+      "Unlimited E-Commerce Stores", "150 GB SSD Storage", "Unlimited Bandwidth", "All E-Commerce Platforms",
+      "Free SSL + Premium CDN", "LiteSpeed + Full Stack", "Multi-Currency + Multi-Language",
+      "99.99% Uptime SLA", "VIP Support (24/7)", "White Glove Migration", "Hourly Backups",
+      "Enterprise PCI Compliance", "WAF + Advanced DDoS", "Multiple Staging", "Auto-Scaling",
+    ],
+  },
+]
+
+// Python Hosting Plans
+const pythonPlans: PricingPlan[] = [
+  {
+    name: "Python Starter",
+    basePrice: 1800,
+    description: "Perfect for Python applications",
+    features: ["1 Python App", "15 GB SSD Storage", "Python 3.9/3.10/3.11/3.12", "Free SSL Certificate"],
+    allFeatures: [
+      "1 Python Application", "15 GB SSD Storage", "Unlimited Bandwidth", "Python 3.9/3.10/3.11/3.12",
+      "Free SSL Certificate", "Django/Flask Support", "PostgreSQL/MySQL",
+      "99.9% Uptime Guarantee", "24/7 Support", "Git Deployment", "Daily Backups",
+      "Virtual Environment", "pip Support",
+    ],
+  },
+  {
+    name: "Python Plus",
+    basePrice: 3500,
+    description: "Great for Python projects",
+    badge: "Popular",
+    color: "blue",
+    features: ["5 Python Apps", "60 GB SSD Storage", "All Python Versions", "Free SSL Certificate"],
+    allFeatures: [
+      "5 Python Applications", "60 GB SSD Storage", "Unlimited Bandwidth", "All Python Versions",
+      "Free SSL Certificate", "Django/Flask/FastAPI", "PostgreSQL/MySQL/MongoDB",
+      "99.9% Uptime Guarantee", "Priority Support", "Git + CI/CD", "Daily Backups",
+      "SSH Access", "Conda Support", "Redis Access", "Celery Support",
+    ],
+  },
+  {
+    name: "Python Pro",
+    basePrice: 7000,
+    description: "For production Python apps",
+    badge: "Best Value",
+    color: "purple",
+    features: ["Unlimited Apps", "120 GB SSD Storage", "All Python Versions", "Free SSL + CDN"],
+    allFeatures: [
+      "Unlimited Python Apps", "120 GB SSD Storage", "Unlimited Bandwidth", "All Python Versions",
+      "Free SSL + CDN", "Django/Flask/FastAPI + More", "All Databases",
+      "99.99% Uptime SLA", "VIP Support (24/7)", "Advanced Git + CI/CD", "Hourly Backups",
+      "SSH + Root Access", "Conda + pip", "Redis + RabbitMQ", "Auto-Scaling", "ML Libraries",
+    ],
+  },
+]
+
+// Ruby Hosting Plans
+const rubyPlans: PricingPlan[] = [
+  {
+    name: "Ruby Starter",
+    basePrice: 1800,
+    description: "Perfect for Ruby applications",
+    features: ["1 Ruby App", "15 GB SSD Storage", "Ruby 2.7/3.0/3.1/3.2", "Free SSL Certificate"],
+    allFeatures: [
+      "1 Ruby Application", "15 GB SSD Storage", "Unlimited Bandwidth", "Ruby 2.7/3.0/3.1/3.2",
+      "Free SSL Certificate", "Rails Support", "PostgreSQL/MySQL",
+      "99.9% Uptime Guarantee", "24/7 Support", "Git Deployment", "Daily Backups",
+      "RVM/rbenv Support", "Bundler",
+    ],
+  },
+  {
+    name: "Ruby Plus",
+    basePrice: 3500,
+    description: "Great for Ruby on Rails",
+    badge: "Popular",
+    color: "blue",
+    features: ["5 Ruby Apps", "60 GB SSD Storage", "All Ruby Versions", "Free SSL Certificate"],
+    allFeatures: [
+      "5 Ruby Applications", "60 GB SSD Storage", "Unlimited Bandwidth", "All Ruby Versions",
+      "Free SSL Certificate", "Rails + Sinatra", "PostgreSQL/MySQL/MongoDB",
+      "99.9% Uptime Guarantee", "Priority Support", "Git + CI/CD", "Daily Backups",
+      "SSH Access", "RVM/rbenv/chruby", "Redis + Sidekiq", "Asset Pipeline",
+    ],
+  },
+  {
+    name: "Ruby Pro",
+    basePrice: 7000,
+    description: "For production Ruby apps",
+    badge: "Best Value",
+    color: "purple",
+    features: ["Unlimited Apps", "120 GB SSD Storage", "All Ruby Versions", "Free SSL + CDN"],
+    allFeatures: [
+      "Unlimited Ruby Apps", "120 GB SSD Storage", "Unlimited Bandwidth", "All Ruby Versions",
+      "Free SSL + CDN", "Rails + All Frameworks", "All Databases",
+      "99.99% Uptime SLA", "VIP Support (24/7)", "Advanced Git + CI/CD", "Hourly Backups",
+      "SSH + Root Access", "Version Managers", "Redis + Sidekiq Pro", "Auto-Scaling", "Monitoring",
     ],
   },
 ]
@@ -168,6 +428,125 @@ function calculatePrice(basePrice: number, period: BillingPeriod) {
   const totalPrice = discountedPrice * months
   return { monthlyPrice: discountedPrice, totalPrice: totalPrice, discount: discount }
 }
+
+// Additional plan groups
+const cloudVpsResellerPlans: PricingPlan[] = [
+  {
+    name: "Cloud VPS Reseller",
+    basePrice: 18000,
+    description: "Offer cloud VPS to your clients with white-label control",
+    features: ["Custom VPS Templates", "Automated Provisioning", "Billing Integration"],
+    allFeatures: ["Custom VPS Templates", "Automated Provisioning", "Billing Integration", "Private Nameservers", "WHMCS Integration", "Multi-Region Availability"],
+    badge: "Reseller",
+    color: "green",
+  },
+]
+
+const dedicatedPlans: PricingPlan[] = [
+  {
+    name: "Managed Dedicated",
+    basePrice: 120000,
+    description: "Fully managed dedicated server with monitoring and backups",
+    features: ["Full Stack Management", "Daily Backups", "Priority Support"],
+    allFeatures: ["Full Stack Management", "Daily Backups", "Priority Support", "Hardware SLA", "DDoS Protection", "Custom Hardware Options"],
+    badge: "Enterprise",
+    color: "orange",
+  },
+  {
+    name: "Unmanaged Dedicated",
+    basePrice: 80000,
+    description: "Raw dedicated hardware for advanced users",
+    features: ["Root Access", "Custom OS", "No Managed Services"],
+    allFeatures: ["Root Access", "Custom OS", "No Managed Services", "Optional Managed Addons", "DDoS Protection"],
+    color: "purple",
+  },
+]
+
+const bareMetalPlans: PricingPlan[] = [
+  {
+    name: "Managed Server",
+    basePrice: 90000,
+    description: "Managed bare-metal servers with enterprise support",
+    features: ["Managed OS", "Backups", "24/7 Support"],
+    allFeatures: ["Managed OS", "Backups", "24/7 Support", "Custom Networking", "Hardware Monitoring"],
+    color: "orange",
+  },
+  {
+    name: "Unmanaged Server",
+    basePrice: 60000,
+    description: "Bare metal for maximum control",
+    features: ["Raw Hardware", "Full Root Access", "Custom Configurations"],
+    allFeatures: ["Raw Hardware", "Full Root Access", "Custom Configurations", "Optional Managed Addons"],
+    color: "purple",
+  },
+]
+
+const n8nPlans: PricingPlan[] = [
+  {
+    name: "Self-hosted n8n",
+    basePrice: 0,
+    description: "Deploy n8n on your infrastructure with our one-click installer",
+    features: ["1 GB Storage", "5,000 Inodes", "Visual Workflow Editor", "400+ Integrations"],
+    allFeatures: ["1 GB Storage", "5,000 Inodes", "Visual Workflow Editor", "400+ Integrations", "Self-hosted Support", "Backups & Restore", "Private Networking", "Enterprise Integrations"],
+    badge: "Free",
+    color: "green",
+  },
+  {
+    name: "Preinstalled n8n",
+    basePrice: 6000,
+    description: "n8n preinstalled on our domain, ready to use",
+    features: ["Preinstalled & Configured", "Custom Subdomain", "Automatic Updates", "24/7 Support"],
+    allFeatures: ["Preinstalled & Configured", "Custom Subdomain (n8n.kmerhosting.com)", "Automatic Updates", "24/7 Support", "SSL Certificate", "Daily Backups", "Visual Workflow Editor", "400+ Integrations", "Managed Hosting"],
+    badge: "Popular",
+    color: "blue",
+  },
+]
+
+// AI Plans
+const aiWebsiteBuilderPlans: PricingPlan[] = [
+  {
+    name: "AI Website Builder",
+    basePrice: 0,
+    description: "Build stunning websites with AI-powered design",
+    features: ["AI-Powered Design", "Instant Content Generation", "Drag & Drop Editor"],
+    allFeatures: ["AI-Powered Design", "Instant Content Generation", "Drag & Drop Editor", "Mobile Responsive", "SEO Optimization", "Free Hosting"],
+    badge: "Free",
+    color: "green",
+  },
+]
+
+const aiFreeAccessPlans: PricingPlan[] = [
+  {
+    name: "Free AI Access",
+    basePrice: 0,
+    description: "Access 8 AI models for free",
+    features: ["8 Free AI Models", "GPT-3.5 Turbo", "Claude Instant", "Gemini Flash"],
+    allFeatures: ["8 Free AI Models", "GPT-3.5 Turbo", "Claude Instant", "Gemini Flash", "Llama 2", "Mistral", "Command", "Stable Diffusion", "Basic Rate Limits"],
+    badge: "Free",
+    color: "green",
+  },
+]
+
+const aiPaidAccessPlans: PricingPlan[] = [
+  {
+    name: "AI Pro",
+    basePrice: 5000,
+    description: "Access 10+ premium AI models",
+    features: ["10+ Premium Models", "GPT-4", "Claude 3 Opus", "Gemini Pro"],
+    allFeatures: ["10+ Premium Models", "GPT-4 & GPT-4 Turbo", "Claude 3 Opus & Sonnet", "Gemini Pro & Ultra", "DALL-E 3", "Midjourney", "API Access", "Unlimited Requests", "Priority Support"],
+    badge: "Popular",
+    color: "blue",
+  },
+  {
+    name: "AI Enterprise",
+    basePrice: 15000,
+    description: "Enterprise-grade AI with custom models",
+    features: ["Custom Fine-tuned Models", "Dedicated Support", "API White-labeling"],
+    allFeatures: ["Custom Fine-tuned Models", "All Pro Models", "Dedicated Support", "API White-labeling", "Custom Rate Limits", "SLA Guarantee", "Priority Processing", "Advanced Analytics"],
+    badge: "Enterprise",
+    color: "purple",
+  },
+]
 
 function PricingCard({ plan, billingPeriod }: { plan: PricingPlan; billingPeriod: BillingPeriod }) {
   const { monthlyPrice, totalPrice, discount } = calculatePrice(plan.basePrice, billingPeriod)
@@ -275,6 +654,25 @@ export default function PricingPage() {
   })
   const [openSubcategories, setOpenSubcategories] = useState<Record<string, boolean>>({
     "shared-cpanel": true,
+    "ai-website-builder": false,
+    "ai-free-access": false,
+    "ai-paid-access": false,
+  })
+  const [openTechStacks, setOpenTechStacks] = useState<Record<string, boolean>>({
+    "cpanel-nodejs": false,
+    "cpanel-php": false,
+    "cpanel-wordpress": false,
+    "cpanel-woocommerce": false,
+    "cpanel-ecommerce": false,
+    "cpanel-python": false,
+    "cpanel-ruby": false,
+    "directadmin-nodejs": false,
+    "directadmin-php": false,
+    "directadmin-wordpress": false,
+    "directadmin-woocommerce": false,
+    "directadmin-ecommerce": false,
+    "directadmin-python": false,
+    "directadmin-ruby": false,
   })
 
   return (
@@ -361,7 +759,7 @@ export default function PricingPage() {
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <div className="p-4 space-y-3 bg-muted/30">
-                    {/* cPanel Subcategory */}
+                    {/* cPanel Shared Hosting */}
                     <Collapsible 
                       open={openSubcategories["shared-cpanel"]} 
                       onOpenChange={(open) => setOpenSubcategories({...openSubcategories, "shared-cpanel": open})}
@@ -372,16 +770,152 @@ export default function PricingPage() {
                           <ChevronDown className={`h-4 w-4 transition-transform ${openSubcategories["shared-cpanel"] ? "rotate-180" : ""}`} />
                         </CollapsibleTrigger>
                         <CollapsibleContent>
-                          <div className="p-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {sharedHostingPlans.map((plan) => (
-                              <PricingCard key={`cpanel-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
-                            ))}
+                          <div className="p-3 space-y-2 bg-muted/20">
+                            {/* Node.js */}
+                            <Collapsible 
+                              open={openTechStacks["cpanel-nodejs"]} 
+                              onOpenChange={(open) => setOpenTechStacks({...openTechStacks, "cpanel-nodejs": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">Node.js</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openTechStacks["cpanel-nodejs"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {nodejsPlans.map((plan) => (
+                                      <PricingCard key={`cpanel-nodejs-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* PHP */}
+                            <Collapsible 
+                              open={openTechStacks["cpanel-php"]} 
+                              onOpenChange={(open) => setOpenTechStacks({...openTechStacks, "cpanel-php": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">PHP</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openTechStacks["cpanel-php"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {phpPlans.map((plan) => (
+                                      <PricingCard key={`cpanel-php-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* WordPress */}
+                            <Collapsible 
+                              open={openTechStacks["cpanel-wordpress"]} 
+                              onOpenChange={(open) => setOpenTechStacks({...openTechStacks, "cpanel-wordpress": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">WordPress</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openTechStacks["cpanel-wordpress"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {wordpressPlans.map((plan) => (
+                                      <PricingCard key={`cpanel-wordpress-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* WooCommerce */}
+                            <Collapsible 
+                              open={openTechStacks["cpanel-woocommerce"]} 
+                              onOpenChange={(open) => setOpenTechStacks({...openTechStacks, "cpanel-woocommerce": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">WooCommerce</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openTechStacks["cpanel-woocommerce"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {woocommercePlans.map((plan) => (
+                                      <PricingCard key={`cpanel-woocommerce-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* E-Commerce */}
+                            <Collapsible 
+                              open={openTechStacks["cpanel-ecommerce"]} 
+                              onOpenChange={(open) => setOpenTechStacks({...openTechStacks, "cpanel-ecommerce": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">E-Commerce</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openTechStacks["cpanel-ecommerce"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {ecommercePlans.map((plan) => (
+                                      <PricingCard key={`cpanel-ecommerce-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* Python */}
+                            <Collapsible 
+                              open={openTechStacks["cpanel-python"]} 
+                              onOpenChange={(open) => setOpenTechStacks({...openTechStacks, "cpanel-python": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">Python</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openTechStacks["cpanel-python"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {pythonPlans.map((plan) => (
+                                      <PricingCard key={`cpanel-python-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* Ruby */}
+                            <Collapsible 
+                              open={openTechStacks["cpanel-ruby"]} 
+                              onOpenChange={(open) => setOpenTechStacks({...openTechStacks, "cpanel-ruby": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">Ruby</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openTechStacks["cpanel-ruby"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {rubyPlans.map((plan) => (
+                                      <PricingCard key={`cpanel-ruby-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
                           </div>
                         </CollapsibleContent>
                       </Card>
                     </Collapsible>
 
-                    {/* DirectAdmin Subcategory */}
+                    {/* DirectAdmin Shared Hosting */}
                     <Collapsible 
                       open={openSubcategories["shared-directadmin"]} 
                       onOpenChange={(open) => setOpenSubcategories({...openSubcategories, "shared-directadmin": open})}
@@ -392,10 +926,146 @@ export default function PricingPage() {
                           <ChevronDown className={`h-4 w-4 transition-transform ${openSubcategories["shared-directadmin"] ? "rotate-180" : ""}`} />
                         </CollapsibleTrigger>
                         <CollapsibleContent>
-                          <div className="p-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {sharedHostingPlans.map((plan) => (
-                              <PricingCard key={`directadmin-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
-                            ))}
+                          <div className="p-3 space-y-2 bg-muted/20">
+                            {/* Node.js */}
+                            <Collapsible 
+                              open={openTechStacks["directadmin-nodejs"]} 
+                              onOpenChange={(open) => setOpenTechStacks({...openTechStacks, "directadmin-nodejs": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">Node.js</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openTechStacks["directadmin-nodejs"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {nodejsPlans.map((plan) => (
+                                      <PricingCard key={`directadmin-nodejs-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* PHP */}
+                            <Collapsible 
+                              open={openTechStacks["directadmin-php"]} 
+                              onOpenChange={(open) => setOpenTechStacks({...openTechStacks, "directadmin-php": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">PHP</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openTechStacks["directadmin-php"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {phpPlans.map((plan) => (
+                                      <PricingCard key={`directadmin-php-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* WordPress */}
+                            <Collapsible 
+                              open={openTechStacks["directadmin-wordpress"]} 
+                              onOpenChange={(open) => setOpenTechStacks({...openTechStacks, "directadmin-wordpress": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">WordPress</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openTechStacks["directadmin-wordpress"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {wordpressPlans.map((plan) => (
+                                      <PricingCard key={`directadmin-wordpress-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* WooCommerce */}
+                            <Collapsible 
+                              open={openTechStacks["directadmin-woocommerce"]} 
+                              onOpenChange={(open) => setOpenTechStacks({...openTechStacks, "directadmin-woocommerce": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">WooCommerce</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openTechStacks["directadmin-woocommerce"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {woocommercePlans.map((plan) => (
+                                      <PricingCard key={`directadmin-woocommerce-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* E-Commerce */}
+                            <Collapsible 
+                              open={openTechStacks["directadmin-ecommerce"]} 
+                              onOpenChange={(open) => setOpenTechStacks({...openTechStacks, "directadmin-ecommerce": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">E-Commerce</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openTechStacks["directadmin-ecommerce"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {ecommercePlans.map((plan) => (
+                                      <PricingCard key={`directadmin-ecommerce-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* Python */}
+                            <Collapsible 
+                              open={openTechStacks["directadmin-python"]} 
+                              onOpenChange={(open) => setOpenTechStacks({...openTechStacks, "directadmin-python": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">Python</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openTechStacks["directadmin-python"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {pythonPlans.map((plan) => (
+                                      <PricingCard key={`directadmin-python-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* Ruby */}
+                            <Collapsible 
+                              open={openTechStacks["directadmin-ruby"]} 
+                              onOpenChange={(open) => setOpenTechStacks({...openTechStacks, "directadmin-ruby": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">Ruby</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openTechStacks["directadmin-ruby"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {rubyPlans.map((plan) => (
+                                      <PricingCard key={`directadmin-ruby-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
                           </div>
                         </CollapsibleContent>
                       </Card>
@@ -461,9 +1131,11 @@ export default function PricingPage() {
                     </Collapsible>
 
                     {/* Cloud VPS Reseller */}
-                    <Card className="p-3">
-                      <span className="font-medium text-muted-foreground">Cloud VPS Reseller</span>
-                    </Card>
+                    <div className="p-4 grid sm:grid-cols-1 lg:grid-cols-1 gap-4">
+                      {cloudVpsResellerPlans.map((plan) => (
+                        <PricingCard key={`cloud-vps-reseller-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                      ))}
+                    </div>
                   </div>
                 </CollapsibleContent>
               </Card>
@@ -502,9 +1174,11 @@ export default function PricingPage() {
                     </Collapsible>
 
                     {/* Unmanaged VPS */}
-                    <Card className="p-3">
-                      <span className="font-medium text-muted-foreground">Unmanaged VPS</span>
-                    </Card>
+                    <div className="p-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {vpsPlans.map((plan) => (
+                        <PricingCard key={`unmanaged-vps-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                      ))}
+                    </div>
                   </div>
                 </CollapsibleContent>
               </Card>
@@ -522,12 +1196,11 @@ export default function PricingPage() {
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <div className="p-4 space-y-3 bg-muted/30">
-                    <Card className="p-3">
-                      <span className="font-medium text-muted-foreground">Managed Dedicated VPS</span>
-                    </Card>
-                    <Card className="p-3">
-                      <span className="font-medium text-muted-foreground">Unmanaged Dedicated VPS</span>
-                    </Card>
+                    <div className="p-4 grid sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                      {dedicatedPlans.map((plan) => (
+                        <PricingCard key={`dedicated-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                      ))}
+                    </div>
                   </div>
                 </CollapsibleContent>
               </Card>
@@ -545,12 +1218,11 @@ export default function PricingPage() {
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <div className="p-4 space-y-3 bg-muted/30">
-                    <Card className="p-3">
-                      <span className="font-medium text-muted-foreground">Managed Servers</span>
-                    </Card>
-                    <Card className="p-3">
-                      <span className="font-medium text-muted-foreground">Unmanaged Servers</span>
-                    </Card>
+                    <div className="p-4 grid sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                      {bareMetalPlans.map((plan) => (
+                        <PricingCard key={`baremetal-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                      ))}
+                    </div>
                   </div>
                 </CollapsibleContent>
               </Card>
@@ -571,23 +1243,63 @@ export default function PricingPage() {
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <div className="p-4 space-y-3 bg-muted/30">
-                    <Card className="p-3">
-                      <span className="font-medium text-muted-foreground">AI Website Builder</span>
-                    </Card>
-                    <Collapsible>
+                    {/* AI Website Builder */}
+                    <Collapsible 
+                      open={openSubcategories["ai-website-builder"]} 
+                      onOpenChange={(open) => setOpenSubcategories({...openSubcategories, "ai-website-builder": open})}
+                    >
+                      <Card className="overflow-hidden">
+                        <CollapsibleTrigger className="w-full p-3 flex items-center justify-between hover:bg-accent transition-colors">
+                          <span className="font-medium">AI Website Builder</span>
+                          <ChevronDown className={`h-4 w-4 transition-transform ${openSubcategories["ai-website-builder"] ? "rotate-180" : ""}`} />
+                        </CollapsibleTrigger>
+                        <CollapsibleContent>
+                          <div className="p-4 grid sm:grid-cols-1 gap-4">
+                            {aiWebsiteBuilderPlans.map((plan) => (
+                              <PricingCard key={`ai-builder-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                            ))}
+                          </div>
+                        </CollapsibleContent>
+                      </Card>
+                    </Collapsible>
+
+                    {/* Free Access Plan */}
+                    <Collapsible 
+                      open={openSubcategories["ai-free-access"]} 
+                      onOpenChange={(open) => setOpenSubcategories({...openSubcategories, "ai-free-access": open})}
+                    >
                       <Card className="overflow-hidden">
                         <CollapsibleTrigger className="w-full p-3 flex items-center justify-between hover:bg-accent transition-colors">
                           <span className="font-medium">Free Access Plan</span>
-                          <ChevronDown className="h-4 w-4" />
+                          <ChevronDown className={`h-4 w-4 transition-transform ${openSubcategories["ai-free-access"] ? "rotate-180" : ""}`} />
                         </CollapsibleTrigger>
+                        <CollapsibleContent>
+                          <div className="p-4 grid sm:grid-cols-1 gap-4">
+                            {aiFreeAccessPlans.map((plan) => (
+                              <PricingCard key={`ai-free-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                            ))}
+                          </div>
+                        </CollapsibleContent>
                       </Card>
                     </Collapsible>
-                    <Collapsible>
+
+                    {/* Paid Access */}
+                    <Collapsible 
+                      open={openSubcategories["ai-paid-access"]} 
+                      onOpenChange={(open) => setOpenSubcategories({...openSubcategories, "ai-paid-access": open})}
+                    >
                       <Card className="overflow-hidden">
                         <CollapsibleTrigger className="w-full p-3 flex items-center justify-between hover:bg-accent transition-colors">
                           <span className="font-medium">Paid Access</span>
-                          <ChevronDown className="h-4 w-4" />
+                          <ChevronDown className={`h-4 w-4 transition-transform ${openSubcategories["ai-paid-access"] ? "rotate-180" : ""}`} />
                         </CollapsibleTrigger>
+                        <CollapsibleContent>
+                          <div className="p-4 grid sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                            {aiPaidAccessPlans.map((plan) => (
+                              <PricingCard key={`ai-paid-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                            ))}
+                          </div>
+                        </CollapsibleContent>
                       </Card>
                     </Collapsible>
                   </div>
@@ -596,14 +1308,29 @@ export default function PricingPage() {
             </Collapsible>
 
             {/* Self-hosted n8n */}
-            <Card className="overflow-hidden">
-              <div className="p-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <h2 className="text-xl font-bold text-green-500">Self-hosted n8n</h2>
-                  <Badge className="bg-orange-500 text-xs">Popular</Badge>
-                </div>
-              </div>
-            </Card>
+            <Collapsible 
+              open={openCategories["n8n"]} 
+              onOpenChange={(open) => setOpenCategories({...openCategories, "n8n": open})}
+            >
+              <Card className="overflow-hidden">
+                <CollapsibleTrigger className="w-full p-4 flex items-center justify-between hover:bg-accent transition-colors">
+                  <div className="flex items-center gap-3">
+                    <h2 className="text-xl font-bold text-green-500">Self-hosted n8n</h2>
+                    <Badge className="bg-orange-500 text-xs">Popular</Badge>
+                  </div>
+                  <ChevronDown className={`h-5 w-5 transition-transform ${openCategories["n8n"] ? "rotate-180" : ""}`} />
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <div className="p-4 space-y-3 bg-muted/30">
+                    <div className="p-4 grid sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                      {n8nPlans.map((plan) => (
+                        <PricingCard key={`n8n-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                      ))}
+                    </div>
+                  </div>
+                </CollapsibleContent>
+              </Card>
+            </Collapsible>
           </div>
         </section>
 

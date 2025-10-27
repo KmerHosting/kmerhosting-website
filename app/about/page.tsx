@@ -177,7 +177,7 @@ export default function AboutPage() {
                 <div className="border-l-4 border-primary pl-6">
                   <h3 className="font-semibold mb-2">Developer-Friendly Platform</h3>
                   <p className="text-muted-foreground">
-                    From SSH access to Git integration, WP-CLI, and support for PHP, Node.js, Ruby and Python. Using most popular database such as PostgreSQL, MySQL and Redis, we provide the
+                    From SSH access to Git integration, WP-CLI, and support for PHP, Node.js, Ruby and Python. Using most popular databases such as PostgreSQL, MySQL and Redis, we provide the
                     tools developers need to build amazing applications.
                   </p>
                 </div>

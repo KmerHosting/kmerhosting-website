@@ -234,12 +234,7 @@ function ProductCard({ product }: { product: Product }) {
             </li>
           )}
         </ul>
-        <Button asChild size="sm" className="w-full h-7 text-xs">
-          <Link href={product.href}>
-            Learn More
-            <ArrowRight className="ml-1 h-3 w-3" />
-          </Link>
-        </Button>
+        {/* Per-product CTA removed — users should use the global "View Pricing Plans" CTA below */}
       </div>
     </Card>
   )
@@ -267,11 +262,11 @@ export default function ProductsPage() {
           </div>
         </section>
 
-        {/* Hosting Services */}
+        {/* Main Services */}
         <section className="container py-12 md:py-16">
           <div className="space-y-6">
             <div className="text-center space-y-2 max-w-2xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold">Hosting Services</h2>
+              <h2 className="text-2xl md:text-3xl font-bold">Main Services</h2>
               <p className="text-sm text-muted-foreground">
                 Reliable, high-performance hosting solutions for every need
               </p>
