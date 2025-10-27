@@ -1,6 +1,9 @@
 "use client"
 
+import Image from "next/image"
+import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { 
   Terminal,
   Database,
@@ -18,23 +21,23 @@ interface Feature {
 const allFeatures: Feature[] = [
   // Row 1 - 3 items (top of triangle)
   {
-    iconSvg: `<svg viewBox="0 0 128 128"><path fill="currentColor" d="M126.67 98.44c-4.56 1.16-7.38.05-9.91-3.75-5.68-8.51-11.95-16.63-18-24.9-.78-1.07-1.59-2.12-2.6-3.45C89 76 81.85 85.2 75.14 94.77c-2.4 3.42-4.92 4.91-9.4 3.7l26.92-36.13L67.6 29.71c4.31-.84 7.29-.41 9.93 3.45 5.83 8.52 12.26 16.63 18.67 25.21 6.45-8.55 12.8-16.67 18.8-25.11 2.41-3.42 5-4.72 9.33-3.46-3.28 4.35-6.49 8.63-9.72 12.88-4.36 5.73-8.64 11.53-13.16 17.14-1.61 2-1.35 3.3.09 5.19C109.9 76 118.16 87.1 126.67 98.44zM1.33 61.74c.72-3.61 1.2-7.29 2.2-10.83 6-21.43 30.6-30.34 47.5-17.06C60.93 41.64 63.39 52.62 62.9 65H7.1c-.84 22.21 15.15 35.62 35.53 28.78 7.15-2.4 11.36-8 13.47-15 1.07-3.51 2.84-4.06 6.14-3.06-1.69 8.76-5.52 16.08-13.52 20.66-12 6.86-29.13 4.64-38.14-4.89C5.26 85.89 3 78.92 2 71.39c-.15-1.2-.46-2.38-.7-3.57q.03-3.04.03-6.08zm5.87-1.49h50.43c-.33-16.06-10.33-27.47-24-27.57-15-.12-25.78 11.02-26.43 27.57z"/></svg>`,
+    iconSvg: `<svg viewBox="0 0 128 128"><path fill="#83CD29" d="M112.771 30.334L68.674 4.729c-2.781-1.584-6.402-1.584-9.205 0L14.901 30.334C12.031 31.985 10 35.088 10 38.407v51.142c0 3.319 2.084 6.423 4.954 8.083l11.775 6.688c5.628 2.772 7.617 2.772 10.178 2.772 8.333 0 13.093-5.039 13.093-13.828v-50.49c0-.713-.371-1.774-1.071-1.774h-5.623C42.594 41 41 42.061 41 42.773v50.49c0 3.896-3.524 7.773-10.11 4.48L18.723 90.73c-.424-.23-.723-.693-.723-1.181V38.407c0-.482.555-.966.982-1.213l44.424-25.561c.415-.235 1.025-.235 1.439 0l43.882 25.555c.42.253.272.722.272 1.219v51.142c0 .488.183.963-.232 1.198l-44.086 25.576c-.378.227-.847.227-1.261 0l-11.307-6.749c-.341-.198-.746-.269-1.073-.086-3.146 1.783-3.726 2.02-6.677 3.043-.726.253-1.797.692.41 1.929l14.798 8.754a9.294 9.294 0 004.647 1.246c1.642 0 3.25-.426 4.667-1.246l43.885-25.582c2.87-1.672 4.23-4.764 4.23-8.083V38.407c0-3.319-1.36-6.414-4.229-8.073zM77.91 81.445c-11.726 0-14.309-3.235-15.17-9.066-.1-.628-.633-1.379-1.272-1.379h-5.731c-.709 0-1.279.86-1.279 1.566 0 7.466 4.059 16.512 23.453 16.512 14.039 0 22.088-5.455 22.088-15.109 0-9.572-6.467-12.084-20.082-13.886-13.762-1.819-15.16-2.738-15.16-5.962 0-2.658 1.184-6.203 11.374-6.203 9.105 0 12.461 1.954 13.842 8.091.118.577.645.991 1.24.991h5.754c.354 0 .692-.143.94-.396.24-.272.367-.613.335-.979-.891-10.568-7.912-15.493-22.112-15.493-12.631 0-20.166 5.334-20.166 14.275 0 9.698 7.497 12.378 19.622 13.577 14.505 1.422 15.633 3.542 15.633 6.395 0 4.955-3.978 7.066-13.309 7.066z"/></svg>`,
     title: "Node.js",
     description: "Fast, scalable applications"
   },
   {
-    iconSvg: `<svg viewBox="0 0 128 128"><path fill="currentColor" d="M49.33 62h29.159C86.606 62 93 55.132 93 46.981V19.183c0-7.912-6.632-13.856-14.555-15.176-5.014-.835-10.195-1.215-15.187-1.191-4.99.023-9.612.448-13.805 1.191C37.098 6.188 35 10.758 35 19.183V30h29v4H23.776c-8.484 0-15.914 5.108-18.237 14.811-2.681 11.12-2.8 17.919 0 29.53C7.614 86.983 12.569 93 21.054 93H31V79.952C31 70.315 39.428 62 49.33 62zm-1.838-39.11c-3.026 0-5.478-2.479-5.478-5.545 0-3.079 2.451-5.581 5.478-5.581 3.015 0 5.479 2.502 5.479 5.581-.001 3.066-2.465 5.545-5.479 5.545zM122.281 48.811c-2.098-8.448-6.103-14.811-14.588-14.811H94V47.459c0 10.357-8.197 19.541-18.099 19.541H46.742C38.719 67 33 72.833 33 80.854v27.798c0 7.912 6.745 12.564 14.462 14.811 9.242 2.698 17.994 3.183 29.159 0C85.862 121.37 93 117.331 93 109.652V98H64v-4h43.682c8.484 0 11.647-5.776 14.599-14.66 3.047-9.145 2.916-17.799 0-29.529zm-41.955 55.606c3.027 0 5.479 2.479 5.479 5.547 0 3.076-2.451 5.579-5.479 5.579-3.015 0-5.478-2.502-5.478-5.579 0-3.068 2.463-5.547 5.478-5.547z"/></svg>`,
+    iconSvg: `<svg viewBox="0 0 128 128"><linearGradient id="python-gradient-1" gradientUnits="userSpaceOnUse" x1="70.252" y1="1237.476" x2="170.659" y2="1151.089" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)"><stop offset="0" stop-color="#5A9FD4"/><stop offset="1" stop-color="#306998"/></linearGradient><linearGradient id="python-gradient-2" gradientUnits="userSpaceOnUse" x1="209.474" y1="1098.811" x2="173.62" y2="1149.537" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)"><stop offset="0" stop-color="#FFD43B"/><stop offset="1" stop-color="#FFE873"/></linearGradient><path fill="url(#python-gradient-1)" d="M63.391 1.988c-4.222.02-8.252.379-11.8 1.007-10.45 1.846-12.346 5.71-12.346 12.837v9.411h24.693v3.137H29.977c-7.176 0-13.46 4.313-15.426 12.521-2.268 9.405-2.368 15.275 0 25.096 1.755 7.311 5.947 12.519 13.124 12.519h8.491V67.234c0-8.151 7.051-15.34 15.426-15.34h24.665c6.866 0 12.346-5.654 12.346-12.548V15.833c0-6.693-5.646-11.72-12.346-12.837-4.244-.706-8.645-1.027-12.866-1.008zM50.037 9.557c2.55 0 4.634 2.117 4.634 4.721 0 2.593-2.083 4.69-4.634 4.69-2.56 0-4.633-2.097-4.633-4.69-.001-2.604 2.073-4.721 4.633-4.721z" transform="translate(0 10.26)"/><path fill="url(#python-gradient-2)" d="M91.682 28.38v10.966c0 8.5-7.208 15.655-15.426 15.655H51.591c-6.756 0-12.346 5.783-12.346 12.549v23.515c0 6.691 5.818 10.628 12.346 12.547 7.816 2.297 15.312 2.713 24.665 0 6.216-1.801 12.346-5.423 12.346-12.547v-9.412H63.938v-3.138h37.012c7.176 0 9.852-5.005 12.348-12.519 2.578-7.735 2.467-15.174 0-25.096-1.774-7.145-5.161-12.521-12.348-12.521h-9.268zM77.809 87.927c2.561 0 4.634 2.097 4.634 4.692 0 2.602-2.074 4.719-4.634 4.719-2.55 0-4.633-2.117-4.633-4.719 0-2.595 2.083-4.692 4.633-4.692z" transform="translate(0 10.26)"/><radialGradient id="python-gradient-3" cx="1825.678" cy="444.45" r="26.743" gradientTransform="matrix(0 -.24 -1.055 0 532.979 557.576)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#B8B8B8" stop-opacity=".498"/><stop offset="1" stop-color="#7F7F7F" stop-opacity="0"/></radialGradient><path opacity=".444" fill="url(#python-gradient-3)" d="M97.309 119.597c0 3.543-14.816 6.416-33.091 6.416-18.276 0-33.092-2.873-33.092-6.416 0-3.544 14.815-6.417 33.092-6.417 18.275 0 33.091 2.872 33.091 6.417z"/></svg>`,
     title: "Python",
     description: "AI & data science ready"
   },
   {
-    iconSvg: `<svg viewBox="0 0 128 128"><path fill="currentColor" d="M27.7 99.4c-1.6 1.4-3.7 2-5.8 1.5-3.5-.8-5.8-4.1-5.2-7.6.4-2.1 1.7-3.6 3.4-4.6l-.1-.1c-2.1 1-4.3 1.3-6.6.7-4.5-1.1-7.3-5.5-6.3-10 .7-3.1 2.9-5.2 5.6-6.3l-.1-.1c-2.8 1-6 1.1-9 .1-5.4-1.8-8.4-7.6-6.6-13.1 1.3-4 4.8-6.6 8.8-7.2l-.1-.1c-4 .3-8.1-.9-11.4-3.8-5.4-4.8-5.9-13-1.1-18.4 3.5-3.9 8.8-5.2 13.5-3.7l.1-.1c-4.6-1.2-8.3-4.7-9.8-9.4-2.3-7.1 1.6-14.8 8.7-17 5.2-1.6 10.6.2 13.8 4.3l.1-.1c-3.2-3.9-4.3-9.4-2.4-14.5 2.9-7.8 11.5-11.7 19.3-8.8 5.7 2.1 9.3 7.3 9.5 13l.1-.1c-.1-5.7 2.3-11.3 7.1-14.8 7.3-5.3 17.5-3.7 22.8 3.7 3.9 5.4 4.2 12.4 1.2 18.1l.1.1c2.9-5.5 8.4-9.2 14.7-9.6 9.6-.6 17.9 6.6 18.5 16.2.5 6.9-3 13.1-8.6 16.3l.1.1c5.5-3 12.4-3.2 18.2-.2 8.9 4.6 12.3 15.4 7.7 24.3-3.4 6.5-10 10-17 9.4l.1.1c6.9.4 13.3 4.3 16.5 10.8 4.9 9.9.9 21.9-9 26.8-7.2 3.6-15.6 1.9-21.1-3.7l.1.1c5.4 5.3 6.9 13.5 3.4 20.5-5.4 10.6-18.4 14.9-29 9.5-7.7-3.9-11.9-12.1-11.1-20.3l-.1.1c.6 8.1-3 16.2-10 20.9-10.7 7.2-25.3 4.4-32.6-6.3-5.3-7.8-5.2-17.8.1-25.4z"/></svg>`,
+    iconSvg: `<svg viewBox="0 0 128 128"><path fill="#CC342D" d="M27.35 80.52l10.68-68.44c.37-2.33 3.5-2.89 4.6-.8l11.48 21.48-26.76 47.76zm75.94 16.63L93.1 34.11c-.31-1.96-2.76-2.76-4.17-1.35L24.71 97.15l35.54 19.95a7.447 7.447 0 007.18 0l35.86-19.95zm-28.85-55L66.21 26.5c-.92-1.78-3.44-1.78-4.36 0L25.7 90.95l48.74-48.8z"/></svg>`,
     title: "Ruby",
     description: "Elegant development"
   },
   // Row 2 - 4 items
   {
-    iconSvg: `<svg viewBox="0 0 128 128"><path fill="currentColor" d="M64 33.039c-33.74 0-61.094 13.862-61.094 30.961s27.354 30.961 61.094 30.961 61.094-13.862 61.094-30.961-27.354-30.961-61.094-30.961zm-15.897 36.993c-1.458 1.364-3.077 1.927-4.86 2.507-1.783.581-4.052.461-6.811.461h-6.253l-1.733 10h-7.301l6.515-34h14.04c4.224 0 7.305 1.215 9.242 3.432 1.937 2.217 2.519 5.364 1.747 9.337-.319 1.637-.856 3.159-1.614 4.515-.759 1.357-1.748 2.598-2.972 3.748zm21.311 2.968l2.881-14.42c.328-1.688.208-2.942-.361-3.555-.57-.614-1.782-1.025-3.635-1.025h-5.79l-3.731 19h-7.244l6.515-34h7.244l-1.732 9h6.453c4.061 0 6.861.815 8.402 2.231s2.003 3.356 1.387 6.528l-3.031 15.241h-7.358zm40.259-11.178c-.318 1.637-.856 3.133-1.613 4.488-.758 1.357-1.748 2.598-2.971 3.748-1.359 1.18-2.89 1.711-4.573 2.228-1.681.518-3.73.461-6.162.461h-6.918l-1.733 10h-7.244l6.515-34h14.041c4.224 0 7.305 1.215 9.241 3.432 1.935 2.217 2.518 5.418 1.746 9.392l-.329 1.251zM95.919 54h-5.001l-2.727 14h4.442c2.942 0 5.136-.29 6.576-1.4 1.442-1.108 2.413-2.828 2.918-5.421l.515-2.517c.452-2.279.243-3.925-.686-4.794-.929-.868-2.517-1.868-5.037-1.868zm-39.381 14h-5.274l-2.727 14h5.274c2.942 0 5.136-.29 6.576-1.4 1.441-1.108 2.413-2.828 2.917-5.421l.515-2.517c.452-2.279.243-3.925-.686-4.794-.928-.868-2.844-1.868-6.595-1.868z"/></svg>`,
+    iconSvg: `<svg viewBox="0 0 128 128"><path fill="#6181B6" d="M64 33.039c-33.74 0-61.094 13.862-61.094 30.961s27.354 30.961 61.094 30.961 61.094-13.862 61.094-30.961-27.354-30.961-61.094-30.961zm-15.897 36.993c-1.458 1.364-3.077 1.927-4.86 2.507-1.783.581-4.052.461-6.811.461h-6.253l-1.733 10h-7.301l6.515-34h14.04c4.224 0 7.305 1.215 9.242 3.432 1.937 2.217 2.519 5.364 1.747 9.337-.319 1.637-.856 3.159-1.614 4.515-.759 1.357-1.748 2.598-2.972 3.748zm21.311 2.968l2.881-14.42c.328-1.688.208-2.942-.361-3.555-.57-.614-1.782-1.025-3.635-1.025h-5.79l-3.731 19h-7.244l6.515-34h7.244l-1.732 9h6.453c4.061 0 6.861.815 8.402 2.231s2.003 3.356 1.387 6.528l-3.031 15.241h-7.358zm40.259-11.178c-.318 1.637-.856 3.133-1.613 4.488-.758 1.357-1.748 2.598-2.971 3.748-1.359 1.18-2.89 1.711-4.573 2.228-1.681.518-3.73.461-6.162.461h-6.918l-1.733 10h-7.244l6.515-34h14.041c4.224 0 7.305 1.215 9.241 3.432 1.935 2.217 2.518 5.418 1.746 9.392l-.329 1.251zM95.919 54h-5.001l-2.727 14h4.442c2.942 0 5.136-.29 6.576-1.4 1.442-1.108 2.413-2.828 2.918-5.421l.515-2.517c.452-2.279.243-3.925-.686-4.794-.929-.868-2.517-1.868-5.037-1.868zm-39.381 14h-5.274l-2.727 14h5.274c2.942 0 5.136-.29 6.576-1.4 1.441-1.108 2.413-2.828 2.917-5.421l.515-2.517c.452-2.279.243-3.925-.686-4.794-.928-.868-2.844-1.868-6.595-1.868z"/></svg>`,
     title: "PHP",
     description: "Industry standard"
   },
@@ -83,95 +86,114 @@ const allFeatures: Feature[] = [
 
 export function Features() {
   return (
-    <section className="py-20 sm:py-32 bg-background">
+    <section id="hosting-features" className="py-20 sm:py-32 bg-background" aria-labelledby="features-heading">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+        <header className="text-center mb-16">
+          <h2 id="features-heading" className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
             Everything you need to succeed online
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Professional hosting with industry-leading control panels
+            Professional web hosting with industry-leading control panels DirectAdmin and cPanel
           </p>
-        </div>
+        </header>
 
         {/* DirectAdmin & cPanel Banner */}
-        <div className="max-w-6xl mx-auto mb-16">
-          <div className="border-2 border-border rounded-lg p-8 md:p-12 bg-card">
-            <div className="grid md:grid-cols-2 gap-8 items-start">
-              {/* DirectAdmin */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <Server className="h-8 w-8" />
+        <div className="max-w-5xl mx-auto mb-16">
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* DirectAdmin */}
+            <article 
+              className="group relative bg-gradient-to-br from-card to-muted/20 border-2 border-border rounded-2xl p-6" 
+              itemScope 
+              itemType="https://schema.org/SoftwareApplication"
+            >
+              {/* Decorative Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              <div className="relative space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="!bg-blue-400 flex-shrink-0 w-20 h-20 flex items-center justify-center bg-muted/50 rounded-xl border border-border">
+                    <Image
+                      src="/partners/white_directadmin.svg"
+                      alt="DirectAdmin Control Panel Logo - Lightweight Web Hosting Management"
+                      width={64}
+                      height={64}
+                      className="object-contain"
+                      loading="eager"
+                    />
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-bold">DirectAdmin</h3>
-                    <Badge variant="secondary" className="mt-1">Lightweight & Fast</Badge>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-xl font-bold mb-1" itemProp="name">DirectAdmin</h3>
+                    <Badge variant="secondary" className="text-xs">Lightweight & Fast</Badge>
                   </div>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  A powerful, streamlined control panel designed for speed and efficiency. DirectAdmin offers a clean interface with low resource usage, making it perfect for performance-focused hosting. Manage your websites, databases, email accounts, and files with ease.
+                
+                <p className="text-sm text-muted-foreground leading-relaxed" itemProp="description">
+                  High-performance control panel engineered for minimal resource consumption and maximum uptime. Features enterprise-grade security and native LiteSpeed integration.
                 </p>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-start gap-2">
-                    <span className="text-foreground mt-0.5">•</span>
-                    <span className="text-muted-foreground">Minimal resource footprint</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-foreground mt-0.5">•</span>
-                    <span className="text-muted-foreground">Intuitive file manager & FTP</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-foreground mt-0.5">•</span>
-                    <span className="text-muted-foreground">One-click SSL installation</span>
-                  </li>
-                </ul>
+                
+                <Button asChild size="sm" className="w-full group-hover:bg-primary/90 transition-colors">
+                  <Link href="/free-hosting" aria-label="Try DirectAdmin control panel with our free hosting plan">
+                    Explore panel for free
+                  </Link>
+                </Button>
               </div>
+            </article>
 
-              {/* cPanel */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <Server className="h-8 w-8" />
+            {/* cPanel */}
+            <article 
+              className="group relative bg-gradient-to-br from-card to-muted/20 border-2 border-border rounded-2xl p-6" 
+              itemScope 
+              itemType="https://schema.org/SoftwareApplication"
+            >
+              {/* Decorative Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              <div className="relative space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-20 h-20 flex items-center justify-center bg-muted/50 rounded-xl border border-border">
+                    <Image
+                      src="/partners/cpanel-logo.svg"
+                      alt="cPanel Control Panel Logo - Industry Standard Web Hosting Management"
+                      width={64}
+                      height={64}
+                      className="object-contain"
+                      loading="eager"
+                    />
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-bold">cPanel</h3>
-                    <Badge variant="secondary" className="mt-1">Industry Standard</Badge>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-xl font-bold mb-1" itemProp="name">cPanel</h3>
+                    <Badge variant="secondary" className="text-xs">Industry Standard</Badge>
                   </div>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  The world's most popular web hosting control panel, trusted by millions. cPanel provides comprehensive tools for website management, with extensive documentation and third-party integrations. Perfect for users who need advanced features and familiar workflows.
+                
+                <p className="text-sm text-muted-foreground leading-relaxed" itemProp="description">
+                  Enterprise-class hosting platform with advanced automation, comprehensive API access, and Softaculous integration. Optimized for scalability and developer productivity.
                 </p>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-start gap-2">
-                    <span className="text-foreground mt-0.5">•</span>
-                    <span className="text-muted-foreground">Softaculous 1-click installer (400+ apps)</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-foreground mt-0.5">•</span>
-                    <span className="text-muted-foreground">Advanced email management</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-foreground mt-0.5">•</span>
-                    <span className="text-muted-foreground">Extensive plugin ecosystem</span>
-                  </li>
-                </ul>
+                
+                <Button asChild size="sm" className="w-full group-hover:bg-primary/90 transition-colors">
+                  <Link href="/free-hosting" aria-label="Try cPanel control panel with our free hosting plan">
+                    Explore panel for free
+                  </Link>
+                </Button>
               </div>
-            </div>
+            </article>
           </div>
         </div>
 
         {/* Features in Reverse Triangle Layout */}
         <div className="max-w-5xl mx-auto">
+          <h3 className="sr-only">Supported Technologies and Features</h3>
           <div className="space-y-4">
             {/* Row 1 - 3 items */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto">
               {allFeatures.slice(0, 3).map((feature) => (
-                <div
+                <article
                   key={feature.title}
                   className="flex items-center gap-3 p-4 border border-border rounded-lg bg-card hover:border-foreground/20 transition-colors"
+                  itemScope
+                  itemType="https://schema.org/Thing"
                 >
-                  <div className="shrink-0 w-10 h-10 flex items-center justify-center bg-muted rounded-md">
+                  <div className="shrink-0 w-10 h-10 flex items-center justify-center bg-muted rounded-md" aria-hidden="true">
                     {feature.iconSvg ? (
                       <div 
                         className="w-6 h-6 text-foreground" 
@@ -182,21 +204,23 @@ export function Features() {
                     ) : null}
                   </div>
                   <div className="min-w-0">
-                    <h4 className="font-semibold text-sm truncate">{feature.title}</h4>
-                    <p className="text-xs text-muted-foreground truncate">{feature.description}</p>
+                    <h4 className="font-semibold text-sm truncate" itemProp="name">{feature.title}</h4>
+                    <p className="text-xs text-muted-foreground truncate" itemProp="description">{feature.description}</p>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
 
             {/* Row 2 - 4 items */}
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 max-w-4xl mx-auto">
               {allFeatures.slice(3, 7).map((feature) => (
-                <div
+                <article
                   key={feature.title}
                   className="flex items-center gap-3 p-4 border border-border rounded-lg bg-card hover:border-foreground/20 transition-colors"
+                  itemScope
+                  itemType="https://schema.org/Thing"
                 >
-                  <div className="shrink-0 w-10 h-10 flex items-center justify-center bg-muted rounded-md">
+                  <div className="shrink-0 w-10 h-10 flex items-center justify-center bg-muted rounded-md" aria-hidden="true">
                     {feature.iconSvg ? (
                       <div 
                         className="w-6 h-6 text-foreground" 
@@ -207,21 +231,23 @@ export function Features() {
                     ) : null}
                   </div>
                   <div className="min-w-0">
-                    <h4 className="font-semibold text-sm truncate">{feature.title}</h4>
-                    <p className="text-xs text-muted-foreground truncate">{feature.description}</p>
+                    <h4 className="font-semibold text-sm truncate" itemProp="name">{feature.title}</h4>
+                    <p className="text-xs text-muted-foreground truncate" itemProp="description">{feature.description}</p>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
 
             {/* Row 3 - 5 items */}
             <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
               {allFeatures.slice(7, 12).map((feature) => (
-                <div
+                <article
                   key={feature.title}
                   className="flex items-center gap-3 p-4 border border-border rounded-lg bg-card hover:border-foreground/20 transition-colors"
+                  itemScope
+                  itemType="https://schema.org/Thing"
                 >
-                  <div className="shrink-0 w-10 h-10 flex items-center justify-center bg-muted rounded-md">
+                  <div className="shrink-0 w-10 h-10 flex items-center justify-center bg-muted rounded-md" aria-hidden="true">
                     {feature.iconSvg ? (
                       <div 
                         className="w-6 h-6 text-foreground" 
@@ -232,10 +258,10 @@ export function Features() {
                     ) : null}
                   </div>
                   <div className="min-w-0">
-                    <h4 className="font-semibold text-sm truncate">{feature.title}</h4>
-                    <p className="text-xs text-muted-foreground truncate">{feature.description}</p>
+                    <h4 className="font-semibold text-sm truncate" itemProp="name">{feature.title}</h4>
+                    <p className="text-xs text-muted-foreground truncate" itemProp="description">{feature.description}</p>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           </div>

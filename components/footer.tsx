@@ -41,24 +41,31 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
     <>
       <footer className="border-t bg-muted/30">
         {/* Newsletter Bar */}
-        <div className="border-b bg-primary text-primary-foreground">
+        <div className="border-b bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="text-center md:text-left">
-                <h3 className="text-lg font-semibold">{"Subscribe to our newsletter"}</h3>
+                <h3 className="text-xl font-bold mb-1">Join the KmerHosting universe</h3>
+                <p className="text-sm text-muted-foreground">Subscribe to keep up with everything happening on KmerHosting,<br className="hidden sm:block" /> from deals and promotions to product launches.</p>
               </div>
-              <form onSubmit={handleNewsletterSubmit} className="flex w-full md:w-auto gap-2">
-                <Input
-                  type="email"
-                  placeholder={"Enter your email"}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-primary-foreground text-foreground w-full md:w-64"
-                  required
-                />
-                <Button type="submit" variant="outline" className="bg-transparent px-6 py-2">
-                  {"Subscribe"}
-                </Button>
+              <form onSubmit={handleNewsletterSubmit} className="flex w-full md:w-auto gap-2 relative">
+                <div className="relative w-full md:w-80">
+                  <Input
+                    type="email"
+                    placeholder="Enter your email here"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="bg-muted/50 border-border text-foreground w-full pr-12 h-12 rounded-full focus-visible:ring-2 focus-visible:ring-primary"
+                    required
+                  />
+                  <Button 
+                    type="submit" 
+                    size="icon"
+                    className="absolute right-1 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-primary hover:bg-primary/90"
+                  >
+                    <Mail className="h-5 w-5" />
+                  </Button>
+                </div>
               </form>
             </div>
           </div>
@@ -207,6 +214,11 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
                 <li>
                   <Link href="/pricing" className="hover:text-accent transition-colors">
                     {"Pricing"}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/affiliate" className="hover:text-accent transition-colors">
+                    {"Affiliate Program"}
                   </Link>
                 </li>
                 <li>

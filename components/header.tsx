@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Moon, Sun, Menu, ChevronDown } from "lucide-react"
+import { Moon, Sun, Menu, ChevronDown, Check } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuLabel, DropdownMenuGroup } from "@/components/ui/dropdown-menu"
@@ -21,7 +21,6 @@ export function Header() {
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/pricing", label: "Pricing" },
-    { href: "/forum", label: "Forum" },
     { href: "/faq", label: "FAQ" },
     { href: "/about", label: "About Us" },
     { href: "/blog", label: "Blog" },
@@ -239,8 +238,8 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "px-5 py-3 text-sm font-medium transition-colors hover:text-accent",
-                  pathname === item.href ? "text-foreground" : "text-muted-foreground",
+                  "px-5 py-3 text-sm font-medium transition-colors hover:border-b-2 hover:border-green-500",
+                  pathname === item.href ? "text-foreground border-b-2 border-green-500" : "text-muted-foreground",
                 )}
               >
                 {item.label}
@@ -253,7 +252,7 @@ export function Header() {
                 <Button 
                   variant="ghost" 
                   className={cn(
-                    "px-5 py-3 text-sm font-medium transition-colors hover:text-accent",
+                    "px-5 py-3 text-sm font-medium transition-colors hover:text-accent focus-visible:ring-0 focus-visible:ring-offset-0",
                     pathname.startsWith('/products') ? "text-foreground" : "text-muted-foreground",
                   )}
                 >
@@ -371,8 +370,8 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "px-5 py-3 text-sm font-medium transition-colors hover:text-accent",
-                  pathname === item.href ? "text-foreground" : "text-muted-foreground",
+                  "px-5 py-3 text-sm font-medium transition-colors hover:border-b-2 hover:border-green-500",
+                  pathname === item.href ? "text-foreground border-b-2 border-green-500" : "text-muted-foreground",
                 )}
               >
                 {item.label}
@@ -385,16 +384,29 @@ export function Header() {
             {/* Theme Toggle */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="h-9 w-9">
+                <Button variant="ghost" size="icon" className="h-9 w-9 focus-visible:ring-0 focus-visible:ring-offset-0">
                   <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                   <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                   <span className="sr-only">Toggle theme</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("default")}>Default</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("default")} className="flex items-center justify-between">
+                  Default
+                  {theme === "default" && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("light")} className="flex items-center justify-between">
+                  Light
+                  {theme === "light" && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("dark")} className="flex items-center justify-between">
+                  Dark
+                  {theme === "dark" && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("system")} className="flex items-center justify-between">
+                  System
+                  {theme === "system" && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -415,16 +427,29 @@ export function Header() {
             {/* Theme Toggle for Mobile */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="h-9 w-9">
+                <Button variant="ghost" size="icon" className="h-9 w-9 focus-visible:ring-0 focus-visible:ring-offset-0">
                   <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                   <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                   <span className="sr-only">Toggle theme</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>System</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("default")} className="flex items-center justify-between">
+                  Default
+                  {theme === "default" && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("light")} className="flex items-center justify-between">
+                  Light
+                  {theme === "light" && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("dark")} className="flex items-center justify-between">
+                  Dark
+                  {theme === "dark" && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("system")} className="flex items-center justify-between">
+                  System
+                  {theme === "system" && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 

@@ -2,6 +2,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CookieBanner } from "@/components/cookie-banner"
 import { Hero } from "@/components/sections/hero"
+import { GlobalInfrastructure } from "@/components/sections/global-infrastructure"
 import { ExpertHelp } from "@/components/sections/expert-help"
 import { Features } from "@/components/sections/features"
 import { Partners } from "@/components/sections/partners"
@@ -65,8 +66,9 @@ export default function HomePage() {
       <Header />
       <main>
         <Hero />
-        <ExpertHelp />
+        <GlobalInfrastructure />
         <Features />
+        <ExpertHelp />
         <Partners />
         <WhyChooseUs />
         <Testimonials />
