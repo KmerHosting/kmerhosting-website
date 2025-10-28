@@ -36,7 +36,7 @@ const billingDiscounts: Record<BillingPeriod, { discount: number; label: string;
 const nodejsPlans: PricingPlan[] = [
   {
     name: "Node.js Starter",
-    basePrice: 1175,
+    basePrice: 3175,
     description: "Perfect for Node.js applications",
     features: ["1 Node.js App", "10 GB SSD Storage", "Node.js 18/20/21", "Free SSL Certificate"],
     allFeatures: [
@@ -47,7 +47,7 @@ const nodejsPlans: PricingPlan[] = [
   },
   {
     name: "Node.js Plus",
-    basePrice: 1250,
+    basePrice: 3250,
     description: "Great for growing Node.js apps",
     badge: "Popular",
     color: "blue",
@@ -60,7 +60,7 @@ const nodejsPlans: PricingPlan[] = [
   },
   {
     name: "Node.js Pro",
-    basePrice: 2100,
+    basePrice: 4100,
     description: "For production Node.js apps",
     badge: "Best Value",
     color: "purple",
@@ -78,7 +78,7 @@ const nodejsPlans: PricingPlan[] = [
 const phpPlans: PricingPlan[] = [
   {
     name: "PHP Starter",
-    basePrice: 1175,
+    basePrice: 3175,
     description: "Perfect for PHP websites",
     features: ["1 Website", "10 GB SSD Storage", "PHP 7.4/8.0/8.1/8.2", "Free SSL Certificate"],
     allFeatures: [
@@ -89,7 +89,7 @@ const phpPlans: PricingPlan[] = [
   },
   {
     name: "PHP Plus",
-    basePrice: 1250,
+    basePrice: 3250,
     description: "Great for PHP applications",
     badge: "Popular",
     color: "blue",
@@ -103,7 +103,7 @@ const phpPlans: PricingPlan[] = [
   },
   {
     name: "PHP Pro",
-    basePrice: 2100,
+    basePrice: 4100,
     description: "For high-traffic PHP sites",
     badge: "Best Value",
     color: "purple",
@@ -121,7 +121,7 @@ const phpPlans: PricingPlan[] = [
 const wordpressPlans: PricingPlan[] = [
   {
     name: "WordPress Starter",
-    basePrice: 1175,
+    basePrice: 3175,
     description: "Perfect for WordPress blogs",
     features: ["1 WordPress Site", "10 GB SSD Storage", "WordPress Optimized", "Free SSL Certificate"],
     allFeatures: [
@@ -133,7 +133,7 @@ const wordpressPlans: PricingPlan[] = [
   },
   {
     name: "WordPress Plus",
-    basePrice: 1250,
+    basePrice: 3250,
     description: "Great for WordPress businesses",
     badge: "Popular",
     color: "blue",
@@ -147,7 +147,7 @@ const wordpressPlans: PricingPlan[] = [
   },
   {
     name: "WordPress Pro",
-    basePrice: 2100,
+    basePrice: 4100,
     description: "For WordPress agencies",
     badge: "Best Value",
     color: "purple",
@@ -165,7 +165,7 @@ const wordpressPlans: PricingPlan[] = [
 const woocommercePlans: PricingPlan[] = [
   {
     name: "WooCommerce Starter",
-    basePrice: 1175,
+    basePrice: 3175,
     description: "Perfect for new online stores",
     features: ["1 WooCommerce Store", "20 GB SSD Storage", "WooCommerce Optimized", "Free SSL Certificate"],
     allFeatures: [
@@ -177,7 +177,7 @@ const woocommercePlans: PricingPlan[] = [
   },
   {
     name: "WooCommerce Plus",
-    basePrice: 1250,
+    basePrice: 3250,
     description: "Great for growing stores",
     badge: "Popular",
     color: "blue",
@@ -191,7 +191,7 @@ const woocommercePlans: PricingPlan[] = [
   },
   {
     name: "WooCommerce Pro",
-    basePrice: 2100,
+    basePrice: 4100,
     description: "For high-volume stores",
     badge: "Best Value",
     color: "purple",
@@ -209,7 +209,7 @@ const woocommercePlans: PricingPlan[] = [
 const ecommercePlans: PricingPlan[] = [
   {
     name: "E-Commerce Starter",
-    basePrice: 1175,
+    basePrice: 3175,
     description: "Perfect for any e-commerce platform",
     features: ["1 Store", "25 GB SSD Storage", "Magento/PrestaShop/OpenCart", "Free SSL Certificate"],
     allFeatures: [
@@ -221,7 +221,7 @@ const ecommercePlans: PricingPlan[] = [
   },
   {
     name: "E-Commerce Plus",
-    basePrice: 1250,
+    basePrice: 3250,
     description: "Great for growing e-commerce",
     badge: "Popular",
     color: "blue",
@@ -235,7 +235,7 @@ const ecommercePlans: PricingPlan[] = [
   },
   {
     name: "E-Commerce Pro",
-    basePrice: 2100,
+    basePrice: 4100,
     description: "For enterprise e-commerce",
     badge: "Best Value",
     color: "purple",
@@ -253,7 +253,7 @@ const ecommercePlans: PricingPlan[] = [
 const pythonPlans: PricingPlan[] = [
   {
     name: "Python Starter",
-    basePrice: 1175,
+    basePrice: 3175,
     description: "Perfect for Python applications",
     features: ["1 Python App", "15 GB SSD Storage", "Python 3.9/3.10/3.11/3.12", "Free SSL Certificate"],
     allFeatures: [
@@ -265,7 +265,7 @@ const pythonPlans: PricingPlan[] = [
   },
   {
     name: "Python Plus",
-    basePrice: 1250,
+    basePrice: 3250,
     description: "Great for Python projects",
     badge: "Popular",
     color: "blue",
@@ -279,7 +279,7 @@ const pythonPlans: PricingPlan[] = [
   },
   {
     name: "Python Pro",
-    basePrice: 2100,
+    basePrice: 4100,
     description: "For production Python apps",
     badge: "Best Value",
     color: "purple",
@@ -297,7 +297,7 @@ const pythonPlans: PricingPlan[] = [
 const rubyPlans: PricingPlan[] = [
   {
     name: "Ruby Starter",
-    basePrice: 1175,
+    basePrice: 3175,
     description: "Perfect for Ruby applications",
     features: ["1 Ruby App", "15 GB SSD Storage", "Ruby 2.7/3.0/3.1/3.2", "Free SSL Certificate"],
     allFeatures: [
@@ -309,7 +309,7 @@ const rubyPlans: PricingPlan[] = [
   },
   {
     name: "Ruby Plus",
-    basePrice: 1250,
+    basePrice: 3250,
     description: "Great for Ruby on Rails",
     badge: "Popular",
     color: "blue",
@@ -323,7 +323,7 @@ const rubyPlans: PricingPlan[] = [
   },
   {
     name: "Ruby Pro",
-    basePrice: 2100,
+    basePrice: 4100,
     description: "For production Ruby apps",
     badge: "Best Value",
     color: "purple",
@@ -337,43 +337,348 @@ const rubyPlans: PricingPlan[] = [
   },
 ]
 
-// Reseller Hosting Plans
-const resellerPlans: PricingPlan[] = [
+// cPanel Reseller Plans
+const cpanelResellerPlans: PricingPlan[] = [
   {
-    name: "Alpha Reseller",
-    basePrice: 8000,
-    description: "Start your hosting business",
-    features: ["50 GB SSD Storage", "500 GB Bandwidth", "Unlimited cPanel Accounts", "Free WHMCS License"],
+    name: "cPanel Reseller Bronze",
+    basePrice: 5000,
+    description: "Entry-level reseller hosting",
+    features: ["25 GB SSD Storage", "250 GB Bandwidth", "15 cPanel Accounts", "Free WHMCS License"],
     allFeatures: [
-      "50 GB SSD Storage", "500 GB Bandwidth", "Unlimited cPanel Accounts", "Free WHMCS License",
+      "25 GB SSD Storage", "250 GB Bandwidth", "15 cPanel Accounts", "Free WHMCS License",
       "WHM Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed Web Server",
-      "Private Nameservers", "Reseller Support", "Daily Backups", "99.9% Uptime SLA",
+      "Private Nameservers", "Email Support", "Daily Backups", "99.9% Uptime SLA",
     ],
   },
   {
-    name: "Master Reseller",
-    basePrice: 15000,
-    description: "Scale your hosting business",
-    popular: true,
-    badge: "Most Popular",
-    color: "green",
-    features: ["100 GB SSD Storage", "1 TB Bandwidth", "Unlimited cPanel Accounts", "Free WHMCS License"],
+    name: "cPanel Reseller Silver",
+    basePrice: 8000,
+    description: "Growing reseller business",
+    badge: "Popular",
+    color: "blue",
+    features: ["50 GB SSD Storage", "500 GB Bandwidth", "30 cPanel Accounts", "Free WHMCS License"],
     allFeatures: [
-      "100 GB SSD Storage", "1 TB Bandwidth", "Unlimited cPanel Accounts", "Free WHMCS License",
+      "50 GB SSD Storage", "500 GB Bandwidth", "30 cPanel Accounts", "Free WHMCS License",
+      "WHM Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed Web Server",
+      "Private Nameservers", "Priority Support", "Daily Backups", "99.9% Uptime SLA",
+      "Free Website Migration",
+    ],
+  },
+  {
+    name: "cPanel Reseller Gold",
+    basePrice: 12000,
+    description: "Professional reseller hosting",
+    badge: "Best Value",
+    color: "purple",
+    features: ["100 GB SSD Storage", "1 TB Bandwidth", "50 cPanel Accounts", "Free WHMCS License"],
+    allFeatures: [
+      "100 GB SSD Storage", "1 TB Bandwidth", "50 cPanel Accounts", "Free WHMCS License",
       "WHM Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Redis",
-      "Private Nameservers", "Priority Reseller Support", "Daily Backups", "99.9% Uptime SLA",
+      "Private Nameservers", "Priority Support", "Daily Backups", "99.9% Uptime SLA",
       "Free Website Migration", "Advanced Security",
     ],
   },
   {
-    name: "Reseller",
-    basePrice: 5000,
-    description: "Basic reseller package",
-    features: ["25 GB SSD Storage", "250 GB Bandwidth", "Unlimited cPanel Accounts", "Free WHMCS License"],
+    name: "cPanel Reseller Platinum",
+    basePrice: 18000,
+    description: "Premium reseller hosting",
+    badge: "Premium",
+    color: "orange",
+    features: ["200 GB SSD Storage", "2 TB Bandwidth", "Unlimited cPanel Accounts", "Free WHMCS License"],
     allFeatures: [
-      "25 GB SSD Storage", "250 GB Bandwidth", "Unlimited cPanel Accounts", "Free WHMCS License",
+      "200 GB SSD Storage", "2 TB Bandwidth", "Unlimited cPanel Accounts", "Free WHMCS License",
+      "WHM Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Redis + Memcached",
+      "Private Nameservers", "VIP Support (24/7)", "Hourly Backups", "99.99% Uptime SLA",
+      "Free Website Migration", "Advanced Security", "Dedicated IP",
+    ],
+  },
+]
+
+// cPanel Master Reseller Plans
+const cpanelMasterResellerPlans: PricingPlan[] = [
+  {
+    name: "cPanel Master Reseller Bronze",
+    basePrice: 15000,
+    description: "Entry-level master reseller",
+    features: ["50 GB SSD Storage", "1 TB Bandwidth", "15 Reseller Accounts", "Free WHMCS License"],
+    allFeatures: [
+      "50 GB SSD Storage", "1 TB Bandwidth", "15 Reseller Accounts", "Free WHMCS License",
       "WHM Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed Web Server",
+      "Private Nameservers", "Master Reseller Support", "Daily Backups", "99.9% Uptime SLA",
+      "Create Sub-Resellers",
+    ],
+  },
+  {
+    name: "cPanel Master Reseller Silver",
+    basePrice: 22000,
+    description: "Growing master reseller business",
+    badge: "Popular",
+    color: "blue",
+    features: ["100 GB SSD Storage", "2 TB Bandwidth", "30 Reseller Accounts", "Free WHMCS License"],
+    allFeatures: [
+      "100 GB SSD Storage", "2 TB Bandwidth", "30 Reseller Accounts", "Free WHMCS License",
+      "WHM Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Redis",
+      "Private Nameservers", "Priority Support", "Daily Backups", "99.9% Uptime SLA",
+      "Create Sub-Resellers", "Advanced Security",
+    ],
+  },
+  {
+    name: "cPanel Master Reseller Gold",
+    basePrice: 30000,
+    description: "Professional master reseller",
+    badge: "Best Value",
+    color: "purple",
+    features: ["200 GB SSD Storage", "4 TB Bandwidth", "50 Reseller Accounts", "Free WHMCS License"],
+    allFeatures: [
+      "200 GB SSD Storage", "4 TB Bandwidth", "50 Reseller Accounts", "Free WHMCS License",
+      "WHM Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Redis + Memcached",
+      "Private Nameservers", "VIP Support (24/7)", "Hourly Backups", "99.99% Uptime SLA",
+      "Create Sub-Resellers", "Advanced Security", "Dedicated IP",
+    ],
+  },
+  {
+    name: "cPanel Master Reseller Platinum",
+    basePrice: 40000,
+    description: "Premium master reseller",
+    badge: "Premium",
+    color: "orange",
+    features: ["400 GB SSD Storage", "8 TB Bandwidth", "Unlimited Reseller Accounts", "Free WHMCS License"],
+    allFeatures: [
+      "400 GB SSD Storage", "8 TB Bandwidth", "Unlimited Reseller Accounts", "Free WHMCS License",
+      "WHM Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Full Stack",
+      "Private Nameservers", "VIP Support (24/7)", "Hourly Backups", "99.99% Uptime SLA",
+      "Create Sub-Resellers", "Enterprise Security", "Multiple Dedicated IPs", "Custom Branding",
+    ],
+  },
+]
+
+// cPanel Alpha Reseller Plans
+const cpanelAlphaResellerPlans: PricingPlan[] = [
+  {
+    name: "cPanel Alpha Reseller Bronze",
+    basePrice: 35000,
+    description: "Entry-level alpha reseller",
+    features: ["100 GB SSD Storage", "2 TB Bandwidth", "15 Master Resellers", "Free WHMCS License"],
+    allFeatures: [
+      "100 GB SSD Storage", "2 TB Bandwidth", "15 Master Resellers", "Free WHMCS License",
+      "WHM Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Redis",
+      "Private Nameservers", "Alpha Reseller Support", "Daily Backups", "99.9% Uptime SLA",
+      "Multi-Level Reselling", "Dedicated IP",
+    ],
+  },
+  {
+    name: "cPanel Alpha Reseller Silver",
+    basePrice: 50000,
+    description: "Growing alpha reseller business",
+    badge: "Popular",
+    color: "blue",
+    features: ["200 GB SSD Storage", "4 TB Bandwidth", "30 Master Resellers", "Free WHMCS License"],
+    allFeatures: [
+      "200 GB SSD Storage", "4 TB Bandwidth", "30 Master Resellers", "Free WHMCS License",
+      "WHM Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Redis + Memcached",
+      "Private Nameservers", "Priority Support", "Hourly Backups", "99.99% Uptime SLA",
+      "Multi-Level Reselling", "Multiple Dedicated IPs", "Custom Branding",
+    ],
+  },
+  {
+    name: "cPanel Alpha Reseller Gold",
+    basePrice: 70000,
+    description: "Professional alpha reseller",
+    badge: "Best Value",
+    color: "purple",
+    features: ["400 GB SSD Storage", "8 TB Bandwidth", "50 Master Resellers", "Free WHMCS License"],
+    allFeatures: [
+      "400 GB SSD Storage", "8 TB Bandwidth", "50 Master Resellers", "Free WHMCS License",
+      "WHM Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Full Stack",
+      "Private Nameservers", "VIP Support (24/7)", "Hourly Backups", "99.99% Uptime SLA",
+      "Multi-Level Reselling", "Multiple Dedicated IPs", "Custom Branding", "API Access",
+    ],
+  },
+  {
+    name: "cPanel Alpha Reseller Platinum",
+    basePrice: 100000,
+    description: "Premium alpha reseller",
+    badge: "Premium",
+    color: "orange",
+    features: ["800 GB SSD Storage", "16 TB Bandwidth", "Unlimited Master Resellers", "Free WHMCS License"],
+    allFeatures: [
+      "800 GB SSD Storage", "16 TB Bandwidth", "Unlimited Master Resellers", "Free WHMCS License",
+      "WHM Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Enterprise Stack",
+      "Private Nameservers", "VIP Support (24/7)", "Real-time Backups", "99.99% Uptime SLA",
+      "Multi-Level Reselling", "Multiple Dedicated IPs", "Custom Branding", "Full API Access", "SLA Guarantee",
+    ],
+  },
+]
+
+// DA (DirectAdmin) Reseller Plans
+const daResellerPlans: PricingPlan[] = [
+  {
+    name: "DA Reseller Bronze",
+    basePrice: 4500,
+    description: "Entry-level DA reseller hosting",
+    features: ["25 GB SSD Storage", "250 GB Bandwidth", "15 DA Accounts", "Free WHMCS License"],
+    allFeatures: [
+      "25 GB SSD Storage", "250 GB Bandwidth", "15 DirectAdmin Accounts", "Free WHMCS License",
+      "DirectAdmin Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed Web Server",
       "Private Nameservers", "Email Support", "Daily Backups", "99.9% Uptime SLA",
+    ],
+  },
+  {
+    name: "DA Reseller Silver",
+    basePrice: 7500,
+    description: "Growing DA reseller business",
+    badge: "Popular",
+    color: "blue",
+    features: ["50 GB SSD Storage", "500 GB Bandwidth", "30 DA Accounts", "Free WHMCS License"],
+    allFeatures: [
+      "50 GB SSD Storage", "500 GB Bandwidth", "30 DirectAdmin Accounts", "Free WHMCS License",
+      "DirectAdmin Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed Web Server",
+      "Private Nameservers", "Priority Support", "Daily Backups", "99.9% Uptime SLA",
+      "Free Website Migration",
+    ],
+  },
+  {
+    name: "DA Reseller Gold",
+    basePrice: 11000,
+    description: "Professional DA reseller hosting",
+    badge: "Best Value",
+    color: "purple",
+    features: ["100 GB SSD Storage", "1 TB Bandwidth", "50 DA Accounts", "Free WHMCS License"],
+    allFeatures: [
+      "100 GB SSD Storage", "1 TB Bandwidth", "50 DirectAdmin Accounts", "Free WHMCS License",
+      "DirectAdmin Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Redis",
+      "Private Nameservers", "Priority Support", "Daily Backups", "99.9% Uptime SLA",
+      "Free Website Migration", "Advanced Security",
+    ],
+  },
+  {
+    name: "DA Reseller Platinum",
+    basePrice: 16500,
+    description: "Premium DA reseller hosting",
+    badge: "Premium",
+    color: "orange",
+    features: ["200 GB SSD Storage", "2 TB Bandwidth", "Unlimited DA Accounts", "Free WHMCS License"],
+    allFeatures: [
+      "200 GB SSD Storage", "2 TB Bandwidth", "Unlimited DirectAdmin Accounts", "Free WHMCS License",
+      "DirectAdmin Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Redis + Memcached",
+      "Private Nameservers", "VIP Support (24/7)", "Hourly Backups", "99.99% Uptime SLA",
+      "Free Website Migration", "Advanced Security", "Dedicated IP",
+    ],
+  },
+]
+
+// DA (DirectAdmin) Master Reseller Plans
+const daMasterResellerPlans: PricingPlan[] = [
+  {
+    name: "DA Master Reseller Bronze",
+    basePrice: 14000,
+    description: "Entry-level DA master reseller",
+    features: ["50 GB SSD Storage", "1 TB Bandwidth", "15 Reseller Accounts", "Free WHMCS License"],
+    allFeatures: [
+      "50 GB SSD Storage", "1 TB Bandwidth", "15 Reseller Accounts", "Free WHMCS License",
+      "DirectAdmin Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed Web Server",
+      "Private Nameservers", "Master Reseller Support", "Daily Backups", "99.9% Uptime SLA",
+      "Create Sub-Resellers",
+    ],
+  },
+  {
+    name: "DA Master Reseller Silver",
+    basePrice: 20000,
+    description: "Growing DA master reseller",
+    badge: "Popular",
+    color: "blue",
+    features: ["100 GB SSD Storage", "2 TB Bandwidth", "30 Reseller Accounts", "Free WHMCS License"],
+    allFeatures: [
+      "100 GB SSD Storage", "2 TB Bandwidth", "30 Reseller Accounts", "Free WHMCS License",
+      "DirectAdmin Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Redis",
+      "Private Nameservers", "Priority Support", "Daily Backups", "99.9% Uptime SLA",
+      "Create Sub-Resellers", "Advanced Security",
+    ],
+  },
+  {
+    name: "DA Master Reseller Gold",
+    basePrice: 28000,
+    description: "Professional DA master reseller",
+    badge: "Best Value",
+    color: "purple",
+    features: ["200 GB SSD Storage", "4 TB Bandwidth", "50 Reseller Accounts", "Free WHMCS License"],
+    allFeatures: [
+      "200 GB SSD Storage", "4 TB Bandwidth", "50 Reseller Accounts", "Free WHMCS License",
+      "DirectAdmin Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Redis + Memcached",
+      "Private Nameservers", "VIP Support (24/7)", "Hourly Backups", "99.99% Uptime SLA",
+      "Create Sub-Resellers", "Advanced Security", "Dedicated IP",
+    ],
+  },
+  {
+    name: "DA Master Reseller Platinum",
+    basePrice: 37000,
+    description: "Premium DA master reseller",
+    badge: "Premium",
+    color: "orange",
+    features: ["400 GB SSD Storage", "8 TB Bandwidth", "Unlimited Reseller Accounts", "Free WHMCS License"],
+    allFeatures: [
+      "400 GB SSD Storage", "8 TB Bandwidth", "Unlimited Reseller Accounts", "Free WHMCS License",
+      "DirectAdmin Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Full Stack",
+      "Private Nameservers", "VIP Support (24/7)", "Hourly Backups", "99.99% Uptime SLA",
+      "Create Sub-Resellers", "Enterprise Security", "Multiple Dedicated IPs", "Custom Branding",
+    ],
+  },
+]
+
+// DA (DirectAdmin) Alpha Reseller Plans
+const daAlphaResellerPlans: PricingPlan[] = [
+  {
+    name: "DA Alpha Reseller Bronze",
+    basePrice: 32000,
+    description: "Entry-level DA alpha reseller",
+    features: ["100 GB SSD Storage", "2 TB Bandwidth", "Unlimited Master Resellers", "Free WHMCS License"],
+    allFeatures: [
+      "100 GB SSD Storage", "2 TB Bandwidth", "Unlimited Master Resellers", "Free WHMCS License",
+      "DirectAdmin Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Redis",
+      "Private Nameservers", "Alpha Reseller Support", "Daily Backups", "99.9% Uptime SLA",
+      "Multi-Level Reselling", "Dedicated IP",
+    ],
+  },
+  {
+    name: "DA Alpha Reseller Silver",
+    basePrice: 45000,
+    description: "Growing DA alpha reseller",
+    badge: "Popular",
+    color: "blue",
+    features: ["200 GB SSD Storage", "4 TB Bandwidth", "Unlimited Master Resellers", "Free WHMCS License"],
+    allFeatures: [
+      "200 GB SSD Storage", "4 TB Bandwidth", "Unlimited Master Resellers", "Free WHMCS License",
+      "DirectAdmin Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Redis + Memcached",
+      "Private Nameservers", "Priority Support", "Hourly Backups", "99.99% Uptime SLA",
+      "Multi-Level Reselling", "Multiple Dedicated IPs", "Custom Branding",
+    ],
+  },
+  {
+    name: "DA Alpha Reseller Gold",
+    basePrice: 65000,
+    description: "Professional DA alpha reseller",
+    badge: "Best Value",
+    color: "purple",
+    features: ["400 GB SSD Storage", "8 TB Bandwidth", "Unlimited Master Resellers", "Free WHMCS License"],
+    allFeatures: [
+      "400 GB SSD Storage", "8 TB Bandwidth", "Unlimited Master Resellers", "Free WHMCS License",
+      "DirectAdmin Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Full Stack",
+      "Private Nameservers", "VIP Support (24/7)", "Hourly Backups", "99.99% Uptime SLA",
+      "Multi-Level Reselling", "Multiple Dedicated IPs", "Custom Branding", "API Access",
+    ],
+  },
+  {
+    name: "DA Alpha Reseller Platinum",
+    basePrice: 95000,
+    description: "Premium DA alpha reseller",
+    badge: "Premium",
+    color: "orange",
+    features: ["800 GB SSD Storage", "16 TB Bandwidth", "Unlimited Master Resellers", "Free WHMCS License"],
+    allFeatures: [
+      "800 GB SSD Storage", "16 TB Bandwidth", "Unlimited Master Resellers", "Free WHMCS License",
+      "DirectAdmin Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Enterprise Stack",
+      "Private Nameservers", "VIP Support (24/7)", "Real-time Backups", "99.99% Uptime SLA",
+      "Multi-Level Reselling", "Multiple Dedicated IPs", "Custom Branding", "Full API Access", "SLA Guarantee",
     ],
   },
 ]
@@ -673,6 +978,14 @@ export default function PricingPage() {
     "directadmin-ecommerce": false,
     "directadmin-python": false,
     "directadmin-ruby": false,
+  })
+  const [openResellerTypes, setOpenResellerTypes] = useState<Record<string, boolean>>({
+    "cpanel-reseller": false,
+    "cpanel-master": false,
+    "cpanel-alpha": false,
+    "da-reseller": false,
+    "da-master": false,
+    "da-alpha": false,
   })
 
   return (
@@ -1101,10 +1414,66 @@ export default function PricingPage() {
                           <ChevronDown className={`h-4 w-4 transition-transform ${openSubcategories["reseller-cpanel"] ? "rotate-180" : ""}`} />
                         </CollapsibleTrigger>
                         <CollapsibleContent>
-                          <div className="p-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {resellerPlans.map((plan) => (
-                              <PricingCard key={`reseller-cpanel-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
-                            ))}
+                          <div className="p-3 space-y-2 bg-muted/20">
+                            {/* cPanel Reseller */}
+                            <Collapsible 
+                              open={openResellerTypes["cpanel-reseller"]} 
+                              onOpenChange={(open) => setOpenResellerTypes({...openResellerTypes, "cpanel-reseller": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">Reseller</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openResellerTypes["cpanel-reseller"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                                    {cpanelResellerPlans.map((plan) => (
+                                      <PricingCard key={`${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* cPanel Master Reseller */}
+                            <Collapsible 
+                              open={openResellerTypes["cpanel-master"]} 
+                              onOpenChange={(open) => setOpenResellerTypes({...openResellerTypes, "cpanel-master": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">Master Reseller</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openResellerTypes["cpanel-master"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                                    {cpanelMasterResellerPlans.map((plan) => (
+                                      <PricingCard key={`${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* cPanel Alpha Reseller */}
+                            <Collapsible 
+                              open={openResellerTypes["cpanel-alpha"]} 
+                              onOpenChange={(open) => setOpenResellerTypes({...openResellerTypes, "cpanel-alpha": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">Alpha Reseller</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openResellerTypes["cpanel-alpha"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                                    {cpanelAlphaResellerPlans.map((plan) => (
+                                      <PricingCard key={`${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
                           </div>
                         </CollapsibleContent>
                       </Card>
@@ -1121,10 +1490,66 @@ export default function PricingPage() {
                           <ChevronDown className={`h-4 w-4 transition-transform ${openSubcategories["reseller-directadmin"] ? "rotate-180" : ""}`} />
                         </CollapsibleTrigger>
                         <CollapsibleContent>
-                          <div className="p-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {resellerPlans.map((plan) => (
-                              <PricingCard key={`reseller-da-${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
-                            ))}
+                          <div className="p-3 space-y-2 bg-muted/20">
+                            {/* DA Reseller */}
+                            <Collapsible 
+                              open={openResellerTypes["da-reseller"]} 
+                              onOpenChange={(open) => setOpenResellerTypes({...openResellerTypes, "da-reseller": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">Reseller</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openResellerTypes["da-reseller"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                                    {daResellerPlans.map((plan) => (
+                                      <PricingCard key={`${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* DA Master Reseller */}
+                            <Collapsible 
+                              open={openResellerTypes["da-master"]} 
+                              onOpenChange={(open) => setOpenResellerTypes({...openResellerTypes, "da-master": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">Master Reseller</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openResellerTypes["da-master"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                                    {daMasterResellerPlans.map((plan) => (
+                                      <PricingCard key={`${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
+
+                            {/* DA Alpha Reseller */}
+                            <Collapsible 
+                              open={openResellerTypes["da-alpha"]} 
+                              onOpenChange={(open) => setOpenResellerTypes({...openResellerTypes, "da-alpha": open})}
+                            >
+                              <Card className="overflow-hidden">
+                                <CollapsibleTrigger className="w-full p-2 flex items-center justify-between hover:bg-accent transition-colors">
+                                  <span className="text-sm font-medium">Alpha Reseller</span>
+                                  <ChevronDown className={`h-3 w-3 transition-transform ${openResellerTypes["da-alpha"] ? "rotate-180" : ""}`} />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="p-3 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                                    {daAlphaResellerPlans.map((plan) => (
+                                      <PricingCard key={`${plan.name}`} plan={plan} billingPeriod={billingPeriod} />
+                                    ))}
+                                  </div>
+                                </CollapsibleContent>
+                              </Card>
+                            </Collapsible>
                           </div>
                         </CollapsibleContent>
                       </Card>
