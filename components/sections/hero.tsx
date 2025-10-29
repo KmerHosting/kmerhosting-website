@@ -47,8 +47,31 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Decorative gradient blur */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 dark:bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Decorative effects - different for light and dark themes */}
+      
+      {/* Dark theme: Central gradient blur */}
+      <div className="hidden dark:block absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      
+      {/* Light theme: Border gradient effects */}
+      <div className="dark:hidden">
+        {/* Top border glow */}
+        <div className="absolute top-0 left-0 right-0 h-[200px] bg-gradient-to-b from-primary/10 to-transparent pointer-events-none" />
+        
+        {/* Left border glow */}
+        <div className="absolute top-0 left-0 bottom-0 w-[200px] bg-gradient-to-r from-primary/8 to-transparent pointer-events-none" />
+        
+        {/* Right border glow */}
+        <div className="absolute top-0 right-0 bottom-0 w-[200px] bg-gradient-to-l from-primary/8 to-transparent pointer-events-none" />
+        
+        {/* Bottom border glow */}
+        <div className="absolute bottom-0 left-0 right-0 h-[200px] bg-gradient-to-t from-primary/10 to-transparent pointer-events-none" />
+        
+        {/* Corner accents */}
+        <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      </div>
     </section>
   )
 }

@@ -414,9 +414,9 @@ export function Header() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("default")} className="flex items-center justify-between">
+                <DropdownMenuItem onClick={() => setTheme("dark")} className="flex items-center justify-between">
                   Dark
-                  {theme === "default" && <Check className="h-4 w-4 text-[#07C983] ml-2" />}
+                  {theme === "dark" && <Check className="h-4 w-4 text-[#07C983] ml-2" />}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("light")} className="flex items-center justify-between">
                   Light
@@ -467,9 +467,9 @@ export function Header() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("default")} className="flex items-center justify-between">
+                <DropdownMenuItem onClick={() => setTheme("dark")} className="flex items-center justify-between">
                   Dark
-                  {theme === "default" && <Check className="h-4 w-4 text-[#07C983] ml-2" />}
+                  {theme === "dark" && <Check className="h-4 w-4 text-[#07C983] ml-2" />}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("light")} className="flex items-center justify-between">
                   Light
