@@ -40,7 +40,6 @@ const popularPlans: Plan[] = [
       "WHM Control Panel Access",
       "Create Unlimited cPanel Accounts",
       "White-Label Branding",
-      "Free WHMCS License",
       "Private Name Servers",
       "24/7 Technical Support"
     ],

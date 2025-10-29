@@ -58,7 +58,6 @@ const hostingProducts: Product[] = [
     title: "Reseller Hosting",
     description: "Start your own hosting business with white-label solutions and WHMCS",
     features: [
-      "Free WHMCS License",
       "White Label Hosting",
       "cPanel/WHM or DirectAdmin",
       "Unlimited Client Accounts"
