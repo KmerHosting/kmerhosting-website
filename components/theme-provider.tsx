@@ -1,15 +1,15 @@
 "use client"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 import type { ThemeProviderProps } from "next-themes"
-import { useEffect } from "react"
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return (
     <NextThemesProvider 
-      {...props}
-      forcedTheme={undefined}
+      attribute="class"
+      defaultTheme="dark"
       enableSystem={true}
-      systemTheme="dark"
+      themes={["light", "dark", "system"]}
+      {...props}
     >
       {children}
     </NextThemesProvider>
