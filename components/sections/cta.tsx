@@ -86,7 +86,7 @@ export function CTA() {// Structured data for SEO
                   <div className="text-sm text-muted-foreground">Expert Support</div>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">8000+</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">5000+</div>
                   <div className="text-sm text-muted-foreground">Happy Customers</div>
                 </div>
                 <div>

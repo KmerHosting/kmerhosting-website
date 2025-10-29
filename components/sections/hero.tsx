@@ -47,8 +47,8 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Decorative gradient blur - more visible in light mode */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 dark:bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Decorative gradient blur - forced dark for system theme */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 dark:bg-primary/5 [html[data-theme='system']_&]:bg-primary/5 rounded-full blur-3xl pointer-events-none" />
     </section>
   )
 }
