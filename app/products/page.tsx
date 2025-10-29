@@ -224,7 +224,7 @@ function ProductCard({ product }: { product: Product }) {
         <ul className="space-y-1 mb-3">
           {product.features.slice(0, 3).map((feature, idx) => (
             <li key={idx} className="flex items-start gap-1.5 text-xs">
-              <CheckCircle2 className="h-3 w-3 text-green-500 flex-shrink-0 mt-0.5" />
+              <CheckCircle2 className="h-3 w-3 text-[#07C983] flex-shrink-0 mt-0.5" />
               <span className="text-muted-foreground">{feature}</span>
             </li>
           ))}

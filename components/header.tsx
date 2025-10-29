@@ -267,7 +267,7 @@ export function Header() {
                       // Single link category (like Self-hosted n8n)
                       <>
                         <DropdownMenuItem asChild>
-                          <Link href={category.href} className="cursor-pointer text-green-500 dark:text-green-500 font-bold flex items-center gap-2">
+                          <Link href={category.href} className="cursor-pointer text-[#07C983] dark:text-[#07C983] font-bold flex items-center gap-2">
                             {category.label}
                             {category.popular && (
                               <span className="text-xs bg-orange-500 text-white px-2 py-0.5 rounded-full font-semibold">
@@ -290,7 +290,7 @@ export function Header() {
                           }
                         }}
                       >
-                        <CollapsibleTrigger className="flex items-center justify-between w-full px-2 py-1.5 text-sm font-bold text-green-500 dark:text-green-500 hover:bg-accent rounded-sm">
+                        <CollapsibleTrigger className="flex items-center justify-between w-full px-2 py-1.5 text-sm font-bold text-[#07C983] dark:text-[#07C983] hover:bg-accent rounded-sm">
                           <span className="flex items-center gap-2">
                             {category.label}
                             {category.popular && (
@@ -392,20 +392,16 @@ export function Header() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => setTheme("default")} className="flex items-center justify-between">
-                  Default
-                  {theme === "default" && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                  Dark
+                  {theme === "default" && <Check className="h-4 w-4 text-[#07C983] ml-2" />}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("light")} className="flex items-center justify-between">
                   Light
-                  {theme === "light" && <Check className="h-4 w-4 text-green-500 ml-2" />}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")} className="flex items-center justify-between">
-                  Dark
-                  {theme === "dark" && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                  {theme === "light" && <Check className="h-4 w-4 text-[#07C983] ml-2" />}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("system")} className="flex items-center justify-between">
                   System
-                  {theme === "system" && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                  {theme === "system" && <Check className="h-4 w-4 text-[#07C983] ml-2" />}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -449,20 +445,16 @@ export function Header() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => setTheme("default")} className="flex items-center justify-between">
-                  Default
-                  {theme === "default" && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                  Dark
+                  {theme === "default" && <Check className="h-4 w-4 text-[#07C983] ml-2" />}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("light")} className="flex items-center justify-between">
                   Light
-                  {theme === "light" && <Check className="h-4 w-4 text-green-500 ml-2" />}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")} className="flex items-center justify-between">
-                  Dark
-                  {theme === "dark" && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                  {theme === "light" && <Check className="h-4 w-4 text-[#07C983] ml-2" />}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("system")} className="flex items-center justify-between">
                   System
-                  {theme === "system" && <Check className="h-4 w-4 text-green-500 ml-2" />}
+                  {theme === "system" && <Check className="h-4 w-4 text-[#07C983] ml-2" />}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -514,7 +506,7 @@ export function Header() {
                         <CollapsibleTrigger asChild>
                           <Button
                             variant="ghost"
-                            className="w-full justify-between text-sm font-semibold text-green-500 dark:text-green-500 py-2 px-4"
+                            className="w-full justify-between text-sm font-semibold text-[#07C983] dark:text-[#07C983] py-2 px-4"
                           >
                             <span className="flex items-center gap-2">
                               Hosting Services
@@ -608,7 +600,7 @@ export function Header() {
                         <CollapsibleTrigger asChild>
                           <Button
                             variant="ghost"
-                            className="w-full justify-between text-sm font-semibold text-green-500 dark:text-green-500 py-2 px-4"
+                            className="w-full justify-between text-sm font-semibold text-[#07C983] dark:text-[#07C983] py-2 px-4"
                           >
                             Cloud VPS Hosting
                             <ChevronDown className={cn("h-3 w-3 transition-transform", vpsOpen && "rotate-180")} />
@@ -636,7 +628,7 @@ export function Header() {
                         <CollapsibleTrigger asChild>
                           <Button
                             variant="ghost"
-                            className="w-full justify-between text-sm font-semibold text-green-500 dark:text-green-500 py-2 px-4"
+                            className="w-full justify-between text-sm font-semibold text-[#07C983] dark:text-[#07C983] py-2 px-4"
                           >
                             Dedicated VPS
                             <ChevronDown className={cn("h-3 w-3 transition-transform", dedicatedVpsOpen && "rotate-180")} />
@@ -664,7 +656,7 @@ export function Header() {
                         <CollapsibleTrigger asChild>
                           <Button
                             variant="ghost"
-                            className="w-full justify-between text-sm font-semibold text-green-500 dark:text-green-500 py-2 px-4"
+                            className="w-full justify-between text-sm font-semibold text-[#07C983] dark:text-[#07C983] py-2 px-4"
                           >
                             Bare Metal Servers
                             <ChevronDown className={cn("h-3 w-3 transition-transform", dedicatedOpen && "rotate-180")} />
@@ -692,7 +684,7 @@ export function Header() {
                         <CollapsibleTrigger asChild>
                           <Button
                             variant="ghost"
-                            className="w-full justify-between text-sm font-semibold text-green-500 dark:text-green-500 py-2 px-4"
+                            className="w-full justify-between text-sm font-semibold text-[#07C983] dark:text-[#07C983] py-2 px-4"
                           >
                             <span className="flex items-center gap-2">
                               KmerHosting AI
@@ -779,7 +771,7 @@ export function Header() {
                         href={productCategories[5].href || '/products/n8n'}
                         onClick={() => setIsOpen(false)}
                         className={cn(
-                          "flex items-center gap-2 text-sm font-semibold text-green-500 dark:text-green-500 py-2 px-4 rounded-md transition-colors hover:bg-accent",
+                          "flex items-center gap-2 text-sm font-semibold text-[#07C983] dark:text-[#07C983] py-2 px-4 rounded-md transition-colors hover:bg-accent",
                           pathname === (productCategories[5].href || '/products/n8n') ? "bg-accent" : "",
                         )}
                       >
@@ -794,7 +786,7 @@ export function Header() {
                         <CollapsibleTrigger asChild>
                           <Button
                             variant="ghost"
-                            className="w-full justify-between text-sm font-semibold text-green-500 dark:text-green-500 py-2 px-4"
+                            className="w-full justify-between text-sm font-semibold text-[#07C983] dark:text-[#07C983] py-2 px-4"
                           >
                             Other Services
                             <ChevronDown className={cn("h-3 w-3 transition-transform", servicesOpen && "rotate-180")} />

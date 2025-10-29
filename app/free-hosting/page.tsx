@@ -199,7 +199,7 @@ export default function FreeHostingPage() {const [uploadedFiles, setUploadedFile
                             {uploadedFiles.map((file, index) => (
                               <div key={index} className="flex items-center justify-between p-2 bg-muted rounded">
                                 <div className="flex items-center gap-2">
-                                  <Check className="h-4 w-4 text-green-500" />
+                                  <Check className="h-4 w-4 text-[#07C983]" />
                                   <span className="text-sm font-medium">{file.name}</span>
                                   <span className="text-xs text-muted-foreground">
                                     ({formatFileSize(file.size)})
@@ -275,7 +275,7 @@ export default function FreeHostingPage() {const [uploadedFiles, setUploadedFile
                 <Card className="text-center">
                   <CardContent className="pt-8">
                     <div className="mb-6">
-                      <Check className="h-16 w-16 mx-auto mb-4 text-green-500" />
+                      <Check className="h-16 w-16 mx-auto mb-4 text-[#07C983]" />
                       <h2 className="text-2xl font-bold mb-2">Deployment Successful!</h2>
                       <p className="text-muted-foreground">Your website is now live and accessible worldwide.</p>
                     </div>
@@ -357,23 +357,23 @@ export default function FreeHostingPage() {const [uploadedFiles, setUploadedFile
                 <CardContent>
                   <ul className="space-y-3 text-sm">
                     <li className="flex items-start gap-2">
-                      <Check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                      <Check className="h-4 w-4 text-[#07C983] mt-0.5 flex-shrink-0" />
                       <span><strong>Upload format:</strong> Upload a .zip file containing your project with files at the first three directory levels (HTML, CSS, JavaScript, images, fonts)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <Check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                      <Check className="h-4 w-4 text-[#07C983] mt-0.5 flex-shrink-0" />
                       <span><strong>Maximum size:</strong> 10MB total for all files</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <Check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                      <Check className="h-4 w-4 text-[#07C983] mt-0.5 flex-shrink-0" />
                       <span><strong>No backend:</strong> No server-side processing, databases, or APIs</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <Check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                      <Check className="h-4 w-4 text-[#07C983] mt-0.5 flex-shrink-0" />
                       <span><strong>Index file:</strong> Include an index.html file as your homepage</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <Check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                      <Check className="h-4 w-4 text-[#07C983] mt-0.5 flex-shrink-0" />
                       <span><strong>Subdomain:</strong> Choose a unique .kmerhosting.site subdomain</span>
                     </li>
                   </ul>

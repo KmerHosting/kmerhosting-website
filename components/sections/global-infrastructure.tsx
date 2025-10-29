@@ -152,13 +152,13 @@ export function GlobalInfrastructure() {
                 <div key={dc.name} className="bg-background/50 dark:bg-background/30 backdrop-blur-sm border border-border rounded-xl p-4 hover:border-green-500/50 transition-colors group">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-10 h-10 rounded-full bg-green-500/10 dark:bg-green-400/10 flex items-center justify-center group-hover:bg-green-500/20 transition-colors">
-                      <MapPin className="h-5 w-5 text-green-600 dark:text-green-400" />
+                      <MapPin className="h-5 w-5 text-[#07C983] dark:text-[#07C983]" />
                     </div>
                     <span className="text-2xl">{dc.flag}</span>
                   </div>
                   <h3 className="font-bold text-sm mb-1">{dc.name}</h3>
                   <p className="text-xs text-muted-foreground">{dc.region}</p>
-                  <div className="mt-3 flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
+                  <div className="mt-3 flex items-center gap-1 text-xs text-[#07C983] dark:text-[#07C983]">
                     <Zap className="h-3 w-3" />
                     <span className="font-medium">Active</span>
                   </div>
@@ -171,7 +171,7 @@ export function GlobalInfrastructure() {
           <div className="grid sm:grid-cols-3 gap-3 mt-8">
             <div className="flex items-center gap-3 p-4 bg-card/50 border border-border/50 rounded-lg hover:border-green-500/30 transition-colors">
               <div className="w-10 h-10 rounded-lg bg-green-500/10 dark:bg-green-400/10 flex items-center justify-center flex-shrink-0">
-                <Zap className="h-5 w-5 text-green-600 dark:text-green-400" />
+                <Zap className="h-5 w-5 text-[#07C983] dark:text-[#07C983]" />
               </div>
               <div className="min-w-0">
                 <h3 className="font-bold text-sm mb-0.5">Ultra-Low Latency</h3>
@@ -182,7 +182,7 @@ export function GlobalInfrastructure() {
             </div>
             <div className="flex items-center gap-3 p-4 bg-card/50 border border-border/50 rounded-lg hover:border-green-500/30 transition-colors">
               <div className="w-10 h-10 rounded-lg bg-green-500/10 dark:bg-green-400/10 flex items-center justify-center flex-shrink-0">
-                <Server className="h-5 w-5 text-green-600 dark:text-green-400" />
+                <Server className="h-5 w-5 text-[#07C983] dark:text-[#07C983]" />
               </div>
               <div className="min-w-0">
                 <h3 className="font-bold text-sm mb-0.5">99.9% Uptime SLA</h3>
@@ -193,7 +193,7 @@ export function GlobalInfrastructure() {
             </div>
             <div className="flex items-center gap-3 p-4 bg-card/50 border border-border/50 rounded-lg hover:border-green-500/30 transition-colors">
               <div className="w-10 h-10 rounded-lg bg-green-500/10 dark:bg-green-400/10 flex items-center justify-center flex-shrink-0">
-                <MapPin className="h-5 w-5 text-green-600 dark:text-green-400" />
+                <MapPin className="h-5 w-5 text-[#07C983] dark:text-[#07C983]" />
               </div>
               <div className="min-w-0">
                 <h3 className="font-bold text-sm mb-0.5">Global CDN</h3>

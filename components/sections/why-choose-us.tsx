@@ -50,7 +50,7 @@ export function WhyChooseUs() {
               {reasons.map((reason, index) => (
                 <div key={index} className="flex gap-4">
                   <div className="flex-shrink-0">
-                    <CheckCircle2 className="h-6 w-6 text-green-500 dark:text-green-500" />
+                    <CheckCircle2 className="h-6 w-6 text-[#07C983] dark:text-[#07C983]" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">{reason.title}</h3>

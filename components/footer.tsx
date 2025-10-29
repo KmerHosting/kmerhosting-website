@@ -372,7 +372,7 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
               {/* Status Indicator */}
               <div className="flex items-center gap-2 text-sm">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-green-500 dark:text-green-500 font-medium">
+                <span className="text-[#07C983] dark:text-[#07C983] font-medium">
                   {"Service status"}
                 </span>
               </div>

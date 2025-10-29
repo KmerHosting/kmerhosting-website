@@ -84,7 +84,7 @@ const popularPlans: Plan[] = [
     ],
     href: "/products/ai/website-builder",
     gradient: "from-green-500/10 to-emerald-500/10",
-    iconBg: "bg-green-500/10 text-green-600 dark:text-green-400"
+    iconBg: "bg-green-500/10 text-[#07C983] dark:text-[#07C983]"
   },
   {
     id: "self-hosted-n8n",
@@ -181,7 +181,7 @@ export function PopularPlans() {
                   <ul className="space-y-1.5">
                     {plan.features.slice(0, 4).map((feature, index) => (
                       <li key={index} className="flex items-start gap-2 text-xs">
-                        <Check className="h-3 w-3 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                        <Check className="h-3 w-3 text-[#07C983] dark:text-[#07C983] mt-0.5 flex-shrink-0" />
                         <span className="text-muted-foreground leading-tight">{feature}</span>
                       </li>
                     ))}
