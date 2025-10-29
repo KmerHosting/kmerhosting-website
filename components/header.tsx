@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuLabel, DropdownMenuGroup } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { ProductInfoDialog } from "@/components/product-info-dialog"
+import { productInfoData } from "@/lib/product-data"
 import { cn } from "@/lib/utils"
 import { useState } from "react"
 
@@ -17,6 +19,18 @@ export function Header() {
   const { theme, setTheme } = useTheme()
   const [isOpen, setIsOpen] = useState(false)
   const [productsOpen, setProductsOpen] = useState(false)
+  
+  // Product dialog state
+  const [productDialogOpen, setProductDialogOpen] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState<string>("")
+
+  const handleProductClick = (productPath: string, e: React.MouseEvent) => {
+    e.preventDefault()
+    if (productInfoData[productPath]) {
+      setSelectedProduct(productPath)
+      setProductDialogOpen(true)
+    }
+  }
 
   const navItems = [
     { href: "/", label: "Home" },
@@ -266,15 +280,18 @@ export function Header() {
                     {category.href ? (
                       // Single link category (like Self-hosted n8n)
                       <>
-                        <DropdownMenuItem asChild>
-                          <Link href={category.href} className="cursor-pointer text-[#07C983] dark:text-[#07C983] font-bold flex items-center gap-2">
+                        <DropdownMenuItem>
+                          <div 
+                            onClick={(e) => handleProductClick(category.href, e)}
+                            className="cursor-pointer text-[#07C983] dark:text-[#07C983] font-bold flex items-center gap-2 w-full"
+                          >
                             {category.label}
                             {category.popular && (
                               <span className="text-xs bg-orange-500 text-white px-2 py-0.5 rounded-full font-semibold">
                                 Popular
                               </span>
                             )}
-                          </Link>
+                          </div>
                         </DropdownMenuItem>
                         {index < productCategories.length - 1 && <DropdownMenuSeparator />}
                       </>
@@ -336,10 +353,13 @@ export function Header() {
                                           )}
                                         </div>
                                         {subcat.items.map((subitem: any) => (
-                                          <DropdownMenuItem key={subitem.href} asChild>
-                                            <Link href={subitem.href} className="cursor-pointer pl-4 text-xs">
+                                          <DropdownMenuItem key={subitem.href}>
+                                            <div 
+                                              onClick={(e) => handleProductClick(subitem.href, e)}
+                                              className="cursor-pointer pl-4 text-xs w-full"
+                                            >
                                               {subitem.label}
-                                            </Link>
+                                            </div>
                                           </DropdownMenuItem>
                                         ))}
                                       </div>
@@ -349,10 +369,13 @@ export function Header() {
                               </Collapsible>
                             ) : item.href ? (
                               // Simple item with link
-                              <DropdownMenuItem key={item.href} asChild>
-                                <Link href={item.href} className="cursor-pointer">
+                              <DropdownMenuItem key={item.href}>
+                                <div 
+                                  onClick={(e) => handleProductClick(item.href, e)}
+                                  className="cursor-pointer w-full"
+                                >
                                   {item.label}
-                                </Link>
+                                </div>
                               </DropdownMenuItem>
                             ) : null
                           ))}
@@ -536,17 +559,19 @@ export function Header() {
                                     {panel.label}
                                   </div>
                                   {panel.items.map((item: any) => (
-                                    <Link
+                                    <button
                                       key={item.href}
-                                      href={item.href}
-                                      onClick={() => setIsOpen(false)}
+                                      onClick={(e) => {
+                                        handleProductClick(item.href, e)
+                                        setIsOpen(false)
+                                      }}
                                       className={cn(
-                                        "block text-xs py-1.5 px-4 rounded-md transition-colors hover:bg-accent",
-                                        pathname === item.href ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                                        "block text-xs py-1.5 px-4 rounded-md transition-colors hover:bg-accent w-full text-left",
+                                        "text-muted-foreground hover:text-foreground",
                                       )}
                                     >
                                       {item.label}
-                                    </Link>
+                                    </button>
                                   ))}
                                 </div>
                               ))}
@@ -576,17 +601,19 @@ export function Header() {
                                     )}
                                   </div>
                                   {panel.items.map((item: any) => (
-                                    <Link
+                                    <button
                                       key={item.href}
-                                      href={item.href}
-                                      onClick={() => setIsOpen(false)}
+                                      onClick={(e) => {
+                                        handleProductClick(item.href, e)
+                                        setIsOpen(false)
+                                      }}
                                       className={cn(
-                                        "block text-xs py-1.5 px-4 rounded-md transition-colors hover:bg-accent",
-                                        pathname === item.href ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                                        "block text-xs py-1.5 px-4 rounded-md transition-colors hover:bg-accent w-full text-left",
+                                        "text-muted-foreground hover:text-foreground",
                                       )}
                                     >
                                       {item.label}
-                                    </Link>
+                                    </button>
                                   ))}
                                 </div>
                               ))}
@@ -608,17 +635,19 @@ export function Header() {
                         </CollapsibleTrigger>
                         <CollapsibleContent className="space-y-1 ml-4">
                           {productCategories[1].items && productCategories[1].items.map((item: any) => (
-                            <Link
+                            <button
                               key={item.href}
-                              href={item.href}
-                              onClick={() => setIsOpen(false)}
+                              onClick={(e) => {
+                                handleProductClick(item.href, e)
+                                setIsOpen(false)
+                              }}
                               className={cn(
-                                "block text-sm py-2 px-4 rounded-md transition-colors hover:bg-accent",
-                                pathname === item.href ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground",
+                                "block text-sm py-2 px-4 rounded-md transition-colors hover:bg-accent w-full text-left",
+                                "text-muted-foreground hover:text-foreground",
                               )}
                             >
                               {item.label}
-                            </Link>
+                            </button>
                           ))}
                         </CollapsibleContent>
                       </Collapsible>
@@ -893,6 +922,18 @@ export function Header() {
           </div>
         </div>
       </div>
+      
+      {/* Product Info Dialog */}
+      {selectedProduct && productInfoData[selectedProduct] && (
+        <ProductInfoDialog
+          open={productDialogOpen}
+          onOpenChange={setProductDialogOpen}
+          productName={productInfoData[selectedProduct].name}
+          description={productInfoData[selectedProduct].description}
+          features={productInfoData[selectedProduct].features}
+          isPopular={productInfoData[selectedProduct].isPopular}
+        />
+      )}
     </header>
   )
 }

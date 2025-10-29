@@ -43,6 +43,78 @@
   --sidebar-ring: oklch(0.696 0.17 162.48);
 }
 
+/* Force system theme to always use dark colors regardless of OS preference */
+[data-theme="system"] {
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #0a0a0a;
+  --card-foreground: #ffffff;
+  --popover: #000000;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #ffffff;
+  --muted: #1a1a1a;
+  --muted-foreground: #a3a3a3;
+  --accent: #1a1a1a;
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #262626;
+  --input: #1a1a1a;
+  --ring: #ffffff;
+}
+
+/* Override system theme preference to force dark colors */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ffffff;
+    --card: #0a0a0a;
+    --card-foreground: #ffffff;
+    --popover: #000000;
+    --popover-foreground: #ffffff;
+    --primary: #ffffff;
+    --primary-foreground: #000000;
+    --secondary: #1a1a1a;
+    --secondary-foreground: #ffffff;
+    --muted: #1a1a1a;
+    --muted-foreground: #a3a3a3;
+    --accent: #1a1a1a;
+    --accent-foreground: #ffffff;
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
+    --border: #262626;
+    --input: #1a1a1a;
+    --ring: #ffffff;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  [data-theme="system"] {
+    --background: #000000 !important;
+    --foreground: #ffffff !important;
+    --card: #0a0a0a !important;
+    --card-foreground: #ffffff !important;
+    --popover: #000000 !important;
+    --popover-foreground: #ffffff !important;
+    --primary: #ffffff !important;
+    --primary-foreground: #000000 !important;
+    --secondary: #1a1a1a !important;
+    --secondary-foreground: #ffffff !important;
+    --muted: #1a1a1a !important;
+    --muted-foreground: #a3a3a3 !important;
+    --accent: #1a1a1a !important;
+    --accent-foreground: #ffffff !important;
+    --destructive: #dc2626 !important;
+    --destructive-foreground: #ffffff !important;
+    --border: #262626 !important;
+    --input: #1a1a1a !important;
+    --ring: #ffffff !important;
+  }
+}
+
 .default {
   /* Default theme - Black background & White text (same as dark) */
   --background: #000000;
