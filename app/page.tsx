@@ -9,6 +9,7 @@ import { Partners } from "@/components/sections/partners"
 import { PopularPlans } from "@/components/sections/popular-plans"
 import { WhyChooseUs } from "@/components/sections/why-choose-us"
 import { Testimonials } from "@/components/sections/testimonials"
+import { PaymentMethods } from "@/components/sections/payment-methods"
 import { CTA } from "@/components/sections/cta"
 import { StructuredData, organizationSchema, websiteSchema } from "@/components/structured-data"
 import type { Metadata } from "next"
@@ -74,6 +75,7 @@ export default function HomePage() {
         <PopularPlans />
         <WhyChooseUs />
         <Testimonials />
+        <PaymentMethods />
         <CTA />
       </main>
       <Footer />
