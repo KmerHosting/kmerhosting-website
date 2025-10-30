@@ -47,30 +47,25 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Decorative effects - different for light and dark themes */}
+      {/* Decorative effects - beautiful light theme with green colors */}
       
       {/* Dark theme: Central gradient blur */}
       <div className="hidden dark:block absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
       
-      {/* Light theme: Border gradient effects */}
+      {/* Light theme: Beautiful green gradient effects */}
       <div className="dark:hidden">
-        {/* Top border glow */}
-        <div className="absolute top-0 left-0 right-0 h-[200px] bg-gradient-to-b from-primary/10 to-transparent pointer-events-none" />
+        {/* Main central green glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-[#07C983]/20 via-[#16A34A]/10 to-transparent rounded-full blur-2xl pointer-events-none" />
         
-        {/* Left border glow */}
-        <div className="absolute top-0 left-0 bottom-0 w-[200px] bg-gradient-to-r from-primary/8 to-transparent pointer-events-none" />
+        {/* Secondary overlapping green circle */}
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-radial from-[#16A34A]/15 via-[#07C983]/8 to-transparent rounded-full blur-3xl pointer-events-none" />
         
-        {/* Right border glow */}
-        <div className="absolute top-0 right-0 bottom-0 w-[200px] bg-gradient-to-l from-primary/8 to-transparent pointer-events-none" />
+        {/* Accent green dots */}
+        <div className="absolute top-20 left-1/4 w-[200px] h-[200px] bg-[#07C983]/10 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute bottom-20 right-1/4 w-[300px] h-[300px] bg-[#16A34A]/8 rounded-full blur-3xl pointer-events-none" />
         
-        {/* Bottom border glow */}
-        <div className="absolute bottom-0 left-0 right-0 h-[200px] bg-gradient-to-t from-primary/10 to-transparent pointer-events-none" />
-        
-        {/* Corner accents */}
-        <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+        {/* Subtle border enhancement */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#07C983]/5 via-transparent to-[#16A34A]/5 pointer-events-none" />
       </div>
     </section>
   )
