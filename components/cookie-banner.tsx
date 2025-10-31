@@ -92,11 +92,11 @@ export function CookieBanner() {
             <p className="text-sm text-muted-foreground">
               We use cookies to enhance your browsing experience. By clicking "Accept All", you
               consent to our use of cookies. Read our{" "}
-              <Link href="/cookies" className="text-accent hover:underline">
+              <Link href="/cookies" className="text-[#07C983] hover:underline">
                 Cookie Policy
               </Link>{" "}
               and{" "}
-              <Link href="/privacy" className="text-accent hover:underline">
+              <Link href="/privacy" className="text-[#07C983] hover:underline">
                 Privacy Policy
               </Link>
               .

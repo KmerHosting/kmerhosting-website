@@ -79,22 +79,22 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
               <h4 className="font-semibold mb-4">{"Company"}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="/about" className="hover:text-accent transition-colors">
+                  <Link href="/about" className="hover:text-[#07C983] transition-colors">
                     {"About Us"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/support" className="hover:text-accent transition-colors">
+                  <Link href="/support" className="hover:text-[#07C983] transition-colors">
                     {"Support"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/support/live-chat" className="hover:text-accent transition-colors">
+                  <Link href="/support/live-chat" className="hover:text-[#07C983] transition-colors">
                     {"Live Chat"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/faq" className="hover:text-accent transition-colors">
+                  <Link href="/faq" className="hover:text-[#07C983] transition-colors">
                     {"FAQ"}
                   </Link>
                 </li>
@@ -106,32 +106,32 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
               <h4 className="font-semibold mb-4">{"Hosting"}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="/pricing" className="hover:text-accent transition-colors">
+                  <Link href="/pricing" className="hover:text-[#07C983] transition-colors">
                     {"Shared Hosting"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products/reseller/cpanel/reseller" className="hover:text-accent transition-colors">
+                  <Link href="/products/reseller/cpanel/reseller" className="hover:text-[#07C983] transition-colors">
                     {"Reseller Hosting"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products/vps/managed" className="hover:text-accent transition-colors">
+                  <Link href="/products/vps/managed" className="hover:text-[#07C983] transition-colors">
                     {"Cloud VPS"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products/dedicated-vps/managed" className="hover:text-accent transition-colors">
+                  <Link href="/products/dedicated-vps/managed" className="hover:text-[#07C983] transition-colors">
                     {"Dedicated VPS"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products/dedicated-servers/managed" className="hover:text-accent transition-colors">
+                  <Link href="/products/dedicated-servers/managed" className="hover:text-[#07C983] transition-colors">
                     {"Bare Metal Servers"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products/n8n" className="hover:text-accent transition-colors">
+                  <Link href="/products/n8n" className="hover:text-[#07C983] transition-colors">
                     {"Self-hosted n8n"}
                   </Link>
                 </li>
@@ -143,27 +143,27 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
               <h4 className="font-semibold mb-4">{"AI & Tools"}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="/products/ai/website-builder" className="hover:text-accent transition-colors">
+                  <Link href="/products/ai/website-builder" className="hover:text-[#07C983] transition-colors">
                     {"AI Website Builder"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products/ai/free/llama" className="hover:text-accent transition-colors">
+                  <Link href="/products/ai/free/llama" className="hover:text-[#07C983] transition-colors">
                     {"Free AI Access"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products/ai/paid/gpt" className="hover:text-accent transition-colors">
+                  <Link href="/products/ai/paid/gpt" className="hover:text-[#07C983] transition-colors">
                     {"Paid AI Access"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/domain-search" className="hover:text-accent transition-colors">
+                  <Link href="/domain-search" className="hover:text-[#07C983] transition-colors">
                     {"Domain Search"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tools/whois-lookup" className="hover:text-accent transition-colors">
+                  <Link href="/tools/whois-lookup" className="hover:text-[#07C983] transition-colors">
                     {"WHOIS Lookup"}
                   </Link>
                 </li>
@@ -175,27 +175,27 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
               <h4 className="font-semibold mb-4">{"Extra Services"}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="/products/ssl-certificates" className="hover:text-accent transition-colors">
+                  <Link href="/products/ssl-certificates" className="hover:text-[#07C983] transition-colors">
                     {"SSL Certificates"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products/email-hosting" className="hover:text-accent transition-colors">
+                  <Link href="/products/email-hosting" className="hover:text-[#07C983] transition-colors">
                     {"Email Hosting"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products/database-hosting" className="hover:text-accent transition-colors">
+                  <Link href="/products/database-hosting" className="hover:text-[#07C983] transition-colors">
                     {"Database Hosting"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products/free-static-hosting" className="hover:text-accent transition-colors">
+                  <Link href="/products/free-static-hosting" className="hover:text-[#07C983] transition-colors">
                     {"Free Static Hosting"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/free-hosting" className="hover:text-accent transition-colors">
+                  <Link href="/free-hosting" className="hover:text-[#07C983] transition-colors">
                     {"Free Hosting Plan"}
                   </Link>
                 </li>
@@ -207,44 +207,44 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
               <h4 className="font-semibold mb-4">{"Resources"}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="/products" className="hover:text-accent transition-colors">
+                  <Link href="/products" className="hover:text-[#07C983] transition-colors">
                     {"Products"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/pricing" className="hover:text-accent transition-colors">
+                  <Link href="/pricing" className="hover:text-[#07C983] transition-colors">
                     {"Pricing"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/affiliate" className="hover:text-accent transition-colors">
+                  <Link href="/affiliate" className="hover:text-[#07C983] transition-colors">
                     {"Affiliate Program"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/docs" className="hover:text-accent transition-colors">
+                  <Link href="/docs" className="hover:text-[#07C983] transition-colors">
                     {"Documentation"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/knowledgebase" className="hover:text-accent transition-colors">
+                  <Link href="/knowledgebase" className="hover:text-[#07C983] transition-colors">
                     {"Knowledge Base"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/blog" className="hover:text-accent transition-colors">
+                  <Link href="/blog" className="hover:text-[#07C983] transition-colors">
                     {"Blog"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/forum" className="hover:text-accent transition-colors">
+                  <Link href="/forum" className="hover:text-[#07C983] transition-colors">
                     {"Community"}
                   </Link>
                 </li>
                 <li>
                   <button
                     onClick={() => window.dispatchEvent(new CustomEvent('showCookieBanner'))}
-                    className="hover:text-accent transition-colors text-left cursor-pointer"
+                    className="hover:text-[#07C983] transition-colors text-left cursor-pointer"
                   >
                     {"Manage Cookies"}
                   </button>
@@ -257,22 +257,22 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
               <h4 className="font-semibold mb-4">{"Legal"}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="/terms" className="hover:text-accent transition-colors">
+                  <Link href="/terms" className="hover:text-[#07C983] transition-colors">
                     {"Terms of Service"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/privacy" className="hover:text-accent transition-colors">
+                  <Link href="/privacy" className="hover:text-[#07C983] transition-colors">
                     {"Privacy Policy"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/cookies" className="hover:text-accent transition-colors">
+                  <Link href="/cookies" className="hover:text-[#07C983] transition-colors">
                     {"Cookie Policy"}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/refunds" className="hover:text-accent transition-colors">
+                  <Link href="/refunds" className="hover:text-[#07C983] transition-colors">
                     {"Refund Policy"}
                   </Link>
                 </li>
@@ -285,13 +285,13 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
-                  <a href="mailto:sales@kmerhosting.com" className="hover:text-accent transition-colors">
+                  <a href="mailto:sales@kmerhosting.com" className="hover:text-[#07C983] transition-colors">
                     sales@kmerhosting.com
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
                   <Ticket className="h-4 w-4" />
-                  <Link href="/support" className="hover:text-accent transition-colors">
+                  <Link href="/support" className="hover:text-[#07C983] transition-colors">
                     Open Ticket
                   </Link>
                 </li>
