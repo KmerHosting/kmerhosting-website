@@ -403,11 +403,11 @@ const cpanelResellerPlans: PricingPlan[] = [
 const cpanelMasterResellerPlans: PricingPlan[] = [
   {
     name: "cPanel Master Reseller Bronze",
-    basePrice: 15000,
+    basePrice: 7500,
     description: "Entry-level master reseller",
-    features: ["50 GB SSD Storage", "1 TB Bandwidth", "15 Reseller Accounts"],
+    features: ["50 GB SSD Storage", "1 TB Bandwidth", "2 WHM Accounts", "15 cPanel Accounts"],
     allFeatures: [
-      "50 GB SSD Storage", "1 TB Bandwidth", "15 Reseller Accounts",
+      "50 GB SSD Storage", "1 TB Bandwidth", "2 WHM Accounts", "15 cPanel Accounts",
       "WHM Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed Web Server",
       "Private Nameservers", "Master Reseller Support", "Daily Backups", "99.9% Uptime SLA",
       "Create Sub-Resellers",
@@ -415,13 +415,13 @@ const cpanelMasterResellerPlans: PricingPlan[] = [
   },
   {
     name: "cPanel Master Reseller Silver",
-    basePrice: 22000,
+    basePrice: 11000,
     description: "Growing master reseller business",
     badge: "Popular",
     color: "blue",
-    features: ["100 GB SSD Storage", "2 TB Bandwidth", "30 Reseller Accounts"],
+    features: ["100 GB SSD Storage", "2 TB Bandwidth", "5 WHM Accounts", "30 cPanel Accounts"],
     allFeatures: [
-      "100 GB SSD Storage", "2 TB Bandwidth", "30 Reseller Accounts",
+      "100 GB SSD Storage", "2 TB Bandwidth", "5 WHM Accounts", "30 cPanel Accounts",
       "WHM Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Redis",
       "Private Nameservers", "Priority Support", "Daily Backups", "99.9% Uptime SLA",
       "Create Sub-Resellers", "Advanced Security",
@@ -429,13 +429,13 @@ const cpanelMasterResellerPlans: PricingPlan[] = [
   },
   {
     name: "cPanel Master Reseller Gold",
-    basePrice: 30000,
+    basePrice: 15000,
     description: "Professional master reseller",
     badge: "Best Value",
     color: "purple",
-    features: ["200 GB SSD Storage", "4 TB Bandwidth", "50 Reseller Accounts"],
+    features: ["200 GB SSD Storage", "4 TB Bandwidth", "10 WHM Accounts", "50 cPanel Accounts"],
     allFeatures: [
-      "200 GB SSD Storage", "4 TB Bandwidth", "50 Reseller Accounts",
+      "200 GB SSD Storage", "4 TB Bandwidth", "10 WHM Accounts", "50 cPanel Accounts",
       "WHM Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Redis + Memcached",
       "Private Nameservers", "VIP Support (24/7)", "Hourly Backups", "99.99% Uptime SLA",
       "Create Sub-Resellers", "Advanced Security", "Dedicated IP",
@@ -443,13 +443,13 @@ const cpanelMasterResellerPlans: PricingPlan[] = [
   },
   {
     name: "cPanel Master Reseller Platinum",
-    basePrice: 40000,
+    basePrice: 20000,
     description: "Premium master reseller",
     badge: "Premium",
     color: "orange",
-    features: ["400 GB SSD Storage", "8 TB Bandwidth", "Unlimited Reseller Accounts"],
+    features: ["400 GB SSD Storage", "8 TB Bandwidth", "30 WHM Accounts", "Unlimited cPanel Accounts"],
     allFeatures: [
-      "400 GB SSD Storage", "8 TB Bandwidth", "Unlimited Reseller Accounts",
+      "400 GB SSD Storage", "8 TB Bandwidth", "30 WHM Accounts", "Unlimited cPanel Accounts",
       "WHM Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Full Stack",
       "Private Nameservers", "VIP Support (24/7)", "Hourly Backups", "99.99% Uptime SLA",
       "Create Sub-Resellers", "Enterprise Security", "Multiple Dedicated IPs", "Custom Branding",
@@ -461,11 +461,11 @@ const cpanelMasterResellerPlans: PricingPlan[] = [
 const cpanelAlphaResellerPlans: PricingPlan[] = [
   {
     name: "cPanel Alpha Reseller Bronze",
-    basePrice: 35000,
+    basePrice: 17500,
     description: "Entry-level alpha reseller",
-    features: ["100 GB SSD Storage", "2 TB Bandwidth", "15 Master Resellers"],
+    features: ["100 GB SSD Storage", "2 TB Bandwidth", "2 WHM Accounts", "15 Master Reseller Accounts"],
     allFeatures: [
-      "100 GB SSD Storage", "2 TB Bandwidth", "15 Master Resellers",
+      "100 GB SSD Storage", "2 TB Bandwidth", "2 WHM Accounts", "15 Master Reseller Accounts",
       "WHM Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Redis",
       "Private Nameservers", "Alpha Reseller Support", "Daily Backups", "99.9% Uptime SLA",
       "Multi-Level Reselling", "Dedicated IP",
@@ -473,13 +473,13 @@ const cpanelAlphaResellerPlans: PricingPlan[] = [
   },
   {
     name: "cPanel Alpha Reseller Silver",
-    basePrice: 50000,
+    basePrice: 25000,
     description: "Growing alpha reseller business",
     badge: "Popular",
     color: "blue",
-    features: ["200 GB SSD Storage", "4 TB Bandwidth", "30 Master Resellers"],
+    features: ["200 GB SSD Storage", "4 TB Bandwidth", "5 WHM Accounts", "30 Master Reseller Accounts"],
     allFeatures: [
-      "200 GB SSD Storage", "4 TB Bandwidth", "30 Master Resellers",
+      "200 GB SSD Storage", "4 TB Bandwidth", "5 WHM Accounts", "30 Master Reseller Accounts",
       "WHM Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Redis + Memcached",
       "Private Nameservers", "Priority Support", "Hourly Backups", "99.99% Uptime SLA",
       "Multi-Level Reselling", "Multiple Dedicated IPs", "Custom Branding",
@@ -487,13 +487,13 @@ const cpanelAlphaResellerPlans: PricingPlan[] = [
   },
   {
     name: "cPanel Alpha Reseller Gold",
-    basePrice: 70000,
+    basePrice: 35000,
     description: "Professional alpha reseller",
     badge: "Best Value",
     color: "purple",
-    features: ["400 GB SSD Storage", "8 TB Bandwidth", "50 Master Resellers"],
+    features: ["400 GB SSD Storage", "8 TB Bandwidth", "10 WHM Accounts", "50 Master Reseller Accounts"],
     allFeatures: [
-      "400 GB SSD Storage", "8 TB Bandwidth", "50 Master Resellers",
+      "400 GB SSD Storage", "8 TB Bandwidth", "10 WHM Accounts", "50 Master Reseller Accounts",
       "WHM Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Full Stack",
       "Private Nameservers", "VIP Support (24/7)", "Hourly Backups", "99.99% Uptime SLA",
       "Multi-Level Reselling", "Multiple Dedicated IPs", "Custom Branding", "API Access",
@@ -501,13 +501,13 @@ const cpanelAlphaResellerPlans: PricingPlan[] = [
   },
   {
     name: "cPanel Alpha Reseller Platinum",
-    basePrice: 100000,
+    basePrice: 50000,
     description: "Premium alpha reseller",
     badge: "Premium",
     color: "orange",
-    features: ["800 GB SSD Storage", "16 TB Bandwidth", "Unlimited Master Resellers"],
+    features: ["800 GB SSD Storage", "16 TB Bandwidth", "30 WHM Accounts", "Unlimited Master Reseller Accounts"],
     allFeatures: [
-      "800 GB SSD Storage", "16 TB Bandwidth", "Unlimited Master Resellers",
+      "800 GB SSD Storage", "16 TB Bandwidth", "30 WHM Accounts", "Unlimited Master Reseller Accounts",
       "WHM Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Enterprise Stack",
       "Private Nameservers", "VIP Support (24/7)", "Real-time Backups", "99.99% Uptime SLA",
       "Multi-Level Reselling", "Multiple Dedicated IPs", "Custom Branding", "Full API Access", "SLA Guarantee",
@@ -576,11 +576,11 @@ const daResellerPlans: PricingPlan[] = [
 const daMasterResellerPlans: PricingPlan[] = [
   {
     name: "DA Master Reseller Bronze",
-    basePrice: 14000,
+    basePrice: 7000,
     description: "Entry-level DA master reseller",
-    features: ["50 GB SSD Storage", "1 TB Bandwidth", "15 Reseller Accounts"],
+    features: ["50 GB SSD Storage", "1 TB Bandwidth", "2 WHM Accounts", "15 DirectAdmin Accounts"],
     allFeatures: [
-      "50 GB SSD Storage", "1 TB Bandwidth", "15 Reseller Accounts",
+      "50 GB SSD Storage", "1 TB Bandwidth", "2 WHM Accounts", "15 DirectAdmin Accounts",
       "DirectAdmin Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed Web Server",
       "Private Nameservers", "Master Reseller Support", "Daily Backups", "99.9% Uptime SLA",
       "Create Sub-Resellers",
@@ -588,13 +588,13 @@ const daMasterResellerPlans: PricingPlan[] = [
   },
   {
     name: "DA Master Reseller Silver",
-    basePrice: 20000,
+    basePrice: 10000,
     description: "Growing DA master reseller",
     badge: "Popular",
     color: "blue",
-    features: ["100 GB SSD Storage", "2 TB Bandwidth", "30 Reseller Accounts"],
+    features: ["100 GB SSD Storage", "2 TB Bandwidth", "5 WHM Accounts", "30 DirectAdmin Accounts"],
     allFeatures: [
-      "100 GB SSD Storage", "2 TB Bandwidth", "30 Reseller Accounts",
+      "100 GB SSD Storage", "2 TB Bandwidth", "5 WHM Accounts", "30 DirectAdmin Accounts",
       "DirectAdmin Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Redis",
       "Private Nameservers", "Priority Support", "Daily Backups", "99.9% Uptime SLA",
       "Create Sub-Resellers", "Advanced Security",
@@ -602,13 +602,13 @@ const daMasterResellerPlans: PricingPlan[] = [
   },
   {
     name: "DA Master Reseller Gold",
-    basePrice: 28000,
+    basePrice: 14000,
     description: "Professional DA master reseller",
     badge: "Best Value",
     color: "purple",
-    features: ["200 GB SSD Storage", "4 TB Bandwidth", "50 Reseller Accounts"],
+    features: ["200 GB SSD Storage", "4 TB Bandwidth", "10 WHM Accounts", "50 DirectAdmin Accounts"],
     allFeatures: [
-      "200 GB SSD Storage", "4 TB Bandwidth", "50 Reseller Accounts",
+      "200 GB SSD Storage", "4 TB Bandwidth", "10 WHM Accounts", "50 DirectAdmin Accounts",
       "DirectAdmin Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Redis + Memcached",
       "Private Nameservers", "VIP Support (24/7)", "Hourly Backups", "99.99% Uptime SLA",
       "Create Sub-Resellers", "Advanced Security", "Dedicated IP",
@@ -616,13 +616,13 @@ const daMasterResellerPlans: PricingPlan[] = [
   },
   {
     name: "DA Master Reseller Platinum",
-    basePrice: 37000,
+    basePrice: 18500,
     description: "Premium DA master reseller",
     badge: "Premium",
     color: "orange",
-    features: ["400 GB SSD Storage", "8 TB Bandwidth", "Unlimited Reseller Accounts"],
+    features: ["400 GB SSD Storage", "8 TB Bandwidth", "30 WHM Accounts", "Unlimited DirectAdmin Accounts"],
     allFeatures: [
-      "400 GB SSD Storage", "8 TB Bandwidth", "Unlimited Reseller Accounts",
+      "400 GB SSD Storage", "8 TB Bandwidth", "30 WHM Accounts", "Unlimited DirectAdmin Accounts",
       "DirectAdmin Control Panel", "White Label Hosting", "Free SSL Certificates", "LiteSpeed + Full Stack",
       "Private Nameservers", "VIP Support (24/7)", "Hourly Backups", "99.99% Uptime SLA",
       "Create Sub-Resellers", "Enterprise Security", "Multiple Dedicated IPs", "Custom Branding",
@@ -634,11 +634,11 @@ const daMasterResellerPlans: PricingPlan[] = [
 const daAlphaResellerPlans: PricingPlan[] = [
   {
     name: "DA Alpha Reseller Bronze",
-    basePrice: 32000,
+    basePrice: 16000,
     description: "Entry-level DA alpha reseller",
-    features: ["100 GB SSD Storage", "2 TB Bandwidth", "Unlimited Master Resellers"],
+    features: ["100 GB SSD Storage", "2 TB Bandwidth", "2 WHM Accounts", "15 Master Reseller Accounts"],
     allFeatures: [
-      "100 GB SSD Storage", "2 TB Bandwidth", "Unlimited Master Resellers",
+      "100 GB SSD Storage", "2 TB Bandwidth", "2 WHM Accounts", "15 Master Reseller Accounts",
       "DirectAdmin Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Redis",
       "Private Nameservers", "Alpha Reseller Support", "Daily Backups", "99.9% Uptime SLA",
       "Multi-Level Reselling", "Dedicated IP",
@@ -646,13 +646,13 @@ const daAlphaResellerPlans: PricingPlan[] = [
   },
   {
     name: "DA Alpha Reseller Silver",
-    basePrice: 45000,
+    basePrice: 22500,
     description: "Growing DA alpha reseller",
     badge: "Popular",
     color: "blue",
-    features: ["200 GB SSD Storage", "4 TB Bandwidth", "Unlimited Master Resellers"],
+    features: ["200 GB SSD Storage", "4 TB Bandwidth", "5 WHM Accounts", "30 Master Reseller Accounts"],
     allFeatures: [
-      "200 GB SSD Storage", "4 TB Bandwidth", "Unlimited Master Resellers",
+      "200 GB SSD Storage", "4 TB Bandwidth", "5 WHM Accounts", "30 Master Reseller Accounts",
       "DirectAdmin Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Redis + Memcached",
       "Private Nameservers", "Priority Support", "Hourly Backups", "99.99% Uptime SLA",
       "Multi-Level Reselling", "Multiple Dedicated IPs", "Custom Branding",
@@ -660,13 +660,13 @@ const daAlphaResellerPlans: PricingPlan[] = [
   },
   {
     name: "DA Alpha Reseller Gold",
-    basePrice: 65000,
+    basePrice: 32500,
     description: "Professional DA alpha reseller",
     badge: "Best Value",
     color: "purple",
-    features: ["400 GB SSD Storage", "8 TB Bandwidth", "Unlimited Master Resellers"],
+    features: ["400 GB SSD Storage", "8 TB Bandwidth", "10 WHM Accounts", "50 Master Reseller Accounts"],
     allFeatures: [
-      "400 GB SSD Storage", "8 TB Bandwidth", "Unlimited Master Resellers",
+      "400 GB SSD Storage", "8 TB Bandwidth", "10 WHM Accounts", "50 Master Reseller Accounts",
       "DirectAdmin Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Full Stack",
       "Private Nameservers", "VIP Support (24/7)", "Hourly Backups", "99.99% Uptime SLA",
       "Multi-Level Reselling", "Multiple Dedicated IPs", "Custom Branding", "API Access",
@@ -674,13 +674,13 @@ const daAlphaResellerPlans: PricingPlan[] = [
   },
   {
     name: "DA Alpha Reseller Platinum",
-    basePrice: 95000,
+    basePrice: 47500,
     description: "Premium DA alpha reseller",
     badge: "Premium",
     color: "orange",
-    features: ["800 GB SSD Storage", "16 TB Bandwidth", "Unlimited Master Resellers"],
+    features: ["800 GB SSD Storage", "16 TB Bandwidth", "30 WHM Accounts", "Unlimited Master Reseller Accounts"],
     allFeatures: [
-      "800 GB SSD Storage", "16 TB Bandwidth", "Unlimited Master Resellers",
+      "800 GB SSD Storage", "16 TB Bandwidth", "30 WHM Accounts", "Unlimited Master Reseller Accounts",
       "DirectAdmin Control Panel", "Full White Label", "Free SSL Certificates", "LiteSpeed + Enterprise Stack",
       "Private Nameservers", "VIP Support (24/7)", "Real-time Backups", "99.99% Uptime SLA",
       "Multi-Level Reselling", "Multiple Dedicated IPs", "Custom Branding", "Full API Access", "SLA Guarantee",
