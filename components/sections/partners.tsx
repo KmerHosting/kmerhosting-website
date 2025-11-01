@@ -1,8 +1,15 @@
 "use client"
 
 import Image from "next/image"
+import { useState, useRef, useEffect } from "react"
 
 export function Partners() {
+  const [isDragging, setIsDragging] = useState(false)
+  const [startX, setStartX] = useState(0)
+  const [scrollLeft, setScrollLeft] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+  const scrollContainer = useRef<HTMLDivElement>(null)
+
   const partners = [
     {
       name: "Sectigo",
@@ -72,6 +79,61 @@ export function Partners() {
   // Duplicate partners for seamless loop
   const duplicatedPartners = [...partners, ...partners]
 
+  // Mouse drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollContainer.current) return
+    setIsDragging(true)
+    setIsPaused(true)
+    setStartX(e.pageX - scrollContainer.current.offsetLeft)
+    setScrollLeft(scrollContainer.current.scrollLeft)
+    scrollContainer.current.style.cursor = 'grabbing'
+  }
+
+  const handleMouseLeave = () => {
+    setIsDragging(false)
+    setIsPaused(false)
+    if (scrollContainer.current) {
+      scrollContainer.current.style.cursor = 'grab'
+    }
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+    setIsPaused(false)
+    if (scrollContainer.current) {
+      scrollContainer.current.style.cursor = 'grab'
+    }
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollContainer.current) return
+    e.preventDefault()
+    const x = e.pageX - scrollContainer.current.offsetLeft
+    const walk = (x - startX) * 2 // Scroll speed multiplier
+    scrollContainer.current.scrollLeft = scrollLeft - walk
+  }
+
+  // Touch handlers for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!scrollContainer.current) return
+    setIsDragging(true)
+    setIsPaused(true)
+    setStartX(e.touches[0].pageX - scrollContainer.current.offsetLeft)
+    setScrollLeft(scrollContainer.current.scrollLeft)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || !scrollContainer.current) return
+    const x = e.touches[0].pageX - scrollContainer.current.offsetLeft
+    const walk = (x - startX) * 2
+    scrollContainer.current.scrollLeft = scrollLeft - walk
+  }
+
+  const handleTouchEnd = () => {
+    setIsDragging(false)
+    setIsPaused(false)
+  }
+
   // Structured data for SEO
   const structuredData = {
     "@context": "https://schema.org",
@@ -124,17 +186,47 @@ export function Partners() {
               .animate-scroll {
                 animation: scroll-left 30s linear infinite;
               }
-              .animate-scroll:hover {
+              .animate-scroll:hover,
+              .animate-scroll.paused {
                 animation-play-state: paused;
+              }
+              .scroll-container {
+                cursor: grab;
+                user-select: none;
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+              }
+              .scroll-container::-webkit-scrollbar {
+                display: none;
+              }
+              .scroll-container:active {
+                cursor: grabbing;
               }
             `}</style>
 
-            <div className="flex animate-scroll" role="list">
+            <div 
+              ref={scrollContainer}
+              className={`flex animate-scroll scroll-container ${isPaused ? 'paused' : ''}`}
+              role="list"
+              onMouseDown={handleMouseDown}
+              onMouseLeave={handleMouseLeave}
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              style={{ 
+                cursor: isDragging ? 'grabbing' : 'grab',
+                userSelect: 'none'
+              }}
+            >
               {duplicatedPartners.map((partner, index) => (
                 <article
                   key={`${partner.name}-${index}`}
                   className="flex-shrink-0 mx-4 w-48 h-24"
                   role="listitem"
+                  style={{ pointerEvents: isDragging ? 'none' : 'auto' }}
                 >
                   <a
                     href={partner.url}
@@ -143,6 +235,11 @@ export function Partners() {
                     className="flex items-center justify-center h-full p-6 rounded-lg border border-gray-800 hover:border-gray-700 transition-colors bg-black"
                     aria-label={`Visit ${partner.name} - ${partner.description}`}
                     title={partner.name}
+                    onClick={(e) => {
+                      if (isDragging) {
+                        e.preventDefault()
+                      }
+                    }}
                   >
                     <Image
                       src={partner.logo}
@@ -151,6 +248,7 @@ export function Partners() {
                       height={96}
                       className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100"
                       loading="lazy"
+                      draggable={false}
                     />
                   </a>
                 </article>
