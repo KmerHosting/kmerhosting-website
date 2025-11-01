@@ -14,6 +14,11 @@ import Link from "next/link"
 
 type BillingPeriod = "monthly" | "quarterly" | "semi-annually" | "annually"
 
+// Format numbers with spaces as thousand separators
+const formatPrice = (price: number): string => {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+}
+
 interface PricingPlan {
   name: string
   basePrice: number
@@ -880,7 +885,7 @@ function PricingCard({ plan, billingPeriod }: { plan: PricingPlan; billingPeriod
 
         <div className="mb-4">
           <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold">{Math.round(monthlyPrice).toLocaleString()}</span>
+            <span className="text-2xl font-bold">{formatPrice(Math.round(monthlyPrice))}</span>
             <span className="text-xs text-muted-foreground">FCFA/mo</span>
           </div>
           {discount > 0 && (
@@ -889,18 +894,18 @@ function PricingCard({ plan, billingPeriod }: { plan: PricingPlan; billingPeriod
                 Save {discount}%
               </Badge>
               <span className="text-xs text-muted-foreground line-through">
-                {plan.basePrice.toLocaleString()} FCFA
+                {formatPrice(plan.basePrice)} FCFA
               </span>
             </div>
           )}
           {billingPeriod !== "monthly" && (
             <p className="text-xs text-muted-foreground mt-1">
-              Billed {Math.round(totalPrice).toLocaleString()} FCFA {billingDiscounts[billingPeriod].label.toLowerCase()}
+              Billed {formatPrice(Math.round(totalPrice))} FCFA {billingDiscounts[billingPeriod].label.toLowerCase()}
             </p>
           )}
         </div>
 
-        {isAnnual && (
+        {isAnnual && plan.name.includes("Pro") && (
           <div className="mb-4 p-2 rounded-lg bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20">
             <div className="flex items-center gap-2">
               <Gift className="h-4 w-4 text-[#07C983]" />
@@ -1046,7 +1051,7 @@ export default function PricingPage() {
               {billingPeriod === "annually" && (
                 <p className="text-center text-xs text-muted-foreground mt-3 flex items-center justify-center gap-1">
                   <Gift className="h-3 w-3 text-[#07C983]" />
-                  Annual billing includes a free .com domain
+                  Annual billing includes a free .com domain for Pro plans only
                 </p>
               )}
             </div>
@@ -1791,7 +1796,7 @@ export default function PricingPage() {
                 <Card className="p-4">
                   <h3 className="font-bold text-sm mb-2">When do I get the free domain?</h3>
                   <p className="text-xs text-muted-foreground">
-                    Free .com domain is included only with annual billing plans. You can register or transfer a domain during signup.
+                    Free .com domain is included only with annual billing on Pro plans. You can register or transfer a domain during signup.
                   </p>
                 </Card>
               </div>
