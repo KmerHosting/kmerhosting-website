@@ -285,13 +285,11 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
               <h4 className="font-semibold mb-4">{"Contact Us"}</h4>
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
                   <a href="mailto:info@kmerhosting.com" className="hover:text-[#07C983] transition-colors">
                   info@kmerhosting.com
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Ticket className="h-4 w-4" />
                   <Link href="/support" className="hover:text-[#07C983] transition-colors">
                   Open Ticket
                   </Link>
