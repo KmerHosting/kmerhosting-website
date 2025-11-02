@@ -2,8 +2,9 @@
 
 import type React from "react"
 
+import Image from "next/image"
 import Link from "next/link"
-import { ArrowUp, Mail, Ticket, Slack, Twitter, Facebook, Linkedin, Github, Instagram, Youtube } from "lucide-react"
+import { ArrowUp, Mail, Ticket, Slack, Twitter, Facebook, Linkedin, Github, Instagram, Youtube, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useState, useEffect } from "react"
@@ -285,15 +286,21 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
-                  <a href="mailto:sales@kmerhosting.com" className="hover:text-[#07C983] transition-colors">
-                    sales@kmerhosting.com
+                  <a href="mailto:info@kmerhosting.com" className="hover:text-[#07C983] transition-colors">
+                  info@kmerhosting.com
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
                   <Ticket className="h-4 w-4" />
                   <Link href="/support" className="hover:text-[#07C983] transition-colors">
-                    Open Ticket
+                  Open Ticket
                   </Link>
+                </li>
+                <li className="flex items-start gap-2">
+                  <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <span className="text-muted-foreground">
+                  10e arrêt Nkoabang Centre,<br />Yaoundé, Cameroon
+                  </span>
                 </li>
               </ul>
             </div>
@@ -383,6 +390,41 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
               <p>
                 KmerHosting &copy; 2019-{new Date().getFullYear()}
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Payment options & Certifications - Bottom Section */}
+        <div className="border-t bg-muted/30">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              {/* Payment Options */}
+              <div className="flex-1">
+                <h5 className="text-sm font-semibold mb-3">Payment Options</h5>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Image src="/payment-options/visa.svg" alt="Visa" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
+                  <Image src="/payment-options/mastercard.svg" alt="Mastercard" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
+                  <Image src="/payment-options/amex.svg" alt="American Express" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
+                  <Image src="/payment-options/discover.svg" alt="Discover" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
+                  <Image src="/payment-options/jcb.svg" alt="JCB" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
+                  <Image src="/payment-options/unionpay.svg" alt="UnionPay" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
+                  <Image src="/payment-options/bitcoin.svg" alt="Bitcoin" width={28} height={18} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
+                  <Image src="/payment-options/paypal.svg" alt="PayPal" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
+                  <Image src="/payment-options/google-pay.svg" alt="Google Pay" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
+                  <Image src="/payment-options/apple-pay.svg" alt="Apple Pay" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
+                  <Image src="/payment-options/mtn-momo.svg" alt="MTN Mobile Money" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
+                  <Image src="/payment-options/orange-money.svg" alt="Orange Money" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
+                </div>
+                <p className="text-xs text-muted-foreground mt-3">We protect and save your data.</p>
+              </div>
+
+              {/* Certifications (no heading text) */}
+              <div className="flex flex-col items-end">
+                <div className="flex items-center gap-4">
+                  <Image src="/partners/icann.svg" alt="We are an ICANN-accredited registrar. Serving customers since 2022." width={64} height={32} className="opacity-90" />
+                  <Image src="/partners/sectigo-small.svg" alt="Secured by Sectigo" width={64} height={32} className="opacity-90" />
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -75,7 +75,6 @@ export default function HomePage() {
         <PopularPlans />
         <WhyChooseUs />
         <Testimonials />
-        <PaymentMethods />
         <CTA />
       </main>
       <Footer />
