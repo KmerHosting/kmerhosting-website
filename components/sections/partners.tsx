@@ -196,6 +196,12 @@ export function Partners() {
                 cursor: grab;
                 user-select: none;
                 width: 100%;
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+              }
+              .scroll-container::-webkit-scrollbar {
+                display: none;
               }
               .scroll-container:active {
                 cursor: grabbing;
@@ -228,7 +234,7 @@ export function Partners() {
               }}
             >
               <div className={`partners-track ${isPaused ? 'paused' : ''}`}>
-              {duplicatedPartners.map((partner, index) => (
+                {duplicatedPartners.map((partner, index) => (
                 <article
                   key={`${partner.name}-${index}`}
                   className="flex-shrink-0 mx-4 w-48 h-24"
