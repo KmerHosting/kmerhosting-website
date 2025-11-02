@@ -157,7 +157,7 @@ export function Partners() {
       />
 
       <section 
-        className="py-16 bg-black text-white overflow-hidden"
+        className="py-16 bg-black text-white"
         aria-labelledby="partners-heading"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -172,8 +172,10 @@ export function Partners() {
               Powered by industry-leading technologies to deliver exceptional hosting services
             </p>
           </header>
+        </div>
 
-          <div className="relative" role="region" aria-label="Partner logos carousel">
+          {/* Full-width carousel container */}
+          <div className="relative w-full overflow-hidden" role="region" aria-label="Partner logos carousel">
             <style jsx>{`
               @keyframes scroll-left {
                 0% {
@@ -193,21 +195,25 @@ export function Partners() {
               .scroll-container {
                 cursor: grab;
                 user-select: none;
-                overflow-x: auto;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-              }
-              .scroll-container::-webkit-scrollbar {
-                display: none;
+                width: 100%;
               }
               .scroll-container:active {
                 cursor: grabbing;
+              }
+              .partners-track {
+                display: flex;
+                width: calc(200% + 32px);
+                animation: scroll-left 30s linear infinite;
+              }
+              .partners-track:hover,
+              .partners-track.paused {
+                animation-play-state: paused;
               }
             `}</style>
 
             <div 
               ref={scrollContainer}
-              className={`flex animate-scroll scroll-container ${isPaused ? 'paused' : ''}`}
+              className={`scroll-container ${isPaused ? 'paused' : ''}`}
               role="list"
               onMouseDown={handleMouseDown}
               onMouseLeave={handleMouseLeave}
@@ -221,6 +227,7 @@ export function Partners() {
                 userSelect: 'none'
               }}
             >
+              <div className={`partners-track ${isPaused ? 'paused' : ''}`}>
               {duplicatedPartners.map((partner, index) => (
                 <article
                   key={`${partner.name}-${index}`}
@@ -253,9 +260,11 @@ export function Partners() {
                   </a>
                 </article>
               ))}
+              </div>
             </div>
           </div>
 
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <footer className="mt-12 text-center">
             <p className="text-sm text-gray-400">
               Trusted partnerships delivering cutting-edge performance, security, and reliability
