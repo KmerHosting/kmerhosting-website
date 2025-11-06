@@ -47,10 +47,10 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Decorative effects */}
+      {/* Decorative effects - Hidden on mobile (below sm breakpoint) */}
       
       {/* Dark theme: Green geometric shapes + central white glow behind text */}
-      <div className="hidden dark:block">
+      <div className="hidden sm:dark:block">
         {/* Central white glow behind text */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-white/10 rounded-full blur-3xl pointer-events-none" />
         
@@ -91,8 +91,8 @@ export function Hero() {
         <div className="absolute bottom-1/3 right-1/3 w-[80px] h-[80px] bg-[#16A34A]/10 rounded-full pointer-events-none" />
       </div>
       
-      {/* Light theme: Green geometric shapes at extremities */}
-      <div className="dark:hidden">
+      {/* Light theme: Green geometric shapes at extremities - Hidden on mobile */}
+      <div className="hidden sm:block dark:hidden">
         {/* Top left green triangular shape */}
         <div className="absolute top-0 left-0 w-[300px] h-[200px] pointer-events-none">
           <svg viewBox="0 0 300 200" className="w-full h-full">

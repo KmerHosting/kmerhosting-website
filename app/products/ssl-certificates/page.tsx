@@ -183,7 +183,7 @@ export default function SslCertificatesPage() {
                       ))}
                     </ul>
                     <Button className="w-full" size="lg" asChild>
-                      <Link href="/signup">Order Now</Link>
+                      <a href="https://clients.kmerhosting.com/cart.php">Order Now</a>
                     </Button>
                   </CardContent>
                 </Card>

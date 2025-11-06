@@ -129,7 +129,7 @@ const aiProducts: Product[] = [
       "Drag & Drop Editor",
       "Mobile Responsive"
     ],
-    href: "/signup"
+    href: "https://clients.kmerhosting.com/cart.php"
   },
   {
     icon: Workflow,
@@ -141,7 +141,7 @@ const aiProducts: Product[] = [
       "Self-hosted Solution",
       "Full Control & Privacy"
     ],
-    href: "/signup",
+    href: "https://clients.kmerhosting.com/cart.php",
     badge: "Popular",
     badgeVariant: "default"
   },

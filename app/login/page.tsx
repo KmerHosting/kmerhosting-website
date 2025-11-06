@@ -119,9 +119,9 @@ export default function LoginPage() {const [email, setEmail] = useState("")
                 <span className="text-muted-foreground">
                   {"Don't have an account?"}{" "}
                 </span>
-                <Link href="/signup" className="text-primary hover:underline">
+                <a href="https://clients.kmerhosting.com/register.php" className="text-primary hover:underline">
                   {"Sign up here"}
-                </Link>
+                </a>
               </div>
             </CardContent>
           </Card>

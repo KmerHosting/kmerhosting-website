@@ -185,7 +185,7 @@ export default function EmailHostingPage() {
                       ))}
                     </ul>
                     <Button className="w-full" size="lg" asChild>
-                      <Link href="/signup">Get Started</Link>
+                      <a href="https://clients.kmerhosting.com/cart.php">Get Started</a>
                     </Button>
                   </CardContent>
                 </Card>
@@ -265,7 +265,7 @@ export default function EmailHostingPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button size="lg" variant="secondary" asChild>
-                    <Link href="/signup">Get Started Now</Link>
+                    <a href="https://clients.kmerhosting.com/cart.php">Get Started Now</a>
                   </Button>
                   <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10" asChild>
                     <Link href="/support">Contact Support</Link>

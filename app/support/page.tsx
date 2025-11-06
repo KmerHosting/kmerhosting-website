@@ -71,16 +71,16 @@ export default function SupportPage() {
                 <CardContent>
                   <div className="grid md:grid-cols-2 gap-4">
                     <Button size="lg" variant="outline" className="w-full bg-transparent px-6 py-6" asChild>
-                      <Link href="/support/live-chat">
+                      <a href="https://clients.kmerhosting.com/knowledgebase.php">
                         <MessageCircle className="mr-2 h-5 w-5" />
-                        Live chat
-                      </Link>
+                        Knowledge Base
+                      </a>
                     </Button>
                     <Button size="lg" variant="outline" className="w-full bg-transparent px-6 py-6" asChild>
-                      <Link href="/support">
+                      <a href="https://clients.kmerhosting.com/submitticket.php">
                         <Ticket className="mr-2 h-5 w-5" />
                         Open Support Ticket
-                      </Link>
+                      </a>
                     </Button>
                   </div>
 

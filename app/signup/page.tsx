@@ -180,9 +180,9 @@ export default function SignupPage() {const [formData, setFormData] = useState({
                 <span className="text-muted-foreground">
                   {"Already have an account?"}{" "}
                 </span>
-                <Link href="/login" className="text-primary hover:underline">
+                <a href="https://clients.kmerhosting.com" className="text-primary hover:underline">
                   {"Login here"}
-                </Link>
+                </a>
               </div>
             </CardContent>
           </Card>

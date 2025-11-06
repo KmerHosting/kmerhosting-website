@@ -194,7 +194,7 @@ export default function DatabaseHostingPage() {
                       ))}
                     </ul>
                     <Button className="w-full" size="lg" asChild>
-                      <Link href="/signup">Get Started</Link>
+                      <a href="https://clients.kmerhosting.com/cart.php">Get Started</a>
                     </Button>
                   </CardContent>
                 </Card>

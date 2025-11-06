@@ -947,10 +947,10 @@ function PricingCard({ plan, billingPeriod }: { plan: PricingPlan; billingPeriod
         </Dialog>
 
         <Button asChild className="w-full h-8 text-xs">
-          <Link href="/signup">
+          <a href="https://clients.kmerhosting.com/cart.php">
             Get Started
             <ChevronRight className="ml-1 h-3 w-3" />
-          </Link>
+          </a>
         </Button>
       </div>
     </Card>

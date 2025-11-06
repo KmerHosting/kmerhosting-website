@@ -90,9 +90,9 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
                   </Link>
                 </li>
                 <li>
-                  <Link href="/support/live-chat" className="hover:text-[#07C983] transition-colors">
+                  <a href="https://clients.kmerhosting.com/submitticket.php" className="hover:text-[#07C983] transition-colors">
                     {"Live Chat"}
-                  </Link>
+                  </a>
                 </li>
                 <li>
                   <Link href="/faq" className="hover:text-[#07C983] transition-colors">
@@ -290,9 +290,9 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Link href="/support" className="hover:text-[#07C983] transition-colors">
+                  <a href="https://clients.kmerhosting.com/submitticket.php" className="hover:text-[#07C983] transition-colors">
                   Open Ticket
-                  </Link>
+                  </a>
                 </li>
                 <li className="flex items-start gap-2">
                   <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
@@ -374,8 +374,8 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
                 </a>
               </div>
 
-              {/* Status Indicator */}
-              <div className="flex items-center gap-2 text-sm">
+              {/* Status Indicator - Hidden on mobile */}
+              <div className="hidden sm:flex items-center gap-2 text-sm">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                 <span className="text-[#07C983] dark:text-[#07C983] font-medium">
                   {"Service status"}
@@ -383,8 +383,14 @@ export function Footer() {const [showBackToTop, setShowBackToTop] = useState(fal
               </div>
             </div>
 
-            {/* Centered Copyright */}
-            <div className="text-center text-sm text-muted-foreground">
+            {/* Centered Copyright and Service Status */}
+            <div className="text-center text-sm text-muted-foreground space-y-2">
+              <div className="flex items-center justify-center gap-2 sm:hidden">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-[#07C983] dark:text-[#07C983] font-medium">
+                  {"Service status"}
+                </span>
+              </div>
               <p>
                 KmerHosting &copy; 2019-{new Date().getFullYear()}
               </p>
