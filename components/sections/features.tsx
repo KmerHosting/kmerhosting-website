@@ -129,7 +129,7 @@ export function Features() {
                 </p>
                 
                 <Button asChild size="sm" className="w-full hover:bg-primary/90 transition-colors">
-                  <a href="https://d5.my-control-panel.com:2222/CMD_LOGIN?username=trial&loginkey=tNz6MYCTTKHzFKevzczG" target="_blank" rel="noopener noreferrer" aria-label="Try DirectAdmin control panel with live demo">
+                  <a href="https://demo.directadmin.com" target="_blank" rel="noopener noreferrer" aria-label="Try DirectAdmin control panel with live demo">
                     Explore panel for free
                   </a>
                 </Button>
