@@ -102,13 +102,10 @@ export function Features() {
           <div className="grid md:grid-cols-2 gap-6">
             {/* DirectAdmin */}
             <article 
-              className="group relative bg-gradient-to-br from-card to-muted/20 border-2 border-border rounded-2xl p-6" 
+              className="relative bg-gradient-to-br from-card to-muted/20 border-2 border-border rounded-2xl p-6" 
               itemScope 
               itemType="https://schema.org/SoftwareApplication"
             >
-              {/* Decorative Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
               <div className="relative space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="!bg-blue-400 flex-shrink-0 w-20 h-20 flex items-center justify-center bg-muted/50 rounded-xl border border-border">
@@ -131,23 +128,20 @@ export function Features() {
                   High-performance control panel engineered for minimal resource consumption and maximum uptime. Features enterprise-grade security and native LiteSpeed integration.
                 </p>
                 
-                <Button asChild size="sm" className="w-full group-hover:bg-primary/90 transition-colors">
-                  <Link href="/free-hosting" aria-label="Try DirectAdmin control panel with our free hosting plan">
+                <Button asChild size="sm" className="w-full hover:bg-primary/90 transition-colors">
+                  <a href="https://d5.my-control-panel.com:2222/CMD_LOGIN?username=trial&loginkey=tNz6MYCTTKHzFKevzczG" target="_blank" rel="noopener noreferrer" aria-label="Try DirectAdmin control panel with live demo">
                     Explore panel for free
-                  </Link>
+                  </a>
                 </Button>
               </div>
             </article>
 
             {/* cPanel */}
             <article 
-              className="group relative bg-gradient-to-br from-card to-muted/20 border-2 border-border rounded-2xl p-6" 
+              className="relative bg-gradient-to-br from-card to-muted/20 border-2 border-border rounded-2xl p-6" 
               itemScope 
               itemType="https://schema.org/SoftwareApplication"
             >
-              {/* Decorative Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
               <div className="relative space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-20 h-20 flex items-center justify-center bg-muted/50 rounded-xl border border-border">
@@ -170,10 +164,10 @@ export function Features() {
                   Enterprise-class hosting platform with advanced automation, comprehensive API access, and Softaculous integration. Optimized for scalability and developer productivity.
                 </p>
                 
-                <Button asChild size="sm" className="w-full group-hover:bg-primary/90 transition-colors">
-                  <Link href="/free-hosting" aria-label="Try cPanel control panel with our free hosting plan">
+                <Button asChild size="sm" className="w-full hover:bg-primary/90 transition-colors">
+                  <a href="https://cpanel.net/demo/" target="_blank" rel="noopener noreferrer" aria-label="Try cPanel control panel demo">
                     Explore panel for free
-                  </Link>
+                  </a>
                 </Button>
               </div>
             </article>
