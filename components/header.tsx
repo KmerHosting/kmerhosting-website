@@ -899,17 +899,17 @@ export function Header() {
                   <div className="border-t pt-4 space-y-4">
                     {/* User Menu */}
                     <div className="px-4">
-                      <h4 className="text-sm font-semibold mb-3 text-muted-foreground">Account</h4>
-                      <div className="space-y-2">
+                      <h4 className="text-sm font-semibold mb-4 text-muted-foreground">Account</h4>
+                      <div className="space-y-4">
                         <a href="https://clients.kmerhosting.com" onClick={() => setIsOpen(false)}>
-                          <Button variant="outline" className="w-full bg-transparent px-6 py-2 justify-start gap-2">
-                            <User className="h-4 w-4" />
+                          <Button variant="outline" className="w-full bg-transparent px-8 py-4 justify-start gap-3 text-base">
+                            <User className="h-5 w-5" />
                             Client Area
                           </Button>
                         </a>
                         <a href="https://clients.kmerhosting.com/submitticket.php" onClick={() => setIsOpen(false)}>
-                          <Button variant="outline" className="w-full bg-transparent px-6 py-2 justify-start gap-2">
-                            <Ticket className="h-4 w-4" />
+                          <Button variant="outline" className="w-full bg-transparent px-8 py-4 justify-start gap-3 text-base">
+                            <Ticket className="h-5 w-5" />
                             Submit a Ticket
                           </Button>
                         </a>

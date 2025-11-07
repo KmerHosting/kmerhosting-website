@@ -47,85 +47,91 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Decorative effects - Hidden on mobile (below sm breakpoint) */}
+      {/* Decorative effects */}
       
       {/* Dark theme: Green geometric shapes + central white glow behind text */}
-      <div className="hidden sm:dark:block">
-        {/* Central white glow behind text */}
+      <div className="hidden dark:block">
+        {/* Central white glow behind text - Always visible */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-white/10 rounded-full blur-3xl pointer-events-none" />
         
-        {/* Top left green triangular shape */}
-        <div className="absolute top-0 left-0 w-[300px] h-[200px] pointer-events-none">
-          <svg viewBox="0 0 300 200" className="w-full h-full">
-            <polygon points="0,0 300,0 200,200 0,100" fill="#16A34A" opacity="0.6" />
-            <polygon points="0,0 200,0 100,150 0,80" fill="#07C983" opacity="0.4" />
-          </svg>
+        {/* Green triangular shapes - Hidden on mobile */}
+        <div className="hidden sm:block">
+          {/* Top left green triangular shape */}
+          <div className="absolute top-0 left-0 w-[300px] h-[200px] pointer-events-none">
+            <svg viewBox="0 0 300 200" className="w-full h-full">
+              <polygon points="0,0 300,0 200,200 0,100" fill="#16A34A" opacity="0.6" />
+              <polygon points="0,0 200,0 100,150 0,80" fill="#07C983" opacity="0.4" />
+            </svg>
+          </div>
+          
+          {/* Top right green triangular shape */}
+          <div className="absolute top-0 right-0 w-[300px] h-[200px] pointer-events-none">
+            <svg viewBox="0 0 300 200" className="w-full h-full">
+              <polygon points="300,0 0,0 100,200 300,100" fill="#16A34A" opacity="0.6" />
+              <polygon points="300,0 100,0 200,150 300,80" fill="#07C983" opacity="0.4" />
+            </svg>
+          </div>
+          
+          {/* Bottom left green shape */}
+          <div className="absolute bottom-0 left-0 w-[250px] h-[150px] pointer-events-none">
+            <svg viewBox="0 0 250 150" className="w-full h-full">
+              <polygon points="0,150 250,150 150,0 0,50" fill="#16A34A" opacity="0.5" />
+              <polygon points="0,150 150,150 100,30 0,70" fill="#07C983" opacity="0.3" />
+            </svg>
+          </div>
+          
+          {/* Bottom right green shape */}
+          <div className="absolute bottom-0 right-0 w-[250px] h-[150px] pointer-events-none">
+            <svg viewBox="0 0 250 150" className="w-full h-full">
+              <polygon points="250,150 0,150 100,0 250,50" fill="#16A34A" opacity="0.5" />
+              <polygon points="250,150 100,150 150,30 250,70" fill="#07C983" opacity="0.3" />
+            </svg>
+          </div>
         </div>
         
-        {/* Top right green triangular shape */}
-        <div className="absolute top-0 right-0 w-[300px] h-[200px] pointer-events-none">
-          <svg viewBox="0 0 300 200" className="w-full h-full">
-            <polygon points="300,0 0,0 100,200 300,100" fill="#16A34A" opacity="0.6" />
-            <polygon points="300,0 100,0 200,150 300,80" fill="#07C983" opacity="0.4" />
-          </svg>
-        </div>
-        
-        {/* Bottom left green shape */}
-        <div className="absolute bottom-0 left-0 w-[250px] h-[150px] pointer-events-none">
-          <svg viewBox="0 0 250 150" className="w-full h-full">
-            <polygon points="0,150 250,150 150,0 0,50" fill="#16A34A" opacity="0.5" />
-            <polygon points="0,150 150,150 100,30 0,70" fill="#07C983" opacity="0.3" />
-          </svg>
-        </div>
-        
-        {/* Bottom right green shape */}
-        <div className="absolute bottom-0 right-0 w-[250px] h-[150px] pointer-events-none">
-          <svg viewBox="0 0 250 150" className="w-full h-full">
-            <polygon points="250,150 0,150 100,0 250,50" fill="#16A34A" opacity="0.5" />
-            <polygon points="250,150 100,150 150,30 250,70" fill="#07C983" opacity="0.3" />
-          </svg>
-        </div>
-        
-        {/* Additional decorative circles */}
+        {/* Additional decorative circles - Always visible */}
         <div className="absolute top-1/4 left-1/4 w-[100px] h-[100px] bg-[#07C983]/10 rounded-full pointer-events-none" />
         <div className="absolute bottom-1/3 right-1/3 w-[80px] h-[80px] bg-[#16A34A]/10 rounded-full pointer-events-none" />
       </div>
       
-      {/* Light theme: Green geometric shapes at extremities - Hidden on mobile */}
-      <div className="hidden sm:block dark:hidden">
-        {/* Top left green triangular shape */}
-        <div className="absolute top-0 left-0 w-[300px] h-[200px] pointer-events-none">
-          <svg viewBox="0 0 300 200" className="w-full h-full">
-            <polygon points="0,0 300,0 200,200 0,100" fill="#16A34A" opacity="0.6" />
-            <polygon points="0,0 200,0 100,150 0,80" fill="#07C983" opacity="0.4" />
-          </svg>
+      {/* Light theme: Green geometric shapes at extremities */}
+      <div className="dark:hidden">
+        {/* Green triangular shapes - Hidden on mobile */}
+        <div className="hidden sm:block">
+          {/* Top left green triangular shape */}
+          <div className="absolute top-0 left-0 w-[300px] h-[200px] pointer-events-none">
+            <svg viewBox="0 0 300 200" className="w-full h-full">
+              <polygon points="0,0 300,0 200,200 0,100" fill="#16A34A" opacity="0.6" />
+              <polygon points="0,0 200,0 100,150 0,80" fill="#07C983" opacity="0.4" />
+            </svg>
+          </div>
+          
+          {/* Top right green triangular shape */}
+          <div className="absolute top-0 right-0 w-[300px] h-[200px] pointer-events-none">
+            <svg viewBox="0 0 300 200" className="w-full h-full">
+              <polygon points="300,0 0,0 100,200 300,100" fill="#16A34A" opacity="0.6" />
+              <polygon points="300,0 100,0 200,150 300,80" fill="#07C983" opacity="0.4" />
+            </svg>
+          </div>
+          
+          {/* Bottom left green shape */}
+          <div className="absolute bottom-0 left-0 w-[250px] h-[150px] pointer-events-none">
+            <svg viewBox="0 0 250 150" className="w-full h-full">
+              <polygon points="0,150 250,150 150,0 0,50" fill="#16A34A" opacity="0.5" />
+              <polygon points="0,150 150,150 100,30 0,70" fill="#07C983" opacity="0.3" />
+            </svg>
+          </div>
+          
+          {/* Bottom right green shape */}
+          <div className="absolute bottom-0 right-0 w-[250px] h-[150px] pointer-events-none">
+            <svg viewBox="0 0 250 150" className="w-full h-full">
+              <polygon points="250,150 0,150 100,0 250,50" fill="#16A34A" opacity="0.5" />
+              <polygon points="250,150 100,150 150,30 250,70" fill="#07C983" opacity="0.3" />
+            </svg>
+          </div>
         </div>
         
-        {/* Top right green triangular shape */}
-        <div className="absolute top-0 right-0 w-[300px] h-[200px] pointer-events-none">
-          <svg viewBox="0 0 300 200" className="w-full h-full">
-            <polygon points="300,0 0,0 100,200 300,100" fill="#16A34A" opacity="0.6" />
-            <polygon points="300,0 100,0 200,150 300,80" fill="#07C983" opacity="0.4" />
-          </svg>
-        </div>
-        
-        {/* Bottom left green shape */}
-        <div className="absolute bottom-0 left-0 w-[250px] h-[150px] pointer-events-none">
-          <svg viewBox="0 0 250 150" className="w-full h-full">
-            <polygon points="0,150 250,150 150,0 0,50" fill="#16A34A" opacity="0.5" />
-            <polygon points="0,150 150,150 100,30 0,70" fill="#07C983" opacity="0.3" />
-          </svg>
-        </div>
-        
-        {/* Bottom right green shape */}
-        <div className="absolute bottom-0 right-0 w-[250px] h-[150px] pointer-events-none">
-          <svg viewBox="0 0 250 150" className="w-full h-full">
-            <polygon points="250,150 0,150 100,0 250,50" fill="#16A34A" opacity="0.5" />
-            <polygon points="250,150 100,150 150,30 250,70" fill="#07C983" opacity="0.3" />
-          </svg>
-        </div>
-        
-        {/* Additional decorative circles */}
+        {/* Additional decorative circles - Always visible */}
         <div className="absolute top-1/4 left-1/4 w-[100px] h-[100px] bg-[#07C983]/10 rounded-full pointer-events-none" />
         <div className="absolute bottom-1/3 right-1/3 w-[80px] h-[80px] bg-[#16A34A]/10 rounded-full pointer-events-none" />
       </div>
