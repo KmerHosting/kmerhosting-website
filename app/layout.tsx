@@ -1,70 +1,32 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter, Geist_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
-import { ThemeProvider } from "@/components/theme-provider"
-import { Toaster } from "@/components/ui/sonner"
-import "./globals.css"
+import type { Metadata } from 'next'
+import { Geist, Geist_Mono } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
+import './globals.css'
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
-const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
+const _geist = Geist({ subsets: ["latin"] });
+const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kmerhosting.com"),
-  title: {
-    default: "KmerHosting - Professional Web Hosting Solutions",
-    template: "%s | KmerHosting",
+  title: 'v0 App',
+  description: 'Created with v0',
+  generator: 'v0.app',
+  icons: {
+    icon: [
+      {
+        url: '/icon-light-32x32.png',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        url: '/icon-dark-32x32.png',
+        media: '(prefers-color-scheme: dark)',
+      },
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      },
+    ],
+    apple: '/apple-icon.png',
   },
-  description:
-    "Multiple Affordable Hosting services to suit you perfectly. PHP, Node.js, Python, WordPress, and VPS hosting plans starting at 1,158 FCFA/month.",
-  keywords: [
-    "web hosting",
-    "cloud hosting",
-    "VPS hosting",
-    "WordPress hosting",
-    "PHP hosting",
-    "Node.js hosting",
-    "Python hosting",
-    "domain registration",
-    "SSL certificate",
-    "email hosting",
-    "shared hosting",
-    "managed hosting",
-  ],
-  authors: [{ name: "KmerHosting" }],
-  creator: "KmerHosting",
-  publisher: "KmerHosting",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://kmerhosting.com",
-    title: "KmerHosting - Professional Web Hosting Solutions",
-    description: "Every plan include free SSL, domain, and email. Built for developers and businesses.",
-    siteName: "KmerHosting",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "KmerHosting - Professional Web Hosting Solutions",
-    description: "Every plan include free SSL, domain, and email. Built for developers and businesses.",
-  },
-  verification: {
-    google: "your-google-verification-code",
-  },
-  alternates: {
-    canonical: "https://kmerhosting.com",
-  },
-    generator: 'KmerHosting'
 }
 
 export default function RootLayout({
@@ -73,17 +35,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
-      <body className={`${inter.variable} ${geistMono.variable} font-sans antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false} themes={['light', 'dark', 'system']}>
-          {children}
-        </ThemeProvider>
-        <Toaster />
+    <html lang="en">
+      <body className={`font-sans antialiased`}>
+        {children}
         <Analytics />
       </body>
     </html>

@@ -1,450 +1,102 @@
 "use client"
 
-import type React from "react"
-
-import Image from "next/image"
-import Link from "next/link"
-import { ArrowUp, Mail, Ticket, Slack, Twitter, Facebook, Linkedin, Github, Instagram, Youtube, MapPin } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { useState, useEffect } from "react"
-
-export function Footer() {const [showBackToTop, setShowBackToTop] = useState(false)
-  const [email, setEmail] = useState("")
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY
-      const documentHeight = document.documentElement.scrollHeight
-      const windowHeight = window.innerHeight
-      
-      // Show button when user has scrolled past 70% of the page
-      const scrollPercentage = scrollY / (documentHeight - windowHeight)
-      setShowBackToTop(scrollPercentage > 0.7)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // TODO: Implement newsletter subscription
-    console.log("Newsletter subscription:", email)
-    setEmail("")
-  }
-
+export default function Footer() {
   return (
-    <>
-      <footer className="border-t bg-muted/30">
-        {/* Newsletter Bar */}
-        <div className="border-b bg-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="text-center md:text-left">
-                <h3 className="text-xl font-bold mb-1">Join the KmerHosting universe</h3>
-                <p className="text-sm text-muted-foreground">Subscribe to keep up with everything happening on KmerHosting,<br className="hidden sm:block" /> from deals and promotions to product launches.</p>
-              </div>
-              <form onSubmit={handleNewsletterSubmit} className="flex w-full md:w-auto gap-2 relative">
-                <div className="relative w-full md:w-80">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email here"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="bg-muted/50 border-border text-foreground w-full pr-12 h-12 rounded-full focus-visible:ring-2 focus-visible:ring-primary"
-                    required
-                  />
-                  <Button 
-                    type="submit" 
-                    size="icon"
-                    className="absolute right-1 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-primary hover:bg-primary/90"
-                  >
-                    <Mail className="h-5 w-5" />
-                  </Button>
-                </div>
-              </form>
-            </div>
+    <footer className="py-16 px-4" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+          <div>
+            <h3 className="text-lg font-bold mb-4" style={{ color: "#128C7E" }}>
+              KmerHosting
+            </h3>
+            <p className="text-slate-600">Reliable web hosting solutions for Cameroon businesses and individuals.</p>
+          </div>
+
+          <div>
+            <h4 className="font-semibold mb-4 text-slate-900">Hosting</h4>
+            <ul className="space-y-2 text-slate-600">
+              <li>
+                <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                  Shared Hosting
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                  Reseller Hosting
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                  cPanel Plans
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                  DirectAdmin Plans
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold mb-4 text-slate-900">Company</h4>
+            <ul className="space-y-2 text-slate-600">
+              <li>
+                <a href="/about" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                  Contact
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                  Support
+                </a>
+              </li>
+              <li>
+                <a href="/extra-services" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                  Extra Services
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold mb-4 text-slate-900">Contact</h4>
+            <ul className="space-y-2 text-slate-600">
+              <li>Email: info@kmerhosting.cm</li>
+              <li>Phone: +237 XXX XXX XXX</li>
+              <li>Location: Cameroon</li>
+              <li>24/7 Support Available</li>
+            </ul>
           </div>
         </div>
 
-        {/* Main Footer */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            {/* Company */}
-            <div>
-              <h4 className="font-semibold mb-4">{"Company"}</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/about" className="hover:text-[#07C983] transition-colors">
-                    {"About Us"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/support" className="hover:text-[#07C983] transition-colors">
-                    {"Support"}
-                  </Link>
-                </li>
-                <li>
-                  <a href="https://clients.kmerhosting.com/submitticket.php" className="hover:text-[#07C983] transition-colors">
-                    {"Live Chat"}
-                  </a>
-                </li>
-                <li>
-                  <Link href="/faq" className="hover:text-[#07C983] transition-colors">
-                    {"FAQ"}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Hosting Products */}
-            <div>
-              <h4 className="font-semibold mb-4">{"Hosting"}</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/pricing" className="hover:text-[#07C983] transition-colors">
-                    {"Shared Hosting"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/reseller/cpanel/reseller" className="hover:text-[#07C983] transition-colors">
-                    {"Reseller Hosting"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/vps/managed" className="hover:text-[#07C983] transition-colors">
-                    {"Cloud VPS"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/dedicated-vps/managed" className="hover:text-[#07C983] transition-colors">
-                    {"Dedicated VPS"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/dedicated-servers/managed" className="hover:text-[#07C983] transition-colors">
-                    {"Bare Metal Servers"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/n8n" className="hover:text-[#07C983] transition-colors">
-                    {"Self-hosted n8n"}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* AI & Services */}
-            <div>
-              <h4 className="font-semibold mb-4">{"AI & Tools"}</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/products/ai/website-builder" className="hover:text-[#07C983] transition-colors">
-                    {"AI Website Builder"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/ai/free/llama" className="hover:text-[#07C983] transition-colors">
-                    {"Free AI Access"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/ai/paid/gpt" className="hover:text-[#07C983] transition-colors">
-                    {"Paid AI Access"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/domain-search" className="hover:text-[#07C983] transition-colors">
-                    {"Domain Search"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/tools/whois-lookup" className="hover:text-[#07C983] transition-colors">
-                    {"WHOIS Lookup"}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Extra Services */}
-            <div>
-              <h4 className="font-semibold mb-4">{"Extra Services"}</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/products/ssl-certificates" className="hover:text-[#07C983] transition-colors">
-                    {"SSL Certificates"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/email-hosting" className="hover:text-[#07C983] transition-colors">
-                    {"Email Hosting"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/database-hosting" className="hover:text-[#07C983] transition-colors">
-                    {"Database Hosting"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/free-static-hosting" className="hover:text-[#07C983] transition-colors">
-                    {"Free Static Hosting"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/free-hosting" className="hover:text-[#07C983] transition-colors">
-                    {"Free Hosting Plan"}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Quick Link */}
-            <div>
-              <h4 className="font-semibold mb-4">{"Resources"}</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/products" className="hover:text-[#07C983] transition-colors">
-                    {"Products"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/pricing" className="hover:text-[#07C983] transition-colors">
-                    {"Pricing"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/affiliate" className="hover:text-[#07C983] transition-colors">
-                    {"Affiliate Program"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/docs" className="hover:text-[#07C983] transition-colors">
-                    {"Documentation"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/knowledgebase" className="hover:text-[#07C983] transition-colors">
-                    {"Knowledge Base"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog" className="hover:text-[#07C983] transition-colors">
-                    {"Blog"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/forum" className="hover:text-[#07C983] transition-colors">
-                    {"Community"}
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    onClick={() => window.dispatchEvent(new CustomEvent('showCookieBanner'))}
-                    className="hover:text-[#07C983] transition-colors text-left cursor-pointer"
-                  >
-                    {"Manage Cookies"}
-                  </button>
-                </li>
-              </ul>
-            </div>
-
-            {/* Legal */}
-            <div>
-              <h4 className="font-semibold mb-4">{"Legal"}</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/terms" className="hover:text-[#07C983] transition-colors">
-                    {"Terms of Service"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/privacy" className="hover:text-[#07C983] transition-colors">
-                    {"Privacy Policy"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/cookies" className="hover:text-[#07C983] transition-colors">
-                    {"Cookie Policy"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/refunds" className="hover:text-[#07C983] transition-colors">
-                    {"Refund Policy"}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h4 className="font-semibold mb-4">{"Contact Us"}</h4>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li className="flex items-center gap-2">
-                  <a href="mailto:info@kmerhosting.com" className="hover:text-[#07C983] transition-colors">
-                  info@kmerhosting.com
-                  </a>
-                </li>
-                <li className="flex items-center gap-2">
-                  <a href="https://clients.kmerhosting.com/submitticket.php" className="hover:text-[#07C983] transition-colors">
-                  Open Ticket
-                  </a>
-                </li>
-                <li className="flex items-start gap-2">
-                  <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                  <span className="text-muted-foreground">
-                  10e arrêt Nkoabang Centre,<br />Yaoundé, Cameroon
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="mt-12 pt-8 border-t">
-            <div className="flex items-center justify-between mb-4">
-              {/* Social Media Icons */}
-              <div className="flex items-center gap-3">
-                <a
-                  href="https://slack.kmerhosting.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  aria-label="Join our Slack community"
-                >
-                  <Slack className="h-5 w-5" />
-                </a>
-                <a
-                  href="https://twitter.com/kmerhosting"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  aria-label="Follow us on Twitter"
-                >
-                  <Twitter className="h-5 w-5" />
-                </a>
-                <a
-                  href="https://facebook.com/kmerhosting"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  aria-label="Follow us on Facebook"
-                >
-                  <Facebook className="h-5 w-5" />
-                </a>
-                <a
-                  href="https://linkedin.com/company/kmerhosting"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  aria-label="Connect with us on LinkedIn"
-                >
-                  <Linkedin className="h-5 w-5" />
-                </a>
-                <a
-                  href="https://github.com/kmerhosting"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  aria-label="View our GitHub"
-                >
-                  <Github className="h-5 w-5" />
-                </a>
-                <a
-                  href="https://instagram.com/kmerhosting"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  aria-label="Follow us on Instagram"
-                >
-                  <Instagram className="h-5 w-5" />
-                </a>
-                <a
-                  href="https://youtube.com/@kmerhosting"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  aria-label="Subscribe to our YouTube channel"
-                >
-                  <Youtube className="h-5 w-5" />
-                </a>
-              </div>
-
-              {/* Status Indicator - Hidden on mobile */}
-              <div className="hidden sm:flex items-center gap-2 text-sm">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-[#07C983] dark:text-[#07C983] font-medium">
-                  {"Service status"}
-                </span>
-              </div>
-            </div>
-
-            {/* Centered Copyright and Service Status */}
-            <div className="text-center text-sm text-muted-foreground space-y-2">
-              <div className="flex items-center justify-center gap-2 sm:hidden">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-[#07C983] dark:text-[#07C983] font-medium">
-                  {"Service status"}
-                </span>
-              </div>
-              <p>
-                KmerHosting &copy; 2019-{new Date().getFullYear()}
-              </p>
+        <div className="border-t border-slate-300 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-slate-600 text-sm">© 2025 KmerHosting. All rights reserved.</p>
+            <div className="flex gap-6 mt-4 md:mt-0 text-sm text-slate-600">
+              <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                Privacy Policy
+              </a>
+              <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                Terms of Service
+              </a>
+              <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                Cookie Policy
+              </a>
             </div>
           </div>
         </div>
-
-        {/* Payment options & Certifications - Bottom Section */}
-        <div className="border-t bg-muted/30">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              {/* Payment Options */}
-              <div className="flex-1">
-                <h5 className="text-sm font-semibold mb-3">Payment Options</h5>
-                <div className="flex flex-wrap items-center gap-3">
-                  <Image src="/payment-options/visa.svg" alt="Visa" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <Image src="/payment-options/mastercard.svg" alt="Mastercard" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <Image src="/payment-options/amex.svg" alt="American Express" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <Image src="/payment-options/discover.svg" alt="Discover" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <Image src="/payment-options/jcb.svg" alt="JCB" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <Image src="/payment-options/unionpay.svg" alt="UnionPay" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <Image src="/payment-options/bitcoin.svg" alt="Bitcoin" width={28} height={18} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <Image src="/payment-options/paypal.svg" alt="PayPal" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <Image src="/payment-options/google-pay.svg" alt="Google Pay" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <Image src="/payment-options/apple-pay.svg" alt="Apple Pay" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <Image src="/payment-options/mtn-momo.svg" alt="MTN Mobile Money" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                  <Image src="/payment-options/orange-money.svg" alt="Orange Money" width={32} height={20} className="filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all" />
-                </div>
-                <p className="text-xs text-muted-foreground mt-3">We protect and save your data.</p>
-              </div>
-
-              {/* Certifications (no heading text) */}
-              <div className="flex flex-col items-end">
-                <div className="flex items-center gap-4">
-                  <Image src="/partners/icann.svg" alt="We are an ICANN-accredited registrar. Serving customers since 2022." width={64} height={32} className="opacity-90" />
-                  <Image src="/partners/sectigo-small.svg" alt="Secured by Sectigo" width={64} height={32} className="opacity-90" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* Back to Top Button */}
-      {showBackToTop && (
-        <Button
-          onClick={scrollToTop}
-          size="icon"
-          className="fixed bottom-8 right-8 rounded-full z-50"
-          aria-label={"Back to top"}
-        >
-          <ArrowUp className="h-5 w-5" />
-        </Button>
-      )}
-    </>
+      </div>
+    </footer>
   )
 }

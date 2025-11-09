@@ -1,200 +1,270 @@
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { CookieBanner } from "@/components/cookie-banner"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Target, Users, Award, TrendingUp } from "lucide-react"
-import type { Metadata } from "next"
+"use client"
 
-export const metadata: Metadata = {
-  title: "About Us - Professional Web Hosting Since 2019 | KmerHosting",
-  description: "Learn about KmerHosting's mission to provide reliable, affordable web hosting. Serving 10,000+ customers worldwide with 99.9% uptime and 24/7 support since 2019.",
-  keywords: ["about KmerHosting", "web hosting company", "hosting provider", "reliable hosting", "web hosting Africa"],
-  openGraph: {
-    title: "About KmerHosting - Your Trusted Hosting Partner",
-    description: "Professional web hosting services since 2019. Join 10,000+ satisfied customers worldwide.",
-    url: "https://kmerhosting.com/about",
-    siteName: "KmerHosting",
-    type: "website",
-  },
-  alternates: {
-    canonical: "https://kmerhosting.com/about",
-  },
-}
+import Link from "next/link"
+import { Server, Shield, Headphones, Zap, Award, Users, Globe, TrendingUp } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export default function AboutPage() {
+  const stats = [
+    { icon: Users, label: "Happy Clients", value: "500+" },
+    { icon: Server, label: "Servers Running", value: "99.9%", suffix: " Uptime" },
+    { icon: Globe, label: "Websites Hosted", value: "1000+" },
+    { icon: Award, label: "Years Experience", value: "5+" },
+  ]
+
+  const values = [
+    {
+      icon: Shield,
+      title: "Security First",
+      description: "We prioritize the security of your data with free SSL certificates, DDoS protection, and regular security updates on all our hosting plans.",
+    },
+    {
+      icon: Zap,
+      title: "Performance",
+      description: "Our state-of-the-art infrastructure with SSD storage ensures lightning-fast loading times for your websites and applications.",
+    },
+    {
+      icon: Headphones,
+      title: "24/7 Support",
+      description: "Our expert support team is available around the clock in both French and English to assist you whenever you need help.",
+    },
+    {
+      icon: TrendingUp,
+      title: "Growth Focused",
+      description: "We provide scalable solutions that grow with your business, from shared hosting to reseller packages for entrepreneurs.",
+    },
+  ]
+
+  const team = [
+    {
+      role: "Our Mission",
+      description: "To provide reliable, affordable, and secure web hosting solutions tailored specifically for Cameroon businesses and individuals, empowering them to establish and grow their online presence.",
+    },
+    {
+      role: "Our Vision",
+      description: "To become the leading web hosting provider in Cameroon, known for exceptional service, local expertise, and unwavering commitment to our clients' success.",
+    },
+  ]
+
   return (
-    <>
-      <Header />
-      <main>
-        {/* Hero Section */}
-        <section className="py-20 sm:py-32 bg-gradient-to-b from-background to-muted/30">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <Badge variant="secondary" className="mb-6 px-4 py-1.5">
-                About KmerHosting
-              </Badge>
-              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6 text-balance">
-                Empowering businesses with reliable hosting solutions
-              </h1>
-              <p className="text-lg text-muted-foreground text-balance">
-                Since 2019, we've been providing professional web hosting services to thousands of customers worldwide,
-                combining cutting-edge technology with exceptional support.
+    <main className="min-h-screen">
+      {/* Hero Section */}
+      <section className="py-20 px-4 bg-gradient-to-br from-slate-50 to-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900">
+            About <span style={{ color: "#128C7E" }}>KmerHosting</span>
+          </h1>
+          <p className="text-xl text-slate-600 mb-8 leading-relaxed">
+            We are Cameroon's trusted web hosting provider, dedicated to delivering reliable, secure, and affordable hosting solutions for businesses and individuals across the nation.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              asChild
+              size="lg" 
+              className="text-white font-semibold"
+              style={{ backgroundColor: "#128C7E" }}
+            >
+              <Link href="/#pricing">View Our Plans</Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-slate-300 text-slate-900 hover:bg-slate-50 font-semibold"
+            >
+              <Link href="#contact">Contact Us</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {stats.map((stat, index) => {
+              const Icon = stat.icon
+              return (
+                <div key={index} className="text-center">
+                  <div className="flex justify-center mb-4">
+                    <div className="p-4 rounded-xl" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
+                      <Icon className="w-8 h-8" style={{ color: "#128C7E" }} />
+                    </div>
+                  </div>
+                  <div className="text-3xl font-bold mb-2" style={{ color: "#128C7E" }}>
+                    {stat.value}
+                    {stat.suffix && <span className="text-lg text-slate-600">{stat.suffix}</span>}
+                  </div>
+                  <p className="text-slate-600 font-medium">{stat.label}</p>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Story Section */}
+      <section className="py-16 px-4" style={{ backgroundColor: "rgba(18, 140, 126, 0.05)" }}>
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold mb-6 text-center text-slate-900">Our Story</h2>
+          <div className="prose prose-lg max-w-none text-slate-700 space-y-4">
+            <p>
+              KmerHosting was founded with a clear vision: to make professional web hosting accessible and affordable for everyone in Cameroon. We understand the unique challenges that local businesses and individuals face when trying to establish their online presence.
+            </p>
+            <p>
+              Starting as a small team of passionate technology enthusiasts, we've grown into a trusted hosting provider serving hundreds of satisfied customers across Cameroon. Our commitment to quality, reliability, and exceptional customer service has been the cornerstone of our success.
+            </p>
+            <p>
+              We offer a comprehensive range of hosting solutions, from shared hosting perfect for beginners to powerful reseller packages for entrepreneurs looking to start their own hosting business. With both cPanel and DirectAdmin control panel options, we give you the flexibility to choose the tools that work best for you.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Vision */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {team.map((item, index) => (
+              <div key={index} className="p-8 rounded-xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all">
+                <h3 className="text-2xl font-bold mb-4" style={{ color: "#128C7E" }}>
+                  {item.role}
+                </h3>
+                <p className="text-slate-700 leading-relaxed">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="py-16 px-4" style={{ backgroundColor: "rgba(18, 140, 126, 0.05)" }}>
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold mb-12 text-center text-slate-900">Our Core Values</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {values.map((value, index) => {
+              const Icon = value.icon
+              return (
+                <div key={index} className="bg-white p-6 rounded-xl border border-slate-200 hover:shadow-md transition-all">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-lg flex-shrink-0" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
+                      <Icon className="w-6 h-6" style={{ color: "#128C7E" }} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold mb-2 text-slate-900">{value.title}</h3>
+                      <p className="text-slate-600 text-sm leading-relaxed">{value.description}</p>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* What We Offer */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold mb-6 text-center text-slate-900">What We Offer</h2>
+          <p className="text-center text-slate-600 mb-12 max-w-3xl mx-auto">
+            Comprehensive hosting solutions designed to meet the diverse needs of our Cameroonian clients
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="p-8 rounded-xl border-2 hover:shadow-lg transition-all" style={{ borderColor: "#128C7E" }}>
+              <h3 className="text-2xl font-bold mb-4" style={{ color: "#128C7E" }}>
+                Shared Hosting
+              </h3>
+              <p className="text-slate-700 mb-4">
+                Perfect for beginners and small businesses. Get started with our reliable shared hosting featuring:
               </p>
+              <ul className="space-y-2 text-slate-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Choice of cPanel or DirectAdmin control panels</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Free .com domain (Silver plan and above)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Unlimited bandwidth</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Free SSL certificates on all plans</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Plans starting from 13,000 FCFA/year</span>
+                </li>
+              </ul>
             </div>
-          </div>
-        </section>
 
-        {/* Mission & Values */}
-        <section className="py-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-3xl font-bold tracking-tight mb-6">Our Mission</h2>
-                <p className="text-muted-foreground mb-4">
-                  At KmerHosting, our mission is to provide reliable, high-performance web hosting solutions that
-                  empower businesses and individuals to succeed online. We believe that everyone deserves access to
-                  professional hosting services without complexity or compromise.
-                </p>
-                <p className="text-muted-foreground">
-                  We're committed to delivering exceptional value through innovative technology, transparent pricing,
-                  and world-class customer support. Your success is our success.
-                </p>
-              </div>
-              <div className="grid grid-cols-2 gap-6">
-                <Card>
-                  <CardContent className="p-6 text-center">
-                    <div className="text-4xl font-bold text-primary mb-2">10K+</div>
-                    <div className="text-sm text-muted-foreground">Active Customers</div>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-6 text-center">
-                    <div className="text-4xl font-bold text-primary mb-2">99.9%</div>
-                    <div className="text-sm text-muted-foreground">Uptime SLA</div>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-6 text-center">
-                    <div className="text-4xl font-bold text-primary mb-2">24/7</div>
-                    <div className="text-sm text-muted-foreground">Expert Support</div>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-6 text-center">
-                    <div className="text-4xl font-bold text-primary mb-2">5+</div>
-                    <div className="text-sm text-muted-foreground">Years Experience</div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Core Values */}
-        <section className="py-20 bg-muted/30">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold tracking-tight mb-4">Our Core Values</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-                These principles guide everything we do and shape how we serve our customers.
+            <div className="p-8 rounded-xl border-2 hover:shadow-lg transition-all" style={{ borderColor: "#128C7E" }}>
+              <h3 className="text-2xl font-bold mb-4" style={{ color: "#128C7E" }}>
+                Reseller Hosting
+              </h3>
+              <p className="text-slate-700 mb-4">
+                Start your own hosting business with our powerful reseller packages featuring:
               </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Card>
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                    <Target className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="font-semibold mb-2">Customer First</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Your success drives our decisions. We prioritize your needs and work tirelessly to exceed
-                    expectations.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                    <Award className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="font-semibold mb-2">Excellence</h3>
-                  <p className="text-sm text-muted-foreground">
-                    We maintain the highest standards in technology, security, and service delivery.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                    <Users className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="font-semibold mb-2">Transparency</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Clear pricing, honest communication, and no hidden fees. You always know what you're getting.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                    <TrendingUp className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="font-semibold mb-2">Innovation</h3>
-                  <p className="text-sm text-muted-foreground">
-                    We continuously improve our platform with the latest technologies and best practices.
-                  </p>
-                </CardContent>
-              </Card>
+              <ul className="space-y-2 text-slate-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>WHM & cPanel management access</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Flexible billing: Monthly, Quarterly, Semi-Annual, or Annual</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Free .com domain with annual billing</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>White label ready - brand it as your own</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Plans starting from 3,000 FCFA/month</span>
+                </li>
+              </ul>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Why Choose Us */}
-        <section className="py-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold tracking-tight mb-6 text-center">Why businesses trust KmerHosting</h2>
-              <div className="space-y-6">
-                <div className="border-l-4 border-primary pl-6">
-                  <h3 className="font-semibold mb-2">Proven Reliability</h3>
-                  <p className="text-muted-foreground">
-                    Our infrastructure is built on enterprise-grade hardware with redundant systems ensuring 99.9%
-                    uptime. Your website stays online when it matters most.
-                  </p>
-                </div>
-                <div className="border-l-4 border-primary pl-6">
-                  <h3 className="font-semibold mb-2">Expert Support Team</h3>
-                  <p className="text-muted-foreground">
-                    Our technical support team consists of experienced professionals who understand hosting inside and
-                    out. We're available 24/7 to help you succeed.
-                  </p>
-                </div>
-                <div className="border-l-4 border-primary pl-6">
-                  <h3 className="font-semibold mb-2">Developer-Friendly Platform</h3>
-                  <p className="text-muted-foreground">
-                    From SSH access to Git integration, WP-CLI, and support for PHP, Node.js, Ruby and Python. Using most popular databases such as PostgreSQL, MySQL and Redis, we provide the
-                    tools developers need to build amazing applications.
-                  </p>
-                </div>
-                <div className="border-l-4 border-primary pl-6">
-                  <h3 className="font-semibold mb-2">Scalable Solutions</h3>
-                  <p className="text-muted-foreground">
-                    Start with shared hosting and seamlessly upgrade to VPS as your business grows. Our flexible plans
-                    scale with your success.
-                  </p>
-                </div>
-              </div>
-            </div>
+      {/* CTA Section */}
+      <section className="py-16 px-4" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
+            Ready to Join KmerHosting?
+          </h2>
+          <p className="text-lg text-slate-700 mb-8">
+            Experience reliable hosting with local support. Let's build your online presence together.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              asChild
+              size="lg" 
+              className="text-white font-semibold"
+              style={{ backgroundColor: "#128C7E" }}
+            >
+              <Link href="/#pricing">Get Started Today</Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-slate-300 text-slate-900 hover:bg-white/50 font-semibold"
+            >
+              <Link href="#contact">Contact Our Team</Link>
+            </Button>
           </div>
-        </section>
-      </main>
-      <Footer />
-      <CookieBanner />
-    </>
+        </div>
+      </section>
+    </main>
   )
 }
