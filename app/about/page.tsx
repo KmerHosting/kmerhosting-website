@@ -47,14 +47,14 @@ export default function AboutPage() {
   ]
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-white dark:bg-slate-900">
       {/* Hero Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-slate-50 to-white">
+      <section className="py-20 px-4 bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
             About <span style={{ color: "#128C7E" }}>KmerHosting</span>
           </h1>
-          <p className="text-xl text-slate-600 mb-8 leading-relaxed">
+          <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
             We are Cameroon's trusted web hosting provider, dedicated to delivering reliable, secure, and affordable hosting solutions for businesses and individuals across the nation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -70,7 +70,7 @@ export default function AboutPage() {
               asChild
               size="lg"
               variant="outline"
-              className="border-slate-300 text-slate-900 hover:bg-slate-50 font-semibold"
+              className="border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 font-semibold"
             >
               <Link href="#contact">Contact Us</Link>
             </Button>
@@ -79,7 +79,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 px-4 bg-white">
+      <section className="py-16 px-4 bg-white dark:bg-slate-900">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => {
@@ -93,9 +93,9 @@ export default function AboutPage() {
                   </div>
                   <div className="text-3xl font-bold mb-2" style={{ color: "#128C7E" }}>
                     {stat.value}
-                    {stat.suffix && <span className="text-lg text-slate-600">{stat.suffix}</span>}
+                    {stat.suffix && <span className="text-lg text-slate-600 dark:text-slate-400">{stat.suffix}</span>}
                   </div>
-                  <p className="text-slate-600 font-medium">{stat.label}</p>
+                  <p className="text-slate-600 dark:text-slate-400 font-medium">{stat.label}</p>
                 </div>
               )
             })}
@@ -104,10 +104,10 @@ export default function AboutPage() {
       </section>
 
       {/* Story Section */}
-      <section className="py-16 px-4" style={{ backgroundColor: "rgba(18, 140, 126, 0.05)" }}>
+      <section className="py-16 px-4 bg-slate-50 dark:bg-slate-800">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6 text-center text-slate-900">Our Story</h2>
-          <div className="prose prose-lg max-w-none text-slate-700 space-y-4">
+          <h2 className="text-3xl font-bold mb-6 text-center text-slate-900 dark:text-white">Our Story</h2>
+          <div className="prose prose-lg max-w-none text-slate-700 dark:text-slate-300 space-y-4">
             <p>
               KmerHosting was founded with a clear vision: to make professional web hosting accessible and affordable for everyone in Cameroon. We understand the unique challenges that local businesses and individuals face when trying to establish their online presence.
             </p>
@@ -122,15 +122,15 @@ export default function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-16 px-4 bg-white">
+      <section className="py-16 px-4 bg-white dark:bg-slate-900">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {team.map((item, index) => (
-              <div key={index} className="p-8 rounded-xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all">
+              <div key={index} className="p-8 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all bg-white dark:bg-slate-800">
                 <h3 className="text-2xl font-bold mb-4" style={{ color: "#128C7E" }}>
                   {item.role}
                 </h3>
-                <p className="text-slate-700 leading-relaxed">{item.description}</p>
+                <p className="text-slate-700 dark:text-slate-300 leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
@@ -138,21 +138,21 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="py-16 px-4" style={{ backgroundColor: "rgba(18, 140, 126, 0.05)" }}>
+      <section className="py-16 px-4 bg-slate-50 dark:bg-slate-800">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-12 text-center text-slate-900">Our Core Values</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center text-slate-900 dark:text-white">Our Core Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {values.map((value, index) => {
               const Icon = value.icon
               return (
-                <div key={index} className="bg-white p-6 rounded-xl border border-slate-200 hover:shadow-md transition-all">
+                <div key={index} className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all">
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-lg flex-shrink-0" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
+                    <div className="p-3 rounded-lg flex-shrink-0 bg-slate-50 dark:bg-slate-800">
                       <Icon className="w-6 h-6" style={{ color: "#128C7E" }} />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold mb-2 text-slate-900">{value.title}</h3>
-                      <p className="text-slate-600 text-sm leading-relaxed">{value.description}</p>
+                      <h3 className="text-xl font-bold mb-2 text-slate-900 dark:text-white">{value.title}</h3>
+                      <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{value.description}</p>
                     </div>
                   </div>
                 </div>
@@ -163,22 +163,22 @@ export default function AboutPage() {
       </section>
 
       {/* What We Offer */}
-      <section className="py-16 px-4 bg-white">
+      <section className="py-16 px-4 bg-white dark:bg-slate-900">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6 text-center text-slate-900">What We Offer</h2>
-          <p className="text-center text-slate-600 mb-12 max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold mb-6 text-center text-slate-900 dark:text-white">What We Offer</h2>
+          <p className="text-center text-slate-600 dark:text-slate-400 mb-12 max-w-3xl mx-auto">
             Comprehensive hosting solutions designed to meet the diverse needs of our Cameroonian clients
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 rounded-xl border-2 hover:shadow-lg transition-all" style={{ borderColor: "#128C7E" }}>
+            <div className="p-8 rounded-xl border-2 hover:shadow-lg transition-all bg-white dark:bg-slate-800" style={{ borderColor: "#128C7E" }}>
               <h3 className="text-2xl font-bold mb-4" style={{ color: "#128C7E" }}>
                 Shared Hosting
               </h3>
-              <p className="text-slate-700 mb-4">
+              <p className="text-slate-700 dark:text-slate-300 mb-4">
                 Perfect for beginners and small businesses. Get started with our reliable shared hosting featuring:
               </p>
-              <ul className="space-y-2 text-slate-600">
+              <ul className="space-y-2 text-slate-600 dark:text-slate-400">
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
                   <span>Choice of cPanel or DirectAdmin control panels</span>
@@ -202,14 +202,14 @@ export default function AboutPage() {
               </ul>
             </div>
 
-            <div className="p-8 rounded-xl border-2 hover:shadow-lg transition-all" style={{ borderColor: "#128C7E" }}>
+            <div className="p-8 rounded-xl border-2 hover:shadow-lg transition-all bg-white dark:bg-slate-800" style={{ borderColor: "#128C7E" }}>
               <h3 className="text-2xl font-bold mb-4" style={{ color: "#128C7E" }}>
                 Reseller Hosting
               </h3>
-              <p className="text-slate-700 mb-4">
+              <p className="text-slate-700 dark:text-slate-300 mb-4">
                 Start your own hosting business with our powerful reseller packages featuring:
               </p>
-              <ul className="space-y-2 text-slate-600">
+              <ul className="space-y-2 text-slate-600 dark:text-slate-400">
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
                   <span>WHM & cPanel management access</span>
@@ -237,12 +237,12 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
+      <section className="py-16 px-4 bg-slate-50 dark:bg-slate-800">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white">
             Ready to Join KmerHosting?
           </h2>
-          <p className="text-lg text-slate-700 mb-8">
+          <p className="text-lg text-slate-700 dark:text-slate-300 mb-8">
             Experience reliable hosting with local support. Let's build your online presence together.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -258,7 +258,7 @@ export default function AboutPage() {
               asChild
               size="lg"
               variant="outline"
-              className="border-slate-300 text-slate-900 hover:bg-white/50 font-semibold"
+              className="border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white hover:bg-white/50 dark:hover:bg-slate-700 font-semibold"
             >
               <Link href="#contact">Contact Our Team</Link>
             </Button>

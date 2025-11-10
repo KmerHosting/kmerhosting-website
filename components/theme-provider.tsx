@@ -7,5 +7,10 @@ import {
 } from 'next-themes'
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
+  // Use the `class` attribute so Tailwind's `dark:` variants work.
+  return (
+    <NextThemesProvider attribute="class" defaultTheme="system" {...props}>
+      {children}
+    </NextThemesProvider>
+  )
 }

@@ -261,12 +261,12 @@ export default function PricingSection() {
   const plans = getPlansList()
 
   return (
-    <section id="pricing" className="py-16 px-4 bg-white">
+    <section id="pricing" className="py-16 px-4 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-slate-900 mb-2">Hosting Plans</h2>
-          <p className="text-slate-600">
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Hosting Plans</h2>
+          <p className="text-slate-600 dark:text-slate-400">
             Choose the perfect plan. Shared hosting prices are yearly. Reseller hosting: flexible billing options. Free domain with annual billing.
           </p>
         </div>
@@ -278,7 +278,7 @@ export default function PricingSection() {
             className={`px-5 py-2 rounded-lg font-medium transition-all text-sm ${
               activeTab === "shared-cpanel"
                 ? "text-white shadow-md"
-                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
             }`}
             style={activeTab === "shared-cpanel" ? { backgroundColor: "#128C7E" } : {}}
           >
@@ -289,7 +289,7 @@ export default function PricingSection() {
             className={`px-5 py-2 rounded-lg font-medium transition-all text-sm ${
               activeTab === "shared-da"
                 ? "text-white shadow-md"
-                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
             }`}
             style={activeTab === "shared-da" ? { backgroundColor: "#128C7E" } : {}}
           >
@@ -300,7 +300,7 @@ export default function PricingSection() {
             className={`px-5 py-2 rounded-lg font-medium transition-all text-sm ${
               activeTab === "reseller"
                 ? "text-white shadow-md"
-                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
             }`}
             style={activeTab === "reseller" ? { backgroundColor: "#128C7E" } : {}}
           >
@@ -316,7 +316,7 @@ export default function PricingSection() {
               className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs ${
                 resellerBilling === "monthly"
                   ? "text-white"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
               }`}
               style={resellerBilling === "monthly" ? { backgroundColor: "#128C7E" } : {}}
             >
@@ -327,7 +327,7 @@ export default function PricingSection() {
               className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs ${
                 resellerBilling === "quarterly"
                   ? "text-white"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
               }`}
               style={resellerBilling === "quarterly" ? { backgroundColor: "#128C7E" } : {}}
             >
@@ -338,7 +338,7 @@ export default function PricingSection() {
               className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs ${
                 resellerBilling === "semi-annual"
                   ? "text-white"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
               }`}
               style={resellerBilling === "semi-annual" ? { backgroundColor: "#128C7E" } : {}}
             >
@@ -349,7 +349,7 @@ export default function PricingSection() {
               className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs relative ${
                 resellerBilling === "annual"
                   ? "text-white"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
               }`}
               style={resellerBilling === "annual" ? { backgroundColor: "#128C7E" } : {}}
             >
@@ -366,8 +366,8 @@ export default function PricingSection() {
               key={index}
               className={`rounded-xl p-5 flex flex-col border transition-all duration-300 hover:shadow-lg ${
                 plan.highlighted
-                  ? "border-primary shadow-md bg-slate-50"
-                  : "border-slate-200 bg-white"
+                  ? "border-primary shadow-md bg-slate-50 dark:bg-slate-800"
+                  : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
               }`}
             >
               {/* Highlighted Badge */}
@@ -380,28 +380,28 @@ export default function PricingSection() {
               )}
 
               {/* Plan Name */}
-              <h3 className="text-xl font-bold text-slate-900 mb-1">{plan.name}</h3>
-              <p className="text-xs text-slate-500 mb-4">{plan.description}</p>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">{plan.name}</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">{plan.description}</p>
 
               {/* Price */}
               <div className="mb-5">
                 <div className="flex items-baseline gap-1">
                   <span className="text-3xl font-bold" style={{ color: "#128C7E" }}>{plan.price}</span>
-                  <span className="text-slate-600 text-xs">{plan.currency}</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-xs">{plan.currency}</span>
                 </div>
-                <p className="text-xs text-slate-500 mt-0.5">{plan.billing}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{plan.billing}</p>
               </div>
 
               {/* Highlights */}
-              <div className="space-y-1.5 mb-5 pb-4 border-b border-slate-200">
+              <div className="space-y-1.5 mb-5 pb-4 border-b border-slate-200 dark:border-slate-700">
                 <div className="flex items-center gap-1.5">
                   <div className="w-1 h-1 rounded-full" style={{ backgroundColor: "#128C7E" }}></div>
-                  <span className="text-xs font-medium text-slate-700">{plan.controlPanel}</span>
+                  <span className="text-xs font-medium text-slate-700 dark:text-slate-300">{plan.controlPanel}</span>
                 </div>
                 {plan.freeDomain && (
                   <div className="flex items-center gap-1.5">
                     <Check className="w-3 h-3 flex-shrink-0" style={{ color: "#128C7E" }} />
-                    <span className="text-xs font-medium text-slate-700">Free .com Domain</span>
+                    <span className="text-xs font-medium text-slate-700 dark:text-slate-300">Free .com Domain</span>
                   </div>
                 )}
               </div>
@@ -413,11 +413,11 @@ export default function PricingSection() {
 
               {/* Features List */}
               <div className="space-y-2">
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Includes:</p>
+                <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">Includes:</p>
                 {plan.features.map((feature, idx) => (
                   <div key={idx} className="flex items-start gap-2">
                     <Check className="w-3 h-3 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
-                    <span className="text-xs text-slate-600">{feature}</span>
+                    <span className="text-xs text-slate-600 dark:text-slate-400">{feature}</span>
                   </div>
                 ))}
               </div>

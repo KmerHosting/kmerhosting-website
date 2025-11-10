@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 
 export default function Hero() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-slate-50 px-4 py-20">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 px-4 py-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
           <div className="flex items-center gap-3">
@@ -15,14 +15,14 @@ export default function Hero() {
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-bold leading-tight text-pretty">
+          <h1 className="text-5xl md:text-6xl font-bold leading-tight text-pretty text-slate-900 dark:text-white">
             Reliable Hosting
             <span className="block" style={{ color: "#128C7E" }}>
               Solutions for Cameroon
             </span>
           </h1>
 
-          <p className="text-lg text-slate-600 leading-relaxed">
+          <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
             Experience lightning-fast web hosting powered by cPanel and DirectAdmin. Whether you're starting your first
             website or managing multiple domains, KmerHosting has the perfect plan for you.
           </p>
@@ -41,19 +41,19 @@ export default function Hero() {
               <div className="font-bold text-xl" style={{ color: "#128C7E" }}>
                 99.9%
               </div>
-              <div className="text-slate-600">Uptime Guarantee</div>
+              <div className="text-slate-600 dark:text-slate-400">Uptime Guarantee</div>
             </div>
             <div>
               <div className="font-bold text-xl" style={{ color: "#128C7E" }}>
                 24/7
               </div>
-              <div className="text-slate-600">Support</div>
+              <div className="text-slate-600 dark:text-slate-400">Support</div>
             </div>
             <div>
               <div className="font-bold text-xl" style={{ color: "#128C7E" }}>
                 Free SSL
               </div>
-              <div className="text-slate-600">All Plans</div>
+              <div className="text-slate-600 dark:text-slate-400">All Plans</div>
             </div>
           </div>
         </div>

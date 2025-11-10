@@ -5,18 +5,18 @@ import { ArrowRight } from "lucide-react"
 
 export default function CTA() {
   return (
-    <section className="py-16 px-4">
+    <section className="py-16 px-4 bg-white dark:bg-slate-900">
       <div className="max-w-5xl mx-auto">
-        <div className="relative overflow-hidden rounded-2xl p-8 md:p-12">
+        <div className="relative overflow-hidden rounded-2xl p-8 md:p-12 bg-slate-50 dark:bg-slate-800">
           {/* Decorative elements */}
-          <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-3xl"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl" style={{ backgroundColor: "rgba(18, 140, 126, 0.15)" }}></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-3xl" style={{ backgroundColor: "rgba(18, 140, 126, 0.15)" }}></div>
           
           <div className="relative z-10 text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
               Ready to Get Started?
             </h2>
-            <p className="text-lg text-slate-700 mb-8">
+            <p className="text-lg text-slate-700 dark:text-slate-300 mb-8">
               Join hundreds of satisfied customers. Get your website online today.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -31,7 +31,7 @@ export default function CTA() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-slate-300 text-slate-900 hover:bg-white/50 font-semibold bg-transparent"
+                className="border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white hover:bg-white/50 dark:hover:bg-slate-700 font-semibold bg-transparent"
               >
                 Contact Support
               </Button>
