@@ -13,6 +13,14 @@
     box-sizing: border-box;
 }
 
+/* Supprimer les outlines Bootstrap dégueux */
+*:focus,
+*:active:focus,
+*:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -22,6 +30,14 @@ body {
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+/* Prévenir les débordements horizontaux */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 /* Container principal */
@@ -643,9 +659,22 @@ body {
 }
 
 /* ============================================
-   FORMS - Design Moderne et Élégant
+   FORMS - Design Minimaliste et Propre
    ============================================ */
 
+/* Reset Bootstrap outline dégueux */
+.form-control:focus,
+.form-select:focus,
+input:focus,
+textarea:focus,
+select:focus,
+button:focus,
+.btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Inputs - Style minimaliste */
 .form-control,
 .form-select,
 input[type="text"],
@@ -653,61 +682,175 @@ input[type="email"],
 input[type="password"],
 input[type="tel"],
 input[type="number"],
+input[type="url"],
+input[type="search"],
+select,
 textarea {
-    border: 2px solid #e2e8f0 !important;
-    border-radius: 12px !important;
-    padding: 1rem 1.25rem !important;
-    font-size: 1rem !important;
-    background: white !important;
+    display: block !important;
+    width: 100% !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.9375rem !important;
+    background: #fafafa !important;
     color: #0f172a !important;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    font-weight: 500;
+    transition: all 0.2s ease !important;
+    box-shadow: none !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
 }
 
+/* Hover - Subtil */
 .form-control:hover,
 .form-select:hover,
 input:hover,
-textarea:hover {
+textarea:hover,
+select:hover {
     border-color: #cbd5e1 !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    background: #ffffff !important;
 }
 
+/* Focus - Accent sur la bordure uniquement */
 .form-control:focus,
 .form-select:focus,
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
     border-color: #128C7E !important;
-    box-shadow: 0 0 0 4px rgba(18, 140, 126, 0.15), 0 8px 20px rgba(18, 140, 126, 0.1) !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(18, 140, 126, 0.1) !important;
     outline: none !important;
-    background: white !important;
-    transform: translateY(-2px);
 }
 
+/* Labels - Plus légers */
 .form-label,
 label {
-    font-weight: 700 !important;
-    color: #334155 !important;
-    margin-bottom: 0.625rem !important;
-    font-size: 0.9rem !important;
-    letter-spacing: 0.01em;
+    display: block !important;
+    font-weight: 600 !important;
+    color: #475569 !important;
+    margin-bottom: 0.5rem !important;
+    font-size: 0.875rem !important;
+    letter-spacing: 0;
 }
 
+/* Form Groups - Espacement cohérent */
 .form-group {
-    margin-bottom: 1.75rem !important;
+    margin-bottom: 1.25rem !important;
+    display: block !important;
+    width: 100% !important;
 }
 
+.form-group:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Input Groups - Éviter l'emboîtage */
+.input-group {
+    display: flex !important;
+    width: 100% !important;
+    position: relative !important;
+}
+
+.input-group > * {
+    position: relative !important;
+    flex: 1 1 auto !important;
+}
+
+.input-group .form-control {
+    position: relative !important;
+    flex: 1 1 auto !important;
+    width: 1% !important;
+    min-width: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.input-group-addon,
 .input-group-text {
-    background: linear-gradient(135deg, #f8fafc, #e2e8f0) !important;
-    border: 2px solid #e2e8f0 !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+    background: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
     color: #64748b !important;
-    font-weight: 600;
-    border-radius: 12px 0 0 12px !important;
+    border-radius: 8px 0 0 8px !important;
 }
 
-textarea.form-control {
-    min-height: 120px;
-    resize: vertical;
+.input-group > .form-control:not(:first-child) {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.input-group-btn {
+    position: relative !important;
+    font-size: 0 !important;
+    white-space: nowrap !important;
+}
+
+.input-group-btn > .btn {
+    position: relative !important;
+    border-radius: 0 8px 8px 0 !important;
+    margin-left: -1px !important;
+}
+
+/* Select - Style propre */
+select.form-control,
+.form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0.75rem center !important;
+    background-size: 12px 12px !important;
+    padding-right: 2.5rem !important;
+}
+
+/* Textarea - Hauteur minimum */
+textarea.form-control,
+textarea {
+    min-height: 100px !important;
+    resize: vertical !important;
+    line-height: 1.6 !important;
+}
+
+/* Checkboxes et Radios - Plus grands */
+input[type="checkbox"],
+input[type="radio"] {
+    width: 18px !important;
+    height: 18px !important;
+    margin-right: 0.5rem !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+}
+
+.checkbox label,
+.radio label {
+    display: flex !important;
+    align-items: center !important;
+    font-weight: 400 !important;
+    cursor: pointer !important;
+}
+
+/* Disabled state */
+.form-control:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled {
+    background: #f1f5f9 !important;
+    color: #94a3b8 !important;
+    cursor: not-allowed !important;
+    opacity: 0.6 !important;
+}
+
+/* Placeholder */
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8 !important;
+    opacity: 1 !important;
 }
 
 /* ============================================
@@ -1763,52 +1906,377 @@ body[class*="register"] .alert-info {
 }
 
 /* ============================================
-   RESPONSIVE
+   SUPPRESSION OUTLINES BOOTSTRAP DÉGUEUX
+   ============================================ */
+
+/* Supprimer les outlines Bootstrap par défaut */
+input:focus,
+textarea:focus,
+select:focus,
+button:focus,
+.form-control:focus,
+.btn:focus,
+a:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+/* Remplacer par des bordures subtiles modernes */
+input:focus,
+textarea:focus,
+select:focus,
+.form-control:focus {
+    border-color: #128C7E !important;
+    box-shadow: 0 0 0 3px rgba(18, 140, 126, 0.1) !important;
+}
+
+/* Supprimer les anneaux bleus de Bootstrap */
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* ============================================
+   RESPONSIVE MOBILE - MINIMALISTE
    ============================================ */
 
 @media (max-width: 768px) {
+    /* Container principal - plus d'air */
+    .container,
+    .container-fluid {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+    
+    /* Headers plus compacts */
+    .page-header,
+    .header-lined {
+        padding: 1rem 0 !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
     .page-header h1 {
-        font-size: var(--kmer-font-size-2xl);
+        font-size: 1.75rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0 !important;
     }
     
-    .card {
-        margin-bottom: 1rem;
+    /* Cards plus compactes et respirantes */
+    .card,
+    .panel,
+    .panel-default {
+        margin-bottom: 1rem !important;
+        border-radius: 12px !important;
     }
     
-    .btn-lg {
-        padding: 0.75rem 1.5rem;
-        font-size: var(--kmer-font-size-base);
+    .card-body,
+    .panel-body {
+        padding: 1.25rem !important;
+    }
+    
+    /* Login/Register Forms - Ultra compact */
+    .logincontainer,
+    #containerNewUserSignup {
+        padding: 0 !important;
+        margin-top: 1rem !important;
+    }
+    
+    .logincontainer .card,
+    #containerNewUserSignup .card {
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        border-radius: 12px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
     }
     
     .logincontainer .card-body,
     #containerNewUserSignup .card-body {
-        padding: 2rem 1.5rem !important;
-    }
-    
-    .pricing-table {
-        grid-template-columns: 1fr;
-    }
-    
-    .checkout-steps {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .checkout-steps::before {
-        display: none;
-    }
-    
-    .invoice-container {
         padding: 1.5rem !important;
     }
     
-    .product-actions .btn {
-        min-width: 100%;
+    .logincontainer h2,
+    #containerNewUserSignup h2 {
+        font-size: 1.5rem !important;
+        margin-bottom: 0.5rem !important;
     }
     
+    .logincontainer p,
+    #containerNewUserSignup p {
+        font-size: 0.875rem !important;
+        margin-bottom: 1.25rem !important;
+    }
+    
+    /* Form Groups - Plus compacts */
+    .form-group {
+        margin-bottom: 1rem !important;
+    }
+    
+    .form-group label {
+        font-size: 0.875rem !important;
+        margin-bottom: 0.375rem !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Inputs - Minimalistes avec espacement correct */
+    .form-control,
+    input.form-control,
+    textarea.form-control,
+    select.form-control {
+        padding: 0.75rem !important;
+        font-size: 0.9375rem !important;
+        height: auto !important;
+        min-height: 44px !important;
+        border-radius: 8px !important;
+        border: 1px solid #e2e8f0 !important;
+        background: #fafafa !important;
+    }
+    
+    /* Input Groups - Éviter l'emboîtage */
+    .input-group {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        width: 100% !important;
+    }
+    
+    .input-group .form-control {
+        flex: 1 1 auto !important;
+        width: 1% !important;
+        min-width: 0 !important;
+    }
+    
+    .input-group-addon,
+    .input-group-btn {
+        display: table-cell !important;
+        white-space: nowrap !important;
+        width: auto !important;
+    }
+    
+    .input-group-addon {
+        padding: 0.75rem !important;
+        background: #f1f5f9 !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 8px 0 0 8px !important;
+    }
+    
+    /* Buttons - Plus larges et accessibles */
+    .btn {
+        padding: 0.75rem 1.25rem !important;
+        font-size: 0.9375rem !important;
+        border-radius: 8px !important;
+        min-height: 44px !important;
+        font-weight: 600 !important;
+    }
+    
+    .btn-lg {
+        padding: 0.875rem 1.5rem !important;
+        font-size: 1rem !important;
+        min-height: 48px !important;
+    }
+    
+    .btn-sm {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.875rem !important;
+        min-height: 36px !important;
+    }
+    
+    .btn-block,
+    .btn-block + .btn-block {
+        margin-top: 0.75rem !important;
+    }
+    
+    /* Checkboxes et Radio - Plus grands */
+    .checkbox label,
+    .radio label {
+        font-size: 0.875rem !important;
+        padding-left: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+    }
+    
+    input[type="checkbox"],
+    input[type="radio"] {
+        width: 18px !important;
+        height: 18px !important;
+        margin: 0 !important;
+    }
+    
+    /* Tables - Responsive scroll */
+    .table-responsive {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        border-radius: 8px !important;
+    }
+    
+    .table {
+        font-size: 0.875rem !important;
+    }
+    
+    .table th,
+    .table td {
+        padding: 0.75rem !important;
+        white-space: nowrap !important;
+    }
+    
+    /* Pricing Tables - Stack vertical */
+    .pricing-table,
+    .pricing-table .row {
+        display: block !important;
+    }
+    
+    .pricing-table .col-md-3,
+    .pricing-table .col-md-4,
+    .pricing-table [class*="col-"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Product Grid - Une colonne */
     .products-container,
     .home-shortcuts .row {
-        grid-template-columns: 1fr;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    
+    .product-card,
+    .shortcut-card {
+        width: 100% !important;
+    }
+    
+    /* Checkout Steps - Vertical */
+    .checkout-steps {
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+    }
+    
+    .checkout-steps::before {
+        display: none !important;
+    }
+    
+    .checkout-step {
+        width: 100% !important;
+        padding: 0.75rem !important;
+    }
+    
+    /* Sidebar - Pleine largeur */
+    .sidebar,
+    aside {
+        width: 100% !important;
+        margin-top: 1.5rem !important;
+    }
+    
+    /* Alerts - Compacts */
+    .alert {
+        padding: 0.875rem !important;
+        font-size: 0.875rem !important;
+        margin-bottom: 1rem !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Modal - Plein écran sur mobile */
+    .modal-dialog {
+        margin: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .modal-content {
+        height: 100% !important;
+        border-radius: 0 !important;
+    }
+    
+    /* Navigation dropdown - Pleine largeur */
+    .navbar-nav .dropdown-menu {
+        position: static !important;
+        float: none !important;
+        width: 100% !important;
+        border-radius: 8px !important;
+        margin-top: 0.5rem !important;
+    }
+    
+    /* Domain checker - Stack vertical */
+    .domain-checker-container .input-group {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+    
+    .domain-checker-container .form-control {
+        border-radius: 8px !important;
+    }
+    
+    .domain-checker-container .btn {
+        width: 100% !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Invoice - Compact */
+    .invoice-container {
+        padding: 1rem !important;
+    }
+    
+    .invoice-items {
+        font-size: 0.875rem !important;
+    }
+    
+    /* Breadcrumb - Scroll horizontal si nécessaire */
+    .breadcrumb {
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        flex-wrap: nowrap !important;
+    }
+    
+    /* Product Actions - Stack vertical */
+    .product-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+    }
+    
+    .product-actions .btn {
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+}
+
+/* ============================================
+   RESPONSIVE TRÈS PETITS ÉCRANS (< 375px)
+   ============================================ */
+
+@media (max-width: 375px) {
+    .container,
+    .container-fluid {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+    
+    .card-body,
+    .panel-body {
+        padding: 1rem !important;
+    }
+    
+    .logincontainer .card-body,
+    #containerNewUserSignup .card-body {
+        padding: 1.25rem !important;
+    }
+    
+    .form-control {
+        padding: 0.625rem !important;
+        font-size: 0.875rem !important;
+    }
+    
+    .btn {
+        padding: 0.625rem 1rem !important;
+        font-size: 0.875rem !important;
+    }
+    
+    .page-header h1 {
+        font-size: 1.5rem !important;
     }
 }
 
