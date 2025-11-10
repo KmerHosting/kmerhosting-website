@@ -18,7 +18,7 @@ export default function PricingSection() {
       billing: "/year",
       freeDomain: false,
       controlPanel: "cPanel",
-      features: ["50 GB Storage", "100 GB Bandwidth", "10 Email Accounts", "Basic Support", "Free SSL Certificate"],
+      features: ["1 Website", "50 GB Storage", "100 GB Bandwidth", "10 Email Accounts", "Basic Support", "Free SSL Certificate"],
       highlighted: false,
     },
     {
@@ -30,6 +30,7 @@ export default function PricingSection() {
       freeDomain: true,
       controlPanel: "cPanel",
       features: [
+        "5 Websites",
         "100 GB Storage",
         "Unlimited Bandwidth",
         "25 Email Accounts",
@@ -48,6 +49,7 @@ export default function PricingSection() {
       freeDomain: true,
       controlPanel: "cPanel",
       features: [
+        "20 Websites",
         "250 GB Storage",
         "Unlimited Bandwidth",
         "Unlimited Email Accounts",
@@ -67,6 +69,7 @@ export default function PricingSection() {
       freeDomain: true,
       controlPanel: "cPanel",
       features: [
+        "Unlimited Websites",
         "Unlimited Storage",
         "Unlimited Bandwidth",
         "Unlimited Email Accounts",
@@ -89,7 +92,7 @@ export default function PricingSection() {
       billing: "/year",
       freeDomain: false,
       controlPanel: "DirectAdmin",
-      features: ["50 GB Storage", "100 GB Bandwidth", "10 Email Accounts", "Basic Support", "Free SSL Certificate"],
+      features: ["1 Website", "50 GB Storage", "100 GB Bandwidth", "10 Email Accounts", "Basic Support", "Free SSL Certificate"],
       highlighted: false,
     },
     {
@@ -101,6 +104,7 @@ export default function PricingSection() {
       freeDomain: true,
       controlPanel: "DirectAdmin",
       features: [
+        "5 Websites",
         "100 GB Storage",
         "Unlimited Bandwidth",
         "25 Email Accounts",
@@ -119,6 +123,7 @@ export default function PricingSection() {
       freeDomain: true,
       controlPanel: "DirectAdmin",
       features: [
+        "20 Websites",
         "250 GB Storage",
         "Unlimited Bandwidth",
         "Unlimited Email Accounts",
@@ -138,6 +143,7 @@ export default function PricingSection() {
       freeDomain: true,
       controlPanel: "DirectAdmin",
       features: [
+        "Unlimited Websites",
         "Unlimited Storage",
         "Unlimited Bandwidth",
         "Unlimited Email Accounts",

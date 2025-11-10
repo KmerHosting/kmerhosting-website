@@ -25,7 +25,7 @@ export default function Footer() {
                   Reseller Hosting
                 </a>
               </li>
-              <li>
+              <li>  
                 <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
                   cPanel Plans
                 </a>
