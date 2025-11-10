@@ -16,23 +16,13 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-slate-900 dark:text-white">Hosting</h4>
             <ul className="space-y-2 text-slate-600 dark:text-slate-400">
               <li>
-                <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                <a href="https://kmerhosting.com/customers/store/cpanel-shared-hosting" className="hover:text-primary transition" style={{ color: "inherit" }}>
                   Shared Hosting
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                <a href="https://kmerhosting.com/customers/store/cpanel-reseller-hosting" className="hover:text-primary transition" style={{ color: "inherit" }}>
                   Reseller Hosting
-                </a>
-              </li>
-              <li>  
-                <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
-                  cPanel Plans
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
-                  DirectAdmin Plans
                 </a>
               </li>
             </ul>
@@ -47,17 +37,17 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                <a href="https://kmerhosting.com/customers/contact.php" className="hover:text-primary transition" style={{ color: "inherit" }}>
                   Contact
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                <a href="https://kmerhosting.com/customers/knowledgebase.php" className="hover:text-primary transition" style={{ color: "inherit" }}>
                   Knowledgebase
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition" style={{ color: "inherit" }}>
+                <a href="https://kmerhosting.com/customers/submitticket.php" className="hover:text-primary transition" style={{ color: "inherit" }}>
                   Support
                 </a>
               </li>
@@ -73,8 +63,8 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-slate-900 dark:text-white">Contact</h4>
             <ul className="space-y-2 text-slate-600 dark:text-slate-400">
               <li>Email: info@kmerhosting.cm</li>
-              <li>Phone: +237 XXX XXX XXX</li>
-              <li>Location: Cameroon</li>
+              <li>Phone: +237 694 193 493</li>
+              <li>Location: Yaounde, Cameroon</li>
               <li>24/7 Support Available</li>
             </ul>
           </div>

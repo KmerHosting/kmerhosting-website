@@ -1,0 +1,1874 @@
+/**
+ * KmerHosting Custom Theme Styles
+ * Design moderne et élégant avec couleur #128C7E
+ */
+
+/* ============================================
+   LAYOUT GÉNÉRAL
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    color: #0f172a;
+    line-height: 1.7;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Container principal */
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Page Background */
+#main-body {
+    background: transparent;
+    min-height: 70vh;
+}
+
+/* Content Area with Glass Effect */
+.primary-content {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(18, 140, 126, 0.1);
+    margin-bottom: 2rem;
+}
+
+/* Animations */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.primary-content {
+    animation: slideInUp 0.6s ease-out;
+}
+
+/* ============================================
+   NAVBAR / HEADER - Design Moderne
+   ============================================ */
+
+.header {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    border: none !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+.navbar {
+    background: transparent !important;
+    border: none !important;
+    padding: 1rem 0 !important;
+}
+
+.navbar-brand {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #128C7E !important;
+    letter-spacing: -0.03em;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+    opacity: 0.9;
+}
+
+.navbar-brand img {
+    height: 40px;
+    width: auto;
+    filter: drop-shadow(0 2px 8px rgba(18, 140, 126, 0.2));
+    transition: all 0.3s ease;
+}
+
+.navbar-brand img:hover {
+    filter: drop-shadow(0 4px 12px rgba(18, 140, 126, 0.4));
+}
+
+.navbar-nav .nav-link {
+    color: #334155 !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    padding: 0.75rem 1.25rem !important;
+    margin: 0 0.25rem;
+    border-radius: 12px;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.navbar-nav .nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #128C7E 0%, #0f6f64 100%);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+    border-radius: 3px 3px 0 0;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #128C7E !important;
+    background: rgba(18, 140, 126, 0.05);
+    transform: translateY(-2px);
+}
+
+.navbar-nav .nav-link:hover::before {
+    width: 80%;
+}
+
+.navbar-nav .nav-link.active {
+    color: #128C7E !important;
+    background: rgba(18, 140, 126, 0.1);
+}
+
+/* Bouton CTA Navbar */
+.navbar .btn-primary,
+.navbar .cart-btn {
+    background: linear-gradient(135deg, #128C7E 0%, #0f6f64 100%) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 700 !important;
+    padding: 0.75rem 1.75rem !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 15px rgba(18, 140, 126, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar .btn-primary::before,
+.navbar .cart-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.navbar .btn-primary:hover,
+.navbar .cart-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(18, 140, 126, 0.4) !important;
+}
+
+.navbar .btn-primary:hover::before,
+.navbar .cart-btn:hover::before {
+    left: 100%;
+}
+
+/* Badge Panier */
+.cart-btn .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ef4444;
+    color: white;
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 10px;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Topbar pour utilisateurs connectés */
+.topbar {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+    border-bottom: 1px solid rgba(18, 140, 126, 0.1) !important;
+    padding: 0.75rem 0 !important;
+}
+
+.topbar .btn {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #334155;
+    transition: all 0.3s ease;
+}
+
+.topbar .btn:hover {
+    background: #128C7E;
+    color: white;
+    border-color: #128C7E;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(18, 140, 126, 0.3);
+}
+
+/* ============================================
+   BOUTONS - Design Moderne et Attractif
+   ============================================ */
+
+.btn {
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    padding: 0.875rem 2rem !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: none !important;
+    position: relative;
+    overflow: hidden;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-size: 0.95rem !important;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Bouton Primary - Gradient Moderne */
+.btn-primary {
+    background: linear-gradient(135deg, #128C7E 0%, #0f6f64 100%) !important;
+    color: white !important;
+    box-shadow: 0 8px 20px rgba(18, 140, 126, 0.25);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: linear-gradient(135deg, #0f6f64 0%, #0a5a4f 100%) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(18, 140, 126, 0.4) !important;
+}
+
+.btn-primary:active {
+    transform: translateY(-1px);
+}
+
+/* Bouton Outline */
+.btn-outline-primary {
+    color: #128C7E !important;
+    border: 2px solid #128C7E !important;
+    background: transparent !important;
+    box-shadow: 0 4px 12px rgba(18, 140, 126, 0.1);
+}
+
+.btn-outline-primary:hover {
+    background: linear-gradient(135deg, #128C7E 0%, #0f6f64 100%) !important;
+    color: white !important;
+    border-color: #128C7E !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(18, 140, 126, 0.3);
+}
+
+/* Bouton Success */
+.btn-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    color: white !important;
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4) !important;
+}
+
+/* Bouton Danger */
+.btn-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+    color: white !important;
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.25);
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(239, 68, 68, 0.4) !important;
+}
+
+/* Bouton Secondary */
+.btn-secondary {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+    color: white !important;
+    box-shadow: 0 8px 20px rgba(100, 116, 139, 0.25);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #475569 0%, #334155 100%) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(100, 116, 139, 0.4) !important;
+}
+
+/* Bouton Light */
+.btn-light {
+    background: white !important;
+    color: #334155 !important;
+    border: 2px solid #e2e8f0 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.btn-light:hover {
+    background: #f8fafc !important;
+    border-color: #128C7E !important;
+    color: #128C7E !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Tailles de boutons */
+.btn-lg {
+    padding: 1.125rem 2.5rem !important;
+    font-size: 1.05rem !important;
+    border-radius: 14px !important;
+}
+
+.btn-sm {
+    padding: 0.625rem 1.25rem !important;
+    font-size: 0.85rem !important;
+    border-radius: 10px !important;
+}
+
+/* Bouton Block */
+.btn-block {
+    width: 100%;
+    display: block;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+
+.card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    overflow: hidden;
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(18, 140, 126, 0.08), transparent);
+    transition: left 0.8s ease;
+    z-index: 0;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card:hover {
+    box-shadow: 0 15px 45px rgba(18, 140, 126, 0.2) !important;
+    transform: translateY(-5px);
+    border-color: rgba(18, 140, 126, 0.2) !important;
+}
+
+.card-header {
+    background: linear-gradient(135deg, rgba(18, 140, 126, 0.05) 0%, rgba(15, 111, 100, 0.08) 100%) !important;
+    border-bottom: 2px solid #128C7E !important;
+    border-radius: 20px 20px 0 0 !important;
+    padding: 1.5rem 2rem !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    font-size: 1.15rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.card-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #128C7E, #0f6f64, #128C7E);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+}
+
+.card-body {
+    padding: 2rem !important;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.card-footer {
+    background: linear-gradient(180deg, transparent 0%, rgba(248, 250, 252, 0.8) 100%) !important;
+    border-top: 1px solid rgba(226, 232, 240, 0.5) !important;
+    padding: 1.25rem 2rem !important;
+    border-radius: 0 0 20px 20px !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   TABLES
+   ============================================ */
+
+.table {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 16px !important;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: none !important;
+}
+
+.table thead th {
+    background: linear-gradient(135deg, #128C7E 0%, #0f6f64 100%) !important;
+    color: white !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    padding: 1.25rem 1.5rem !important;
+    border: none !important;
+    position: relative;
+}
+
+.table thead th::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.7), rgba(255,255,255,0.3));
+}
+
+.table tbody tr {
+    border-bottom: 1px solid rgba(226, 232, 240, 0.5) !important;
+    transition: all 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background: linear-gradient(90deg, rgba(18, 140, 126, 0.03), rgba(18, 140, 126, 0.06), rgba(18, 140, 126, 0.03)) !important;
+}
+
+.table tbody td {
+    padding: 1.25rem 1.5rem !important;
+    color: #334155 !important;
+    font-weight: 500;
+    vertical-align: middle;
+}
+
+/* ============================================
+   ALERTS & BADGES - Design Moderne
+   ============================================ */
+
+.alert {
+    border-radius: 16px !important;
+    border: none !important;
+    padding: 1.25rem 1.75rem !important;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    border-left: 4px solid !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.alert::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    animation: pulseBar 2s ease-in-out infinite;
+}
+
+@keyframes pulseBar {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.alert-success {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05)) !important;
+    color: #047857 !important;
+    border-left-color: #10b981 !important;
+}
+
+.alert-success::before {
+    background: #10b981;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)) !important;
+    color: #1e40af !important;
+    border-left-color: #3b82f6 !important;
+}
+
+.alert-info::before {
+    background: #3b82f6;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05)) !important;
+    color: #b45309 !important;
+    border-left-color: #f59e0b !important;
+}
+
+.alert-warning::before {
+    background: #f59e0b;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05)) !important;
+    color: #b91c1c !important;
+    border-left-color: #ef4444 !important;
+}
+
+.alert-danger::before {
+    background: #ef4444;
+}
+
+/* Badges Modernes */
+.badge {
+    border-radius: 10px !important;
+    padding: 0.35rem 0.85rem !important;
+    font-weight: 700 !important;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+}
+
+.badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.badge-success {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    color: white !important;
+}
+
+.badge-primary {
+    background: linear-gradient(135deg, #128C7E, #0f6f64) !important;
+    color: white !important;
+}
+
+.badge-warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+    color: white !important;
+}
+
+.badge-danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+    color: white !important;
+}
+
+.badge-info {
+    background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+    color: white !important;
+}
+
+.badge-secondary {
+    background: linear-gradient(135deg, #64748b, #475569) !important;
+    color: white !important;
+}
+
+.badge-success {
+    background-color: var(--kmer-success);
+    color: white;
+}
+
+.badge-warning {
+    background-color: var(--kmer-warning);
+    color: white;
+}
+
+.badge-danger {
+    background-color: var(--kmer-danger);
+    color: white;
+}
+
+.badge-primary {
+    background-color: var(--kmer-primary);
+    color: white;
+}
+
+/* ============================================
+   FORMS - Design Moderne et Élégant
+   ============================================ */
+
+.form-control,
+.form-select,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+textarea {
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 1rem 1.25rem !important;
+    font-size: 1rem !important;
+    background: white !important;
+    color: #0f172a !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    font-weight: 500;
+}
+
+.form-control:hover,
+.form-select:hover,
+input:hover,
+textarea:hover {
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.form-control:focus,
+.form-select:focus,
+input:focus,
+textarea:focus {
+    border-color: #128C7E !important;
+    box-shadow: 0 0 0 4px rgba(18, 140, 126, 0.15), 0 8px 20px rgba(18, 140, 126, 0.1) !important;
+    outline: none !important;
+    background: white !important;
+    transform: translateY(-2px);
+}
+
+.form-label,
+label {
+    font-weight: 700 !important;
+    color: #334155 !important;
+    margin-bottom: 0.625rem !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.01em;
+}
+
+.form-group {
+    margin-bottom: 1.75rem !important;
+}
+
+.input-group-text {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0) !important;
+    border: 2px solid #e2e8f0 !important;
+    color: #64748b !important;
+    font-weight: 600;
+    border-radius: 12px 0 0 12px !important;
+}
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+    background-color: var(--kmer-bg-secondary);
+    border-top: 1px solid var(--kmer-border);
+    padding: 4rem 0 2rem;
+    margin-top: 4rem;
+}
+
+.footer h4 {
+    color: var(--kmer-text);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: var(--kmer-font-size-lg);
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer a {
+    color: var(--kmer-text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer a:hover {
+    color: var(--kmer-primary);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--kmer-border);
+    padding-top: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--kmer-text-secondary);
+    font-size: var(--kmer-font-size-sm);
+}
+
+/* ============================================
+   PAGE HEADER / HERO & HOMEPAGE
+   ============================================ */
+
+.page-header {
+    background: linear-gradient(135deg, var(--kmer-bg) 0%, var(--kmer-bg-secondary) 100%);
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--kmer-border);
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    font-size: var(--kmer-font-size-4xl);
+    font-weight: 700;
+    color: var(--kmer-text);
+    margin-bottom: 1rem;
+}
+
+.page-header p {
+    font-size: var(--kmer-font-size-lg);
+    color: var(--kmer-text-secondary);
+}
+
+/* Hero Section Homepage - "Sécurisez votre nom de domaine" */
+.home-shortcuts {
+    padding: 3rem 0;
+    background: transparent;
+}
+
+.home-shortcuts h2 {
+    text-align: center;
+    font-size: 2.25rem !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    margin-bottom: 2rem !important;
+}
+
+/* Domain Search Bar */
+.domain-checker-container,
+.domain-search-form,
+form[name="domainchecker"] {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+}
+
+.domain-checker-container .input-group,
+.domain-search-form .input-group,
+form[name="domainchecker"] .input-group {
+    box-shadow: 0 10px 40px rgba(18, 140, 126, 0.15) !important;
+    border-radius: 16px !important;
+    overflow: hidden;
+    background: white;
+}
+
+.domain-checker-container input[type="text"],
+.domain-search-form input[type="text"],
+form[name="domainchecker"] input[type="text"] {
+    border: none !important;
+    padding: 1.25rem 1.5rem !important;
+    font-size: 1.125rem !important;
+    border-radius: 16px 0 0 16px !important;
+    background: white !important;
+}
+
+.domain-checker-container .btn,
+.domain-search-form .btn,
+form[name="domainchecker"] .btn {
+    padding: 1.25rem 2.5rem !important;
+    font-size: 1.125rem !important;
+    font-weight: 700 !important;
+    border-radius: 0 16px 16px 0 !important;
+    background: linear-gradient(135deg, #128C7E 0%, #0f6f64 100%) !important;
+    border: none !important;
+    color: white !important;
+}
+
+/* Section "Découvrez nos produits" */
+.products-container,
+.home-shortcuts .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.product-card,
+.home-shortcuts .panel {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px);
+    border-radius: 20px !important;
+    padding: 2.5rem 2rem !important;
+    border: 2px solid rgba(226, 232, 240, 0.5) !important;
+    transition: all 0.4s ease !important;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card::before,
+.home-shortcuts .panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(18, 140, 126, 0.05), transparent);
+    transition: left 0.8s ease;
+}
+
+.product-card:hover::before,
+.home-shortcuts .panel:hover::before {
+    left: 100%;
+}
+
+.product-card:hover,
+.home-shortcuts .panel:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 45px rgba(18, 140, 126, 0.2) !important;
+    border-color: rgba(18, 140, 126, 0.3) !important;
+}
+
+.product-card h3,
+.home-shortcuts .panel h3 {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    margin-bottom: 1rem !important;
+}
+
+.product-card p,
+.home-shortcuts .panel p {
+    color: #64748b !important;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.product-card .btn,
+.home-shortcuts .panel .btn {
+    margin-top: auto;
+}
+
+/* ============================================
+   LOGIN & REGISTER PAGES - Design Minimaliste & Moderne
+   ============================================ */
+
+/* Container principal - Centré et épuré */
+body[class*="login"] .container,
+body[class*="register"] .container,
+.view-login .container,
+.view-register .container {
+    max-width: 420px;
+    margin: 4rem auto !important;
+    padding: 0 1.5rem;
+}
+
+/* Carte login - Minimaliste avec ombre subtile */
+body[class*="login"] .card,
+body[class*="register"] .card,
+.view-login .card,
+.view-register .card,
+.login-form-container .card,
+div[class*="login"] .card,
+div[class*="register"] .card {
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+body[class*="login"] .card:hover,
+body[class*="register"] .card:hover {
+    box-shadow: 0 12px 50px rgba(18, 140, 126, 0.12) !important;
+}
+
+body[class*="login"] .card-body,
+body[class*="register"] .card-body,
+.view-login .card-body,
+.view-register .card-body {
+    padding: 3rem 2.5rem !important;
+}
+
+/* Titre minimaliste */
+body[class*="login"] h2,
+body[class*="register"] h2,
+.view-login h2,
+.view-register h2,
+body[class*="login"] h1,
+body[class*="register"] h1 {
+    text-align: center;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    margin-bottom: 0.75rem !important;
+    letter-spacing: -0.02em;
+}
+
+/* Sous-titre épuré */
+body[class*="login"] p,
+body[class*="register"] p,
+.logincontainer p,
+#containerNewUserSignup p {
+    text-align: center;
+    color: #64748b !important;
+    margin-bottom: 2.5rem !important;
+    font-weight: 400;
+    font-size: 0.95rem;
+}
+
+/* Form groups - Espacement minimaliste */
+body[class*="login"] .form-group,
+body[class*="register"] .form-group,
+.view-login .form-group,
+.view-register .form-group,
+.logincontainer .form-group,
+#containerNewUserSignup .form-group {
+    margin-bottom: 1.25rem !important;
+    position: relative;
+}
+
+/* Labels minimalistes */
+body[class*="login"] label,
+body[class*="register"] label,
+.view-login label,
+.view-register label {
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: #334155 !important;
+    margin-bottom: 0.5rem !important;
+    display: block;
+}
+
+/* Inputs minimalistes et élégants */
+body[class*="login"] input[type="text"],
+body[class*="login"] input[type="email"],
+body[class*="login"] input[type="password"],
+body[class*="register"] input[type="text"],
+body[class*="register"] input[type="email"],
+body[class*="register"] input[type="password"],
+body[class*="register"] input[type="tel"],
+.view-login input,
+.view-register input,
+.logincontainer input[type="text"],
+.logincontainer input[type="email"],
+.logincontainer input[type="password"],
+#containerNewUserSignup input {
+    width: 100%;
+    padding: 0.875rem 1rem !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    font-size: 0.95rem !important;
+    font-weight: 400;
+    transition: all 0.25s ease;
+    background: #fafafa !important;
+    color: #0f172a !important;
+}
+
+/* Hover subtil */
+body[class*="login"] input:hover,
+body[class*="register"] input:hover,
+.view-login input:hover,
+.view-register input:hover {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+}
+
+/* Focus minimaliste - Accent #128C7E */
+body[class*="login"] input:focus,
+body[class*="register"] input:focus,
+.view-login input:focus,
+.view-register input:focus {
+    border-color: #128C7E !important;
+    box-shadow: 0 0 0 3px rgba(18, 140, 126, 0.08) !important;
+    outline: none !important;
+    background: #ffffff !important;
+}
+
+/* Input avec icône (si présent) */
+body[class*="login"] .input-group-text,
+body[class*="register"] .input-group-text {
+    background: transparent !important;
+    border: none !important;
+    color: #64748b !important;
+    padding: 0 0.75rem !important;
+}
+
+/* Checkbox "Se souvenir de moi" - Minimaliste */
+body[class*="login"] .form-check,
+.login-remember,
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem !important;
+    margin-top: 1rem !important;
+}
+
+body[class*="login"] input[type="checkbox"],
+body[class*="register"] input[type="checkbox"],
+.login-remember input[type="checkbox"],
+.form-check-input {
+    width: 1rem !important;
+    height: 1rem !important;
+    margin-right: 0.5rem !important;
+    border-radius: 4px !important;
+    border: 1.5px solid #cbd5e1 !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+body[class*="login"] input[type="checkbox"]:checked,
+body[class*="register"] input[type="checkbox"]:checked {
+    background-color: #128C7E !important;
+    border-color: #128C7E !important;
+}
+
+body[class*="login"] .form-check-label,
+body[class*="register"] .form-check-label,
+.login-remember label,
+.form-check-label {
+    margin: 0 !important;
+    font-weight: 400 !important;
+    color: #64748b !important;
+    font-size: 0.875rem !important;
+    cursor: pointer;
+}
+
+/* Bouton de connexion - Minimaliste et épuré */
+body[class*="login"] .btn-primary,
+body[class*="login"] button[type="submit"],
+body[class*="register"] .btn-primary,
+body[class*="register"] button[type="submit"],
+.view-login .btn-primary,
+.view-register .btn-primary,
+.logincontainer .btn-primary,
+#containerNewUserSignup .btn-primary,
+.login-container .btn-primary,
+body[class*="login"] .btn[type="submit"],
+body[class*="register"] .btn[type="submit"] {
+    width: 100%;
+    padding: 0.875rem 1.5rem !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    background: #128C7E !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(18, 140, 126, 0.2) !important;
+    color: white !important;
+    transition: all 0.25s ease;
+    margin-top: 0.5rem;
+}
+
+body[class*="login"] .btn-primary:hover,
+body[class*="register"] .btn-primary:hover,
+.view-login .btn-primary:hover,
+.view-register .btn-primary:hover,
+.logincontainer .btn-primary:hover,
+#containerNewUserSignup .btn-primary:hover {
+    background: #0f6f64 !important;
+    box-shadow: 0 4px 12px rgba(18, 140, 126, 0.3) !important;
+}
+
+body[class*="login"] .btn-primary:active,
+body[class*="register"] .btn-primary:active {
+    transform: translateY(1px);
+}
+
+/* Liens en bas - Style épuré */
+body[class*="login"] a:not(.btn),
+body[class*="register"] a:not(.btn),
+.login-footer-links,
+.text-center a:not(.btn) {
+    display: inline-block;
+    text-align: center;
+    margin-top: 1.25rem;
+    color: #128C7E !important;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+}
+
+body[class*="login"] a:not(.btn):hover,
+body[class*="register"] a:not(.btn):hover,
+.login-footer-links:hover,
+.text-center a:not(.btn):hover {
+    color: #0f6f64 !important;
+    text-decoration: underline;
+}
+
+/* Lien "Créer un compte" */
+body[class*="login"] .text-center,
+.text-center {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #f1f5f9;
+}
+
+/* Message d'erreur/succès - Minimaliste */
+body[class*="login"] .alert,
+body[class*="register"] .alert,
+.login-error,
+.successbox,
+.errorbox {
+    padding: 0.875rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    border: none;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.successbox,
+body[class*="login"] .alert-success,
+body[class*="register"] .alert-success {
+    background: #f0fdf4 !important;
+    border-left: 3px solid #10b981 !important;
+    color: #047857 !important;
+}
+
+.errorbox,
+body[class*="login"] .alert-danger,
+body[class*="register"] .alert-danger {
+    background: #fef2f2 !important;
+    border-left: 3px solid #ef4444 !important;
+    color: #b91c1c !important;
+}
+
+body[class*="login"] .alert-info,
+body[class*="register"] .alert-info {
+    background: #eff6ff !important;
+    border-left: 3px solid #3b82f6 !important;
+    color: #1e40af !important;
+}
+
+/* Password strength indicator */
+.password-strength {
+    height: 4px;
+    border-radius: 2px;
+    margin-top: 0.5rem;
+    background: #e2e8f0;
+    overflow: hidden;
+}
+
+.password-strength-bar {
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.password-weak .password-strength-bar {
+    width: 33%;
+    background: #ef4444;
+}
+
+.password-medium .password-strength-bar {
+    width: 66%;
+    background: #f59e0b;
+}
+
+.password-strong .password-strength-bar {
+    width: 100%;
+    background: #10b981;
+}
+
+/* ============================================
+   PRICING & PRODUCT PAGES
+   ============================================ */
+
+.pricing-table {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.pricing-card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px);
+    border-radius: 24px !important;
+    padding: 2.5rem 2rem;
+    border: 2px solid rgba(226, 232, 240, 0.5);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #128C7E, #0f6f64);
+}
+
+.pricing-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 70px rgba(18, 140, 126, 0.25) !important;
+    border-color: rgba(18, 140, 126, 0.3);
+}
+
+.pricing-card.featured {
+    border: 2px solid #128C7E;
+    box-shadow: 0 15px 50px rgba(18, 140, 126, 0.2);
+}
+
+.pricing-card .badge {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+}
+
+.pricing-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+}
+
+.pricing-price {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #128C7E;
+    margin: 1rem 0;
+}
+
+.pricing-price span {
+    font-size: 1.25rem;
+    color: #64748b;
+}
+
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+.pricing-features li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    color: #334155;
+    font-weight: 500;
+}
+
+.pricing-features li::before {
+    content: '✓';
+    color: #128C7E;
+    font-weight: 700;
+    margin-right: 0.75rem;
+}
+
+/* ============================================
+   CART & CHECKOUT - Design Moderne
+   ============================================ */
+
+.view-cart-items {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px);
+    border-radius: 20px !important;
+    padding: 2rem !important;
+    margin-bottom: 2rem;
+}
+
+.cart-item {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    transition: all 0.3s ease;
+}
+
+.cart-item:hover {
+    background: linear-gradient(90deg, rgba(18, 140, 126, 0.03), transparent);
+    transform: translateX(5px);
+}
+
+.cart-total {
+    background: linear-gradient(135deg, rgba(18, 140, 126, 0.08), rgba(15, 111, 100, 0.05)) !important;
+    padding: 2rem;
+    border-radius: 16px;
+    margin-top: 2rem;
+}
+
+.cart-total .total-price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #128C7E;
+}
+
+/* Checkout Steps */
+.checkout-steps {
+    display: flex;
+    justify-content: space-between;
+    margin: 3rem 0;
+    position: relative;
+}
+
+.checkout-steps::before {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e2e8f0;
+    z-index: 0;
+}
+
+.checkout-step {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    flex: 1;
+}
+
+.checkout-step-circle {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.75rem;
+    font-weight: 700;
+    color: #94a3b8;
+    transition: all 0.4s ease;
+}
+
+.checkout-step.active .checkout-step-circle {
+    background: linear-gradient(135deg, #128C7E, #0f6f64);
+    border-color: #128C7E;
+    color: white;
+    box-shadow: 0 8px 25px rgba(18, 140, 126, 0.4);
+}
+
+.checkout-step.completed .checkout-step-circle {
+    background: #10b981;
+    border-color: #10b981;
+    color: white;
+}
+
+/* ============================================
+   INVOICE & BILLING
+   ============================================ */
+
+.invoice-container {
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(30px);
+    border-radius: 24px !important;
+    padding: 3rem !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.invoice-header {
+    border-bottom: 3px solid #128C7E;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+}
+
+.invoice-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #128C7E;
+}
+
+.invoice-status {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+.invoice-status.paid {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.invoice-status.unpaid {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
+.invoice-status.overdue {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+
+/* ============================================
+   DOMAIN MANAGEMENT
+   ============================================ */
+
+.domain-status-active {
+    color: #10b981 !important;
+    font-weight: 700;
+}
+
+.domain-status-expired {
+    color: #ef4444 !important;
+    font-weight: 700;
+}
+
+.domain-checker {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 15px 50px rgba(18, 140, 126, 0.15);
+    margin: 3rem 0;
+}
+
+.domain-checker input {
+    height: 3.5rem;
+    padding: 0 1.5rem;
+    border-radius: 12px 0 0 12px !important;
+    border: 2px solid #e2e8f0;
+    font-size: 1.125rem;
+}
+
+.domain-checker .btn {
+    height: 3.5rem;
+    padding: 0 2.5rem;
+    border-radius: 0 12px 12px 0 !important;
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+/* ============================================
+   SUPPORT TICKETS
+   ============================================ */
+
+.ticket-list .ticket-item {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.ticket-list .ticket-item:hover {
+    border-color: #128C7E;
+    box-shadow: 0 8px 25px rgba(18, 140, 126, 0.15);
+    transform: translateY(-3px);
+}
+
+.ticket-status {
+    display: inline-block;
+    padding: 0.375rem 0.875rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.ticket-status.open {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.ticket-status.answered {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.ticket-status.closed {
+    background: #f3f4f6;
+    color: #4b5563;
+}
+
+.ticket-reply {
+    background: rgba(248, 250, 252, 0.8);
+    border-left: 4px solid #128C7E;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.ticket-reply.admin {
+    background: linear-gradient(135deg, rgba(18, 140, 126, 0.08), rgba(18, 140, 126, 0.03));
+    border-left-color: #128C7E;
+}
+
+.ticket-reply.client {
+    background: rgba(248, 250, 252, 0.8);
+    border-left-color: #64748b;
+}
+
+/* ============================================
+   PRODUCT/SERVICE DETAILS
+   ============================================ */
+
+.product-details {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.product-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.625rem 1.25rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    gap: 0.5rem;
+}
+
+.product-status.active {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+    color: #047857;
+}
+
+.product-status.suspended {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
+    color: #b91c1c;
+}
+
+.product-status.pending {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+    color: #b45309;
+}
+
+.product-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.product-actions .btn {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* ============================================
+   PAGINATION
+   ============================================ */
+
+.pagination {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.pagination .page-item {
+    list-style: none;
+}
+
+.pagination .page-link {
+    padding: 0.625rem 1rem;
+    border-radius: 10px;
+    border: 2px solid #e2e8f0;
+    color: #334155;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.pagination .page-link:hover {
+    background: #128C7E;
+    color: white;
+    border-color: #128C7E;
+    transform: translateY(-2px);
+}
+
+.pagination .page-item.active .page-link {
+    background: linear-gradient(135deg, #128C7E, #0f6f64);
+    color: white;
+    border-color: #128C7E;
+}
+
+/* ============================================
+   MODALS
+   ============================================ */
+
+.modal-content {
+    border-radius: 24px !important;
+    border: none !important;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25) !important;
+    backdrop-filter: blur(30px);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, rgba(18, 140, 126, 0.08), rgba(15, 111, 100, 0.05)) !important;
+    border-bottom: 2px solid #128C7E !important;
+    border-radius: 24px 24px 0 0 !important;
+    padding: 1.75rem 2rem !important;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.modal-body {
+    padding: 2rem !important;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(226, 232, 240, 0.5) !important;
+    padding: 1.5rem 2rem !important;
+    background: rgba(248, 250, 252, 0.5);
+    border-radius: 0 0 24px 24px !important;
+}
+
+/* ============================================
+   ANIMATIONS SUPPLÉMENTAIRES
+   ============================================ */
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-bounce-in {
+    animation: bounceIn 0.6s ease;
+}
+
+.animate-slide-right {
+    animation: slideInRight 0.5s ease;
+}
+
+.animate-slide-left {
+    animation: slideInLeft 0.5s ease;
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+
+.text-gradient {
+    background: linear-gradient(135deg, #128C7E, #0f6f64);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #128C7E 0%, #0f6f64 100%) !important;
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: var(--kmer-font-size-2xl);
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: var(--kmer-font-size-base);
+    }
+    
+    .logincontainer .card-body,
+    #containerNewUserSignup .card-body {
+        padding: 2rem 1.5rem !important;
+    }
+    
+    .pricing-table {
+        grid-template-columns: 1fr;
+    }
+    
+    .checkout-steps {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .checkout-steps::before {
+        display: none;
+    }
+    
+    .invoice-container {
+        padding: 1.5rem !important;
+    }
+    
+    .product-actions .btn {
+        min-width: 100%;
+    }
+    
+    .products-container,
+    .home-shortcuts .row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   OVERRIDES FINAUX - Force application styles
+   ============================================ */
+
+/* Force navbar moderne partout */
+header.main-header,
+.header-lined,
+nav.navbar,
+.navbar-default {
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(20px) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.5) !important;
+}
+
+/* Force style des liens navigation */
+header nav a:not(.btn),
+.navbar-nav .nav-link,
+.navbar-nav > li > a {
+    color: #334155 !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    position: relative;
+}
+
+header nav a:not(.btn):hover,
+.navbar-nav .nav-link:hover,
+.navbar-nav > li > a:hover {
+    color: #128C7E !important;
+}
+
+/* Force gradient sur TOUS les boutons primary */
+.btn.btn-primary,
+button.btn-primary,
+a.btn-primary,
+input[type="submit"].btn-primary {
+    background: linear-gradient(135deg, #128C7E 0%, #0f6f64 100%) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 700 !important;
+}
+
+/* Force cards/panels modernes */
+.panel,
+.panel-default,
+div[class*="panel"]:not(.panel-body) {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px);
+    border-radius: 20px !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.panel-heading,
+.panel-header,
+div[class*="panel-heading"] {
+    background: linear-gradient(135deg, rgba(18, 140, 126, 0.05) 0%, rgba(15, 111, 100, 0.08) 100%) !important;
+    border-bottom: 2px solid #128C7E !important;
+    border-radius: 20px 20px 0 0 !important;
+}

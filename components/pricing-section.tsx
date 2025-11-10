@@ -413,9 +413,11 @@ export default function PricingSection() {
               </div>
 
               {/* CTA Button */}
-              <Button className="w-full mb-5 font-semibold py-2 text-white text-sm hover:opacity-90" style={{ backgroundColor: "#128C7E" }}>
-                Get Started
-              </Button>
+              <a href={`https://kmerhosting.com/customers/store/${activeTab === "shared-cpanel" ? "cpanel-shared-hosting" : activeTab === "shared-da" ? "directadmin-shared-hosting" : "cpanel-reseller-hosting"}`} className="w-full">
+                <Button className="w-full mb-5 font-semibold py-2 text-white text-sm hover:opacity-90" style={{ backgroundColor: "#128C7E" }}>
+                  Get Started
+                </Button>
+              </a>
 
               {/* Features List */}
               <div className="space-y-2">

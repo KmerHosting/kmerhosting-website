@@ -47,9 +47,9 @@ export default function Navbar() {
               {mounted && (resolvedTheme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-300" />)}
             </button>
 
-            <button className="px-6 py-2 bg-primary text-white rounded-lg font-medium hover:opacity-90 transition-opacity">
+            <a href="https://kmerhosting.com/customers/clientarea.php" className="px-6 py-2 bg-primary text-white rounded-lg font-medium hover:opacity-90 transition-opacity">
               Client Area
-            </button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -81,9 +81,9 @@ export default function Navbar() {
                 {mounted && (resolvedTheme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-300" />)}
               </button>
 
-              <button className="w-full px-6 py-2 bg-primary text-white rounded-lg font-medium hover:opacity-90 transition-opacity">
+              <a href="https://kmerhosting.com/customers/clientarea.php" className="w-full px-6 py-2 bg-primary text-white rounded-lg font-medium hover:opacity-90 transition-opacity text-center">
                 Client Area
-              </button>
+              </a>
             </div>
           </div>
         )}

@@ -28,12 +28,16 @@ export default function Hero() {
           </p>
 
           <div className="flex gap-4 pt-4">
-            <Button size="lg" className="text-white font-semibold" style={{ backgroundColor: "#128C7E" }}>
-              Get Started Today
-            </Button>
-            <Button size="lg" variant="outline" style={{ color: "#128C7E", borderColor: "#128C7E" }}>
-              Learn More
-            </Button>
+            <a href="https://kmerhosting.com/customers/store/cpanel-shared-hosting">
+              <Button size="lg" className="text-white font-semibold" style={{ backgroundColor: "#128C7E" }}>
+                Get Started Today
+              </Button>
+            </a>
+            <a href="/about">
+              <Button size="lg" variant="outline" style={{ color: "#128C7E", borderColor: "#128C7E" }}>
+                Learn More
+              </Button>
+            </a>
           </div>
 
           <div className="flex gap-8 pt-8 text-sm">
