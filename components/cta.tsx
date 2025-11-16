@@ -1,46 +1,77 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
+import { Server, Users, HardDrive, Database } from "lucide-react"
 
 export default function CTA() {
+  const hostingOptions = [
+    {
+      title: "Shared Hosting",
+      description: "Perfect for personal websites and small businesses",
+      icon: Users,
+      link: "/shared-hosting",
+    },
+    {
+      title: "Reseller Hosting",
+      description: "Start your own hosting business with ease",
+      icon: Server,
+      link: "/reseller-hosting",
+    },
+    {
+      title: "VPS Hosting",
+      description: "Scalable resources and full root access",
+      icon: HardDrive,
+      link: "/vps-hosting",
+    },
+    {
+      title: "Dedicated Server",
+      description: "Maximum performance and complete control",
+      icon: Database,
+      link: "/dedicated-server",
+    },
+  ]
+
   return (
-    <section className="py-16 px-4 bg-white dark:bg-slate-900">
-      <div className="max-w-5xl mx-auto">
-        <div className="relative overflow-hidden rounded-2xl p-8 md:p-12 bg-white dark:bg-slate-900">
-          {/* Decorative elements */}
-          <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-3xl"></div>
-          
-          <div className="relative z-10 text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-              Ready to Get Started?
-            </h2>
-            <p className="text-lg text-slate-700 dark:text-slate-300 mb-8">
-              Join hundreds of satisfied customers. Get your website online today.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a href="https://kmerhosting.com/customers/store/cpanel-shared-hosting">
-                <Button 
-                  size="lg" 
-                  className="bg-primary hover:bg-primary/90 text-white font-semibold group w-full"
-                  style={{ backgroundColor: "#128C7E" }}
-                >
-                  Start Now
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
+    <section className="py-20 px-4 bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+            Get Started Today
+          </h2>
+          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            Choose the perfect hosting solution for your needs. All plans include 24/7 support and 99.9% uptime guarantee.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {hostingOptions.map((option, index) => {
+            const Icon = option.icon
+            return (
+              <a
+                key={index}
+                href={option.link}
+                className="group cursor-pointer"
+              >
+                <div className="h-full p-6 rounded-xl border-2 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white dark:bg-slate-900" style={{ borderColor: "#128C7E" }}>
+                  <div className="flex flex-col items-center text-center">
+                    <div className="mb-4 p-4 rounded-xl transition-transform group-hover:scale-110" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
+                      <Icon className="w-8 h-8" style={{ color: "#128C7E" }} />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 text-slate-900 dark:text-white">
+                      {option.title}
+                    </h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
+                      {option.description}
+                    </p>
+                    <div className="mt-auto">
+                      <span className="text-sm font-semibold transition-colors" style={{ color: "#128C7E" }}>
+                        Learn More →
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </a>
-              <a href="https://kmerhosting.com/customers/contact.php">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white hover:bg-white/50 dark:hover:bg-slate-700 font-semibold bg-transparent w-full"
-                >
-                  Contact Support
-                </Button>
-              </a>
-            </div>
-          </div>
+            )
+          })}
         </div>
       </div>
     </section>

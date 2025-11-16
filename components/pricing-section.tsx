@@ -6,7 +6,9 @@ import { Check } from "lucide-react"
 import { useState } from "react"
 
 export default function PricingSection() {
-  const [activeTab, setActiveTab] = useState("shared-cpanel")
+  const [activeTab, setActiveTab] = useState<"shared" | "reseller">("shared")
+  const [sharedControlPanel, setSharedControlPanel] = useState<"cpanel" | "directadmin">("cpanel")
+  const [sharedBilling, setSharedBilling] = useState<"monthly" | "quarterly" | "semi-annual" | "annual">("annual")
   const [resellerBilling, setResellerBilling] = useState<"monthly" | "quarterly" | "semi-annual" | "annual">("monthly")
 
   const sharedHostingCPanelPlans = [
@@ -18,7 +20,7 @@ export default function PricingSection() {
       billing: "/year",
       freeDomain: false,
       controlPanel: "cPanel",
-      features: ["1 Website", "50 GB Storage", "100 GB Bandwidth", "10 Email Accounts", "Basic Support", "Free SSL Certificate"],
+      features: ["2 Website", "50 GB Storage", "100 GB Bandwidth", "10 Email Accounts", "Basic Support", "Free SSL Certificate"],
       highlighted: false,
     },
     {
@@ -92,7 +94,7 @@ export default function PricingSection() {
       billing: "/year",
       freeDomain: false,
       controlPanel: "DirectAdmin",
-      features: ["1 Website", "50 GB Storage", "100 GB Bandwidth", "10 Email Accounts", "Basic Support", "Free SSL Certificate"],
+      features: ["2 Website", "50 GB Storage", "100 GB Bandwidth", "10 Email Accounts", "Basic Support", "Free SSL Certificate"],
       highlighted: false,
     },
     {
@@ -156,6 +158,20 @@ export default function PricingSection() {
       highlighted: false,
     },
   ]
+
+  const getSharedPrice = (annual: number) => {
+    const monthly = annual / 12
+    switch (sharedBilling) {
+      case "monthly":
+        return { price: Math.round(monthly).toLocaleString(), billing: "/month" }
+      case "quarterly":
+        return { price: Math.round(monthly * 3).toLocaleString(), billing: "/3 months" }
+      case "semi-annual":
+        return { price: Math.round(monthly * 6).toLocaleString(), billing: "/6 months" }
+      case "annual":
+        return { price: annual.toLocaleString(), billing: "/year" }
+    }
+  }
 
   const getResellerPrice = (monthly: number) => {
     switch (resellerBilling) {
@@ -258,9 +274,27 @@ export default function PricingSection() {
     })
   }
 
+  const getSharedPlansWithPricing = (basePlans: typeof sharedHostingCPanelPlans) => {
+    return basePlans.map((plan) => {
+      const annualPrice = parseInt(plan.price.replace(/,/g, ''))
+      const pricing = getSharedPrice(annualPrice)
+      const freeDomain = plan.freeDomain && sharedBilling === "annual"
+      return {
+        ...plan,
+        price: pricing.price,
+        billing: pricing.billing,
+        freeDomain: freeDomain,
+        features: plan.features.filter(f => f !== "Free .com Domain"),
+      }
+    })
+  }
+
   const getPlansList = () => {
-    if (activeTab === "shared-cpanel") return sharedHostingCPanelPlans
-    if (activeTab === "shared-da") return sharedHostingDAPlans
+    if (activeTab === "shared") {
+      return sharedControlPanel === "cpanel" 
+        ? getSharedPlansWithPricing(sharedHostingCPanelPlans)
+        : getSharedPlansWithPricing(sharedHostingDAPlans)
+    }
     return getResellerPlansWithPricing()
   }
 
@@ -273,37 +307,26 @@ export default function PricingSection() {
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Hosting Plans</h2>
           <p className="text-slate-600 dark:text-slate-400">
-            Choose the perfect plan. Shared hosting prices are yearly. Reseller hosting: flexible billing options. Free domain with annual billing.
+            Choose the perfect plan with flexible billing options. Free domain with annual billing.
           </p>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex justify-center gap-2 mb-6 flex-wrap">
+        {/* Tab Navigation - Main Hosting Types */}
+        <div className="flex justify-center gap-3 mb-6">
           <button
-            onClick={() => setActiveTab("shared-cpanel")}
-            className={`px-5 py-2 rounded-lg font-medium transition-all text-sm ${
-              activeTab === "shared-cpanel"
+            onClick={() => setActiveTab("shared")}
+            className={`px-6 py-2.5 rounded-lg font-semibold transition-all text-sm cursor-pointer ${
+              activeTab === "shared"
                 ? "text-white shadow-md"
                 : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
             }`}
-            style={activeTab === "shared-cpanel" ? { backgroundColor: "#128C7E" } : {}}
+            style={activeTab === "shared" ? { backgroundColor: "#128C7E" } : {}}
           >
-            Shared - cPanel
-          </button>
-          <button
-            onClick={() => setActiveTab("shared-da")}
-            className={`px-5 py-2 rounded-lg font-medium transition-all text-sm ${
-              activeTab === "shared-da"
-                ? "text-white shadow-md"
-                : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
-            }`}
-            style={activeTab === "shared-da" ? { backgroundColor: "#128C7E" } : {}}
-          >
-            Shared - DirectAdmin
+            Shared Hosting
           </button>
           <button
             onClick={() => setActiveTab("reseller")}
-            className={`px-5 py-2 rounded-lg font-medium transition-all text-sm ${
+            className={`px-6 py-2.5 rounded-lg font-semibold transition-all text-sm cursor-pointer ${
               activeTab === "reseller"
                 ? "text-white shadow-md"
                 : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
@@ -314,12 +337,90 @@ export default function PricingSection() {
           </button>
         </div>
 
+        {/* Control Panel Selection for Shared Hosting */}
+        {activeTab === "shared" && (
+          <div className="flex justify-center gap-2 mb-6">
+            <button
+              onClick={() => setSharedControlPanel("cpanel")}
+              className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs cursor-pointer ${
+                sharedControlPanel === "cpanel"
+                  ? "text-white"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
+              }`}
+              style={sharedControlPanel === "cpanel" ? { backgroundColor: "#128C7E" } : {}}
+            >
+              cPanel
+            </button>
+            <button
+              onClick={() => setSharedControlPanel("directadmin")}
+              className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs cursor-pointer ${
+                sharedControlPanel === "directadmin"
+                  ? "text-white"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
+              }`}
+              style={sharedControlPanel === "directadmin" ? { backgroundColor: "#128C7E" } : {}}
+            >
+              DirectAdmin
+            </button>
+          </div>
+        )}
+
+        {/* Shared Hosting Billing Period Toggle */}
+        {activeTab === "shared" && (
+          <div className="flex justify-center gap-2 mb-10 flex-wrap">
+            <button
+              onClick={() => setSharedBilling("monthly")}
+              className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs cursor-pointer ${
+                sharedBilling === "monthly"
+                  ? "text-white"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
+              }`}
+              style={sharedBilling === "monthly" ? { backgroundColor: "#128C7E" } : {}}
+            >
+              Monthly
+            </button>
+            <button
+              onClick={() => setSharedBilling("quarterly")}
+              className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs cursor-pointer ${
+                sharedBilling === "quarterly"
+                  ? "text-white"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
+              }`}
+              style={sharedBilling === "quarterly" ? { backgroundColor: "#128C7E" } : {}}
+            >
+              Quarterly
+            </button>
+            <button
+              onClick={() => setSharedBilling("semi-annual")}
+              className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs cursor-pointer ${
+                sharedBilling === "semi-annual"
+                  ? "text-white"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
+              }`}
+              style={sharedBilling === "semi-annual" ? { backgroundColor: "#128C7E" } : {}}
+            >
+              Semi-Annual
+            </button>
+            <button
+              onClick={() => setSharedBilling("annual")}
+              className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs relative cursor-pointer ${
+                sharedBilling === "annual"
+                  ? "text-white"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
+              }`}
+              style={sharedBilling === "annual" ? { backgroundColor: "#128C7E" } : {}}
+            >
+              Annual <span className="ml-1 text-xs font-semibold">🎁</span>
+            </button>
+          </div>
+        )}
+
         {/* Reseller Billing Period Toggle */}
         {activeTab === "reseller" && (
           <div className="flex justify-center gap-2 mb-10 flex-wrap">
             <button
               onClick={() => setResellerBilling("monthly")}
-              className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs ${
+              className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs cursor-pointer ${
                 resellerBilling === "monthly"
                   ? "text-white"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
@@ -330,7 +431,7 @@ export default function PricingSection() {
             </button>
             <button
               onClick={() => setResellerBilling("quarterly")}
-              className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs ${
+              className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs cursor-pointer ${
                 resellerBilling === "quarterly"
                   ? "text-white"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
@@ -341,7 +442,7 @@ export default function PricingSection() {
             </button>
             <button
               onClick={() => setResellerBilling("semi-annual")}
-              className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs ${
+              className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs cursor-pointer ${
                 resellerBilling === "semi-annual"
                   ? "text-white"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
@@ -352,7 +453,7 @@ export default function PricingSection() {
             </button>
             <button
               onClick={() => setResellerBilling("annual")}
-              className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs relative ${
+              className={`px-4 py-1.5 rounded-md font-medium transition-all text-xs relative cursor-pointer ${
                 resellerBilling === "annual"
                   ? "text-white"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
@@ -370,18 +471,12 @@ export default function PricingSection() {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`rounded-xl p-5 flex flex-col border transition-all duration-300 hover:shadow-lg ${
-                plan.highlighted
-                  ? "border-primary shadow-md bg-slate-50 dark:bg-slate-800"
-                  : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
-              }`}
+              className="relative rounded-xl p-5 flex flex-col border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 transition-all duration-300 hover:shadow-lg overflow-hidden"
             >
-              {/* Highlighted Badge */}
+              {/* Oblique Ribbon for Popular Plan */}
               {plan.highlighted && (
-                <div className="mb-3">
-                  <span className="inline-block px-2 py-1 text-primary text-xs font-semibold rounded-md" style={{ backgroundColor: "#128C7E20" }}>
-                    POPULAR
-                  </span>
+                <div className="absolute top-4 -right-10 w-40 text-center rotate-45 text-white text-xs font-bold py-1 shadow-lg z-10" style={{ backgroundColor: "#128C7E" }}>
+                  POPULAR
                 </div>
               )}
 
@@ -413,8 +508,8 @@ export default function PricingSection() {
               </div>
 
               {/* CTA Button */}
-              <a href={`https://kmerhosting.com/customers/store/${activeTab === "shared-cpanel" ? "cpanel-shared-hosting" : activeTab === "shared-da" ? "directadmin-shared-hosting" : "cpanel-reseller-hosting"}`} className="w-full">
-                <Button className="w-full mb-5 font-semibold py-2 text-white text-sm hover:opacity-90" style={{ backgroundColor: "#128C7E" }}>
+              <a href={`https://kmerhosting.com/customers/store/${activeTab === "shared" ? (sharedControlPanel === "cpanel" ? "cpanel-shared-hosting" : "directadmin-shared-hosting") : "cpanel-reseller-hosting"}`} className="w-full">
+                <Button className="w-full mb-5 font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
                   Get Started
                 </Button>
               </a>

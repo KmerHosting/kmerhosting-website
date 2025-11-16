@@ -28,13 +28,13 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
-            <Link href="#pricing" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors">
+            <Link href="#pricing" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
               Pricing
             </Link>
-            <Link href="/about" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors">
+            <Link href="/about" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
               About Us
             </Link>
-            <Link href="/faq" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors">
+            <Link href="/faq" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
               FAQ
             </Link>
 
@@ -47,7 +47,11 @@ export default function Navbar() {
               {mounted && (resolvedTheme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-300" />)}
             </button>
 
-            <a href="https://kmerhosting.com/customers/clientarea.php" className="px-6 py-2 bg-primary text-white rounded-lg font-medium hover:opacity-90 transition-opacity">
+            <a href="https://kmerhosting.com/customers/clientarea.php" className="flex items-center gap-2 px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
               Client Area
             </a>
           </div>
@@ -61,13 +65,13 @@ export default function Navbar() {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden pb-4 space-y-3">
-            <Link href="#pricing" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2">
+            <Link href="#pricing" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
               Pricing
             </Link>
-            <Link href="/about" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2">
+            <Link href="/about" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
               About Us
             </Link>
-            <Link href="/faq" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2">
+            <Link href="/faq" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
               FAQ
             </Link>
 
@@ -81,7 +85,11 @@ export default function Navbar() {
                 {mounted && (resolvedTheme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-300" />)}
               </button>
 
-              <a href="https://kmerhosting.com/customers/clientarea.php" className="w-full px-6 py-2 bg-primary text-white rounded-lg font-medium hover:opacity-90 transition-opacity text-center">
+              <a href="https://kmerhosting.com/customers/clientarea.php" className="flex items-center justify-center gap-2 w-full px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
                 Client Area
               </a>
             </div>

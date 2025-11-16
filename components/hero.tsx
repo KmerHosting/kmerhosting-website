@@ -16,7 +16,7 @@ export default function Hero() {
           </div>
 
           <h1 className="text-5xl md:text-6xl font-bold leading-tight text-pretty text-slate-900 dark:text-white">
-            Reliable Hosting
+            The Best Hosting
             <span className="block" style={{ color: "#128C7E" }}>
               Solutions for Cameroon
             </span>
@@ -29,12 +29,12 @@ export default function Hero() {
 
           <div className="flex gap-4 pt-4">
             <a href="https://kmerhosting.com/customers/store/cpanel-shared-hosting">
-              <Button size="lg" className="text-white font-semibold" style={{ backgroundColor: "#128C7E" }}>
+              <Button size="lg" className="text-white font-semibold cursor-pointer hover:opacity-90 transition-opacity" style={{ backgroundColor: "#128C7E" }}>
                 Get Started Today
               </Button>
             </a>
             <a href="/about">
-              <Button size="lg" variant="outline" style={{ color: "#128C7E", borderColor: "#128C7E" }}>
+              <Button size="lg" variant="outline" className="cursor-pointer hover:opacity-70 hover:bg-[#128C7E] transition-all" style={{ color: "#128C7E", borderColor: "#128C7E" }}>
                 Learn More
               </Button>
             </a>
