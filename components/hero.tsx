@@ -34,7 +34,7 @@ export default function Hero() {
               </Button>
             </a>
             <a href="/about">
-              <Button size="lg" variant="outline" className="cursor-pointer hover:opacity-70 hover:bg-[#128C7E] transition-all" style={{ color: "#128C7E", borderColor: "#128C7E" }}>
+              <Button size="lg" variant="outline" className="cursor-pointer hover:bg-[#128C7E] hover:!text-white transition-all" style={{ color: "#128C7E", borderColor: "#128C7E" }}>
                 Learn More
               </Button>
             </a>

@@ -162,7 +162,7 @@ export default function AboutPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Shared Hosting */}
-            <div className="p-8 rounded-xl border-2 transition-all bg-white dark:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E" }}>
+            <Link href="/shared-hosting" className="p-8 rounded-xl border-2 hover:shadow-lg transition-all bg-white dark:bg-slate-800 cursor-pointer block" style={{ borderColor: "#128C7E" }}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
                   <Users className="w-6 h-6" style={{ color: "#128C7E" }} />
@@ -198,10 +198,10 @@ export default function AboutPage() {
                 Personal websites, blogs, portfolios, small business websites, and WordPress sites
               </p>
               <p className="text-lg font-bold" style={{ color: "#128C7E" }}>From 1 083 FCFA/month</p>
-            </div>
+            </Link>
 
             {/* Reseller Hosting */}
-            <div className="p-8 rounded-xl border-2 transition-all bg-white dark:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E" }}>
+            <Link href="/reseller-hosting" className="p-8 rounded-xl border-2 hover:shadow-lg transition-all bg-white dark:bg-slate-800 cursor-pointer block" style={{ borderColor: "#128C7E" }}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
                   <Server className="w-6 h-6" style={{ color: "#128C7E" }} />
@@ -237,10 +237,10 @@ export default function AboutPage() {
                 Web developers, digital agencies, entrepreneurs looking to start hosting business
               </p>
               <p className="text-lg font-bold" style={{ color: "#128C7E" }}>From 3 000 FCFA/month</p>
-            </div>
+            </Link>
 
             {/* VPS Hosting */}
-            <div className="p-8 rounded-xl border-2 transition-all bg-white dark:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E" }}>
+            <Link href="/vps-hosting" className="p-8 rounded-xl border-2 hover:shadow-lg transition-all bg-white dark:bg-slate-800 cursor-pointer block" style={{ borderColor: "#128C7E" }}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
                   <HardDrive className="w-6 h-6" style={{ color: "#128C7E" }} />
@@ -276,10 +276,10 @@ export default function AboutPage() {
                 Growing businesses, high-traffic websites, custom applications, development environments
               </p>
               <p className="text-lg font-bold" style={{ color: "#128C7E" }}>Contact for pricing</p>
-            </div>
+            </Link>
 
             {/* Dedicated Server */}
-            <div className="p-8 rounded-xl border-2 transition-all bg-white dark:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E" }}>
+            <Link href="/dedicated-server" className="p-8 rounded-xl border-2 hover:shadow-lg transition-all bg-white dark:bg-slate-800 cursor-pointer block" style={{ borderColor: "#128C7E" }}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
                   <Database className="w-6 h-6" style={{ color: "#128C7E" }} />
@@ -315,7 +315,7 @@ export default function AboutPage() {
                 Enterprise applications, large e-commerce sites, mission-critical systems, high-security needs
               </p>
               <p className="text-lg font-bold" style={{ color: "#128C7E" }}>Contact for pricing</p>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
