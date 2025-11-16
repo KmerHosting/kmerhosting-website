@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button"
 
 export default function AboutPage() {
   const stats = [
-    { icon: Users, label: "Happy Clients", value: "500+" },
+    { icon: Users, label: "Happy Clients", value: "3500+" },
     { icon: Server, label: "Servers Running", value: "99.9%", suffix: " Uptime" },
-    { icon: Globe, label: "Websites Hosted", value: "1000+" },
+    { icon: Globe, label: "Websites Hosted", value: "8000+" },
     { icon: Award, label: "Years Experience", value: "5+" },
   ]
 
@@ -58,31 +58,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 px-4 bg-white dark:bg-slate-900">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon
-              return (
-                <div key={index} className="text-center">
-                  <div className="flex justify-center mb-4">
-                    <div className="p-4 rounded-xl" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
-                      <Icon className="w-8 h-8" style={{ color: "#128C7E" }} />
-                    </div>
-                  </div>
-                  <div className="text-3xl font-bold mb-2" style={{ color: "#128C7E" }}>
-                    {stat.value}
-                    {stat.suffix && <span className="text-lg text-slate-600 dark:text-slate-400">{stat.suffix}</span>}
-                  </div>
-                  <p className="text-slate-600 dark:text-slate-400 font-medium">{stat.label}</p>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* Story Section */}
       <section className="py-16 px-4 bg-slate-50 dark:bg-slate-800">
         <div className="max-w-4xl mx-auto">
@@ -101,12 +76,47 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* CEO Section */}
+      <section className="py-16 px-4 bg-white dark:bg-slate-900">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold mb-8 text-center text-slate-900 dark:text-white">Word from Our CEO</h2>
+          <div className="bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-2xl p-8 md:p-12 border-2" style={{ borderColor: "#128C7E" }}>
+            <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+              <div className="flex-shrink-0">
+                <div className="w-32 h-32 rounded-full overflow-hidden border-4" style={{ borderColor: "#128C7E" }}>
+                  <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-white" style={{ backgroundColor: "#128C7E" }}>
+                    TT
+                  </div>
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="mb-6">
+                  <svg className="w-12 h-12 mb-4" style={{ color: "#128C7E" }} fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                  </svg>
+                  <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
+                    "At KmerHosting, our mission goes beyond just providing web hosting services. We are committed to empowering Cameroonian businesses and individuals with the digital infrastructure they need to thrive in today's connected world. Every day, we strive to deliver not just hosting, but reliable partnerships that help our clients achieve their online goals. Our focus on local support, competitive pricing, and enterprise-grade features sets us apart in the market. We believe that quality hosting shouldn't be a luxury—it should be accessible to everyone."
+                  </p>
+                  <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                    "As we continue to grow, we remain dedicated to innovation, security, and exceptional customer service. Thank you for trusting KmerHosting with your online presence."
+                  </p>
+                </div>
+                <div className="border-t border-slate-200 dark:border-slate-700 pt-4">
+                  <p className="text-xl font-bold text-slate-900 dark:text-white">Toscani TENEKEU MODJOU</p>
+                  <p className="text-slate-600 dark:text-slate-400">Chief Executive Officer, KmerHosting</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Mission & Vision */}
       <section className="py-16 px-4 bg-white dark:bg-slate-900">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {team.map((item, index) => (
-              <div key={index} className="p-8 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all bg-white dark:bg-slate-800">
+              <div key={index} className="p-8 rounded-xl border border-slate-200 dark:border-slate-700 transition-all bg-white dark:bg-slate-800">
                 <h3 className="text-2xl font-bold mb-4" style={{ color: "#128C7E" }}>
                   {item.role}
                 </h3>
@@ -125,7 +135,7 @@ export default function AboutPage() {
             {values.map((value, index) => {
               const Icon = value.icon
               return (
-                <div key={index} className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all">
+                <div key={index} className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-700 transition-all">
                   <div className="flex items-start gap-4">
                     <div className="p-3 rounded-lg flex-shrink-0 bg-slate-50 dark:bg-slate-800">
                       <Icon className="w-6 h-6" style={{ color: "#128C7E" }} />
@@ -152,7 +162,7 @@ export default function AboutPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Shared Hosting */}
-            <div className="p-8 rounded-xl border-2 hover:shadow-lg transition-all bg-white dark:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E" }}>
+            <div className="p-8 rounded-xl border-2 transition-all bg-white dark:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E" }}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
                   <Users className="w-6 h-6" style={{ color: "#128C7E" }} />
@@ -191,7 +201,7 @@ export default function AboutPage() {
             </div>
 
             {/* Reseller Hosting */}
-            <div className="p-8 rounded-xl border-2 hover:shadow-lg transition-all bg-white dark:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E" }}>
+            <div className="p-8 rounded-xl border-2 transition-all bg-white dark:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E" }}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
                   <Server className="w-6 h-6" style={{ color: "#128C7E" }} />
@@ -230,7 +240,7 @@ export default function AboutPage() {
             </div>
 
             {/* VPS Hosting */}
-            <div className="p-8 rounded-xl border-2 hover:shadow-lg transition-all bg-white dark:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E" }}>
+            <div className="p-8 rounded-xl border-2 transition-all bg-white dark:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E" }}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
                   <HardDrive className="w-6 h-6" style={{ color: "#128C7E" }} />
@@ -269,7 +279,7 @@ export default function AboutPage() {
             </div>
 
             {/* Dedicated Server */}
-            <div className="p-8 rounded-xl border-2 hover:shadow-lg transition-all bg-white dark:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E" }}>
+            <div className="p-8 rounded-xl border-2 transition-all bg-white dark:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E" }}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
                   <Database className="w-6 h-6" style={{ color: "#128C7E" }} />
@@ -306,6 +316,34 @@ export default function AboutPage() {
               </p>
               <p className="text-lg font-bold" style={{ color: "#128C7E" }}>Contact for pricing</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 px-4 bg-slate-50 dark:bg-slate-800">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold mb-12 text-center text-slate-900 dark:text-white">
+            KmerHosting by the <span style={{ color: "#128C7E" }}>Numbers</span>
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {stats.map((stat, index) => {
+              const Icon = stat.icon
+              return (
+                <div key={index} className="text-center bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-700 transition-all">
+                  <div className="flex justify-center mb-4">
+                    <div className="p-4 rounded-xl" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
+                      <Icon className="w-8 h-8" style={{ color: "#128C7E" }} />
+                    </div>
+                  </div>
+                  <div className="text-4xl font-bold mb-2" style={{ color: "#128C7E" }}>
+                    {stat.value}
+                    {stat.suffix && <span className="text-xl text-slate-600 dark:text-slate-400">{stat.suffix}</span>}
+                  </div>
+                  <p className="text-slate-600 dark:text-slate-400 font-semibold">{stat.label}</p>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>

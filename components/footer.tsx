@@ -89,14 +89,17 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-slate-600 dark:text-slate-400 text-sm">© 2025 KmerHosting. All rights reserved.</p>
             <div className="flex gap-6 mt-4 md:mt-0 text-sm text-slate-600 dark:text-slate-400">
-              <a href="#" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
+              <a href="/legal/privacy-policy" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
                 Privacy Policy
               </a>
-              <a href="#" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
+              <a href="/legal/terms-of-service" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
                 Terms of Service
               </a>
-              <a href="#" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                Cookie Policy
+              <a href="/legal/cookies-policy" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
+                Cookies Policy
+              </a>
+              <a href="/legal/refund-policy" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
+                Refund Policy
               </a>
             </div>
           </div>
