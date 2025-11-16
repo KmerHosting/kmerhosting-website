@@ -47,6 +47,11 @@ export default function Footer() {
                 </a>
               </li>
               <li>
+                <a href="/faq" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
+                  FAQ
+                </a>
+              </li>
+              <li>
                 <a href="https://kmerhosting.com/customers/contact.php" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
                   Contact
                 </a>

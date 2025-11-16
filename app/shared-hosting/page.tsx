@@ -70,6 +70,7 @@ export default function SharedHostingPage() {
             <Home className="w-4 h-4" />
             <span className="text-sm font-medium">Back to Home</span>
           </Link>
+        </div>
         <div className="text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
             <Users className="w-5 h-5" style={{ color: "#128C7E" }} />
