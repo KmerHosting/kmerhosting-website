@@ -92,9 +92,6 @@ export const metadata: Metadata = {
     statusBarStyle: 'black-translucent',
     title: 'KmerHosting',
   },
-  formatDetection: {
-    telephone: false,
-  },
 }
 
 export default function RootLayout({
