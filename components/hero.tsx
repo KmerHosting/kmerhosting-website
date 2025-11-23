@@ -16,9 +16,9 @@ export default function Hero() {
           </div>
 
           <h1 className="text-5xl md:text-6xl font-bold leading-tight text-pretty text-slate-900 dark:text-white">
-            The Best Hosting
+            The best web hosting solution
             <span className="block" style={{ color: "#128C7E" }}>
-              Solutions for Cameroon
+              in Cameroon
             </span>
           </h1>
 

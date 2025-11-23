@@ -71,7 +71,7 @@ export default function CTA() {
                 </div>
               </a>
             )
-          })}j
+          })}
         </div>
       </div>
     </section>

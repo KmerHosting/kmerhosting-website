@@ -498,37 +498,46 @@ export default function PricingSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto mb-20">
             {/* VPS Starter */}
-            <div className="relative rounded-xl p-6 flex flex-col border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 transition-all duration-300 hover:shadow-lg">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">VPS Starter</h3>
-              <div className="space-y-4 mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">CPU</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">2 vCPU Cores</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">RAM</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">4 GB RAM</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">Storage</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">80 GB SSD</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">Bandwidth</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">2 TB Bandwidth</span>
+            <div className="rounded-xl p-6 flex flex-col border-2 bg-white dark:bg-slate-900 transition-all duration-300 hover:shadow-lg" style={{ borderColor: "#128C7E" }}>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">VPS Starter</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">Perfect for growing sites</p>
+              
+              <div className="mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className="text-3xl font-bold" style={{ color: "#128C7E" }}>Contact</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-xs">for pricing</span>
                 </div>
               </div>
-              <div className="space-y-2 mb-6">
+
+              <div className="space-y-3 mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">2 vCPU Cores</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">4 GB RAM</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">80 GB SSD</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">2 TB Bandwidth</span>
+                </div>
+              </div>
+
+              <a href="mailto:sales@kmerhosting.com" className="w-full">
+                <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
+                  Contact Sales
+                </Button>
+              </a>
+
+              <div className="space-y-2 mt-5 pt-5 border-t border-slate-200 dark:border-slate-700">
                 {["Full Root Access", "1 IPv4 Address", "Linux or Windows", "Free SSL Certificate", "24/7 Support"].map((feature, idx) => (
                   <div key={idx} className="flex items-start gap-2">
-                    <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
-                    <span className="text-sm text-slate-600 dark:text-slate-400">{feature}</span>
+                    <Check className="w-3 h-3 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
+                    <span className="text-xs text-slate-600 dark:text-slate-400">{feature}</span>
                   </div>
                 ))}
               </div>
-              <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
-                Get Started
-              </Button>
             </div>
 
             {/* VPS Business - POPULAR */}
@@ -536,70 +545,88 @@ export default function PricingSection() {
               <div className="absolute top-4 -right-10 w-40 text-center rotate-45 text-white text-xs font-bold py-1 shadow-lg z-10" style={{ backgroundColor: "#128C7E" }}>
                 POPULAR
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">VPS Business</h3>
-              <div className="space-y-4 mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">CPU</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">4 vCPU Cores</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">RAM</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">8 GB RAM</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">Storage</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">160 GB SSD</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">Bandwidth</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">4 TB Bandwidth</span>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">VPS Business</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">Best for most businesses</p>
+              
+              <div className="mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className="text-3xl font-bold" style={{ color: "#128C7E" }}>Contact</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-xs">for pricing</span>
                 </div>
               </div>
-              <div className="space-y-2 mb-6">
+
+              <div className="space-y-3 mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">4 vCPU Cores</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">8 GB RAM</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">160 GB SSD</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">4 TB Bandwidth</span>
+                </div>
+              </div>
+
+              <a href="mailto:sales@kmerhosting.com" className="w-full">
+                <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
+                  Contact Sales
+                </Button>
+              </a>
+
+              <div className="space-y-2 mt-5 pt-5 border-t border-slate-200 dark:border-slate-700">
                 {["Full Root Access", "2 IPv4 Addresses", "Linux or Windows", "Free SSL Certificate", "Priority Support", "Weekly Backups"].map((feature, idx) => (
                   <div key={idx} className="flex items-start gap-2">
-                    <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
-                    <span className="text-sm text-slate-600 dark:text-slate-400">{feature}</span>
+                    <Check className="w-3 h-3 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
+                    <span className="text-xs text-slate-600 dark:text-slate-400">{feature}</span>
                   </div>
                 ))}
               </div>
-              <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
-                Get Started
-              </Button>
             </div>
 
             {/* VPS Professional */}
-            <div className="relative rounded-xl p-6 flex flex-col border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 transition-all duration-300 hover:shadow-lg">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">VPS Professional</h3>
-              <div className="space-y-4 mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">CPU</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">6 vCPU Cores</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">RAM</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">16 GB RAM</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">Storage</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">320 GB SSD</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">Bandwidth</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">6 TB Bandwidth</span>
+            <div className="rounded-xl p-6 flex flex-col border-2 bg-white dark:bg-slate-900 transition-all duration-300 hover:shadow-lg" style={{ borderColor: "#128C7E" }}>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">VPS Professional</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">For high-traffic sites</p>
+              
+              <div className="mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className="text-3xl font-bold" style={{ color: "#128C7E" }}>Contact</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-xs">for pricing</span>
                 </div>
               </div>
-              <div className="space-y-2 mb-6">
-                {["Full Root Access", "3 IPv4 Addresses", "Linux or Windows", "Free SSL Certificate", "Priority Support", "Daily Backups"].map((feature, idx) => (
+
+              <div className="space-y-3 mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">8 vCPU Cores</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">16 GB RAM</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">320 GB SSD</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">8 TB Bandwidth</span>
+                </div>
+              </div>
+
+              <a href="mailto:sales@kmerhosting.com" className="w-full">
+                <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
+                  Contact Sales
+                </Button>
+              </a>
+
+              <div className="space-y-2 mt-5 pt-5 border-t border-slate-200 dark:border-slate-700">
+                {["Full Root Access", "4 IPv4 Addresses", "Linux or Windows", "Free SSL Certificate", "24/7 Priority Support", "Daily Backups"].map((feature, idx) => (
                   <div key={idx} className="flex items-start gap-2">
-                    <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
-                    <span className="text-sm text-slate-600 dark:text-slate-400">{feature}</span>
+                    <Check className="w-3 h-3 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
+                    <span className="text-xs text-slate-600 dark:text-slate-400">{feature}</span>
                   </div>
                 ))}
               </div>
-              <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
-                Get Started
-              </Button>
             </div>
           </div>
         </div>
@@ -613,41 +640,46 @@ export default function PricingSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
             {/* Essential */}
-            <div className="relative rounded-xl p-6 flex flex-col border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 transition-all duration-300 hover:shadow-lg">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Essential</h3>
-              <div className="space-y-4 mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">PROCESSOR</span>
-                  <span className="text-slate-900 dark:text-white font-semibold text-sm">Intel Xeon E-2236</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium text-xs">CORES/THREADS</span>
-                  <span className="text-slate-900 dark:text-white font-semibold text-sm">6 Cores / 12 Threads</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">MEMORY</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">32 GB DDR4 ECC</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">STORAGE</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">2x 1TB NVMe SSD</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">BANDWIDTH</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">10 TB/month</span>
+            <div className="rounded-xl p-6 flex flex-col border-2 bg-white dark:bg-slate-900 transition-all duration-300 hover:shadow-lg" style={{ borderColor: "#128C7E" }}>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Essential</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">For small to medium businesses</p>
+              
+              <div className="mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className="text-3xl font-bold" style={{ color: "#128C7E" }}>Contact</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-xs">for pricing</span>
                 </div>
               </div>
-              <div className="space-y-2 mb-6">
+
+              <div className="space-y-3 mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Intel Xeon E-2236 (6 Cores)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">32 GB DDR4 ECC</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">2x 1TB NVMe SSD</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">10 TB/month Bandwidth</span>
+                </div>
+              </div>
+
+              <a href="mailto:sales@kmerhosting.com" className="w-full">
+                <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
+                  Contact Sales
+                </Button>
+              </a>
+
+              <div className="space-y-2 mt-5 pt-5 border-t border-slate-200 dark:border-slate-700">
                 {["Full Root Access", "5 IPv4 Addresses", "RAID 1 Configuration", "Remote Management (IPMI)", "DDoS Protection", "99.9% Uptime SLA"].map((feature, idx) => (
                   <div key={idx} className="flex items-start gap-2">
-                    <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
-                    <span className="text-sm text-slate-600 dark:text-slate-400">{feature}</span>
+                    <Check className="w-3 h-3 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
+                    <span className="text-xs text-slate-600 dark:text-slate-400">{feature}</span>
                   </div>
                 ))}
               </div>
-              <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
-                Get Started
-              </Button>
             </div>
 
             {/* Business - POPULAR */}
@@ -655,78 +687,88 @@ export default function PricingSection() {
               <div className="absolute top-4 -right-10 w-40 text-center rotate-45 text-white text-xs font-bold py-1 shadow-lg z-10" style={{ backgroundColor: "#128C7E" }}>
                 POPULAR
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Business</h3>
-              <div className="space-y-4 mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">PROCESSOR</span>
-                  <span className="text-slate-900 dark:text-white font-semibold text-sm">Intel Xeon E-2288G</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium text-xs">CORES/THREADS</span>
-                  <span className="text-slate-900 dark:text-white font-semibold text-sm">8 Cores / 16 Threads</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">MEMORY</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">64 GB DDR4 ECC</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">STORAGE</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">2x 2TB NVMe SSD</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">BANDWIDTH</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">20 TB/month</span>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Business</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">Best for most enterprises</p>
+              
+              <div className="mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className="text-3xl font-bold" style={{ color: "#128C7E" }}>Contact</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-xs">for pricing</span>
                 </div>
               </div>
-              <div className="space-y-2 mb-6">
+
+              <div className="space-y-3 mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Intel Xeon E-2288G (8 Cores)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">64 GB DDR4 ECC</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">2x 2TB NVMe SSD</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">20 TB/month Bandwidth</span>
+                </div>
+              </div>
+
+              <a href="mailto:sales@kmerhosting.com" className="w-full">
+                <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
+                  Contact Sales
+                </Button>
+              </a>
+
+              <div className="space-y-2 mt-5 pt-5 border-t border-slate-200 dark:border-slate-700">
                 {["Full Root Access", "8 IPv4 Addresses", "RAID 1 or RAID 10", "Remote Management (IPMI)", "DDoS Protection", "99.9% Uptime SLA", "Priority Support"].map((feature, idx) => (
                   <div key={idx} className="flex items-start gap-2">
-                    <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
-                    <span className="text-sm text-slate-600 dark:text-slate-400">{feature}</span>
+                    <Check className="w-3 h-3 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
+                    <span className="text-xs text-slate-600 dark:text-slate-400">{feature}</span>
                   </div>
                 ))}
               </div>
-              <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
-                Get Started
-              </Button>
             </div>
 
             {/* Enterprise */}
-            <div className="relative rounded-xl p-6 flex flex-col border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 transition-all duration-300 hover:shadow-lg">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Enterprise</h3>
-              <div className="space-y-4 mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium text-sm">PROCESSOR</span>
-                  <span className="text-slate-900 dark:text-white font-semibold text-sm">Dual Intel Xeon Silver 4214</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium text-xs">CORES/THREADS</span>
-                  <span className="text-slate-900 dark:text-white font-semibold text-sm">24 Cores / 48 Threads</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">MEMORY</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">128 GB DDR4 ECC</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">STORAGE</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">4x 4TB NVMe SSD</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">BANDWIDTH</span>
-                  <span className="text-slate-900 dark:text-white font-semibold">50 TB/month</span>
+            <div className="rounded-xl p-6 flex flex-col border-2 bg-white dark:bg-slate-900 transition-all duration-300 hover:shadow-lg" style={{ borderColor: "#128C7E" }}>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Enterprise</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">Maximum performance & reliability</p>
+              
+              <div className="mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className="text-3xl font-bold" style={{ color: "#128C7E" }}>Contact</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-xs">for pricing</span>
                 </div>
               </div>
-              <div className="space-y-2 mb-6">
+
+              <div className="space-y-3 mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Dual Xeon Silver 4214 (24 Cores)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">128 GB DDR4 ECC</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">4x 4TB NVMe SSD</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">50 TB/month Bandwidth</span>
+                </div>
+              </div>
+
+              <a href="mailto:sales@kmerhosting.com" className="w-full">
+                <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
+                  Contact Sales
+                </Button>
+              </a>
+
+              <div className="space-y-2 mt-5 pt-5 border-t border-slate-200 dark:border-slate-700">
                 {["Full Root Access", "16 IPv4 Addresses", "Custom RAID Config", "Remote Management (IPMI)", "Advanced DDoS Protection", "99.99% Uptime SLA", "24/7 Dedicated Support", "Hardware Replacement"].map((feature, idx) => (
                   <div key={idx} className="flex items-start gap-2">
-                    <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
-                    <span className="text-sm text-slate-600 dark:text-slate-400">{feature}</span>
+                    <Check className="w-3 h-3 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
+                    <span className="text-xs text-slate-600 dark:text-slate-400">{feature}</span>
                   </div>
                 ))}
               </div>
-              <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
-                Get Started
-              </Button>
             </div>
           </div>
         </div>
