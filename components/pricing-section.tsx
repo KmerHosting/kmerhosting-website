@@ -23,7 +23,7 @@ export default function PricingSection() {
     },
     {
       name: "Silver",
-      price: "20,000",
+      price: "19,900",
       description: "Small business",
       currency: "FCFA",
       billing: "/year",

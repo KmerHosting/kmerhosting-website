@@ -11,7 +11,7 @@ export default function Hero() {
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#128C7E" }}></div>
             <span className="text-sm font-semibold" style={{ color: "#128C7E" }}>
-              Web Hosting for Cameroon
+              Reliable web hosting built for Cameroonians
             </span>
           </div>
 

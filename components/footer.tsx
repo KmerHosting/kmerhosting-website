@@ -1,15 +1,51 @@
 "use client"
 
+import { CheckCircle2 } from "lucide-react"
+
 export default function Footer() {
+  const services = [
+    { name: "Web Servers", status: "Operational" },
+    { name: "Email Services", status: "Operational" },
+    { name: "Database Servers", status: "Operational" },
+    { name: "API Services", status: "Operational" },
+  ]
+
   return (
     <footer className="py-16 px-4 bg-slate-50 dark:bg-slate-900">
       <div className="max-w-7xl mx-auto">
+        {/* Services Status Section */}
+        <div className="mb-12 pb-12 border-b border-slate-300 dark:border-slate-700">
+          <h3 className="text-lg font-bold mb-6 text-slate-900 dark:text-white">
+            Service Status
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="p-4 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center gap-3"
+              >
+                <div className="flex-shrink-0 animate-pulse">
+                  <CheckCircle2 className="w-6 h-6 text-green-500" />
+                </div>
+                <div>
+                  <p className="font-medium text-slate-900 dark:text-white text-sm">
+                    {service.name}
+                  </p>
+                  <p className="text-xs text-green-600 dark:text-green-400 font-semibold">
+                    {service.status}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div>
             <h3 className="text-lg font-bold mb-4" style={{ color: "#128C7E" }}>
               KmerHosting
             </h3>
-            <p className="text-slate-600 dark:text-slate-400">The best web hosting solutions for Cameroon businesses and individuals.</p>
+            <p className="text-slate-600 dark:text-slate-400 text-sm">The best web hosting solution <br />in Cameroon.</p>
           </div>
 
           <div>

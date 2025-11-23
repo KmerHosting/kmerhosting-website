@@ -15,6 +15,13 @@ export const metadata: Metadata = {
   authors: [{ name: 'KmerHosting' }],
   creator: 'KmerHosting',
   publisher: 'KmerHosting',
+  applicationName: 'KmerHosting',
+  referrer: 'strict-origin-when-cross-origin',
+  formatDetection: {
+    email: false,
+    telephone: false,
+    address: false,
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -36,23 +43,57 @@ export const metadata: Metadata = {
     title: 'KmerHosting - The Best Web Hosting Solution in Cameroon',
     description: 'Professional web hosting in Cameroon with 24/7 support and enterprise features.',
     images: ['https://kmerhosting.com/og-image.png'],
+    creator: '@KmerHosting',
   },
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
+        url: '/favicon.ico',
+        sizes: 'any',
       },
       {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
+        url: '/icon0.svg',
         type: 'image/svg+xml',
       },
+      {
+        url: '/icon1.png',
+        type: 'image/png',
+        sizes: '32x32',
+      },
     ],
-    apple: '/apple-icon.png',
+    apple: [
+      {
+        url: '/apple-icon.png',
+        type: 'image/png',
+        sizes: '180x180',
+      },
+    ],
+    other: [
+      {
+        rel: 'manifest',
+        url: '/manifest.json',
+      },
+      {
+        rel: 'mask-icon',
+        url: '/icon0.svg',
+        color: '#1f2937',
+      },
+      {
+        rel: 'shortcut icon',
+        url: '/favicon.ico',
+      },
+    ],
+  },
+  verification: {
+    google: 'your-google-site-verification',
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'KmerHosting',
+  },
+  formatDetection: {
+    telephone: false,
   },
 }
 
@@ -62,7 +103,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="theme-color" content="#1f2937" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="KmerHosting" />
+        <meta name="msapplication-TileColor" content="#1f2937" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+      </head>
       <body className={`font-sans antialiased`}>
         <ThemeProvider>
           {children}
