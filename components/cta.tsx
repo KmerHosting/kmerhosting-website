@@ -17,7 +17,7 @@ export default function CTA() {
       link: "/reseller-hosting",
     },
     {
-      title: "VPS Hosting",
+      title: "VPS Servers",
       description: "Scalable resources and full root access",
       icon: HardDrive,
       link: "/vps-hosting",
@@ -71,7 +71,7 @@ export default function CTA() {
                 </div>
               </a>
             )
-          })}
+          })}j
         </div>
       </div>
     </section>

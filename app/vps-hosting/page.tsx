@@ -90,7 +90,7 @@ export default function VPSHostingPage() {
         <div className="text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
             <HardDrive className="w-5 h-5" style={{ color: "#128C7E" }} />
-            <span className="text-sm font-semibold" style={{ color: "#128C7E" }}>VPS HOSTING</span>
+            <span className="text-sm font-semibold" style={{ color: "#128C7E" }}>VPS Servers</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
             Scalable Resources & Full Root Access
@@ -122,19 +122,19 @@ export default function VPSHostingPage() {
         </div>
       </section>
 
-      {/* What is VPS Hosting */}
+      {/* What is VPS Servers */}
       <section className="py-16 px-4 bg-white dark:bg-slate-900">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">What is VPS Hosting?</h2>
+          <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">What is VPS Servers?</h2>
           <div className="prose prose-lg max-w-none text-slate-700 dark:text-slate-300 space-y-4">
             <p>
               VPS (Virtual Private Server) hosting uses virtualization technology to give you dedicated resources on a server shared with other users. Unlike shared hosting where resources are shared, a VPS gives you allocated RAM, CPU, and storage that are yours alone.
             </p>
             <p>
-              With VPS hosting, you get full root access to your virtual server, allowing you to install any software, configure any settings, and customize your environment to meet your exact needs. It's like having your own dedicated server, but at a fraction of the cost.
+              With VPS Servers, you get full root access to your virtual server, allowing you to install any software, configure any settings, and customize your environment to meet your exact needs. It's like having your own dedicated server, but at a fraction of the cost.
             </p>
             <p>
-              VPS hosting is the perfect middle ground between shared hosting and dedicated servers. It provides more power and control than shared hosting, while being more affordable than a dedicated server. It's ideal for growing websites, web applications, and businesses that need guaranteed resources and complete control.
+              VPS Servers is the perfect middle ground between shared hosting and dedicated servers. It provides more power and control than shared hosting, while being more affordable than a dedicated server. It's ideal for growing websites, web applications, and businesses that need guaranteed resources and complete control.
             </p>
           </div>
         </div>
@@ -143,7 +143,7 @@ export default function VPSHostingPage() {
       {/* Key Features */}
       <section className="py-16 px-4 bg-slate-50 dark:bg-slate-800">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-12 text-center text-slate-900 dark:text-white">Why Choose VPS Hosting?</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center text-slate-900 dark:text-white">Why Choose VPS Servers?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((feature, index) => {
               const Icon = feature.icon
@@ -289,7 +289,7 @@ export default function VPSHostingPage() {
             style={{ backgroundColor: "#128C7E" }}
           >
             <Link href="https://kmerhosting.com/customers/contact.php">
-              Contact Us for VPS Hosting <ArrowRight className="ml-2 w-4 h-4" />
+              Contact Us for VPS Servers <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>
         </div>

@@ -12,7 +12,7 @@ export default function FAQPage() {
 const faqs = [
     {
         question: "What types of hosting services does KmerHosting offer?",
-        answer: "We offer four main types of hosting services: Shared Hosting (perfect for beginners and small websites), Reseller Hosting (for entrepreneurs wanting to start their own hosting business), VPS Hosting (virtual private servers with dedicated resources), and Dedicated Servers (entire physical servers for enterprise needs). Each service comes with different features and pricing to match your specific requirements."
+        answer: "We offer four main types of hosting services: Shared Hosting (perfect for beginners and small websites), Reseller Hosting (for entrepreneurs wanting to start their own hosting business), VPS Servers (virtual private servers with dedicated resources), and Dedicated Servers (entire physical servers for enterprise needs). Each service comes with different features and pricing to match your specific requirements."
     },
     {
         question: "Do you offer a free domain with hosting plans?",

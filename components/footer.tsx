@@ -27,7 +27,7 @@ export default function Footer() {
               </li>
               <li>
                 <a href="https://kmerhosting.com/customers/contact.php" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                  VPS Hosting
+                  VPS Servers
                 </a>
               </li>
               <li>

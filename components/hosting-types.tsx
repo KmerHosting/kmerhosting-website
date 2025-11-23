@@ -32,7 +32,7 @@ export default function HostingTypes() {
       ],
     },
     {
-      title: "VPS Hosting",
+      title: "VPS Servers",
       subtitle: "Power & Control",
       description: "Dedicated resources with full root access for your applications",
       icon: HardDrive,

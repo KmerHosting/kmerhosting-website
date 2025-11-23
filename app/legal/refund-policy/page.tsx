@@ -80,7 +80,7 @@ export default function RefundPolicyPage() {
                 <li><strong>Domain Transfers:</strong> Fees paid for domain transfers are non-refundable</li>
                 <li><strong>SSL Certificates:</strong> SSL certificates and security products are non-refundable once issued</li>
                 <li><strong>Setup Fees:</strong> Any one-time setup or migration fees are non-refundable</li>
-                <li><strong>VPS Hosting:</strong> Virtual Private Server plans are not covered by the money-back guarantee</li>
+                <li><strong>VPS Servers:</strong> Virtual Private Server plans are not covered by the money-back guarantee</li>
                 <li><strong>Dedicated Servers:</strong> Dedicated server plans are non-refundable due to custom configuration costs</li>
                 <li><strong>Add-on Services:</strong> Additional services like extra storage, bandwidth, or IP addresses</li>
                 <li><strong>Third-Party Services:</strong> Any third-party products or services purchased through us</li>
