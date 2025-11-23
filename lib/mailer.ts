@@ -13,9 +13,28 @@ const transport = nodemailer.createTransport(
   })
 );
 
-const sender = {
-  address: process.env.MAILTRAP_EMAIL || "hello@kmerhosting.com",
-  name: process.env.MAILTRAP_NAME || "KmerHosting",
+// Email configurations for different purposes
+const emailConfig = {
+  noreply: {
+    address: process.env.MAILTRAP_EMAIL_NOREPLY || "noreply@kmerhosting.com",
+    name: process.env.MAILTRAP_NAME_NOREPLY || "KmerHosting",
+  },
+  billing: {
+    address: process.env.MAILTRAP_EMAIL_BILLING || "billing@kmerhosting.com",
+    name: process.env.MAILTRAP_NAME_BILLING || "KmerHosting Billing",
+  },
+  sales: {
+    address: process.env.MAILTRAP_EMAIL_SALES || "sales@kmerhosting.com",
+    name: process.env.MAILTRAP_NAME_SALES || "KmerHosting Sales",
+  },
+  support: {
+    address: process.env.MAILTRAP_EMAIL_SUPPORT || "support@kmerhosting.com",
+    name: process.env.MAILTRAP_NAME_SUPPORT || "KmerHosting Support",
+  },
+  admin: {
+    address: process.env.MAILTRAP_EMAIL_ADMIN || "admin@kmerhosting.com",
+    name: process.env.MAILTRAP_NAME_ADMIN || "KmerHosting Admin",
+  },
 };
 
 export async function sendOTPEmail(
@@ -25,7 +44,7 @@ export async function sendOTPEmail(
 ): Promise<void> {
   try {
     await transport.sendMail({
-      from: sender,
+      from: emailConfig.noreply,
       to: recipientEmail,
       subject: "Your KmerHosting Verification Code",
       html: `
@@ -55,7 +74,7 @@ export async function sendWelcomeEmail(
 ): Promise<void> {
   try {
     await transport.sendMail({
-      from: sender,
+      from: emailConfig.noreply,
       to: recipientEmail,
       subject: "Welcome to KmerHosting!",
       html: `
@@ -75,5 +94,68 @@ export async function sendWelcomeEmail(
   } catch (error) {
     console.error("Failed to send welcome email:", error);
     // Don't throw here as account is already created
+  }
+}
+
+// Example function for sending billing emails
+export async function sendBillingEmail(
+  recipientEmail: string,
+  recipientName: string,
+  subject: string,
+  htmlContent: string
+): Promise<void> {
+  try {
+    await transport.sendMail({
+      from: emailConfig.billing,
+      to: recipientEmail,
+      subject: subject,
+      html: htmlContent,
+      category: "Billing",
+    });
+  } catch (error) {
+    console.error("Failed to send billing email:", error);
+    throw new Error("Failed to send billing email");
+  }
+}
+
+// Example function for sending support emails
+export async function sendSupportEmail(
+  recipientEmail: string,
+  recipientName: string,
+  subject: string,
+  htmlContent: string
+): Promise<void> {
+  try {
+    await transport.sendMail({
+      from: emailConfig.support,
+      to: recipientEmail,
+      subject: subject,
+      html: htmlContent,
+      category: "Support",
+    });
+  } catch (error) {
+    console.error("Failed to send support email:", error);
+    throw new Error("Failed to send support email");
+  }
+}
+
+// Example function for sending sales emails
+export async function sendSalesEmail(
+  recipientEmail: string,
+  recipientName: string,
+  subject: string,
+  htmlContent: string
+): Promise<void> {
+  try {
+    await transport.sendMail({
+      from: emailConfig.sales,
+      to: recipientEmail,
+      subject: subject,
+      html: htmlContent,
+      category: "Sales",
+    });
+  } catch (error) {
+    console.error("Failed to send sales email:", error);
+    throw new Error("Failed to send sales email");
   }
 }

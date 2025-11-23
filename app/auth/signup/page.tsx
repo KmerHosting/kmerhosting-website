@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { InputOTP } from "@/components/ui/input-otp";
 import { toast } from "sonner";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
@@ -146,7 +145,7 @@ export default function SignupPage() {
                 )}
               </div>
 
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button type="submit" className="w-full cursor-pointer transition-all" disabled={isLoading}>
                 {isLoading ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -168,36 +167,34 @@ export default function SignupPage() {
             <form onSubmit={otpForm.handleSubmit(onOTPSubmit)} className="space-y-4">
               <div>
                 <Label htmlFor="otp">Verification Code</Label>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
+                <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
                   Sent to: {email}
                 </p>
-                <InputOTP
+                <Input
+                  id="otp"
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="000000"
                   maxLength={6}
-                  value={otpForm.watch("otp")}
-                  onChange={(value) => otpForm.setValue("otp", value)}
+                  {...otpForm.register("otp")}
                   disabled={isLoading}
-                  render={({ slots }) => (
-                    <div className="flex gap-2">
-                      {slots.map((slot, idx) => (
-                        <input
-                          key={idx}
-                          {...slot}
-                          type="text"
-                          inputMode="numeric"
-                          className="w-12 h-12 text-center border rounded-md text-lg font-semibold"
-                        />
-                      ))}
-                    </div>
-                  )}
+                  className="text-center text-4xl tracking-[0.5rem] font-bold border-2 py-6 transition-all focus:border-[#128C7E] focus:ring-2 focus:ring-[#128C7E] focus:ring-opacity-20"
                 />
                 {otpForm.formState.errors.otp && (
-                  <p className="text-sm text-red-500 mt-1">
+                  <p className="text-sm text-red-500 mt-2">
                     {otpForm.formState.errors.otp.message}
                   </p>
                 )}
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
+                  Code expires in 15 minutes
+                </p>
               </div>
 
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button 
+                type="submit" 
+                className="w-full cursor-pointer transition-all" 
+                disabled={isLoading}
+              >
                 {isLoading ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -211,16 +208,12 @@ export default function SignupPage() {
               <Button
                 type="button"
                 variant="outline"
-                className="w-full"
+                className="w-full cursor-pointer transition-all hover:bg-slate-100 dark:hover:bg-slate-800"
                 onClick={() => setStep("signup")}
                 disabled={isLoading}
               >
                 Back
               </Button>
-
-              <p className="text-xs text-center text-slate-600 dark:text-slate-400">
-                Code expires in 15 minutes
-              </p>
             </form>
           )}
         </CardContent>

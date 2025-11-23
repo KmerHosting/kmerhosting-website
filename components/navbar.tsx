@@ -61,11 +61,11 @@ export default function Navbar() {
             {/* Auth buttons or user menu */}
             {!loading && !isAuthenticated ? (
               <>
-                <Link href="/auth/login" className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <Link href="/auth/login" className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer">
                   <User className="w-4 h-4" />
                   Login
                 </Link>
-                <Link href="/auth/signup" className="flex items-center gap-2 px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
+                <Link href="/auth/signup" className="flex items-center gap-2 px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
                   <Zap className="w-4 h-4" />
                   Sign Up
                 </Link>
@@ -73,7 +73,7 @@ export default function Navbar() {
             ) : !loading && isAuthenticated && user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="rounded-full">
+                  <Button variant="ghost" size="icon" className="rounded-full cursor-pointer">
                     <Avatar className="h-8 w-8">
                       <AvatarFallback style={{ backgroundColor: "#128C7E", color: "white" }}>
                         {user.fullName
@@ -158,11 +158,11 @@ export default function Navbar() {
               {/* Mobile auth buttons or user menu */}
               {!loading && !isAuthenticated ? (
                 <>
-                  <Link href="/auth/login" className="flex items-center justify-center gap-2 w-full px-4 py-2 rounded-lg font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                  <Link href="/auth/login" className="flex items-center justify-center gap-2 w-full px-4 py-2 rounded-lg font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer">
                     <User className="w-4 h-4" />
                     Login
                   </Link>
-                  <Link href="/auth/signup" className="flex items-center justify-center gap-2 w-full px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
+                  <Link href="/auth/signup" className="flex items-center justify-center gap-2 w-full px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
                     <Zap className="w-4 h-4" />
                     Sign Up
                   </Link>
@@ -170,25 +170,25 @@ export default function Navbar() {
               ) : !loading && isAuthenticated && user ? (
                 <div className="space-y-2 border-t border-slate-200 dark:border-slate-700 pt-3">
                   <p className="text-sm font-medium text-slate-900 dark:text-slate-100 px-2">{user.fullName}</p>
-                  <Link href="/dashboard" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                  <Link href="/dashboard" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
                     <LayoutDashboard className="w-4 h-4" />
                     Dashboard
                   </Link>
-                  <Link href="/services" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                  <Link href="/services" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
                     <ShoppingCart className="w-4 h-4" />
                     My Services
                   </Link>
-                  <Link href="/domains" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                  <Link href="/domains" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
                     <Globe className="w-4 h-4" />
                     My Domains
                   </Link>
-                  <Link href="/invoices" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                  <Link href="/invoices" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
                     <FileText className="w-4 h-4" />
                     My Invoices
                   </Link>
                   <button
                     onClick={logout}
-                    className="w-full flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    className="w-full flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                   >
                     <LogOut className="w-4 h-4" />
                     Logout
