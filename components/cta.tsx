@@ -23,7 +23,7 @@ export default function CTA() {
       link: "/vps-hosting",
     },
     {
-      title: "Dedicated Server",
+      title: "Dedicated Servers",
       description: "Maximum performance and complete control",
       icon: Database,
       link: "/dedicated-server",

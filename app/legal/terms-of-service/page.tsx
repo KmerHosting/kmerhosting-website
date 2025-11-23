@@ -48,7 +48,7 @@ export default function TermsOfServicePage() {
                 <li>Shared Hosting with cPanel or DirectAdmin control panels</li>
                 <li>Reseller Hosting with WHM and cPanel</li>
                 <li>Virtual Private Server (VPS) Hosting</li>
-                <li>Dedicated Server Hosting</li>
+                <li>Dedicated Servers Hosting</li>
                 <li>Domain registration and management services</li>
                 <li>Email hosting and related services</li>
                 <li>SSL certificates and security features</li>

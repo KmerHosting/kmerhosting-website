@@ -103,10 +103,10 @@ export default function Features() {
               </div>
               <div>
                 <h4 className="text-xl font-bold mb-2 text-slate-900 dark:text-white">
-                  Why We're Different in Cameroon
+                  Why Choose KmerHosting?
                 </h4>
                 <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                  While most local hosting providers offer basic shared hosting with limited features, KmerHosting delivers professional-grade tools used by developers worldwide. Our platform supports modern programming languages (Node.js, Python, Ruby), provides secure SSH access for command-line operations, includes Git for version control, and features advanced security with Immunify360 and CPGuard. With JetBackup for reliable data recovery, Softaculous for one-click app installations, and WP-CLI for WordPress management, we give you the same powerful infrastructure as international providers—but with local support and competitive pricing. <span className="font-semibold" style={{ color: "#128C7E" }}>This is what makes us the leading choice for serious developers and businesses in Cameroon.</span>
+                  Professional-grade hosting with developer tools (Node.js, Python, SSH, Git), advanced security (Immunify360), and local support—matching international providers at local prices. <span className="font-semibold" style={{ color: "#128C7E" }}>The smarter choice for serious developers in Cameroon.</span>
                 </p>
               </div>
             </div>

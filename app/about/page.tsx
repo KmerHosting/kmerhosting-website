@@ -278,14 +278,14 @@ export default function AboutPage() {
               <p className="text-lg font-bold" style={{ color: "#128C7E" }}>Contact for pricing</p>
             </Link>
 
-            {/* Dedicated Server */}
+            {/* Dedicated Servers */}
             <Link href="/dedicated-server" className="p-8 rounded-xl border-2 hover:shadow-lg transition-all bg-white dark:bg-slate-800 cursor-pointer block" style={{ borderColor: "#128C7E" }}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
                   <Database className="w-6 h-6" style={{ color: "#128C7E" }} />
                 </div>
                 <h3 className="text-2xl font-bold" style={{ color: "#128C7E" }}>
-                  Dedicated Server
+                  Dedicated Servers
                 </h3>
               </div>
               <p className="text-slate-700 dark:text-slate-300 mb-4">

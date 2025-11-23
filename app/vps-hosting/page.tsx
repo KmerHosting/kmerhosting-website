@@ -90,7 +90,7 @@ export default function VPSHostingPage() {
         <div className="text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
             <HardDrive className="w-5 h-5" style={{ color: "#128C7E" }} />
-            <span className="text-sm font-semibold" style={{ color: "#128C7E" }}>VPS Servers</span>
+            <span className="text-sm font-semibold" style={{ color: "#128C7E" }}>VPS SERVERS</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
             Scalable Resources & Full Root Access
@@ -99,16 +99,6 @@ export default function VPSHostingPage() {
             Experience the power and flexibility of Virtual Private Server hosting. Get dedicated resources, complete control, and the ability to scale as your business grows.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="text-white font-semibold cursor-pointer"
-              style={{ backgroundColor: "#128C7E" }}
-            >
-              <Link href="https://kmerhosting.com/customers/contact.php">
-                Get a Quote <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
-            </Button>
             <Button
               asChild
               size="lg"

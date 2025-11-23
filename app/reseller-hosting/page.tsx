@@ -32,18 +32,18 @@ export default function ResellerHostingPage() {
     {
       name: "Bronze",
       price: "From 3,000 FCFA/month",
-      features: ["5 cPanel Accounts", "20 GB Storage", "Unlimited Bandwidth", "Basic Support", "Free SSL Certificates", "WHM & cPanel Access"],
+      features: ["5 cPanel Accounts", "20 GB SSD NVMe Storage ", "Unlimited Bandwidth", "Basic Support", "Free SSL Certificates", "WHM & cPanel Access"],
     },
     {
       name: "Silver",
       price: "From 5,000 FCFA/month",
       popular: true,
-      features: ["15 cPanel Accounts", "50 GB Storage", "Unlimited Bandwidth", "Priority Support", "Free SSL Certificates", "WHM & cPanel Access", "Free .com Domain (Annual)"],
+      features: ["15 cPanel Accounts", "50 GB SSD NVMe Storage ", "Unlimited Bandwidth", "Priority Support", "Free SSL Certificates", "WHM & cPanel Access", "Free .com Domain (Annual)"],
     },
     {
       name: "Gold",
       price: "From 15,000 FCFA/month",
-      features: ["50 cPanel Accounts", "150 GB Storage", "Unlimited Bandwidth", "24/7 Premium Support", "Free SSL Certificates", "WHM & cPanel Access", "Advanced Security"],
+      features: ["50 cPanel Accounts", "150 GB SSD NVMe Storage ", "Unlimited Bandwidth", "24/7 Premium Support", "Free SSL Certificates", "WHM & cPanel Access", "Advanced Security"],
     },
     {
       name: "Platinum",

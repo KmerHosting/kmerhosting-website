@@ -102,7 +102,7 @@ export default function DedicatedServerPage() {
         <div className="text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
             <Database className="w-5 h-5" style={{ color: "#128C7E" }} />
-            <span className="text-sm font-semibold" style={{ color: "#128C7E" }}>DEDICATED SERVER</span>
+            <span className="text-sm font-semibold" style={{ color: "#128C7E" }}>DEDICATED SERVERS</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
             Maximum Performance & Complete Control
@@ -111,16 +111,6 @@ export default function DedicatedServerPage() {
             Get an entire physical server dedicated exclusively to your business. Experience unmatched performance, security, and reliability for your mission-critical applications.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="text-white font-semibold cursor-pointer"
-              style={{ backgroundColor: "#128C7E" }}
-            >
-              <Link href="https://kmerhosting.com/customers/contact.php">
-                Request a Quote <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
-            </Button>
             <Button
               asChild
               size="lg"
@@ -135,10 +125,10 @@ export default function DedicatedServerPage() {
         </div>
       </section>
 
-      {/* What is Dedicated Server */}
+      {/* What is Dedicated Servers */}
       <section className="py-16 px-4 bg-white dark:bg-slate-900">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">What is a Dedicated Server?</h2>
+          <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">What is a Dedicated Servers?</h2>
           <div className="prose prose-lg max-w-none text-slate-700 dark:text-slate-300 space-y-4">
             <p>
               A dedicated server is a physical server that is exclusively allocated to a single client. Unlike shared hosting or VPS where resources are shared, you get 100% of the server's CPU, RAM, storage, and bandwidth for your use alone.
@@ -156,7 +146,7 @@ export default function DedicatedServerPage() {
       {/* Key Features */}
       <section className="py-16 px-4 bg-slate-50 dark:bg-slate-800">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-12 text-center text-slate-900 dark:text-white">Why Choose a Dedicated Server?</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center text-slate-900 dark:text-white">Why Choose a Dedicated Servers?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((feature, index) => {
               const Icon = feature.icon
@@ -181,7 +171,7 @@ export default function DedicatedServerPage() {
       {/* Server Specifications */}
       <section className="py-16 px-4 bg-white dark:bg-slate-900">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4 text-center text-slate-900 dark:text-white">Server Configurations</h2>
+          <h2 className="text-3xl font-bold mb-4 text-center text-slate-900 dark:text-white">Servers Configurations</h2>
           <p className="text-center text-slate-600 dark:text-slate-400 mb-12">Enterprise-grade hardware for maximum performance</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {specifications.map((spec, index) => (
@@ -311,7 +301,7 @@ export default function DedicatedServerPage() {
             style={{ backgroundColor: "#128C7E" }}
           >
             <Link href="https://kmerhosting.com/customers/contact.php">
-              Contact Us for Dedicated Server <ArrowRight className="ml-2 w-4 h-4" />
+              Contact Us for Dedicated Servers <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>
         </div>

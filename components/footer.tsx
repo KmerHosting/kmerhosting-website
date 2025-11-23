@@ -32,7 +32,7 @@ export default function Footer() {
               </li>
               <li>
                 <a href="https://kmerhosting.com/customers/contact.php" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                  Dedicated Server
+                  Dedicated Servers
                 </a>
               </li>
             </ul>

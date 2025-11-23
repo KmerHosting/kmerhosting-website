@@ -44,7 +44,7 @@ export default function HostingTypes() {
       ],
     },
     {
-      title: "Dedicated Server",
+      title: "Dedicated Servers",
       subtitle: "Maximum Performance",
       description: "Entire physical server exclusively for your business needs",
       icon: Database,

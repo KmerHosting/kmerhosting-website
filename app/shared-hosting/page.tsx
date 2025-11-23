@@ -31,19 +31,19 @@ export default function SharedHostingPage() {
   const plans = [
     {
       name: "Bronze",
-      price: "13,000 FCFA/year",
-      features: ["2 Website", "50 GB Storage", "100 GB Bandwidth", "10 Email Accounts", "Basic Support", "Free SSL Certificate"],
+      price: "14,000 FCFA/year",
+      features: ["2 Website", "10 GB SSD NVMe Storage ", "100 GB Bandwidth", "10 Email Accounts", "Basic Support", "Free SSL Certificate"],
     },
     {
       name: "Silver",
-      price: "15,000 FCFA/year",
+      price: "16,900 FCFA/year",
       popular: true,
-      features: ["5 Websites", "100 GB Storage", "Unlimited Bandwidth", "25 Email Accounts", "Priority Support", "Free SSL Certificate", "Free .com Domain"],
+      features: ["5 Websites", "50 GB SSD NVMe Storage ", "Unlimited Bandwidth", "25 Email Accounts", "Priority Support", "Free SSL Certificate", "Free .com Domain"],
     },
     {
       name: "Gold",
       price: "25,000 FCFA/year",
-      features: ["20 Websites", "250 GB Storage", "Unlimited Bandwidth", "Unlimited Email Accounts", "24/7 Premium Support", "Free SSL Certificate", "Free .com Domain", "Advanced Security"],
+      features: ["20 Websites", "150 GB SSD NVMe Storage ", "Unlimited Bandwidth", "Unlimited Email Accounts", "24/7 Premium Support", "Free SSL Certificate", "Free .com Domain", "Advanced Security"],
     },
     {
       name: "Platinum",

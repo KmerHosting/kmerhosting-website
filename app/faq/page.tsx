@@ -32,7 +32,7 @@ const faqs = [
     },
     {
         question: "How long does it take to set up my hosting account?",
-        answer: "Most hosting accounts are activated instantly or within a few minutes after payment confirmation. For VPS and Dedicated Server orders, setup typically takes 24-48 hours as we configure the server according to your specifications. You'll receive an email with your login details once your account is ready."
+        answer: "Most hosting accounts are activated instantly or within a few minutes after payment confirmation. For VPS and Dedicated Servers orders, setup typically takes 24-48 hours as we configure the server according to your specifications. You'll receive an email with your login details once your account is ready."
     },
     {
         question: "Do you provide SSL certificates?",
