@@ -260,20 +260,24 @@ export async function GET(
         <tbody>
           <tr>
             <td>
-              <strong>${invoice.service.name}</strong>
+              <strong>${invoice.service ? invoice.service.name : "Service not available"}</strong>
               <br>
               <small style="color: #666;">${
                 (() => {
-                  try {
-                    const features = JSON.parse(invoice.service.features);
-                    return Array.isArray(features) ? features.join(", ") : "Standard hosting package";
-                  } catch {
-                    return invoice.service.features || "Standard hosting package";
+                  if (invoice.service && invoice.service.features) {
+                    try {
+                      const features = JSON.parse(invoice.service.features);
+                      return Array.isArray(features) ? features.join(", ") : "Standard hosting package";
+                    } catch {
+                      return invoice.service.features || "Standard hosting package";
+                    }
+                  } else {
+                    return "Standard hosting package";
                   }
                 })()
               }</small>
             </td>
-            <td class="text-right">${formatCurrency(invoice.service.price)}</td>
+            <td class="text-right">${invoice.service ? formatCurrency(invoice.service.price) : "N/A"}</td>
             <td class="text-right">${formatCurrency(invoice.amount)}</td>
           </tr>
         </tbody>

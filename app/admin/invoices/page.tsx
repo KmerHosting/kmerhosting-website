@@ -290,7 +290,7 @@ export default function AdminInvoicesPage() {
                   {/* Service Selection */}
                   <div>
                     <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-                      Service (Optional)
+                      Service
                     </label>
                     <select
                       value={formData.serviceId}
@@ -318,7 +318,7 @@ export default function AdminInvoicesPage() {
                   {/* Domain Selection */}
                   <div>
                     <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-                      Domain (Optional)
+                      Domain
                     </label>
                     <select
                       value={formData.domainId}
@@ -354,7 +354,7 @@ export default function AdminInvoicesPage() {
                   {/* Due Date */}
                   <div>
                     <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-                      Due Date (Optional)
+                      Due Date
                     </label>
                     <Input
                       type="date"

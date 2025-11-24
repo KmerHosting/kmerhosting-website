@@ -435,7 +435,9 @@ export default function PricingSection() {
           <p className="text-sm text-blue-900 dark:text-blue-200 flex items-start gap-2">
             <Lightbulb className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
             <span>
-              <strong>Custom Domain:</strong> If you don't want to use the included .com or .org domain, you can purchase a domain from another registrar and set the DNS to <code className="bg-white dark:bg-slate-800 px-2 py-1 rounded text-xs font-mono">ns1.kmerhosting.com</code> and <code className="bg-white dark:bg-slate-800 px-2 py-1 rounded text-xs font-mono">ns2.kmerhosting.com</code>
+              <strong>Tips:</strong> If you don't want to use our domain name, you can purchase a domain from another registrar and set the DNS to <code className="bg-white dark:bg-slate-800 px-2 py-1 rounded text-xs font-mono">ns1.kmerhosting.com</code> and <code className="bg-white dark:bg-slate-800 px-2 py-1 rounded text-xs font-mono">ns2.kmerhosting.com</code>
+                <p className="mt-4">You can contact support to remove the domain name from your plan while purchasing, and the price will be recalculated.</p>
+                <p className="mt-4">And if you want to add multiple domains to a specific KmerHosting service you have purchased, submit a request through your Domain name dashboard by specifying the associated service.</p>
             </span>
           </p>
         </div>
