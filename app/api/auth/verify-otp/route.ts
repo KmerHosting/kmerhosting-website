@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { generateJWT, setAuthCookie } from "@/lib/auth";
-import { sendWelcomeEmail } from "@/lib/mailer";
 
 const prisma = new PrismaClient();
 
@@ -45,16 +43,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Generate JWT token
-    const token = await generateJWT(user.id, user.email, user.fullName);
-
-    // Set auth cookie
-    await setAuthCookie(token);
-
-    // Send welcome email
-    await sendWelcomeEmail(email, user.fullName);
-
-    // Create response
+    // Create response - user will proceed to password setup
     const response = NextResponse.json(
       {
         message: "Email verified successfully",

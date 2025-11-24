@@ -6,6 +6,7 @@ export interface User {
   userId: string;
   email: string;
   fullName: string;
+  isProfileComplete?: boolean;
 }
 
 interface AuthContextType {
@@ -24,15 +25,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const fetchUser = async () => {
     try {
-      const response = await fetch("/api/auth/me");
+      console.log("Auth context: Fetching user from /api/auth/me");
+      const response = await fetch("/api/auth/me", {
+        method: "GET",
+        credentials: "include", // Important: include credentials to send cookies
+      });
+      console.log("Auth context: /api/auth/me response status:", response.status);
+      
       if (response.ok) {
         const data = await response.json();
+        console.log("Auth context: User data received:", data);
         setUser(data.user);
       } else {
+        console.log("Auth context: /api/auth/me returned non-ok status:", response.status);
+        const errorText = await response.text();
+        console.log("Auth context: Error response:", errorText);
         setUser(null);
       }
     } catch (error) {
-      console.error("Failed to fetch user:", error);
+      console.error("Auth context: Failed to fetch user:", error);
       setUser(null);
     } finally {
       setLoading(false);
@@ -40,7 +51,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    fetchUser();
+    console.log("Auth context: useEffect mounted, fetching user after a small delay");
+    // Add a small delay to allow cookies to be set from previous requests
+    const timer = setTimeout(() => {
+      fetchUser();
+    }, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   const logout = async () => {

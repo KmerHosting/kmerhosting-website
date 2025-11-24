@@ -14,9 +14,24 @@ model User {
   id                String    @id @default(cuid())
   email             String    @unique
   fullName          String
+  password          String?
   verificationOTP   String?
   otpExpiresAt      DateTime?
   isVerified        Boolean   @default(false)
+  isPasswordSet     Boolean   @default(false)
+  isProfileComplete Boolean   @default(false)
+  
+  // Profile Information
+  phone             String?
+  whatsapp          String?
+  city              String?
+  address           String?
+  country           String?   @default("Cameroon")
+  birthDate         DateTime?
+  companyName       String?
+  jobTitle          String?
+  profilePicture    String?
+  
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 

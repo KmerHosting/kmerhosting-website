@@ -11,22 +11,27 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import Link from "next/link";
-import { Loader2 } from "lucide-react";
+import { Loader2, Eye, EyeOff } from "lucide-react";
+import { useAuth } from "@/lib/auth-context";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
+  password: z.string().min(1, "Password is required"),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
   const router = useRouter();
+  const { refreshUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
+      password: "",
     },
   });
 
@@ -46,9 +51,16 @@ export default function LoginPage() {
       }
 
       toast.success("Logged in successfully!");
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1000);
+      
+      // Wait a bit for the cookie to be set, then refresh user in auth context
+      setTimeout(async () => {
+        console.log("LoginPage: Refreshing user after login");
+        await refreshUser();
+        // Small additional delay before redirect to ensure state is updated
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 200);
+      }, 300);
     } catch (error) {
       toast.error("Failed to login");
     } finally {
@@ -61,7 +73,7 @@ export default function LoginPage() {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Login to Your Account</CardTitle>
-          <CardDescription>Enter your email to log in</CardDescription>
+          <CardDescription>Enter your email and password to access your dashboard</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -81,7 +93,33 @@ export default function LoginPage() {
               )}
             </div>
 
-            <Button type="submit" className="w-full cursor-pointer transition-all" disabled={isLoading}>
+            <div>
+              <Label htmlFor="password">Password</Label>
+              <div className="relative mt-2">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  {...form.register("password")}
+                  disabled={isLoading}
+                  className="pr-10"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+              {form.formState.errors.password && (
+                <p className="text-sm text-red-500 mt-1">
+                  {form.formState.errors.password.message}
+                </p>
+              )}
+            </div>
+
+            <Button type="submit" className="w-full cursor-pointer transition-all bg-[#128C7E] hover:bg-[#0f7469]" disabled={isLoading}>
               {isLoading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -94,7 +132,7 @@ export default function LoginPage() {
 
             <p className="text-sm text-center text-slate-600 dark:text-slate-400">
               Don't have an account?{" "}
-              <Link href="/auth/signup" className="text-primary hover:underline">
+              <Link href="/auth/signup" className="text-[#128C7E] hover:underline">
                 Sign up
               </Link>
             </p>

@@ -2,13 +2,24 @@
 
 import { useAuth } from "@/lib/auth-context";
 import Navbar from "@/components/navbar";
+import LoadingSpinner from "@/components/loading-spinner";
+import { PageSkeletons } from "@/components/page-skeletons";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 export default function InvoicesPage() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <PageSkeletons />
+      </>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">

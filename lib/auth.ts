@@ -1,5 +1,7 @@
 import { jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
+import bcrypt from "bcryptjs";
+import prisma from "./prisma";
 
 const JWT_SECRET = new TextEncoder().encode(
   process.env.JWT_SECRET || "your-secret-key"
@@ -9,6 +11,7 @@ export interface JWTPayload {
   userId: string;
   email: string;
   fullName: string;
+  isProfileComplete?: boolean;
   iat: number;
   exp: number;
 }
@@ -34,21 +37,32 @@ export async function generateJWT(
 export async function verifyJWT(token: string): Promise<JWTPayload | null> {
   try {
     const verified = await jwtVerify(token, JWT_SECRET);
-    return verified.payload as JWTPayload;
+    return {
+      userId: verified.payload.userId as string,
+      email: verified.payload.email as string,
+      fullName: verified.payload.fullName as string,
+      isProfileComplete: (verified.payload.isProfileComplete as boolean) || false,
+      iat: verified.payload.iat as number,
+      exp: verified.payload.exp as number,
+    };
   } catch (err) {
     return null;
   }
 }
 
-export async function setAuthCookie(token: string): Promise<void> {
-  const cookieStore = await cookies();
-  cookieStore.set("auth_token", token, {
+export function getAuthCookieOptions() {
+  return {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
+    sameSite: "lax" as const,
     maxAge: 7 * 24 * 60 * 60, // 7 days
     path: "/",
-  });
+  };
+}
+
+export async function setAuthCookie(token: string): Promise<void> {
+  const cookieStore = await cookies();
+  cookieStore.set("auth_token", token, getAuthCookieOptions());
 }
 
 export async function removeAuthCookie(): Promise<void> {
@@ -62,10 +76,47 @@ export async function getAuthCookie(): Promise<string | undefined> {
 }
 
 export async function getCurrentUser(): Promise<JWTPayload | null> {
-  const token = await getAuthCookie();
-  if (!token) return null;
+  try {
+    const token = await getAuthCookie();
+    if (!token) {
+      console.log("No token found in cookies");
+      return null;
+    }
 
-  return verifyJWT(token);
+    const payload = await verifyJWT(token);
+    if (!payload) {
+      console.log("Token verification failed");
+      return null;
+    }
+
+    // Fetch updated user info from database to get isProfileComplete
+    const user = await prisma.user.findUnique({
+      where: { email: payload.email },
+      select: {
+        id: true,
+        email: true,
+        fullName: true,
+        isProfileComplete: true,
+      },
+    });
+
+    if (!user) {
+      console.log("User not found in database for email:", payload.email);
+      return null;
+    }
+
+    return {
+      userId: user.id,
+      email: user.email,
+      fullName: user.fullName,
+      isProfileComplete: user.isProfileComplete,
+      iat: payload.iat,
+      exp: payload.exp,
+    };
+  } catch (error) {
+    console.error("Error in getCurrentUser:", error);
+    return null;
+  }
 }
 
 export function generateOTP(): string {
@@ -76,4 +127,14 @@ export function getOTPExpiration(): Date {
   const now = new Date();
   now.setMinutes(now.getMinutes() + 15); // OTP valid for 15 minutes
   return now;
+}
+
+// Password hashing functions
+export async function hashPassword(password: string): Promise<string> {
+  const salt = await bcrypt.genSalt(10);
+  return bcrypt.hash(password, salt);
+}
+
+export async function verifyPassword(password: string, hash: string): Promise<boolean> {
+  return bcrypt.compare(password, hash);
 }

@@ -48,17 +48,74 @@ export async function sendOTPEmail(
       to: recipientEmail,
       subject: "Your KmerHosting Verification Code",
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #128C7E;">Welcome to KmerHosting, ${recipientName}!</h2>
-          <p>Your email verification code is:</p>
-          <div style="background-color: #f0f0f0; padding: 20px; text-align: center; border-radius: 8px; margin: 20px 0;">
-            <h1 style="color: #128C7E; letter-spacing: 2px; margin: 0;">${otp}</h1>
-          </div>
-          <p style="color: #666;">This code will expire in 15 minutes.</p>
-          <p style="color: #666;">If you didn't request this code, please ignore this email.</p>
-          <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
-          <p style="color: #999; font-size: 12px;">© 2025 KmerHosting. All rights reserved.</p>
-        </div>
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Email Verification - KmerHosting</title>
+          </head>
+          <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;">
+            <!-- White Header with Centered Logo -->
+            <div style="background-color: #ffffff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #e5e7eb;">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png" alt="KmerHosting" style="max-width: 180px; height: auto; display: inline-block;">
+            </div>
+            
+            <!-- Main Content -->
+            <div style="max-width: 500px; margin: 0 auto; padding: 40px 20px;">
+              <!-- Title -->
+              <h1 style="color: #1f2937; font-size: 24px; font-weight: 600; margin: 0 0 10px 0; text-align: center;">
+                Verify Your Email
+              </h1>
+              
+              <p style="color: #6b7280; font-size: 14px; text-align: center; margin: 0 0 30px 0; line-height: 1.5;">
+                Hi ${recipientName}, use this code to verify your email address and complete your signup.
+              </p>
+              
+              <!-- OTP Code - Large & Centered -->
+              <div style="background-color: #ffffff; border: 2px solid #128C7E; padding: 40px 20px; text-align: center; border-radius: 8px; margin: 30px 0;">
+                <p style="color: #9ca3af; font-size: 12px; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Verification Code</p>
+                <h2 style="color: #128C7E; font-size: 56px; letter-spacing: 6px; margin: 0; font-weight: 700; font-family: 'Courier New', 'Monaco', monospace;">${otp}</h2>
+              </div>
+              
+              <!-- Security Warning -->
+              <div style="background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 15px; margin: 30px 0; border-radius: 4px;">
+                <p style="color: #991b1b; font-size: 13px; margin: 0; line-height: 1.5;">
+                  <strong></strong> Never share this code with anyone, not even KmerHosting staff. Our team members will never ask for your verification code.
+                </p>
+              </div>
+              
+              <!-- Info -->
+              <p style="color: #6b7280; font-size: 13px; text-align: center; margin: 25px 0;">
+                This code expires in <strong>15 minutes</strong>
+              </p>
+              
+              <!-- Info: Didn't request? -->
+              <p style="color: #6b7280; font-size: 12px; text-align: center; margin: 15px 0 0 0; line-height: 1.5;">
+                If you did not request this verification code, please ignore this email. Your email will not be verified and no account will be created.
+              </p>
+              
+              <!-- Divider -->
+              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 40px 0;">
+              
+              <!-- Footer -->
+              <div style="text-align: center;">
+                <p style="color: #374151; font-size: 13px; font-weight: 600; margin: 0 0 10px 0;">
+                  KmerHosting
+                </p>
+                <p style="color: #6b7280; font-size: 12px; margin: 0 0 15px 0;">
+                  Shared Hosting • Reseller Hosting • VPS • Dedicated Servers
+                </p>
+                <p style="color: #6b7280; font-size: 12px; margin: 5px 0;">
+                  NKOABANG, Yaoundé, Cameroon
+                </p>
+                <p style="color: #9ca3af; font-size: 11px; margin: 20px 0 0 0;">
+                  © 2025 KmerHosting. All rights reserved.
+                </p>
+              </div>
+            </div>
+          </body>
+        </html>
       `,
       category: "Email Verification",
     });
@@ -73,21 +130,80 @@ export async function sendWelcomeEmail(
   recipientName: string
 ): Promise<void> {
   try {
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://kmerhosting.com";
     await transport.sendMail({
       from: emailConfig.noreply,
       to: recipientEmail,
       subject: "Welcome to KmerHosting!",
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #128C7E;">Welcome to KmerHosting, ${recipientName}!</h2>
-          <p>Your account has been successfully created and verified.</p>
-          <p>You can now log in to your dashboard and start managing your hosting services.</p>
-          <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard" style="display: inline-block; padding: 12px 24px; background-color: #128C7E; color: white; text-decoration: none; border-radius: 4px; margin: 20px 0;">
-            Go to Dashboard
-          </a>
-          <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
-          <p style="color: #999; font-size: 12px;">© 2025 KmerHosting. All rights reserved.</p>
-        </div>
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Welcome to KmerHosting</title>
+          </head>
+          <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+            <!-- White Header with Centered Logo -->
+            <div style="background-color: #ffffff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #e5e7eb;">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png" alt="KmerHosting" style="max-width: 180px; height: auto; display: inline-block;">
+            </div>
+            
+            <!-- Main Content -->
+            <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+              <!-- Greeting -->
+              <h1 style="color: #1f2937; font-size: 28px; font-weight: 600; margin: 0 0 20px 0; text-align: center;">
+                Welcome to KmerHosting, ${recipientName}!
+              </h1>
+              
+              <!-- Message -->
+              <div style="color: #4b5563; font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+                <p style="margin: 0 0 15px 0;">Your account has been successfully created and verified! Welcome to KmerHosting.</p>
+                
+                <p style="margin: 0 0 20px 0;"><strong style="color: #1f2937;">Next Step: Complete Your Account Information</strong></p>
+                
+                <p style="margin: 0 0 20px 0;">To unlock all features and get started with your hosting services, please log in to your dashboard and complete your profile by providing:</p>
+                
+                <ul style="margin: 0 0 25px 20px; padding: 0; color: #6b7280;">
+                  <li style="margin: 0 0 8px 0;">Complete contact information</li>
+                  <li style="margin: 0 0 8px 0;">Billing and payment information</li>
+                  <li style="margin: 0 0 8px 0;">Address and phone number</li>
+                </ul>
+              </div>
+              
+              <!-- CTA Button -->
+              <div style="text-align: center; margin-bottom: 40px;">
+                <a href="${appUrl}/dashboard" style="display: inline-block; padding: 14px 40px; background-color: #128C7E; color: white; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px; transition: background-color 0.3s ease;">
+                  Complete Your Profile
+                </a>
+              </div>
+              
+              <!-- Important Box -->
+              <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 20px; border-radius: 6px; margin-bottom: 30px;">
+                <p style="color: #92400e; font-size: 14px; font-weight: 600; margin: 0 0 10px 0;">Important</p>
+                <p style="color: #92400e; font-size: 14px; margin: 0;">Completing your account information is required to activate services and process transactions. Your data is protected and used only for account management.</p>
+              </div>
+              
+              <!-- Additional Info -->
+              <div style="background-color: #f9fafb; padding: 20px; border-radius: 6px; margin-bottom: 30px;">
+                <p style="color: #6b7280; font-size: 14px; margin: 0 0 10px 0;"><strong>Need help?</strong></p>
+                <p style="color: #6b7280; font-size: 14px; margin: 0;">Our support team is available 24/7. Visit our <a href="${appUrl}/support" style="color: #128C7E; text-decoration: none;">support center</a> or email us at <a href="mailto:support@kmerhosting.com" style="color: #128C7E; text-decoration: none;">support@kmerhosting.com</a></p>
+              </div>
+              
+              <!-- Divider -->
+              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+              
+              <!-- Footer -->
+              <div style="color: #9ca3af; font-size: 12px; text-align: center; line-height: 1.6;">
+                <p style="margin: 0 0 10px 0;">© 2025 KmerHosting. All rights reserved.</p>
+                <p style="margin: 0;">
+                  <a href="${appUrl}/legal/privacy-policy" style="color: #9ca3af; text-decoration: none; margin-right: 15px;">Privacy Policy</a>
+                  <a href="${appUrl}/legal/terms-of-service" style="color: #9ca3af; text-decoration: none;">Terms of Service</a>
+                </p>
+              </div>
+            </div>
+          </body>
+        </html>
       `,
       category: "Welcome Email",
     });

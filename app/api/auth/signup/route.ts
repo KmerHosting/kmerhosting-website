@@ -23,12 +23,12 @@ export async function POST(request: NextRequest) {
 
     if (existingUser && existingUser.isVerified) {
       return NextResponse.json(
-        { error: "Email already registered" },
+        { error: "This email is already registered. Please log in instead." },
         { status: 409 }
       );
     }
 
-    // Generate OTP
+    // Generate OTP (allow resend for unverified users)
     const otp = generateOTP();
     const otpExpiresAt = getOTPExpiration();
 

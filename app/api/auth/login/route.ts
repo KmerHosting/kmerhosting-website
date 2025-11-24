@@ -1,16 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-import { generateJWT, setAuthCookie } from "@/lib/auth";
-
-const prisma = new PrismaClient();
+import { generateJWT, verifyPassword, getAuthCookieOptions } from "@/lib/auth";
+import prisma from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json();
+    const { email, password } = await request.json();
+    console.log("POST /api/auth/login: Email:", email);
 
-    if (!email) {
+    if (!email || !password) {
       return NextResponse.json(
-        { error: "Email is required" },
+        { error: "Email and password are required" },
         { status: 400 }
       );
     }
@@ -20,10 +19,12 @@ export async function POST(request: NextRequest) {
       where: { email },
     });
 
+    console.log("POST /api/auth/login: User found:", user ? "yes" : "no");
+
     if (!user) {
       return NextResponse.json(
-        { error: "User not found. Please sign up first." },
-        { status: 404 }
+        { error: "Invalid email or password" },
+        { status: 401 }
       );
     }
 
@@ -34,13 +35,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (!user.isPasswordSet || !user.password) {
+      return NextResponse.json(
+        { error: "Please complete your account setup by setting a password" },
+        { status: 403 }
+      );
+    }
+
+    // Verify password
+    const isPasswordValid = await verifyPassword(password, user.password);
+    if (!isPasswordValid) {
+      return NextResponse.json(
+        { error: "Invalid email or password" },
+        { status: 401 }
+      );
+    }
+
     // Generate JWT token
     const token = await generateJWT(user.id, user.email, user.fullName);
+    console.log("POST /api/auth/login: JWT token generated");
 
-    // Set auth cookie
-    await setAuthCookie(token);
-
-    // Create response
+    // Create response with cookie
     const response = NextResponse.json(
       {
         message: "Logged in successfully",
@@ -53,9 +68,13 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
 
+    // Add auth cookie to response
+    response.cookies.set("auth_token", token, getAuthCookieOptions());
+    console.log("POST /api/auth/login: Auth cookie set in response");
+
     return response;
   } catch (error) {
-    console.error("Login error:", error);
+    console.error("POST /api/auth/login: Error:", error);
     return NextResponse.json(
       { error: "Failed to login" },
       { status: 500 }

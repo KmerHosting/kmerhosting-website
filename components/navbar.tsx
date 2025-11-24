@@ -5,6 +5,7 @@ import { Menu, X, Sun, Moon, User, LogOut, LayoutDashboard, ShoppingCart, Globe,
 import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
 import { useAuth } from "@/lib/auth-context"
+import { NavbarSkeleton } from "@/components/navbar-skeleton"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,7 +30,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="#" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <img
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png"
               alt="KmerHosting"
@@ -59,7 +60,9 @@ export default function Navbar() {
             </button>
 
             {/* Auth buttons or user menu */}
-            {!loading && !isAuthenticated ? (
+            {loading ? (
+              <NavbarSkeleton />
+            ) : !isAuthenticated ? (
               <>
                 <Link href="/auth/login" className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer">
                   <User className="w-4 h-4" />
@@ -70,7 +73,7 @@ export default function Navbar() {
                   Sign Up
                 </Link>
               </>
-            ) : !loading && isAuthenticated && user ? (
+            ) : isAuthenticated && user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon" className="rounded-full cursor-pointer">

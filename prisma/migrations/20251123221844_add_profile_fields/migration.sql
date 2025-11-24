@@ -1,0 +1,10 @@
+-- AlterTable
+ALTER TABLE `user` ADD COLUMN `birthDate` DATETIME(3) NULL,
+    ADD COLUMN `city` VARCHAR(191) NULL,
+    ADD COLUMN `companyName` VARCHAR(191) NULL,
+    ADD COLUMN `country` VARCHAR(191) NULL DEFAULT 'Cameroon',
+    ADD COLUMN `isProfileComplete` BOOLEAN NOT NULL DEFAULT false,
+    ADD COLUMN `jobTitle` VARCHAR(191) NULL,
+    ADD COLUMN `phone` VARCHAR(191) NULL,
+    ADD COLUMN `profilePicture` VARCHAR(191) NULL,
+    ADD COLUMN `whatsapp` VARCHAR(191) NULL;
