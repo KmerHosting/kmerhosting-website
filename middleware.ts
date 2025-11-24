@@ -1,15 +1,38 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyJWT } from "./lib/auth";
+import { jwtVerify } from "jose";
+
+const JWT_SECRET = new TextEncoder().encode(
+  process.env.JWT_SECRET || "your-secret-key-change-in-production"
+);
 
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("auth_token")?.value;
+  const adminToken = request.cookies.get("admin_token")?.value;
   const pathname = request.nextUrl.pathname;
 
   console.log("Middleware: pathname =", pathname, "token exists =", !!token);
 
-  // Routes that require authentication
-  const protectedRoutes = ["/dashboard", "/services", "/invoices", "/domains"];
+  // Admin routes protection
+  const adminRoutes = ["/admin/dashboard", "/admin/services", "/admin/domains", "/admin/invoices"];
+  const isAdminRoute = adminRoutes.some((route) => pathname.startsWith(route));
 
+  if (isAdminRoute && !adminToken) {
+    console.log("Middleware: Admin route without token, redirecting to admin login");
+    return NextResponse.redirect(new URL("/admin/login", request.url));
+  }
+
+  if (isAdminRoute && adminToken) {
+    try {
+      await jwtVerify(adminToken, JWT_SECRET);
+    } catch (error) {
+      console.log("Middleware: Admin token verification failed");
+      return NextResponse.redirect(new URL("/admin/login", request.url));
+    }
+  }
+
+  // User routes protection
+  const protectedRoutes = ["/dashboard", "/services", "/invoices", "/domains"];
   const isProtectedRoute = protectedRoutes.some((route) =>
     pathname.startsWith(route)
   );

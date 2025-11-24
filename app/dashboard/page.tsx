@@ -9,13 +9,21 @@ import LoadingSpinner from "@/components/loading-spinner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { ShoppingCart, Globe, FileText, AlertCircle, CheckCircle2, LightbulbIcon, Plus, Zap } from "lucide-react";
+import { ShoppingCart, Globe, FileText, AlertCircle, CheckCircle2, LightbulbIcon, Plus, Zap, BookOpen, Wrench } from "lucide-react";
+
+interface DashboardStats {
+  services: number;
+  domains: number;
+  invoices: number;
+}
 
 export default function DashboardPage() {
   const { user, isAuthenticated, loading, refreshUser } = useAuth();
   const router = useRouter();
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isProfileComplete, setIsProfileComplete] = useState(user?.isProfileComplete || false);
+  const [stats, setStats] = useState<DashboardStats>({ services: 0, domains: 0, invoices: 0 });
+  const [statsLoading, setStatsLoading] = useState(false);
 
   const isProfileIncomplete = !isProfileComplete;
 
@@ -35,6 +43,38 @@ export default function DashboardPage() {
       setIsProfileComplete(user.isProfileComplete);
     }
   }, [user?.isProfileComplete]);
+
+  // Fetch user stats
+  useEffect(() => {
+    if (isAuthenticated && !isProfileIncomplete) {
+      fetchStats();
+    }
+  }, [isAuthenticated, isProfileIncomplete]);
+
+  const fetchStats = async () => {
+    try {
+      setStatsLoading(true);
+      const [servicesRes, domainsRes, invoicesRes] = await Promise.all([
+        fetch("/api/services"),
+        fetch("/api/domains"),
+        fetch("/api/invoices"),
+      ]);
+
+      const servicesData = servicesRes.ok ? await servicesRes.json() : [];
+      const domainsData = domainsRes.ok ? await domainsRes.json() : [];
+      const invoicesData = invoicesRes.ok ? await invoicesRes.json() : [];
+
+      setStats({
+        services: Array.isArray(servicesData) ? servicesData.length : 0,
+        domains: Array.isArray(domainsData) ? domainsData.length : 0,
+        invoices: Array.isArray(invoicesData) ? invoicesData.length : 0,
+      });
+    } catch (error) {
+      console.error("Error fetching dashboard stats:", error);
+    } finally {
+      setStatsLoading(false);
+    }
+  };
 
   if (loading) {
     return <LoadingSpinner />;
@@ -103,9 +143,9 @@ export default function DashboardPage() {
         )}
 
         {/* Services Cards - Minimal Design & Disabled if profile incomplete */}
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ${isProfileIncomplete ? "opacity-50 pointer-events-none" : ""}`}>
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 ${isProfileIncomplete ? "opacity-50 pointer-events-none" : ""}`}>
           {/* Services Card - Minimal */}
-          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow">
+          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow rounded-2xl">
             <CardHeader className="pb-2 pt-4 px-4">
               <CardTitle className="flex items-center gap-2 text-sm">
                 <ShoppingCart className="w-4 h-4" />
@@ -113,6 +153,7 @@ export default function DashboardPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="pb-3 px-4">
+              <p className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{stats.services}</p>
               <Button asChild variant="outline" className="w-full text-sm h-9">
                 <Link href="/services">View Services</Link>
               </Button>
@@ -120,7 +161,7 @@ export default function DashboardPage() {
           </Card>
 
           {/* Domains Card - Minimal */}
-          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow">
+          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow rounded-2xl">
             <CardHeader className="pb-2 pt-4 px-4">
               <CardTitle className="flex items-center gap-2 text-sm">
                 <Globe className="w-4 h-4" />
@@ -128,6 +169,7 @@ export default function DashboardPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="pb-3 px-4">
+              <p className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{stats.domains}</p>
               <Button asChild variant="outline" className="w-full text-sm h-9">
                 <Link href="/domains">View Domains</Link>
               </Button>
@@ -135,7 +177,7 @@ export default function DashboardPage() {
           </Card>
 
           {/* Invoices Card - Minimal */}
-          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow">
+          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow rounded-2xl">
             <CardHeader className="pb-2 pt-4 px-4">
               <CardTitle className="flex items-center gap-2 text-sm">
                 <FileText className="w-4 h-4" />
@@ -143,15 +185,52 @@ export default function DashboardPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="pb-3 px-4">
+              <p className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{stats.invoices}</p>
               <Button asChild variant="outline" className="w-full text-sm h-9">
                 <Link href="/invoices">View Invoices</Link>
               </Button>
             </CardContent>
           </Card>
 
-          {/* KmerHosting AI Card - Minimal with NEW Badge */}
-          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow relative">
-            <div className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full">
+          {/* Students Hosting Card with NEW Badge */}
+          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow rounded-2xl relative">
+            <div className="absolute -top-3 -right-3 bg-teal-600 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow-lg">
+              NEW
+            </div>
+            <CardHeader className="pb-2 pt-4 px-4">
+              <CardTitle className="flex items-center gap-2 text-sm">
+                <BookOpen className="w-4 h-4" />
+                Students Hosting
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pb-3 px-4">
+              <Button asChild variant="outline" className="w-full text-sm h-9">
+                <Link href="#">Learn More</Link>
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Free Tools Card with NEW Badge */}
+          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow rounded-2xl relative">
+            <div className="absolute -top-3 -right-3 bg-teal-600 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow-lg">
+              NEW
+            </div>
+            <CardHeader className="pb-2 pt-4 px-4">
+              <CardTitle className="flex items-center gap-2 text-sm">
+                <Wrench className="w-4 h-4" />
+                Free Tools
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pb-3 px-4">
+              <Button asChild variant="outline" className="w-full text-sm h-9">
+                <Link href="#">Explore</Link>
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* KmerHosting AI Card - with NEW Badge */}
+          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow rounded-2xl relative">
+            <div className="absolute -top-3 -right-3 bg-teal-600 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow-lg">
               NEW
             </div>
             <CardHeader className="pb-2 pt-4 px-4">

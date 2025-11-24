@@ -43,5 +43,90 @@ model User {
   updatedAt         DateTime  @updatedAt
   deletedAt         DateTime?  // For tracking account deletion (60-day reuse restriction)
 
+  // Relations
+  services          Service[]
+  domains           Domain[]
+  invoices          Invoice[]
+
   @@index([email])
+}
+
+model Service {
+  id                String    @id @default(cuid())
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name              String
+  price             Float
+  features          String    // JSON stringified array of features
+  
+  // Panel Information (required, not encrypted for admin display)
+  type              String    // "DirectAdmin" or "cPanel" or "Plesk"
+  url               String
+  username          String
+  password          String
+  serverIp          String
+  
+  // Service Dates
+  startDate         DateTime
+  endDate           DateTime  // Auto-calculated: startDate + 1 year
+  
+  // Relations
+  domains           Domain[]
+  invoices          Invoice[]
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+model Domain {
+  id                String    @id @default(cuid())
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  serviceId         String
+  service           Service   @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  
+  name              String
+  purchasedPrice    Float?    // Price paid for domain purchase
+  hasRenewalPrice   Boolean   @default(false)
+  renewalPrice      Float?    // Price for domain renewal
+  
+  // Domain Dates
+  startDate         DateTime
+  endDate           DateTime  // Auto-calculated: startDate + 1 year
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([serviceId])
+}
+
+model Invoice {
+  id                String    @id @default(cuid())
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  serviceId         String?   // Optional: can be null if invoice is for domain only
+  service           Service?  @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  
+  domainId          String?   // Optional: domain linked to service or standalone domain invoice
+  // Note: domain reference handled through service relationship or as separate field
+  
+  invoiceNumber     String    @unique
+  amount            Float
+  isFinal           Boolean   @default(false) // If true, always marked as PAID
+  status            String    @default("pending") // "pending", "paid", "overdue"
+  dueDate           DateTime
+  invoiceDate       DateTime  @default(now())
+  items             String?   // JSON stringified array of invoice items
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([serviceId])
 }
