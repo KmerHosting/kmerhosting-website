@@ -11,10 +11,13 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import Link from "next/link";
-import { Loader2, RotateCcw } from "lucide-react";
+import { Loader2, RotateCcw, Mail, User } from "lucide-react";
 
 const signupSchema = z.object({
   email: z.string().email("Invalid email address"),
+});
+
+const fullNameSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
 });
 
@@ -23,12 +26,14 @@ const otpSchema = z.object({
 });
 
 type SignupFormData = z.infer<typeof signupSchema>;
+type FullNameFormData = z.infer<typeof fullNameSchema>;
 type OTPFormData = z.infer<typeof otpSchema>;
 
 export default function SignupPage() {
   const router = useRouter();
-  const [step, setStep] = useState<"signup" | "otp">("signup");
+  const [step, setStep] = useState<"signup" | "fullname" | "otp">("signup");
   const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [resendCountdown, setResendCountdown] = useState(0);
 
@@ -36,6 +41,12 @@ export default function SignupPage() {
     resolver: zodResolver(signupSchema),
     defaultValues: {
       email: "",
+    },
+  });
+
+  const fullNameForm = useForm<FullNameFormData>({
+    resolver: zodResolver(fullNameSchema),
+    defaultValues: {
       fullName: "",
     },
   });
@@ -61,10 +72,28 @@ export default function SignupPage() {
   const onSignupSubmit = async (data: SignupFormData) => {
     try {
       setIsLoading(true);
+      // Just proceed to full name step, don't send OTP yet
+      setEmail(data.email);
+      setStep("fullname");
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Failed to proceed");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onFullNameSubmit = async (data: FullNameFormData) => {
+    try {
+      setIsLoading(true);
+      // Now send OTP with email and fullName
       const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          email,
+          fullName: data.fullName,
+        }),
       });
 
       const result = await response.json();
@@ -75,7 +104,7 @@ export default function SignupPage() {
         return;
       }
 
-      setEmail(data.email);
+      setFullName(data.fullName);
       setStep("otp");
       setResendCountdown(60);
       toast.success("OTP sent to your email");
@@ -97,7 +126,7 @@ export default function SignupPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
-          fullName: signupForm.getValues("fullName"),
+          fullName,
         }),
       });
 
@@ -156,61 +185,106 @@ export default function SignupPage() {
           <CardTitle>Create Account</CardTitle>
           <CardDescription>
             {step === "signup"
-              ? "Sign up with your email and full name"
+              ? "Enter your email to get started"
+              : step === "fullname"
+              ? "Tell us your full name"
               : "Enter the OTP sent to your email"}
           </CardDescription>
         </CardHeader>
         <CardContent>
           {step === "signup" ? (
-            <form onSubmit={signupForm.handleSubmit(onSignupSubmit)} className="space-y-4">
+            <form onSubmit={signupForm.handleSubmit(onSignupSubmit)} className="space-y-3">
               <div>
-                <Label htmlFor="fullName">Full Name</Label>
-                <Input
-                  id="fullName"
-                  placeholder="John Doe"
-                  {...signupForm.register("fullName")}
-                  disabled={isLoading}
-                />
-                {signupForm.formState.errors.fullName && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {signupForm.formState.errors.fullName.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  {...signupForm.register("email")}
-                  disabled={isLoading}
-                />
+                <Label htmlFor="email" className="sr-only">Email</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Email address"
+                    {...signupForm.register("email")}
+                    disabled={isLoading}
+                    className="pl-10 h-11"
+                  />
+                </div>
                 {signupForm.formState.errors.email && (
-                  <p className="text-sm text-red-500 mt-1">
+                  <p className="text-xs text-red-500 mt-1.5">
                     {signupForm.formState.errors.email.message}
                   </p>
                 )}
               </div>
 
-              <Button type="submit" className="w-full cursor-pointer transition-all bg-[#128C7E] hover:bg-[#0f7469]" disabled={isLoading}>
+              <Button type="submit" className="w-full cursor-pointer transition-all bg-[#128C7E] hover:bg-[#0f7469] h-11 mt-6" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Proceeding...
+                  </>
+                ) : (
+                  "Continue"
+                )}
+              </Button>
+
+              <p className="text-sm text-center text-slate-600 dark:text-slate-400 mt-4">
+                Already have an account?{" "}
+                <Link href="/auth/login" className="text-[#128C7E] hover:underline font-medium">
+                  Login
+                </Link>
+              </p>
+            </form>
+          ) : step === "fullname" ? (
+            <form onSubmit={fullNameForm.handleSubmit(onFullNameSubmit)} className="space-y-4">
+              <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded border border-blue-200 dark:border-blue-900/50">
+                <p className="text-xs text-blue-900 dark:text-blue-100">
+                  <strong>Important:</strong> Please provide your full legal name. This information will be used for invoices and all KmerHosting services.
+                </p>
+              </div>
+
+              <div>
+                <Label htmlFor="fullName" className="sr-only">Full Name</Label>
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <Input
+                    id="fullName"
+                    placeholder="Your full name"
+                    {...fullNameForm.register("fullName")}
+                    disabled={isLoading}
+                    className="pl-10 h-11"
+                  />
+                </div>
+                {fullNameForm.formState.errors.fullName && (
+                  <p className="text-xs text-red-500 mt-1.5">
+                    {fullNameForm.formState.errors.fullName.message}
+                  </p>
+                )}
+              </div>
+
+              <Button 
+                type="submit" 
+                className="w-full cursor-pointer transition-all bg-[#128C7E] hover:bg-[#0f7469] h-11 mt-6" 
+                disabled={isLoading || fullNameForm.watch("fullName").length < 3}
+              >
                 {isLoading ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                     Sending OTP...
                   </>
+                ) : fullNameForm.watch("fullName").length < 3 ? (
+                  "Enter at least 3 characters"
                 ) : (
                   "Send OTP"
                 )}
               </Button>
 
-              <p className="text-sm text-center text-slate-600 dark:text-slate-400">
-                Already have an account?{" "}
-                <Link href="/auth/login" className="text-[#128C7E] hover:underline">
-                  Login
-                </Link>
-              </p>
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full cursor-pointer"
+                onClick={() => setStep("signup")}
+                disabled={isLoading}
+              >
+                Back
+              </Button>
             </form>
           ) : (
             <form onSubmit={otpForm.handleSubmit(onOTPSubmit)} className="space-y-4">

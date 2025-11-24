@@ -8,9 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { AlertCircle, Lock, Loader2, Upload, X, Shield } from "lucide-react";
+import { AlertCircle, Lock, Loader2, Upload, X, Shield, Mail, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { CAMEROON_CITIES_WITH_AREAS } from "@/lib/cameroon-data";
+import { Switch } from "@/components/ui/switch";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const profileSchema = z.object({
   phone: z.string().min(1, "Phone number is required"),
@@ -38,6 +40,8 @@ export default function ProfileCompletionModal({ open, email, onClose, onSuccess
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [selectedCity, setSelectedCity] = useState<string>("");
   const [customAddress, setCustomAddress] = useState<string>("");
+  const [newsletter, setNewsletter] = useState(true); // Default to true
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const form = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
@@ -113,6 +117,7 @@ export default function ProfileCompletionModal({ open, email, onClose, onSuccess
       formData.append("birthDate", data.birthDate || "");
       formData.append("companyName", data.companyName || "");
       formData.append("jobTitle", data.jobTitle || "");
+      formData.append("newsletter", newsletter.toString());
 
       if (profilePicture) {
         formData.append("profilePicture", profilePicture);
@@ -343,6 +348,43 @@ export default function ProfileCompletionModal({ open, email, onClose, onSuccess
             </div>
           </div>
 
+          {/* Newsletter Toggle */}
+          <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700">
+            <div className="flex items-center gap-3">
+              <Mail className="w-5 h-5 text-[#128C7E]" />
+              <div>
+                <p className="font-semibold text-slate-900 dark:text-slate-100">Join our Newsletter</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Get updates about new features and offers</p>
+              </div>
+            </div>
+            <Switch
+              checked={newsletter}
+              onCheckedChange={setNewsletter}
+              disabled={isLoading}
+            />
+          </div>
+
+          {/* Terms Acceptance */}
+          <div className="flex items-start gap-3 p-4 bg-amber-50 dark:bg-amber-900/10 rounded-lg border border-amber-200 dark:border-amber-900/50">
+            <Checkbox
+              id="terms"
+              checked={termsAccepted}
+              onCheckedChange={(checked) => setTermsAccepted(checked as boolean)}
+              disabled={isLoading}
+              className="mt-1"
+            />
+            <label htmlFor="terms" className="text-sm text-slate-700 dark:text-slate-300 cursor-pointer flex-1">
+              I have read and accept the{" "}
+              <a href="/legal/terms-of-service" target="_blank" className="text-[#128C7E] hover:underline font-semibold">
+                Terms of Service
+              </a>
+              {" "}and{" "}
+              <a href="/legal/privacy-policy" target="_blank" className="text-[#128C7E] hover:underline font-semibold">
+                Privacy Policy
+              </a>
+            </label>
+          </div>
+
           {/* Error Display */}
           {Object.keys(form.formState.errors).length > 0 && (
             <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 flex gap-3">
@@ -373,14 +415,16 @@ export default function ProfileCompletionModal({ open, email, onClose, onSuccess
             </Button>
             <Button
               type="submit"
-              disabled={isLoading}
-              className="flex-1 bg-[#128C7E] hover:bg-[#0f7469] cursor-pointer"
+              disabled={isLoading || !termsAccepted}
+              className="flex-1 bg-[#128C7E] hover:bg-[#0f7469] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                   Saving Profile...
                 </>
+              ) : !termsAccepted ? (
+                "Accept terms to continue"
               ) : (
                 "Complete Profile"
               )}

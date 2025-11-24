@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import Link from "next/link";
-import { Loader2, Eye, EyeOff } from "lucide-react";
+import { Loader2, Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 
 const loginSchema = z.object({
@@ -76,50 +76,57 @@ export default function LoginPage() {
           <CardDescription>Enter your email and password to access your dashboard</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+            {/* Email field */}
             <div>
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                {...form.register("email")}
-                disabled={isLoading}
-              />
+              <Label htmlFor="email" className="sr-only">Email</Label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Email address"
+                  {...form.register("email")}
+                  disabled={isLoading}
+                  className="pl-10 h-11"
+                />
+              </div>
               {form.formState.errors.email && (
-                <p className="text-sm text-red-500 mt-1">
+                <p className="text-xs text-red-500 mt-1.5">
                   {form.formState.errors.email.message}
                 </p>
               )}
             </div>
 
+            {/* Password field */}
             <div>
-              <Label htmlFor="password">Password</Label>
-              <div className="relative mt-2">
+              <Label htmlFor="password" className="sr-only">Password</Label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                 <Input
                   id="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
+                  placeholder="Password"
                   {...form.register("password")}
                   disabled={isLoading}
-                  className="pr-10"
+                  className="pl-10 pr-10 h-11"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
               {form.formState.errors.password && (
-                <p className="text-sm text-red-500 mt-1">
+                <p className="text-xs text-red-500 mt-1.5">
                   {form.formState.errors.password.message}
                 </p>
               )}
             </div>
 
-            <Button type="submit" className="w-full cursor-pointer transition-all bg-[#128C7E] hover:bg-[#0f7469]" disabled={isLoading}>
+            <Button type="submit" className="w-full cursor-pointer transition-all bg-[#128C7E] hover:bg-[#0f7469] h-11 mt-6" disabled={isLoading}>
               {isLoading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -130,9 +137,9 @@ export default function LoginPage() {
               )}
             </Button>
 
-            <p className="text-sm text-center text-slate-600 dark:text-slate-400">
+            <p className="text-sm text-center text-slate-600 dark:text-slate-400 mt-4">
               Don't have an account?{" "}
-              <Link href="/auth/signup" className="text-[#128C7E] hover:underline">
+              <Link href="/auth/signup" className="text-[#128C7E] hover:underline font-medium">
                 Sign up
               </Link>
             </p>

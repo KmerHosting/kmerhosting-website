@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import { generateOTP, getOTPExpiration } from "@/lib/auth";
 import { sendOTPEmail } from "@/lib/mailer";
-
-const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,6 +24,28 @@ export async function POST(request: NextRequest) {
         { error: "This email is already registered. Please log in instead." },
         { status: 409 }
       );
+    }
+
+    // Check if user was deleted recently (within 60 days)
+    if (existingUser && existingUser.deletedAt) {
+      const daysSinceDeletion = Math.floor(
+        (Date.now() - existingUser.deletedAt.getTime()) / (1000 * 60 * 60 * 24)
+      );
+
+      if (daysSinceDeletion < 60) {
+        return NextResponse.json(
+          {
+            error: `This email was deleted ${daysSinceDeletion} days ago. You can reuse this email in ${60 - daysSinceDeletion} days.`,
+          },
+          { status: 403 }
+        );
+      }
+
+      // If 60+ days have passed, allow reuse
+      // Delete the old record to clear the data per policy
+      await prisma.user.delete({
+        where: { id: existingUser.id },
+      });
     }
 
     // Generate OTP (allow resend for unverified users)

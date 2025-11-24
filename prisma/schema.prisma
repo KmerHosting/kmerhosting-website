@@ -32,8 +32,12 @@ model User {
   jobTitle          String?
   profilePicture    String?
   
+  // Preferences
+  newsletter        Boolean   @default(true)  // Opted in by default
+  
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
+  deletedAt         DateTime?  // For tracking account deletion (60-day reuse restriction)
 
   @@index([email])
 }

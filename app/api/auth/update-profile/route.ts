@@ -16,6 +16,7 @@ export async function POST(request: NextRequest) {
     const birthDate = (formData.get("birthDate") as string) || null;
     const companyName = (formData.get("companyName") as string) || null;
     const jobTitle = (formData.get("jobTitle") as string) || null;
+    const newsletter = formData.get("newsletter") === "true";
     const profilePictureFile = formData.get("profilePicture") as File | null;
 
     // Validate email exists
@@ -74,6 +75,7 @@ export async function POST(request: NextRequest) {
         birthDate: birthDate ? new Date(birthDate) : null,
         companyName: companyName || undefined,
         jobTitle: jobTitle || undefined,
+        newsletter,
         profilePicture: profilePicturePath || undefined,
         isProfileComplete: true,
       },

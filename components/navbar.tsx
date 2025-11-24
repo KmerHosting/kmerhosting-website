@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Menu, X, Sun, Moon, User, LogOut, LayoutDashboard, ShoppingCart, Globe, FileText, Zap } from "lucide-react"
+import { Menu, X, Sun, Moon, User, LogOut, LayoutDashboard, ShoppingCart, Settings, Zap, FileText, Globe } from "lucide-react"
 import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
 import { useAuth } from "@/lib/auth-context"
@@ -107,16 +107,11 @@ export default function Navbar() {
                       My Services
                     </Link>
                   </DropdownMenuItem>
+                  <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href="/domains" className="cursor-pointer">
-                      <Globe className="w-4 h-4 mr-2" />
-                      My Domains
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/invoices" className="cursor-pointer">
-                      <FileText className="w-4 h-4 mr-2" />
-                      My Invoices
+                    <Link href="/settings" className="cursor-pointer">
+                      <Settings className="w-4 h-4 mr-2" />
+                      Settings
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />

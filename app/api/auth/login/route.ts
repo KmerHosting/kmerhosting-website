@@ -28,6 +28,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check if account was deleted
+    if (user.deletedAt) {
+      const daysSinceDeletion = Math.floor(
+        (Date.now() - user.deletedAt.getTime()) / (1000 * 60 * 60 * 24)
+      );
+
+      if (daysSinceDeletion < 60) {
+        return NextResponse.json(
+          {
+            error: `This account was deleted ${daysSinceDeletion} days ago. You can create a new account with this email in ${60 - daysSinceDeletion} days.`,
+          },
+          { status: 403 }
+        );
+      }
+    }
+
     if (!user.isVerified) {
       return NextResponse.json(
         { error: "Please verify your email first" },
