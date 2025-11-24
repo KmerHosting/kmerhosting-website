@@ -180,18 +180,28 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle>Create Account</CardTitle>
-          <CardDescription>
-            {step === "signup"
-              ? "Enter your email to get started"
-              : step === "fullname"
-              ? "Tell us your full name"
-              : "Enter the OTP sent to your email"}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+      <div className="w-full max-w-md">
+        {/* Logo */}
+        <div className="flex justify-center mb-8">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png"
+            alt="KmerHosting"
+            className="h-auto w-40"
+          />
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Create Account</CardTitle>
+            <CardDescription>
+              {step === "signup"
+                ? "Enter your email to get started"
+                : step === "fullname"
+                ? "Tell us your full name"
+                : "Enter the OTP sent to your email"}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
           {step === "signup" ? (
             <form onSubmit={signupForm.handleSubmit(onSignupSubmit)} className="space-y-3">
               <div>
@@ -425,6 +435,7 @@ export default function SignupPage() {
           )}
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }

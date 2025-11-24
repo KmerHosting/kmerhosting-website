@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Menu, X, Sun, Moon, User, LogOut, LayoutDashboard, ShoppingCart, Settings, Zap, FileText, Globe } from "lucide-react"
+import { Menu, X, Sun, Moon, User, LogOut, LayoutDashboard, ShoppingCart, Settings, Zap, FileText, Globe, ChevronDown } from "lucide-react"
 import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
 import { useAuth } from "@/lib/auth-context"
@@ -18,6 +18,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isMobileUserMenuOpen, setIsMobileUserMenuOpen] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const { user, isAuthenticated, loading, logout } = useAuth()
@@ -167,30 +168,53 @@ export default function Navbar() {
                 </>
               ) : !loading && isAuthenticated && user ? (
                 <div className="space-y-2 border-t border-slate-200 dark:border-slate-700 pt-3">
-                  <p className="text-sm font-medium text-slate-900 dark:text-slate-100 px-2">{user.fullName}</p>
-                  <Link href="/dashboard" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
-                    <LayoutDashboard className="w-4 h-4" />
-                    Dashboard
-                  </Link>
-                  <Link href="/services" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
-                    <ShoppingCart className="w-4 h-4" />
-                    My Services
-                  </Link>
-                  <Link href="/domains" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
-                    <Globe className="w-4 h-4" />
-                    My Domains
-                  </Link>
-                  <Link href="/invoices" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
-                    <FileText className="w-4 h-4" />
-                    My Invoices
-                  </Link>
+                  {/* Collapsible User Menu Button */}
                   <button
-                    onClick={logout}
-                    className="w-full flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                    onClick={() => setIsMobileUserMenuOpen(!isMobileUserMenuOpen)}
+                    className="w-full flex items-center justify-between px-4 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer"
                   >
-                    <LogOut className="w-4 h-4" />
-                    Logout
+                    <div className="flex items-center gap-2">
+                      <Avatar className="h-6 w-6">
+                        <AvatarFallback style={{ backgroundColor: "#128C7E", color: "white", fontSize: "10px" }}>
+                          {user.fullName
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")
+                            .toUpperCase()
+                            .slice(0, 2)}
+                        </AvatarFallback>
+                      </Avatar>
+                      <span className="text-sm font-medium">{user.fullName}</span>
+                    </div>
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform ${isMobileUserMenuOpen ? "rotate-180" : ""}`}
+                    />
                   </button>
+
+                  {/* Collapsible User Menu Items */}
+                  {isMobileUserMenuOpen && (
+                    <div className="pl-2 space-y-2">
+                      <Link href="/dashboard" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+                        <LayoutDashboard className="w-4 h-4" />
+                        Dashboard
+                      </Link>
+                      <Link href="/services" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+                        <ShoppingCart className="w-4 h-4" />
+                        My Services
+                      </Link>
+                      <Link href="/settings" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+                        <Settings className="w-4 h-4" />
+                        Settings
+                      </Link>
+                      <button
+                        onClick={logout}
+                        className="w-full flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Logout
+                      </button>
+                    </div>
+                  )}
                 </div>
               ) : null}
             </div>

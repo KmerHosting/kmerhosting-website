@@ -21,6 +21,10 @@ model User {
   isPasswordSet     Boolean   @default(false)
   isProfileComplete Boolean   @default(false)
   
+  // Password Reset
+  resetToken        String?   @unique
+  resetTokenExpiry  DateTime?
+  
   // Profile Information
   phone             String?
   whatsapp          String?

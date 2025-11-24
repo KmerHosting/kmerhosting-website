@@ -70,12 +70,22 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle>Login to Your Account</CardTitle>
-          <CardDescription>Enter your email and password to access your dashboard</CardDescription>
-        </CardHeader>
-        <CardContent>
+      <div className="w-full max-w-md">
+        {/* Logo */}
+        <div className="flex justify-center mb-8">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png"
+            alt="KmerHosting"
+            className="h-auto w-40"
+          />
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Login to Your Account</CardTitle>
+            <CardDescription>Enter your email and password to access your dashboard</CardDescription>
+          </CardHeader>
+          <CardContent>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
             {/* Email field */}
             <div>
@@ -137,6 +147,12 @@ export default function LoginPage() {
               )}
             </Button>
 
+            <p className="text-sm text-center text-slate-600 dark:text-slate-400 mt-3">
+              <Link href="/auth/forgot-password" className="text-[#128C7E] hover:underline font-medium">
+                Forgot your password?
+              </Link>
+            </p>
+
             <p className="text-sm text-center text-slate-600 dark:text-slate-400 mt-4">
               Don't have an account?{" "}
               <Link href="/auth/signup" className="text-[#128C7E] hover:underline font-medium">
@@ -146,6 +162,7 @@ export default function LoginPage() {
           </form>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }

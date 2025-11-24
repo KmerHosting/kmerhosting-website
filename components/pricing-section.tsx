@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Check } from "lucide-react"
+import { Check, Lightbulb } from "lucide-react"
 import { useState } from "react"
 
 export default function PricingSection() {
@@ -16,9 +16,10 @@ export default function PricingSection() {
       description: "Getting started",
       currency: "FCFA",
       billing: "/year",
-      freeDomain: false,
+      freeDomain: true,
+      domainType: ".com",
       controlPanel: "cPanel",
-      features: ["2 Website", "10 GB SSD NVMe Storage ", "100 GB Bandwidth", "10 Email Accounts", "Basic Support", "Free SSL Certificate"],
+      features: ["2 Website", "10 GB SSD NVMe Storage ", "100 GB Bandwidth", "10 Email Accounts", "Basic Support", "Free SSL Certificate", "Free .com Domain"],
       highlighted: false,
     },
     {
@@ -28,6 +29,7 @@ export default function PricingSection() {
       currency: "FCFA",
       billing: "/year",
       freeDomain: true,
+      domainType: ".com",
       controlPanel: "cPanel",
       features: [
         "5 Websites",
@@ -47,6 +49,7 @@ export default function PricingSection() {
       currency: "FCFA",
       billing: "/year",
       freeDomain: true,
+      domainType: ".com or .org",
       controlPanel: "cPanel",
       features: [
         "20 Websites",
@@ -55,7 +58,7 @@ export default function PricingSection() {
         "Unlimited Email Accounts",
         "24/7 Premium Support",
         "Free SSL Certificate",
-        "Free .com Domain",
+        "Free .com or .org Domain",
         "Advanced Security",
       ],
       highlighted: false,
@@ -67,6 +70,7 @@ export default function PricingSection() {
       currency: "FCFA",
       billing: "/year",
       freeDomain: true,
+      domainType: "(.*)",
       controlPanel: "cPanel",
       features: [
         "Unlimited Websites",
@@ -75,7 +79,7 @@ export default function PricingSection() {
         "Unlimited Email Accounts",
         "24/7 Dedicated Support",
         "Free SSL Certificate",
-        "Free .com Domain",
+        "Free Domain (.*)",
         "Enterprise Security",
         "Daily Backups",
       ],
@@ -90,9 +94,10 @@ export default function PricingSection() {
       description: "Getting started",
       currency: "FCFA",
       billing: "/year",
-      freeDomain: false,
+      freeDomain: true,
+      domainType: ".com",
       controlPanel: "DirectAdmin",
-      features: ["2 Website", "10 GB SSD NVMe Storage ", "100 GB Bandwidth", "10 Email Accounts", "Basic Support", "Free SSL Certificate"],
+      features: ["2 Website", "10 GB SSD NVMe Storage ", "100 GB Bandwidth", "10 Email Accounts", "Basic Support", "Free SSL Certificate", "Free .com or .org Domain"],
       highlighted: false,
     },
     {
@@ -102,6 +107,7 @@ export default function PricingSection() {
       currency: "FCFA",
       billing: "/year",
       freeDomain: true,
+      domainType: ".com",
       controlPanel: "DirectAdmin",
       features: [
         "5 Websites",
@@ -121,6 +127,7 @@ export default function PricingSection() {
       currency: "FCFA",
       billing: "/year",
       freeDomain: true,
+      domainType: ".com or .org",
       controlPanel: "DirectAdmin",
       features: [
         "20 Websites",
@@ -129,7 +136,7 @@ export default function PricingSection() {
         "Unlimited Email Accounts",
         "24/7 Premium Support",
         "Free SSL Certificate",
-        "Free .com Domain",
+        "Free .com or .org Domain",
         "Advanced Security",
       ],
       highlighted: false,
@@ -141,6 +148,7 @@ export default function PricingSection() {
       currency: "FCFA",
       billing: "/year",
       freeDomain: true,
+      domainType: "(.*)",
       controlPanel: "DirectAdmin",
       features: [
         "Unlimited Websites",
@@ -149,7 +157,7 @@ export default function PricingSection() {
         "Unlimited Email Accounts",
         "24/7 Dedicated Support",
         "Free SSL Certificate",
-        "Free .com Domain",
+        "Free Domain (.*)",
         "Enterprise Security",
         "Daily Backups",
       ],
@@ -172,6 +180,7 @@ export default function PricingSection() {
       description: "Start your journey",
       currency: "FCFA",
       controlPanel: "cPanel",
+      domainType: ".com or .org",
       baseFeatures: [
         "5 cPanel Accounts",
         "20 GB SSD NVMe Storage ",
@@ -188,6 +197,7 @@ export default function PricingSection() {
       description: "Start reselling",
       currency: "FCFA",
       controlPanel: "cPanel",
+      domainType: ".com or .org",
       baseFeatures: [
         "15 cPanel Accounts",
         "50 GB SSD NVMe Storage ",
@@ -204,6 +214,7 @@ export default function PricingSection() {
       description: "Scale your business",
       currency: "FCFA",
       controlPanel: "cPanel",
+      domainType: ".com or .org",
       baseFeatures: [
         "50 cPanel Accounts",
         "150 GB SSD NVMe Storage ",
@@ -221,6 +232,7 @@ export default function PricingSection() {
       description: "Enterprise reseller",
       currency: "FCFA",
       controlPanel: "cPanel",
+      domainType: "(.*)",
       baseFeatures: [
         "Unlimited cPanel Accounts",
         "Unlimited Storage",
@@ -239,6 +251,7 @@ export default function PricingSection() {
     return resellerHostingPlans.map((plan) => {
       const pricing = getResellerPrice(plan.monthlyPrice)
       const freeDomain = true
+      const domainLabel = plan.domainType === "(.*)" ? "Free Domain (.*)" : `Free ${plan.domainType} Domain`
       return {
         name: plan.name,
         price: pricing.price,
@@ -246,8 +259,9 @@ export default function PricingSection() {
         currency: plan.currency,
         billing: pricing.billing,
         freeDomain: freeDomain,
+        domainType: plan.domainType,
         controlPanel: plan.controlPanel,
-        features: ["Free .com Domain", ...plan.baseFeatures],
+        features: [domainLabel, ...plan.baseFeatures],
         highlighted: plan.highlighted,
       }
     })
@@ -385,10 +399,12 @@ export default function PricingSection() {
                   <div className="w-1 h-1 rounded-full" style={{ backgroundColor: "#128C7E" }}></div>
                   <span className="text-xs font-medium text-slate-700 dark:text-slate-300">{plan.controlPanel}</span>
                 </div>
-                {plan.freeDomain && (
+                {plan.freeDomain && plan.domainType && (
                   <div className="flex items-center gap-1.5">
                     <Check className="w-3 h-3 flex-shrink-0" style={{ color: "#128C7E" }} />
-                    <span className="text-xs font-medium text-slate-700 dark:text-slate-300">Free .com Domain</span>
+                    <span className="text-xs font-medium text-slate-700 dark:text-slate-300">
+                      {plan.domainType === "(.*)" ? "Free Domain (.*)" : `Free ${plan.domainType} Domain`}
+                    </span>
                   </div>
                 )}
               </div>
@@ -412,6 +428,16 @@ export default function PricingSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Domain Note */}
+        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 max-w-2xl mx-auto mb-10">
+          <p className="text-sm text-blue-900 dark:text-blue-200 flex items-start gap-2">
+            <Lightbulb className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "#128C7E" }} />
+            <span>
+              <strong>Custom Domain:</strong> If you don't want to use the included .com or .org domain, you can purchase a domain from another registrar and set the DNS to <code className="bg-white dark:bg-slate-800 px-2 py-1 rounded text-xs font-mono">ns1.kmerhosting.com</code> and <code className="bg-white dark:bg-slate-800 px-2 py-1 rounded text-xs font-mono">ns2.kmerhosting.com</code>
+            </span>
+          </p>
         </div>
 
         {/* Control Panel Comparison & Recommendations */}

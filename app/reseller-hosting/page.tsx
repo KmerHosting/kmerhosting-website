@@ -38,7 +38,7 @@ export default function ResellerHostingPage() {
       name: "Silver",
       price: "From 5,000 FCFA/month",
       popular: true,
-      features: ["15 cPanel Accounts", "50 GB SSD NVMe Storage ", "Unlimited Bandwidth", "Priority Support", "Free SSL Certificates", "WHM & cPanel Access", "Free .com Domain (Annual)"],
+      features: ["15 cPanel Accounts", "50 GB SSD NVMe Storage ", "Unlimited Bandwidth", "Priority Support", "Free SSL Certificates", "WHM & cPanel Access", "Free Domain (Annual)"],
     },
     {
       name: "Gold",

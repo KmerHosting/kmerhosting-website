@@ -16,7 +16,7 @@ const faqs = [
     },
     {
         question: "Do you offer a free domain with hosting plans?",
-        answer: "Yes! We offer a free .com domain with our Shared Hosting plans when you choose annual billing. This applies to our Silver, Gold, and Platinum shared and reseller hosting packages. The free domain is valid as long as you remain on annual billing hosting service."
+        answer: "Yes! We offer a free domain with our Shared Hosting and Reseller Hosting plans when you choose annual billing. This applies to our Silver, Gold, and Platinum shared and reseller hosting packages. The free domain is valid as long as you remain on annual billing hosting service."
     },
     {
         question: "What control panels do you support?",

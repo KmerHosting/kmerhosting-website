@@ -8,15 +8,14 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
     const email = formData.get("email") as string;
-    const phone = (formData.get("phone") as string) || null;
-    const whatsapp = (formData.get("whatsapp") as string) || null;
-    const city = (formData.get("city") as string) || null;
-    const address = (formData.get("address") as string) || null;
-    const country = (formData.get("country") as string) || "Cameroon";
-    const birthDate = (formData.get("birthDate") as string) || null;
-    const companyName = (formData.get("companyName") as string) || null;
-    const jobTitle = (formData.get("jobTitle") as string) || null;
-    const newsletter = formData.get("newsletter") === "true";
+    const phone = (formData.get("phone") as string)?.trim() || null;
+    const whatsapp = (formData.get("whatsapp") as string)?.trim() || null;
+    const city = (formData.get("city") as string)?.trim() || null;
+    const address = (formData.get("address") as string)?.trim() || null;
+    const country = ((formData.get("country") as string)?.trim() || "Cameroon");
+    const birthDate = (formData.get("birthDate") as string)?.trim() || null;
+    const companyName = (formData.get("companyName") as string)?.trim() || null;
+    const jobTitle = (formData.get("jobTitle") as string)?.trim() || null;
     const profilePictureFile = formData.get("profilePicture") as File | null;
 
     // Validate email exists
@@ -24,9 +23,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
-    // Validate required fields
+    // Validate required fields - phone, whatsapp, city, and address must be provided
     if (!phone || !whatsapp || !city || !address) {
-      return NextResponse.json({ error: "Phone, WhatsApp, city, and address are required" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Phone, WhatsApp, city, and address are required" },
+        { status: 400 }
+      );
     }
 
     const user = await prisma.user.findUnique({
@@ -63,22 +65,25 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Update user profile
+    // Update user profile - only include fields that are provided
+    const updateData: any = {
+      isProfileComplete: true,
+    };
+
+    // Add each field if it was provided, even if empty
+    if (phone !== undefined) updateData.phone = phone || null;
+    if (whatsapp !== undefined) updateData.whatsapp = whatsapp || null;
+    if (city !== undefined) updateData.city = city || null;
+    if (address !== undefined) updateData.address = address || null;
+    if (country !== undefined) updateData.country = country;
+    if (birthDate !== undefined) updateData.birthDate = birthDate ? new Date(birthDate) : null;
+    if (companyName !== undefined) updateData.companyName = companyName || null;
+    if (jobTitle !== undefined) updateData.jobTitle = jobTitle || null;
+    if (profilePicturePath) updateData.profilePicture = profilePicturePath;
+
     const updatedUser = await prisma.user.update({
       where: { email },
-      data: {
-        phone: phone || undefined,
-        whatsapp: whatsapp || undefined,
-        city: city || undefined,
-        address: address || undefined,
-        country,
-        birthDate: birthDate ? new Date(birthDate) : null,
-        companyName: companyName || undefined,
-        jobTitle: jobTitle || undefined,
-        newsletter,
-        profilePicture: profilePicturePath || undefined,
-        isProfileComplete: true,
-      },
+      data: updateData,
     });
 
     return NextResponse.json(

@@ -7,6 +7,18 @@ export interface User {
   email: string;
   fullName: string;
   isProfileComplete?: boolean;
+  phone?: string | null;
+  whatsapp?: string | null;
+  city?: string | null;
+  address?: string | null;
+  country?: string | null;
+  birthDate?: string | null;
+  companyName?: string | null;
+  jobTitle?: string | null;
+  profilePicture?: string | null;
+  newsletter?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 interface AuthContextType {

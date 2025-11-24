@@ -9,7 +9,7 @@ import LoadingSpinner from "@/components/loading-spinner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { LayoutDashboard, ShoppingCart, Globe, FileText, AlertCircle, CheckCircle2, LightbulbIcon } from "lucide-react";
+import { ShoppingCart, Globe, FileText, AlertCircle, CheckCircle2, LightbulbIcon, Plus, Zap } from "lucide-react";
 
 export default function DashboardPage() {
   const { user, isAuthenticated, loading, refreshUser } = useAuth();
@@ -48,11 +48,22 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-100">
-            Welcome, {user?.fullName}!
-          </h1>
-          <p className="text-slate-600 dark:text-slate-400 mt-2">Manage your hosting services</p>
+        <div className="mb-8 flex items-start justify-between">
+          <div>
+            <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-100">
+              Welcome, {user?.fullName}!
+            </h1>
+            <p className="text-slate-600 dark:text-slate-400 mt-2">Manage your hosting services</p>
+          </div>
+          {/* Credit Balance - Top Right */}
+          <div className="text-right">
+            <p className="text-xs text-slate-600 dark:text-slate-400 uppercase tracking-wide">Account Credit</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100 mt-1">0 FCFA</p>
+            <Button className="mt-2 bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 dark:text-slate-900 text-white cursor-pointer transition-all flex items-center justify-center gap-2 ml-auto">
+              <Plus className="w-4 h-4" />
+              Add
+            </Button>
+          </div>
         </div>
 
         {/* Profile Completion Alert & Button */}
@@ -78,79 +89,80 @@ export default function DashboardPage() {
           </Card>
         )}
 
-        {/* Profile Complete Indicator */}
+        {/* Profile Complete Indicator - Minimal Design */}
         {!isProfileIncomplete && (
-          <Card className="mb-8 border-green-200 dark:border-green-900/50 bg-green-50 dark:bg-green-900/10">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-900 dark:text-green-200">
-                <CheckCircle2 className="w-5 h-5" />
-                Profile Complete
-              </CardTitle>
-              <CardDescription className="text-green-700 dark:text-green-300">
-                Your profile is complete. You have access to all features.
-              </CardDescription>
-            </CardHeader>
-          </Card>
+          <div className="mb-8 w-fit p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-800 relative overflow-hidden">
+            <div className="flex items-center gap-3">
+              <CheckCircle2 className="w-6 h-6 text-green-600 dark:text-green-400 flex-shrink-0" />
+              <div>
+                <p className="text-sm font-semibold text-green-900 dark:text-green-200">Account verified</p>
+                <p className="text-xs text-green-700 dark:text-green-300 mt-1">You have access to all features</p>
+              </div>
+            </div>
+          </div>
         )}
 
-        {/* Dashboard Cards - Disabled if profile incomplete */}
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ${isProfileIncomplete ? "opacity-50 pointer-events-none" : ""}`}>
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <LayoutDashboard className="w-5 h-5" />
-                Dashboard
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">View your account overview</p>
-              <Button asChild variant="outline" className="w-full">
-                <Link href="/dashboard">Go to Dashboard</Link>
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <ShoppingCart className="w-5 h-5" />
+        {/* Services Cards - Minimal Design & Disabled if profile incomplete */}
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ${isProfileIncomplete ? "opacity-50 pointer-events-none" : ""}`}>
+          {/* Services Card - Minimal */}
+          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow">
+            <CardHeader className="pb-2 pt-4 px-4">
+              <CardTitle className="flex items-center gap-2 text-sm">
+                <ShoppingCart className="w-4 h-4" />
                 Services
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">Manage your hosting services</p>
-              <Button asChild variant="outline" className="w-full">
+            <CardContent className="pb-3 px-4">
+              <Button asChild variant="outline" className="w-full text-sm h-9">
                 <Link href="/services">View Services</Link>
               </Button>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Globe className="w-5 h-5" />
+          {/* Domains Card - Minimal */}
+          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow">
+            <CardHeader className="pb-2 pt-4 px-4">
+              <CardTitle className="flex items-center gap-2 text-sm">
+                <Globe className="w-4 h-4" />
                 Domains
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">Manage your domains</p>
-              <Button asChild variant="outline" className="w-full">
+            <CardContent className="pb-3 px-4">
+              <Button asChild variant="outline" className="w-full text-sm h-9">
                 <Link href="/domains">View Domains</Link>
               </Button>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <FileText className="w-5 h-5" />
+          {/* Invoices Card - Minimal */}
+          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow">
+            <CardHeader className="pb-2 pt-4 px-4">
+              <CardTitle className="flex items-center gap-2 text-sm">
+                <FileText className="w-4 h-4" />
                 Invoices
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">View your invoices</p>
-              <Button asChild variant="outline" className="w-full">
+            <CardContent className="pb-3 px-4">
+              <Button asChild variant="outline" className="w-full text-sm h-9">
                 <Link href="/invoices">View Invoices</Link>
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* KmerHosting AI Card - Minimal with NEW Badge */}
+          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow relative">
+            <div className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full">
+              NEW
+            </div>
+            <CardHeader className="pb-2 pt-4 px-4">
+              <CardTitle className="flex items-center gap-2 text-sm">
+                <Zap className="w-4 h-4" />
+                KmerHosting AI
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pb-3 px-4">
+              <Button asChild variant="outline" className="w-full text-sm h-9">
+                <Link href="#">Explore</Link>
               </Button>
             </CardContent>
           </Card>

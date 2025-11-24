@@ -182,7 +182,7 @@ export default function AboutPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span style={{ color: "#128C7E" }}>•</span>
-                  <span>Free .com domain with annual billing</span>
+                  <span>Free domain with annual billing</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span style={{ color: "#128C7E" }}>•</span>

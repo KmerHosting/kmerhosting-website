@@ -14,7 +14,7 @@ export default function HostingTypes() {
       icon: Users,
       features: [
         { name: "cPanel & DirectAdmin", detail: "Choose your control panel" },
-        { name: "Free .com Domain", detail: "Silver plan and above" },
+        { name: "Free Domain", detail: "For every plans chosen" },
         { name: "Unlimited Bandwidth", detail: "No restrictions" },
         { name: "Free SSL Certificate", detail: "Secure your site" },
       ],
@@ -26,7 +26,7 @@ export default function HostingTypes() {
       icon: Server,
       features: [
         { name: "WHM & cPanel", detail: "Full control panel access" },
-        { name: "Free .com Domain", detail: "Silver plan and above" },
+        { name: "Free Domain", detail: "For every plans chosen" },
         { name: "Unlimited Accounts", detail: "Create as many as needed" },
         { name: "White Label Ready", detail: "Your brand, your way" },
       ],
