@@ -165,93 +165,31 @@ export default function SetPasswordPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-            {/* Password Field with Popover */}
+            {/* Password Field */}
             <div>
               <Label htmlFor="password" className="sr-only">Password</Label>
-              <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-                <PopoverTrigger asChild>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                    <Input
-                      id="password"
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Create a strong password"
-                      {...form.register("password")}
-                      onChange={(e) => {
-                        handlePasswordChange(e.target.value);
-                        form.setValue("password", e.target.value);
-                        setIsPopoverOpen(true);
-                      }}
-                      disabled={isLoading}
-                      className="pl-10 pr-10 h-11"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
-                    >
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
-                  </div>
-                </PopoverTrigger>
-
-                {/* Password Strength Popover Content */}
-                {passwordStrength && (
-                  <PopoverContent className="w-72 p-4" align="start">
-                    <div className="space-y-3">
-                      <div>
-                        <div className="flex justify-between text-xs mb-2">
-                          <span className="text-slate-600 dark:text-slate-400">Strength</span>
-                          <span
-                            className={`font-semibold ${
-                              passwordStrength.level === "weak"
-                                ? "text-red-500"
-                                : passwordStrength.level === "fair"
-                                ? "text-orange-500"
-                                : passwordStrength.level === "good"
-                                ? "text-yellow-500"
-                                : "text-green-500"
-                            }`}
-                          >
-                            {getStrengthText()}
-                          </span>
-                        </div>
-                        <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
-                          <div
-                            className={`h-full ${getStrengthColor()} transition-all duration-300`}
-                            style={{ width: `${passwordStrength.score}%` }}
-                          />
-                        </div>
-                      </div>
-
-                      {passwordStrength.feedback.length > 0 && (
-                        <ul className="text-xs text-slate-600 dark:text-slate-400 space-y-1">
-                          {passwordStrength.feedback.map((feedback, idx) => (
-                            <li key={idx} className="flex items-start">
-                              <span className="mr-2">•</span>
-                              <span>{feedback}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-
-                      <div className="pt-2 border-t border-slate-200 dark:border-slate-700">
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          onClick={handleGeneratePassword}
-                          disabled={isLoading}
-                          className="w-full h-8 text-xs"
-                        >
-                          <RefreshCw className="w-3 h-3 mr-1" />
-                          Generate Strong Password
-                        </Button>
-                      </div>
-                    </div>
-                  </PopoverContent>
-                )}
-              </Popover>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Create a strong password"
+                  {...form.register("password")}
+                  onChange={(e) => {
+                    handlePasswordChange(e.target.value);
+                    form.setValue("password", e.target.value);
+                  }}
+                  disabled={isLoading}
+                  className="pl-10 pr-10 h-11"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
 
               {form.formState.errors.password && (
                 <p className="text-xs text-red-500 mt-1.5">
@@ -304,6 +242,59 @@ export default function SetPasswordPage() {
                     <Copy className="w-4 h-4" />
                   </Button>
                 </div>
+              </div>
+            )}
+
+            {/* Password Strength Indicator - Below Form */}
+            {form.watch("password") && (
+              <div className="bg-slate-50 dark:bg-slate-800 p-4 rounded border border-slate-200 dark:border-slate-700 space-y-3">
+                <div>
+                  <div className="flex justify-between text-xs mb-2">
+                    <span className="text-slate-600 dark:text-slate-400 font-semibold">Password Strength</span>
+                    <span
+                      className={`font-semibold ${
+                        passwordStrength?.level === "weak"
+                          ? "text-red-500"
+                          : passwordStrength?.level === "fair"
+                          ? "text-orange-500"
+                          : passwordStrength?.level === "good"
+                          ? "text-yellow-500"
+                          : "text-green-500"
+                      }`}
+                    >
+                      {getStrengthText()}
+                    </span>
+                  </div>
+                  <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                    <div
+                      className={`h-full ${getStrengthColor()} transition-all duration-300`}
+                      style={{ width: `${passwordStrength?.score || 0}%` }}
+                    />
+                  </div>
+                </div>
+
+                {passwordStrength?.feedback.length! > 0 && (
+                  <ul className="text-xs text-slate-600 dark:text-slate-400 space-y-1">
+                    {passwordStrength?.feedback.map((feedback, idx) => (
+                      <li key={idx} className="flex items-start">
+                        <span className="mr-2">•</span>
+                        <span>{feedback}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={handleGeneratePassword}
+                  disabled={isLoading}
+                  className="w-full h-8 text-xs"
+                >
+                  <RefreshCw className="w-3 h-3 mr-1" />
+                  Generate Strong Password
+                </Button>
               </div>
             )}
 
