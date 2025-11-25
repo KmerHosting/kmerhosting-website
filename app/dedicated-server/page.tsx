@@ -300,7 +300,7 @@ export default function DedicatedServerPage() {
             className="text-white font-semibold cursor-pointer hover:opacity-90 transition-opacity"
             style={{ backgroundColor: "#128C7E" }}
           >
-            <Link href="https://kmerhosting.com/customers/contact.php">
+            <Link href="/support">
               Contact Us for Dedicated Servers <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>

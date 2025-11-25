@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 import prisma from "@/lib/prisma";
+import { generateVerificationKey, hashPin, generateInvoiceSignature } from "@/lib/verification";
+
 const JWT_SECRET = new TextEncoder().encode(
   process.env.JWT_SECRET || "your-secret-key-change-in-production"
 );
+
+const SERVER_SECRET = process.env.INVOICE_SIGNING_SECRET || "default-secret-change-in-production";
 
 async function verifyAdminToken(request: NextRequest) {
   const token = request.cookies.get("admin_token")?.value;
@@ -112,8 +116,33 @@ export async function POST(request: NextRequest) {
     });
     const invoiceNumber = `INV-${Date.now()}-${invoiceCount + 1}`;
 
+    // Generate verification key
+    let verificationKey = "";
+    let keyExists = true;
+    while (keyExists) {
+      verificationKey = generateVerificationKey();
+      const existing = await prisma.invoice.findUnique({
+        where: { verificationKey },
+      });
+      keyExists = !!existing;
+    }
+
     // Determine status: if isFinal is true, always set to "paid"
     const status = isFinal ? "paid" : "pending";
+
+    // Hash the user's PIN for the invoice
+    const pinHash = user.pinCode ? hashPin(user.pinCode) : undefined;
+
+    // Generate cryptographic signature to prevent forgery
+    // This signature is based on invoice data + server secret
+    // Only KmerHosting can generate valid signatures
+    const signature = generateInvoiceSignature(
+      invoiceNumber,
+      parseFloat(amount),
+      user.email,
+      verificationKey,
+      SERVER_SECRET
+    );
 
     const invoice = await prisma.invoice.create({
       data: {
@@ -124,6 +153,9 @@ export async function POST(request: NextRequest) {
         status,
         isFinal,
         invoiceNumber,
+        verificationKey,
+        pinHash, // Store hashed PIN on invoice
+        signature, // Store signature to verify authenticity
         dueDate: dueDate ? new Date(dueDate) : new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now if not provided
       },
       include: {

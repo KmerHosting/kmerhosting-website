@@ -27,7 +27,7 @@ async function verifyAdminToken(request: NextRequest) {
 // PUT update invoice
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const admin = await verifyAdminToken(request);
@@ -36,7 +36,7 @@ export async function PUT(
     }
 
     const { amount, status, isFinal, dueDate } = await request.json();
-    const { id } = params;
+    const { id } = await params;
 
     // Build update data
     const updateData: any = {
@@ -74,7 +74,7 @@ export async function PUT(
 // DELETE invoice
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const admin = await verifyAdminToken(request);
@@ -82,7 +82,7 @@ export async function DELETE(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { id } = params;
+    const { id } = await params;
 
     await prisma.invoice.delete({
       where: { id },

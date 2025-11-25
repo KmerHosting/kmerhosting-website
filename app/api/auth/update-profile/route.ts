@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomBytes } from "crypto";
+import { sendAccountInfoUpdateSecurityAlert } from "@/lib/mailer";
 
 export async function POST(request: NextRequest) {
   try {
@@ -85,6 +86,9 @@ export async function POST(request: NextRequest) {
       where: { email },
       data: updateData,
     });
+
+    // Send security alert for account information update
+    await sendAccountInfoUpdateSecurityAlert(updatedUser.email, updatedUser.fullName);
 
     return NextResponse.json(
       {

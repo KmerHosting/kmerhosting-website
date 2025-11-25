@@ -17,6 +17,11 @@ export interface User {
   jobTitle?: string | null;
   profilePicture?: string | null;
   newsletter?: boolean;
+  username?: string | null;
+  isProfilePublic?: boolean;
+  twoFactorEnabled?: boolean;
+  pinCode?: string | null;
+  referralCode?: string | null;
   createdAt?: string;
   updatedAt?: string;
 }

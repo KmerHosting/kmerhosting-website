@@ -172,7 +172,7 @@ const faqs = [
               className="text-white font-semibold cursor-pointer"
               style={{ backgroundColor: "#128C7E" }}
             >
-              <Link href="https://kmerhosting.com/customers/contact.php">
+              <Link href="/support">
                 Contact Support
               </Link>
             </Button>

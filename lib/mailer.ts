@@ -35,6 +35,26 @@ const emailConfig = {
     address: process.env.MAILTRAP_EMAIL_ADMIN || "admin@kmerhosting.com",
     name: process.env.MAILTRAP_NAME_ADMIN || "KmerHosting Admin",
   },
+  security: {
+    address: process.env.MAILTRAP_EMAIL_SECURITY || "security@kmerhosting.com",
+    name: process.env.MAILTRAP_NAME_SECURITY || "KmerHosting Security",
+  },
+  abuse: {
+    address: process.env.MAILTRAP_EMAIL_ABUSE || "abuse@kmerhosting.com",
+    name: process.env.MAILTRAP_NAME_ABUSE || "KmerHosting Abuse",
+  },
+  noc: {
+    address: process.env.MAILTRAP_EMAIL_NOC || "noc@kmerhosting.com",
+    name: process.env.MAILTRAP_NAME_NOC || "KmerHosting NOC",
+  },
+  migrations: {
+    address: process.env.MAILTRAP_EMAIL_MIGRATIONS || "migrations@kmerhosting.com",
+    name: process.env.MAILTRAP_NAME_MIGRATIONS || "KmerHosting Migrations",
+  },
+  info: {
+    address: process.env.MAILTRAP_EMAIL_INFO || "info@kmerhosting.com",
+    name: process.env.MAILTRAP_NAME_INFO || "KmerHosting Info",
+  },
 };
 
 export async function sendOTPEmail(
@@ -275,3 +295,215 @@ export async function sendSalesEmail(
     throw new Error("Failed to send sales email");
   }
 }
+
+// Email verification confirmed
+export async function sendEmailVerificationConfirmationEmail(
+  recipientEmail: string,
+  recipientName: string
+): Promise<void> {
+  try {
+    await transport.sendMail({
+      from: emailConfig.noreply,
+      to: recipientEmail,
+      subject: "Email Verified - Account Activated",
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Email Verified - KmerHosting</title>
+          </head>
+          <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;">
+            <!-- White Header with Centered Logo -->
+            <div style="background-color: #ffffff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #e5e7eb;">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png" alt="KmerHosting" style="max-width: 180px; height: auto; display: inline-block;">
+            </div>
+            
+            <!-- Main Content -->
+            <div style="max-width: 500px; margin: 0 auto; padding: 40px 20px;">
+              <h1 style="color: #1f2937; font-size: 24px; font-weight: 600; margin: 0 0 10px 0; text-align: center;">
+                ✓ Email Verified
+              </h1>
+              
+              <p style="color: #6b7280; font-size: 14px; text-align: center; margin: 0 0 30px 0; line-height: 1.5;">
+                Hi ${recipientName}, your email has been successfully verified and your account is now active!
+              </p>
+              
+              <div style="background-color: #f0fdf4; border-left: 4px solid #22c55e; padding: 20px; border-radius: 6px; margin: 30px 0;">
+                <p style="color: #166534; font-size: 14px; margin: 0; line-height: 1.5;">
+                  Your account is ready to use. You can now log in and access all KmerHosting services.
+                </p>
+              </div>
+              
+              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+              
+              <div style="text-align: center;">
+                <p style="color: #374151; font-size: 13px; font-weight: 600; margin: 0 0 10px 0;">
+                  KmerHosting
+                </p>
+                <p style="color: #6b7280; font-size: 12px; margin: 0;">
+                  © 2025 KmerHosting. All rights reserved.
+                </p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
+      category: "Account Verification",
+    });
+  } catch (error) {
+    console.error("Failed to send email verification confirmation:", error);
+  }
+}
+
+// Security alert for password change
+export async function sendPasswordChangeSecurityAlert(
+  recipientEmail: string,
+  recipientName: string
+): Promise<void> {
+  try {
+    const timestamp = new Date().toLocaleString("fr-FR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    await transport.sendMail({
+      from: emailConfig.security,
+      to: recipientEmail,
+      subject: "Security Alert: Password Changed",
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Password Changed - KmerHosting</title>
+          </head>
+          <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;">
+            <!-- White Header with Centered Logo -->
+            <div style="background-color: #ffffff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #e5e7eb;">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png" alt="KmerHosting" style="max-width: 180px; height: auto; display: inline-block;">
+            </div>
+            
+            <!-- Main Content -->
+            <div style="max-width: 500px; margin: 0 auto; padding: 40px 20px;">
+              <h1 style="color: #1f2937; font-size: 24px; font-weight: 600; margin: 0 0 10px 0; text-align: center;">
+                🔐 Password Changed
+              </h1>
+              
+              <p style="color: #6b7280; font-size: 14px; text-align: center; margin: 0 0 30px 0; line-height: 1.5;">
+                Your KmerHosting account password was successfully changed.
+              </p>
+              
+              <div style="background-color: #ffffff; border: 1px solid #e5e7eb; padding: 20px; border-radius: 6px; margin: 30px 0;">
+                <p style="color: #6b7280; font-size: 12px; text-transform: uppercase; margin: 0 0 10px 0; font-weight: 600;">Activity Details</p>
+                <p style="color: #1f2937; font-size: 14px; margin: 0 0 5px 0;"><strong>Action:</strong> Password changed</p>
+                <p style="color: #1f2937; font-size: 14px; margin: 0;"><strong>Time:</strong> ${timestamp}</p>
+              </div>
+              
+              <div style="background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 15px; margin: 30px 0; border-radius: 4px;">
+                <p style="color: #991b1b; font-size: 13px; margin: 0; line-height: 1.5;">
+                  <strong>Did not authorize this change?</strong> Contact our security team immediately at <a href="mailto:security@kmerhosting.com" style="color: #dc2626; text-decoration: underline;">security@kmerhosting.com</a>
+                </p>
+              </div>
+              
+              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+              
+              <div style="text-align: center;">
+                <p style="color: #374151; font-size: 13px; font-weight: 600; margin: 0 0 10px 0;">
+                  KmerHosting Security Team
+                </p>
+                <p style="color: #6b7280; font-size: 12px; margin: 0;">
+                  © 2025 KmerHosting. All rights reserved.
+                </p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
+      category: "Security Alert",
+    });
+  } catch (error) {
+    console.error("Failed to send password change security alert:", error);
+  }
+}
+
+// Security alert for account information update
+export async function sendAccountInfoUpdateSecurityAlert(
+  recipientEmail: string,
+  recipientName: string
+): Promise<void> {
+  try {
+    const timestamp = new Date().toLocaleString("fr-FR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    await transport.sendMail({
+      from: emailConfig.security,
+      to: recipientEmail,
+      subject: "Security Alert: Account Information Updated",
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Account Updated - KmerHosting</title>
+          </head>
+          <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;">
+            <!-- White Header with Centered Logo -->
+            <div style="background-color: #ffffff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #e5e7eb;">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png" alt="KmerHosting" style="max-width: 180px; height: auto; display: inline-block;">
+            </div>
+            
+            <!-- Main Content -->
+            <div style="max-width: 500px; margin: 0 auto; padding: 40px 20px;">
+              <h1 style="color: #1f2937; font-size: 24px; font-weight: 600; margin: 0 0 10px 0; text-align: center;">
+                🔔 Account Information Updated
+              </h1>
+              
+              <p style="color: #6b7280; font-size: 14px; text-align: center; margin: 0 0 30px 0; line-height: 1.5;">
+                Your KmerHosting account information has been successfully updated.
+              </p>
+              
+              <div style="background-color: #ffffff; border: 1px solid #e5e7eb; padding: 20px; border-radius: 6px; margin: 30px 0;">
+                <p style="color: #6b7280; font-size: 12px; text-transform: uppercase; margin: 0 0 10px 0; font-weight: 600;">Activity Details</p>
+                <p style="color: #1f2937; font-size: 14px; margin: 0 0 5px 0;"><strong>Action:</strong> Account information modified</p>
+                <p style="color: #1f2937; font-size: 14px; margin: 0;"><strong>Time:</strong> ${timestamp}</p>
+              </div>
+              
+              <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 30px 0; border-radius: 4px;">
+                <p style="color: #92400e; font-size: 13px; margin: 0; line-height: 1.5;">
+                  <strong>Did not make this change?</strong> Your account may be compromised. Contact us immediately at <a href="mailto:security@kmerhosting.com" style="color: #f59e0b; text-decoration: underline;">security@kmerhosting.com</a>
+                </p>
+              </div>
+              
+              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+              
+              <div style="text-align: center;">
+                <p style="color: #374151; font-size: 13px; font-weight: 600; margin: 0 0 10px 0;">
+                  KmerHosting Security Team
+                </p>
+                <p style="color: #6b7280; font-size: 12px; margin: 0;">
+                  © 2025 KmerHosting. All rights reserved.
+                </p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
+      category: "Security Alert",
+    });
+  } catch (error) {
+    console.error("Failed to send account info update security alert:", error);
+  }
+}
+

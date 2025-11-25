@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/lib/auth-context";
 import Navbar from "@/components/navbar";
-import LoadingSpinner from "@/components/loading-spinner";
 import { PageSkeletons } from "@/components/page-skeletons";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Alert } from "@/components/ui/alert";
 import Link from "next/link";
-import { ArrowLeft, FileText, Download, Eye, AlertCircle, Check } from "lucide-react";
+import { ArrowLeft, FileText, Download, AlertCircle, Shield } from "lucide-react";
 import { toast } from "sonner";
 
 interface Invoice {
@@ -18,10 +18,9 @@ interface Invoice {
   amount: number;
   status: string;
   dueDate: string;
-  invoiceDate: string;
   createdAt: string;
   isFinal?: boolean;
-  service?: { name: string };
+  verificationKey?: string;
 }
 
 export default function InvoicesPage() {
@@ -55,24 +54,23 @@ export default function InvoicesPage() {
       setDownloadingId(invoiceId);
       const response = await fetch(`/api/admin/invoices/${invoiceId}/pdf`);
       if (response.ok) {
-        const data = await response.json();
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
         const element = document.createElement("a");
-        element.setAttribute(
-          "href",
-          "data:text/html;charset=utf-8," + encodeURIComponent(data.html)
-        );
-        element.setAttribute("download", `${invoiceNumber}.html`);
+        element.href = url;
+        element.download = `KmerHosting_${invoiceNumber}.pdf`;
         element.style.display = "none";
         document.body.appendChild(element);
         element.click();
         document.body.removeChild(element);
-        toast.success("Invoice downloaded successfully");
+        window.URL.revokeObjectURL(url);
+        toast.success("Invoice downloaded");
       } else {
-        toast.error("Failed to download invoice");
+        toast.error("Failed to download");
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("An error occurred while downloading");
+      toast.error("Download error");
     } finally {
       setDownloadingId(null);
     }
@@ -81,24 +79,13 @@ export default function InvoicesPage() {
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case "paid":
-        return "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400";
+        return "bg-green-100 text-green-700";
       case "pending":
-        return "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400";
+        return "bg-yellow-100 text-yellow-700";
       case "overdue":
-        return "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400";
+        return "bg-red-100 text-red-700";
       default:
-        return "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300";
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "paid":
-        return <Check className="w-4 h-4" />;
-      case "overdue":
-        return <AlertCircle className="w-4 h-4" />;
-      default:
-        return null;
+        return "bg-slate-100 text-slate-700";
     }
   };
 
@@ -112,132 +99,132 @@ export default function InvoicesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+    <div className="min-h-screen bg-slate-50">
       <Navbar />
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        {/* Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-100">My Invoices</h1>
-            <p className="text-slate-600 dark:text-slate-400 mt-2">View and download your invoices</p>
+            <h1 className="text-3xl font-bold text-slate-900">My Invoices</h1>
           </div>
-          <Button asChild variant="outline">
-            <Link href="/dashboard" className="flex items-center gap-2 cursor-pointer">
+          <Button asChild variant="outline" size="sm">
+            <Link href="/dashboard" className="flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" />
-              Back to Dashboard
+              Dashboard
             </Link>
           </Button>
         </div>
 
+        {/* Verification Info Alert */}
+        <Alert className="mb-8 border-blue-200 bg-blue-50">
+          <Shield className="h-4 w-4 text-blue-600" />
+          <div className="ml-3">
+            <p className="font-semibold text-blue-900">Besoin de vérifier une facture?</p>
+            <p className="text-sm text-blue-800 mt-1">
+              Chaque PDF contient 4 codes uniques dans la section verte: Clé de Vérification, Hash PIN, et Signature Numérique. 
+              <Button asChild variant="link" className="ml-1 p-0 h-auto text-blue-600 hover:text-blue-800">
+                <Link href="/verify-invoice">Vérifier l'authenticité →</Link>
+              </Button>
+            </p>
+          </div>
+        </Alert>
+
+        {/* Invoices List */}
         {invoices.length === 0 ? (
           <Card>
-            <CardHeader>
-              <CardTitle>No Invoices Yet</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-slate-600 dark:text-slate-400">
-                You don't have any invoices yet. Your first invoice will appear after you purchase a service.
-              </p>
+            <CardContent className="pt-6">
+              <p className="text-slate-600">No invoices yet.</p>
             </CardContent>
           </Card>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3">
             {invoices.map((invoice) => (
               <Card
                 key={invoice.id}
-                className={`hover:shadow-lg transition-all ${
-                  invoice.status.toLowerCase() === "overdue"
-                    ? "border-red-400 border-2"
-                    : "border-slate-200 dark:border-slate-700"
+                className={`hover:shadow-md transition-shadow ${
+                  invoice.status.toLowerCase() === "overdue" ? "border-red-300 border-2" : ""
                 }`}
               >
                 <CardContent className="pt-6">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                    {/* Left Section - Invoice Info */}
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-3">
-                        <FileText className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                        <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                          {invoice.invoiceNumber}
-                        </h3>
-                        <div className="flex items-center gap-2">
-                          <Badge className={`${getStatusColor(invoice.status)} border-0`}>
-                            {getStatusIcon(invoice.status) && (
-                              <span className="mr-1">{getStatusIcon(invoice.status)}</span>
-                            )}
-                            {invoice.status.toUpperCase()}
-                          </Badge>
-                          {invoice.isFinal && (
-                            <Badge className="bg-purple-600 hover:bg-purple-700 text-white">
-                              Final Invoice
-                            </Badge>
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    {/* Invoice Info */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start gap-3 mb-3">
+                        <FileText className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                        <div className="min-w-0 flex-1">
+                          <p className="font-semibold text-slate-900">{invoice.invoiceNumber}</p>
+                          {invoice.verificationKey && (
+                            <p className="text-xs text-slate-600 mt-1">
+                              Verification KEY: <span className="font-mono font-semibold text-teal-600">{invoice.verificationKey.toUpperCase()}</span>
+                            </p>
                           )}
                         </div>
                       </div>
 
-                      {invoice.service && (
-                        <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
-                          Service: <span className="font-semibold text-slate-900 dark:text-white">{invoice.service.name}</span>
-                        </p>
-                      )}
-
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <div className="grid grid-cols-3 md:grid-cols-4 gap-4 text-sm">
                         <div>
-                          <p className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">Amount</p>
-                          <p className="text-lg font-bold text-blue-600 dark:text-blue-400 mt-1">
-                            {invoice.amount.toLocaleString()} FCFA
-                          </p>
+                          <p className="text-xs text-slate-500 uppercase mb-1">Amount</p>
+                          <p className="font-semibold text-slate-900">{invoice.amount.toLocaleString()} FCFA</p>
                         </div>
                         <div>
-                          <p className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">Issued Date</p>
-                          <p className="text-sm text-slate-900 dark:text-white font-medium mt-1">
-                            {new Date(invoice.createdAt).toLocaleDateString()}
-                          </p>
+                          <p className="text-xs text-slate-500 uppercase mb-1">Status</p>
+                          <Badge className={`${getStatusColor(invoice.status)} border-0`}>
+                            {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
+                          </Badge>
                         </div>
                         <div>
-                          <p className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">Due Date</p>
-                          <p className={`text-sm font-medium mt-1 ${
-                            invoice.status.toLowerCase() === "overdue"
-                              ? "text-red-600 dark:text-red-400"
-                              : "text-slate-900 dark:text-white"
-                          }`}>
-                            {new Date(invoice.dueDate).toLocaleDateString()}
-                          </p>
+                          <p className="text-xs text-slate-500 uppercase mb-1">Issued</p>
+                          <p className="text-slate-900">{new Date(invoice.createdAt).toLocaleDateString("fr-FR")}</p>
                         </div>
-                        <div>
-                          <p className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">Days Left</p>
-                          <p className="text-sm text-slate-900 dark:text-white font-medium mt-1">
-                            {Math.ceil((new Date(invoice.dueDate).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))} days
+                        <div className="hidden md:block">
+                          <p className="text-xs text-slate-500 uppercase mb-1">Due</p>
+                          <p className={invoice.status.toLowerCase() === "overdue" ? "text-red-600 font-semibold" : "text-slate-900"}>
+                            {new Date(invoice.dueDate).toLocaleDateString("fr-FR")}
                           </p>
                         </div>
                       </div>
                     </div>
 
-                    {/* Right Section - Download Button */}
-                    <div className="flex gap-2 md:flex-col md:items-end">
-                      <Button
-                        onClick={() => handleDownloadPDF(invoice.id, invoice.invoiceNumber)}
-                        disabled={downloadingId === invoice.id}
-                        className="flex-1 md:flex-none bg-green-600 hover:bg-green-700 text-white cursor-pointer flex items-center justify-center gap-2"
-                      >
-                        {downloadingId === invoice.id ? (
-                          <>
-                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                            Downloading...
-                          </>
-                        ) : (
-                          <>
-                            <Download className="w-4 h-4" />
-                            Download PDF
-                          </>
-                        )}
-                      </Button>
-                    </div>
+                    {/* Download Button */}
+                    <Button
+                      onClick={() => handleDownloadPDF(invoice.id, invoice.invoiceNumber)}
+                      disabled={downloadingId === invoice.id}
+                      className="bg-teal-600 hover:bg-teal-700 text-white gap-2 flex-shrink-0 self-start"
+                      size="sm"
+                    >
+                      {downloadingId === invoice.id ? (
+                        <>
+                          <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        </>
+                      ) : (
+                        <>
+                          <Download className="w-4 h-4" />
+                        </>
+                      )}
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
         )}
+
+        {/* Security Info - at the end, short and minimal */}
+        <div className="mt-12 space-y-3 pt-8 border-t border-slate-200">
+          <Alert className="border-blue-200 bg-blue-50">
+            <Shield className="h-4 w-4 text-blue-600" />
+            <p className="ml-3 text-sm text-blue-800">
+              <strong>Verify invoices:</strong> All invoices have a Verification KEY. <Link href="/verify-invoice" className="font-semibold underline hover:text-blue-900">Verify authenticity here</Link>
+            </p>
+          </Alert>
+          
+          <Alert className="border-orange-200 bg-orange-50">
+            <AlertCircle className="h-4 w-4 text-orange-600" />
+            <p className="ml-3 text-sm text-orange-800">
+              <strong>Never share:</strong> PIN Hash or control panel credentials. Always verify before responding to invoice emails.
+            </p>
+          </Alert>
+        </div>
       </div>
     </div>
   );

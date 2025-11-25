@@ -9,7 +9,7 @@ import LoadingSpinner from "@/components/loading-spinner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { ShoppingCart, Globe, FileText, AlertCircle, CheckCircle2, LightbulbIcon, Plus, Zap, BookOpen, Wrench } from "lucide-react";
+import { ShoppingCart, Globe, FileText, AlertCircle, CheckCircle2, LightbulbIcon, Plus, Zap, BookOpen, Wrench, Copy, MessageSquare } from "lucide-react";
 
 interface DashboardStats {
   services: number;
@@ -88,20 +88,74 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="mb-8 flex items-start justify-between">
-          <div>
-            <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-100">
-              Welcome, {user?.fullName}!
-            </h1>
-            <p className="text-slate-600 dark:text-slate-400 mt-2">Manage your hosting services</p>
+        {/* Top Section - Title & Profile Indicators */}
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4">
+            Welcome, {user?.fullName}!
+          </h1>
+          
+          {/* Account Info Row - Verified Badge, PIN, Referral Code */}
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-6">
+            {/* Profile Complete Indicator */}
+            {!isProfileIncomplete && (
+              <div className="w-fit p-3 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0" />
+                  <div>
+                    <p className="text-xs font-semibold text-green-900 dark:text-green-200">Account verified</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* PIN Code Display */}
+            {!isProfileIncomplete && user?.pinCode && (
+              <div className="flex items-center gap-2 px-3 py-3 bg-teal-50 dark:bg-teal-900/20 rounded-lg border border-teal-200 dark:border-teal-800">
+                <span className="text-xs font-semibold text-teal-900 dark:text-teal-200">PIN:</span>
+                <code className="font-mono font-bold text-teal-600 dark:text-teal-300 tracking-widest">
+                  {user.pinCode}
+                </code>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => navigator.clipboard.writeText(user.pinCode || "")}
+                  className="text-teal-600 dark:text-teal-300 hover:bg-teal-100 dark:hover:bg-teal-900/50 h-6 px-2"
+                >
+                  Copy
+                </Button>
+              </div>
+            )}
+
+            {/* Referral Code Display */}
+            {!isProfileIncomplete && user?.referralCode && (
+              <div className="flex items-center gap-2 px-3 py-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                <span className="text-xs font-semibold text-purple-900 dark:text-purple-200">Referral:</span>
+                <code className="font-mono font-bold text-purple-600 dark:text-purple-300 tracking-widest">
+                  {user.referralCode}
+                </code>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => navigator.clipboard.writeText(user.referralCode || "")}
+                  className="text-purple-600 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/50 h-6 px-2"
+                >
+                  Copy
+                </Button>
+              </div>
+            )}
           </div>
-          {/* Credit Balance - Top Right */}
-          <div className="text-right">
-            <p className="text-xs text-slate-600 dark:text-slate-400 uppercase tracking-wide">Account Credit</p>
-            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100 mt-1">0 FCFA</p>
-            <Button className="mt-2 bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 dark:text-slate-900 text-white cursor-pointer transition-all flex items-center justify-center gap-2 ml-auto">
+        </div>
+
+        {/* Credit Balance Card */}
+        <div className="mb-8 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs text-slate-600 dark:text-slate-400 uppercase tracking-wide font-semibold">Account Credit</p>
+              <p className="text-3xl font-bold text-slate-900 dark:text-slate-100 mt-2">0 FCFA</p>
+            </div>
+            <Button className="bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 dark:text-slate-900 text-white cursor-pointer transition-all flex items-center justify-center gap-2">
               <Plus className="w-4 h-4" />
-              Add
+              Add Credit
             </Button>
           </div>
         </div>
@@ -129,21 +183,8 @@ export default function DashboardPage() {
           </Card>
         )}
 
-        {/* Profile Complete Indicator - Minimal Design */}
-        {!isProfileIncomplete && (
-          <div className="mb-8 w-fit p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-800 relative overflow-hidden">
-            <div className="flex items-center gap-3">
-              <CheckCircle2 className="w-6 h-6 text-green-600 dark:text-green-400 flex-shrink-0" />
-              <div>
-                <p className="text-sm font-semibold text-green-900 dark:text-green-200">Account verified</p>
-                <p className="text-xs text-green-700 dark:text-green-300 mt-1">You have access to all features</p>
-              </div>
-            </div>
-          </div>
-        )}
-
         {/* Services Cards - Minimal Design & Disabled if profile incomplete */}
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 ${isProfileIncomplete ? "opacity-50 pointer-events-none" : ""}`}>
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 ${isProfileIncomplete ? "opacity-50 pointer-events-none" : ""}`}>
           {/* Services Card - Minimal */}
           <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow rounded-2xl">
             <CardHeader className="pb-2 pt-4 px-4">
@@ -204,6 +245,7 @@ export default function DashboardPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="pb-3 px-4">
+              <p className="text-2xl font-bold text-slate-900 dark:text-white mb-2">2</p>
               <Button asChild variant="outline" className="w-full text-sm h-9">
                 <Link href="#">Learn More</Link>
               </Button>
@@ -222,6 +264,7 @@ export default function DashboardPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="pb-3 px-4">
+              <p className="text-2xl font-bold text-slate-900 dark:text-white mb-2">5</p>
               <Button asChild variant="outline" className="w-full text-sm h-9">
                 <Link href="#">Explore</Link>
               </Button>
@@ -240,8 +283,50 @@ export default function DashboardPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="pb-3 px-4">
+              <p className="text-2xl font-bold text-slate-900 dark:text-white mb-2">2</p>
               <Button asChild variant="outline" className="w-full text-sm h-9">
                 <Link href="#">Explore</Link>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Additional Features Row */}
+        <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 ${isProfileIncomplete ? "opacity-50 pointer-events-none" : ""}`}>
+          {/* KmerHosting Chat Room Card */}
+          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow rounded-2xl relative">
+            <div className="absolute -top-3 -right-3 bg-teal-600 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow-lg">
+              NEW
+            </div>
+            <CardHeader className="pb-2 pt-4 px-4">
+              <CardTitle className="flex items-center gap-2 text-sm">
+                <MessageSquare className="w-4 h-4" />
+                KmerHosting Chat Room
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pb-3 px-4">
+              <p className="text-xs text-slate-600 dark:text-slate-400 mb-3">Connect with community members</p>
+              <Button asChild variant="outline" className="w-full text-sm h-9">
+                <Link href="#">Join Chat</Link>
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* KmerHosting Books Card */}
+          <Card className="border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow rounded-2xl relative">
+            <div className="absolute -top-3 -right-3 bg-teal-600 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow-lg">
+              NEW
+            </div>
+            <CardHeader className="pb-2 pt-4 px-4">
+              <CardTitle className="flex items-center gap-2 text-sm">
+                <BookOpen className="w-4 h-4" />
+                KmerHosting Books
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pb-3 px-4">
+              <p className="text-xs text-slate-600 dark:text-slate-400 mb-3">Learn from our comprehensive guides</p>
+              <Button asChild variant="outline" className="w-full text-sm h-9">
+                <Link href="#">Browse Library</Link>
               </Button>
             </CardContent>
           </Card>

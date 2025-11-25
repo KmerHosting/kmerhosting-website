@@ -36,6 +36,16 @@ model User {
   jobTitle          String?
   profilePicture    String?
   
+  // Security
+  pinCode           String?   // 5-digit PIN for invoice verification
+  twoFactorSecret   String?   // 2FA secret key for TOTP
+  twoFactorEnabled  Boolean   @default(false)
+  referralCode      String?   @unique  // 8-character alphanumeric referral code
+  
+  // Community & Chat
+  username          String?   @unique  // Username for chat room access
+  isProfilePublic   Boolean   @default(false)  // Allow public profile & chat/multiplayer features
+  
   // Preferences
   newsletter        Boolean   @default(true)  // Opted in by default
   
@@ -47,6 +57,8 @@ model User {
   services          Service[]
   domains           Domain[]
   invoices          Invoice[]
+  tickets           Ticket[]
+  apiKeys           APIKey[]
 
   @@index([email])
 }
@@ -74,6 +86,7 @@ model Service {
   // Relations
   domains           Domain[]
   invoices          Invoice[]
+  tickets           Ticket[]
   
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
@@ -98,6 +111,9 @@ model Domain {
   startDate         DateTime
   endDate           DateTime  // Auto-calculated: startDate + 1 year
   
+  // Relations
+  invoices          Invoice[]
+  
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
@@ -114,7 +130,7 @@ model Invoice {
   service           Service?  @relation(fields: [serviceId], references: [id], onDelete: SetNull)
   
   domainId          String?   // Optional: domain linked to service or standalone domain invoice
-  // Note: domain reference handled through service relationship or as separate field
+  domain            Domain?   @relation(fields: [domainId], references: [id], onDelete: SetNull)
   
   invoiceNumber     String    @unique
   amount            Float
@@ -124,9 +140,78 @@ model Invoice {
   invoiceDate       DateTime  @default(now())
   items             String?   // JSON stringified array of invoice items
   
+  // Verification & Security
+  verificationKey   String    @unique  // 8-character alphanumeric key for authenticity verification
+  pinHash           String?            // Hash of the user's 5-digit PIN for secure verification
+  signature         String?            // HMAC-SHA256 signature to prevent forgery (16 chars hex)
+  
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
   @@index([userId])
   @@index([serviceId])
+  @@index([domainId])
 }
+
+// Support / Ticketing
+model Ticket {
+  id          String    @id @default(cuid())
+  userId      String?   // Nullable for guest/visitor tickets
+  user        User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  subject     String
+  department  String    // e.g. support, billing, sales, noc, security, abuse, info, migrations
+  content     String    // Stored as Markdown/HTML (allow small styling)
+
+  // If the ticket is related to one of the user's services
+  serviceId   String?   
+  service     Service?  @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+
+  status      String    @default("open") // open, pending, resolved, closed
+  priority    String?   // optional priority: low, medium, high
+
+  // Attachments
+  images      TicketImage[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([serviceId])
+  @@index([status])
+}
+
+model TicketImage {
+  id        String   @id @default(cuid())
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+
+  url       String   // path to public/uploads/tickets/...
+  fileName  String
+  mimeType  String
+  size      Int?
+
+  createdAt DateTime @default(now())
+
+  @@index([ticketId])
+}
+
+model APIKey {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name        String    // User-friendly name for this API key
+  key         String    @unique  // The actual secret key (hashed)
+  keyPrefix   String    // First 8 chars of the key for display purposes
+  
+  isActive    Boolean   @default(true)
+  
+  createdAt   DateTime  @default(now())
+  expiresAt   DateTime?  // Optional: when this key expires
+  lastUsedAt  DateTime?  // Track when this key was last used
+
+  @@index([userId])
+  @@index([key])
+}
+

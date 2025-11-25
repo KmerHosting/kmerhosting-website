@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { sendEmailVerificationConfirmationEmail } from "@/lib/mailer";
 
 const prisma = new PrismaClient();
 
@@ -42,6 +43,9 @@ export async function POST(request: NextRequest) {
         otpExpiresAt: null,
       },
     });
+
+    // Send verification confirmation email
+    await sendEmailVerificationConfirmationEmail(updatedUser.email, updatedUser.fullName);
 
     // Create response - user will proceed to password setup
     const response = NextResponse.json(

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { hashPassword, generateJWT, setAuthCookie } from "@/lib/auth";
-import { sendWelcomeEmail } from "@/lib/mailer";
+import { sendWelcomeEmail, sendPasswordChangeSecurityAlert } from "@/lib/mailer";
 
 const prisma = new PrismaClient();
 
@@ -66,6 +66,9 @@ export async function POST(request: NextRequest) {
 
     // Send welcome email with logo
     await sendWelcomeEmail(email, user.fullName);
+
+    // Send security alert for password change
+    await sendPasswordChangeSecurityAlert(email, user.fullName);
 
     // Create response
     const response = NextResponse.json(

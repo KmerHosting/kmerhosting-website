@@ -262,6 +262,9 @@ export default function AdminInvoicesPage() {
           <Card className="mb-8">
             <CardHeader>
               <CardTitle>Generate New Invoice</CardTitle>
+              <CardDescription>
+                Les codes de sécurité (Clé, Hash PIN, Signature) sont générés automatiquement lors de la création de la facture et seront affichés sur le PDF en zone verte.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">

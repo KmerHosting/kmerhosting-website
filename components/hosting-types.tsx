@@ -2,6 +2,7 @@
 
 import { Check, ChevronLeft, ChevronRight, Users, Server, HardDrive, Database } from "lucide-react"
 import { useState } from "react"
+import Image from "next/image"
 
 export default function HostingTypes() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -73,6 +74,26 @@ export default function HostingTypes() {
     <section className="py-16 px-4 bg-slate-50 dark:bg-slate-800">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
+          <div className="flex justify-center gap-8 mb-8">
+            <div className="relative w-56 h-56 bg-white rounded-lg p-4 flex items-center justify-center dark:bg-white">
+              <Image
+                src="/cpanel-white.png"
+                alt="cPanel Logo"
+                width={200}
+                height={200}
+                className="object-contain"
+              />
+            </div>
+            <div className="relative w-56 h-56 bg-white rounded-lg p-4 flex items-center justify-center dark:bg-white">
+              <Image
+                src="/directadmin-white.png"
+                alt="DirectAdmin Logo"
+                width={200}
+                height={200}
+                className="object-contain"
+              />
+            </div>
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-2 text-slate-900 dark:text-white">
             We Have The Right Hosting Plan For You
           </h2>
@@ -90,7 +111,7 @@ export default function HostingTypes() {
                 const type = hostingTypes[index]
                 const Icon = type.icon
                 return (
-                  <div key={index} className="bg-white dark:bg-slate-900 rounded-lg p-8 shadow-lg">
+                  <div key={index} className="bg-transparent rounded-lg p-8">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
                         <Icon className="w-6 h-6" style={{ color: "#128C7E" }} />
@@ -121,7 +142,7 @@ export default function HostingTypes() {
 
           {/* Mobile View - Show 1 card */}
           <div className="md:hidden">
-            <div className="bg-white dark:bg-slate-900 rounded-lg p-8 shadow-lg">
+            <div className="bg-transparent rounded-lg p-8">
               {(() => {
                 const type = hostingTypes[currentIndex]
                 const Icon = type.icon

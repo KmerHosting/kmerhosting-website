@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { generateOTP, getOTPExpiration } from "@/lib/auth";
+import { generateOTP, getOTPExpiration, generateReferralCode } from "@/lib/auth";
+import { generatePinCode } from "@/lib/verification";
 import { sendOTPEmail } from "@/lib/mailer";
 
 export async function POST(request: NextRequest) {
@@ -51,8 +52,10 @@ export async function POST(request: NextRequest) {
     // Generate OTP (allow resend for unverified users)
     const otp = generateOTP();
     const otpExpiresAt = getOTPExpiration();
+    const pinCode = generatePinCode(); // Generate 5-digit PIN
+    const referralCode = generateReferralCode(); // Generate 8-char referral code
 
-    // Create or update user with OTP
+    // Create or update user with OTP, PIN, and referral code
     const user = await prisma.user.upsert({
       where: { email },
       update: {
@@ -65,6 +68,8 @@ export async function POST(request: NextRequest) {
         fullName,
         verificationOTP: otp,
         otpExpiresAt,
+        pinCode, // Store PIN in plain text (user will see it once)
+        referralCode, // Generate unique referral code
       },
     });
 

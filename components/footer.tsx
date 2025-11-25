@@ -1,8 +1,21 @@
 "use client"
 
-import { CheckCircle2 } from "lucide-react"
+import { CheckCircle2, Mail, Send, Facebook, Twitter, Instagram, Linkedin, Cookie, Youtube, Github } from "lucide-react"
+import { useState } from "react"
+import Image from "next/image"
 
 export default function Footer() {
+  const [email, setEmail] = useState("")
+  const [subscribed, setSubscribed] = useState(false)
+  const [showCookies, setShowCookies] = useState(true)
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubscribed(true)
+    setEmail("")
+    setTimeout(() => setSubscribed(false), 3000)
+  }
+
   const services = [
     { name: "Web Servers", status: "Operational" },
     { name: "Email Services", status: "Operational" },
@@ -11,133 +24,225 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="py-16 px-4 bg-slate-50 dark:bg-slate-900">
-      <div className="max-w-7xl mx-auto">
-        {/* Services Status Section */}
-        <div className="mb-12 pb-12 border-b border-slate-300 dark:border-slate-700">
-          <h3 className="text-lg font-bold mb-6 text-slate-900 dark:text-white">
-            Service Status
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="p-4 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center gap-3"
+    <footer className="text-slate-900 dark:text-white">
+      {/* Newsletter Section */}
+      <div className="py-6 px-4 border-b border-slate-200 dark:border-slate-700">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex-1">
+              <h3 className="text-lg md:text-xl font-bold">Join the KmerHosting Universe</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                Subscribe to keep up with everything happening on KmerHosting
+              </p>
+            </div>
+            <form onSubmit={handleNewsletterSubmit} className="flex gap-2 w-full sm:w-auto flex-shrink-0">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="flex-1 sm:flex-none px-3 py-2 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 rounded-full border border-slate-300 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-teal-500 transition-all text-sm w-full sm:w-56"
+              />
+              <button
+                type="submit"
+                className="px-5 py-2 rounded-full font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap bg-blue-600 hover:bg-blue-700 text-white text-sm"
               >
-                <div className="flex-shrink-0 animate-pulse">
-                  <CheckCircle2 className="w-6 h-6 text-green-500" />
+                <Send className="w-4 h-4" />
+                <span className="hidden sm:inline">Subscribe</span>
+              </button>
+            </form>
+          </div>
+          {subscribed && (
+            <div className="mt-2 text-green-600 dark:text-green-400 flex items-center gap-2 text-sm">
+              <CheckCircle2 className="w-4 h-4" />
+              <span>Thanks for subscribing!</span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="py-16 px-4 bg-white dark:bg-slate-950">
+        <div className="max-w-7xl mx-auto">
+          {/* Services Status Section */}
+          <div className="mb-12 pb-12 border-b border-slate-200 dark:border-slate-700">
+            <h3 className="text-lg font-bold mb-6">
+              Service Status
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {services.map((service, index) => (
+                <div
+                  key={index}
+                  className="p-4 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center gap-3"
+                >
+                  <div className="flex-shrink-0 animate-pulse">
+                    <CheckCircle2 className="w-6 h-6 text-green-500" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-slate-900 dark:text-white text-sm">
+                      {service.name}
+                    </p>
+                    <p className="text-xs text-green-400 font-semibold">
+                      {service.status}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-medium text-slate-900 dark:text-white text-sm">
-                    {service.name}
-                  </p>
-                  <p className="text-xs text-green-600 dark:text-green-400 font-semibold">
-                    {service.status}
-                  </p>
+              ))}
+            </div>
+          </div>
+
+          {/* Footer Links Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12">
+          <div>
+            <div className="mb-4">
+              <Image
+                src="/logo-white1.png"
+                alt="KmerHosting Logo"
+                width={180}
+                height={50}
+                className="h-auto"
+              />
+            </div>
+            <p className="text-slate-600 dark:text-slate-400 text-sm">The best web hosting solution in Cameroon with world-class support and competitive pricing.</p>
+          </div>
+            <div>
+              <h4 className="font-semibold mb-4">Products</h4>
+              <ul className="space-y-2 text-slate-700 dark:text-slate-400">
+                <li>
+                  <a href="https://kmerhosting.com/customers/store/cpanel-shared-hosting" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Shared Hosting
+                  </a>
+                </li>
+                <li>
+                  <a href="https://kmerhosting.com/customers/store/cpanel-reseller-hosting" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Reseller Hosting
+                  </a>
+                </li>
+                <li>
+                  <a href="https://kmerhosting.com/customers/contact.php" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    VPS Servers
+                  </a>
+                </li>
+                <li>
+                  <a href="https://kmerhosting.com/customers/contact.php" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Dedicated Servers
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Company</h4>
+              <ul className="space-y-2 text-slate-700 dark:text-slate-400">
+                <li>
+                  <a href="/about" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="/faq" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    FAQ
+                  </a>
+                </li>
+                <li>
+                  <a href="https://blog.kmerhosting.com" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Blog
+                  </a>
+                </li>
+                <li>
+                  <a href="https://forum.kmerhosting.com" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Forum
+                  </a>
+                </li>
+                <li>
+                  <a href="/support" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Support
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Legal</h4>
+              <ul className="space-y-2 text-slate-700 dark:text-slate-400">
+                <li>
+                  <a href="/legal/privacy-policy" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/legal/terms-of-service" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Terms of Service
+                  </a>
+                </li>
+                <li>
+                  <a href="/legal/cookies-policy" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Cookies Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/legal/refund-policy" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Refund Policy
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Contact</h4>
+              <ul className="space-y-2 text-slate-700 dark:text-slate-400 text-sm">
+                <li className="flex items-start gap-2">
+                  <Mail className="w-4 h-4 mt-1 flex-shrink-0" style={{ color: "#128C7E" }} />
+                  <span>info@kmerhosting.com</span>
+                </li>
+                <li>10ème arrêt Nkoabang,<br />Yaoundé, Cameroon</li>
+                <li className="pt-2 font-semibold text-teal-400">24/7 Support Available</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Social Links */}
+          <div className="mb-8 pb-8 border-b border-slate-200 dark:border-slate-700">
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <div>
+                <h4 className="font-semibold mb-3">Follow Us</h4>
+                <div className="flex gap-4">
+                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 flex items-center justify-center transition-colors" title="Facebook">
+                    <Facebook className="w-5 h-5 text-slate-700 dark:text-slate-400 hover:text-blue-600 dark:hover:text-teal-400" />
+                  </a>
+                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 flex items-center justify-center transition-colors" title="Twitter">
+                    <Twitter className="w-5 h-5 text-slate-700 dark:text-slate-400 hover:text-blue-400 dark:hover:text-teal-400" />
+                  </a>
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 flex items-center justify-center transition-colors" title="Instagram">
+                    <Instagram className="w-5 h-5 text-slate-700 dark:text-slate-400 hover:text-pink-600 dark:hover:text-teal-400" />
+                  </a>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 flex items-center justify-center transition-colors" title="LinkedIn">
+                    <Linkedin className="w-5 h-5 text-slate-700 dark:text-slate-400 hover:text-blue-700 dark:hover:text-teal-400" />
+                  </a>
+                  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 flex items-center justify-center transition-colors" title="YouTube">
+                    <Youtube className="w-5 h-5 text-slate-700 dark:text-slate-400 hover:text-red-600 dark:hover:text-teal-400" />
+                  </a>
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 flex items-center justify-center transition-colors" title="GitHub">
+                    <Github className="w-5 h-5 text-slate-700 dark:text-slate-400 hover:text-gray-900 dark:hover:text-teal-400" />
+                  </a>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-          <div>
-            <h3 className="text-lg font-bold mb-4" style={{ color: "#128C7E" }}>
-              KmerHosting
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 text-sm">The best web hosting solution <br />in Cameroon.</p>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-slate-900 dark:text-white">Hosting</h4>
-            <ul className="space-y-2 text-slate-600 dark:text-slate-400">
-              <li>
-                <a href="https://kmerhosting.com/customers/store/cpanel-shared-hosting" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                  Shared Hosting
-                </a>
-              </li>
-              <li>
-                <a href="https://kmerhosting.com/customers/store/cpanel-reseller-hosting" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                  Reseller Hosting
-                </a>
-              </li>
-              <li>
-                <a href="https://kmerhosting.com/customers/contact.php" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                  VPS Servers
-                </a>
-              </li>
-              <li>
-                <a href="https://kmerhosting.com/customers/contact.php" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                  Dedicated Servers
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-slate-900 dark:text-white">Company</h4>
-            <ul className="space-y-2 text-slate-600 dark:text-slate-400">
-              <li>
-                <a href="/about" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="/faq" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                  FAQ
-                </a>
-              </li>
-              <li>
-                <a href="https://kmerhosting.com/customers/contact.php" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                  Contact
-                </a>
-              </li>
-              <li>
-                <a href="https://kmerhosting.com/customers/knowledgebase.php" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                  Knowledgebase
-                </a>
-              </li>
-              <li>
-                <a href="https://kmerhosting.com/customers/submitticket.php" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                  Support
-                </a>
-              </li>
-              <li>
-                <a href="/extra-services" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                  Extra Services
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-slate-900 dark:text-white">Contact</h4>
-            <ul className="space-y-2 text-slate-600 dark:text-slate-400">
-              <li>info@kmerhosting.com</li>
-              <li>6 94 19 34 93</li>
-              <li>Yaounde, Cameroon</li>
-              <li>24/7 Support Available</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="border-t border-slate-300 dark:border-slate-700 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-slate-600 dark:text-slate-400 text-sm">© 2025 KmerHosting. All rights reserved.</p>
-            <div className="flex gap-6 mt-4 md:mt-0 text-sm text-slate-600 dark:text-slate-400">
-              <a href="/legal/privacy-policy" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                Privacy Policy
-              </a>
-              <a href="/legal/terms-of-service" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                Terms of Service
-              </a>
-              <a href="/legal/cookies-policy" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                Cookies Policy
-              </a>
-              <a href="/legal/refund-policy" className="hover:text-primary transition cursor-pointer" style={{ color: "inherit" }}>
-                Refund Policy
-              </a>
+              {showCookies && (
+                <button
+                  onClick={() => setShowCookies(false)}
+                  className="flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 rounded-lg transition-colors text-sm text-slate-900 dark:text-slate-200"
+                >
+                  <Cookie className="w-4 h-4" />
+                  Manage Cookies
+                </button>
+              )}
             </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-600 dark:text-slate-400">
+            <p>© 2025 KmerHosting. All rights reserved.</p>
+            <p>Proudly serving Cameroon with enterprise-grade hosting solutions.</p>
           </div>
         </div>
       </div>

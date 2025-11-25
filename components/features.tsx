@@ -1,9 +1,10 @@
 "use client"
 
-import { Server, Shield, Headphones, Zap } from "lucide-react"
+import { Server, Shield, Headphones, Zap, Check, Cpu } from "lucide-react"
+import Image from "next/image"
 
 export default function Features() {
-  const features = [
+  const basicFeatures = [
     {
       icon: Server,
       title: "Powerful Infrastructure",
@@ -26,16 +27,54 @@ export default function Features() {
     },
   ]
 
+  const advancedFeatures = [
+    { name: "Node.js", category: "Programming" },
+    { name: "PHP", category: "Programming" },
+    { name: "Python", category: "Programming" },
+    { name: "Ruby", category: "Programming" },
+    { name: "SSH Access", category: "Security" },
+    { name: "Git", category: "Development" },
+    { name: "WordPress Installer", category: "Tools" },
+    { name: "cPanel Terminal", category: "Management" },
+    { name: "PostgreSQL", category: "Database" },
+    { name: "MySQL", category: "Database" },
+    { name: "MariaDB", category: "Database" },
+    { name: "JetBackup", category: "Backup" },
+    { name: "Immunify360", category: "Security" },
+    { name: "CPGuard", category: "Security" },
+    { name: "Site Builder", category: "Tools" },
+    { name: "Softaculous", category: "Tools" },
+    { name: "WP-CLI", category: "Tools" },
+  ]
+
+  const partnersList = [
+    { name: "cPanel" },
+    { name: "DirectAdmin" },
+    { name: "CloudLinux" },
+    { name: "LiteSpeed" },
+    { name: "Immunify360" },
+    { name: "JetBackup" },
+    { name: "Cloudflare" },
+    { name: "SECTIGO" },
+    { name: "Let's Encrypt" },
+    { name: "AWS" },
+    { name: "Docker" },
+    { name: "nginx" },
+    { name: "ModSecurity" },
+    { name: "WHM" },
+  ]
+
   return (
     <section className="py-16 px-4 bg-white dark:bg-slate-900">
       <div className="max-w-6xl mx-auto">
+        {/* Basic Features */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-2 text-slate-900 dark:text-white">Why Choose KmerHosting?</h2>
           <p className="text-slate-600 dark:text-slate-400">Everything you need for success</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, index) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+          {basicFeatures.map((feature, index) => {
             const Icon = feature.icon
             return (
               <div key={index} className="text-center group">
@@ -51,6 +90,170 @@ export default function Features() {
           })}
         </div>
 
+        {/* Free Domain & SSL Highlights */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 px-4">
+          <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-slate-800 dark:to-slate-900 rounded-xl p-6 border border-green-200 dark:border-green-900/30">
+            <div className="text-center">
+              <div className="inline-block p-3 rounded-full mb-3" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
+                <Check className="w-6 h-6" style={{ color: "#128C7E" }} />
+              </div>
+              <h3 className="font-bold text-slate-900 dark:text-white mb-2">Free Domain</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">Get a free domain name with every hosting plan</p>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800 dark:to-slate-900 rounded-xl p-6 border border-blue-200 dark:border-blue-900/30">
+            <div className="text-center">
+              <div className="inline-block p-3 rounded-full mb-3" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
+                <Check className="w-6 h-6" style={{ color: "#128C7E" }} />
+              </div>
+              <h3 className="font-bold text-slate-900 dark:text-white mb-2">Free SSL Certificate</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">Secure your website with complimentary SSL encryption</p>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-slate-800 dark:to-slate-900 rounded-xl p-6 border border-purple-200 dark:border-purple-900/30">
+            <div className="text-center">
+              <div className="inline-block p-3 rounded-full mb-3" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
+                <Check className="w-6 h-6" style={{ color: "#128C7E" }} />
+              </div>
+              <h3 className="font-bold text-slate-900 dark:text-white mb-2">World-Class Support</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">24/7 expert support in French and English</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Developer Types Section */}
+        <div className="mb-20">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
+              Built for <span style={{ color: "#128C7E" }}>All Developers</span>
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+              Whether you're building with WordPress, working on Frontend, Backend, Full-stack, or using Node.js—KmerHosting has everything you need with powerful developer tools and complete control.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-slate-200 dark:border-slate-700" style={{ backgroundColor: "rgba(18, 140, 126, 0.05)" }}>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-slate-900 dark:text-white">Developer Profile</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-slate-900 dark:text-white">Specialization</th>
+                  <th className="px-6 py-3 text-center text-sm font-semibold text-slate-900 dark:text-white">Supported</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { profile: "WordPress Developer", spec: "CMS & Web Development" },
+                  { profile: "Frontend Developer", spec: "UI/UX & Client-side Development" },
+                  { profile: "Backend Developer", spec: "Server-side & API Development" },
+                  { profile: "Full-stack Developer", spec: "Complete Application Development" },
+                  { profile: "Node.js Developer", spec: "JavaScript Runtime & APIs" },
+                  { profile: "Python Developer", spec: "Backend & Data Processing" },
+                  { profile: "MERN Stack Developer", spec: "MongoDB, Express, React, Node.js" },
+                  { profile: "Laravel Developer", spec: "PHP Framework Web Development" },
+                  { profile: "React Developer", spec: "Frontend UI & Components" },
+                  { profile: "Vue.js Developer", spec: "Progressive JavaScript Framework" },
+                  { profile: "Angular Developer", spec: "Enterprise Frontend Solutions" },
+                  { profile: "Django Developer", spec: "Python Web Framework" },
+                  { profile: "No-Code Developer", spec: "Visual & Low-Code Platforms" },
+                  { profile: "Mobile Developer", spec: "Mobile Apps & Progressive Web Apps" },
+                  { profile: "DevOps Engineer", spec: "Infrastructure & Deployment" },
+                ].map((dev, idx) => (
+                  <tr
+                    key={idx}
+                    className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                  >
+                    <td className="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">{dev.profile}</td>
+                    <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">{dev.spec}</td>
+                    <td className="px-6 py-4 text-center">
+                      <div className="flex justify-center">
+                        <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: "#128C7E" }}>
+                          <Check className="w-3 h-3 text-white" />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* LLM & AI Models Section */}
+        <div className="bg-gradient-to-r from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 rounded-2xl p-8 md:p-12 mb-20 border border-slate-200 dark:border-slate-700">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-4">
+                AI-Powered Development with <span style={{ color: "#128C7E" }}>KmerHosting AI</span>
+              </h3>
+              <p className="text-slate-700 dark:text-slate-300 mb-6">
+                Access the most powerful Large Language Models for free with API integration. Leverage cutting-edge AI to accelerate your development workflow and build smarter applications.
+              </p>
+              <div className="space-y-3 mb-8">
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5" style={{ color: "#128C7E" }} />
+                  <span className="text-slate-700 dark:text-slate-300">Free API access to advanced LLMs</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5" style={{ color: "#128C7E" }} />
+                  <span className="text-slate-700 dark:text-slate-300">Seamless integration with your hosting</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5" style={{ color: "#128C7E" }} />
+                  <span className="text-slate-700 dark:text-slate-300">No additional setup required</span>
+                </div>
+              </div>
+              <button
+                className="px-6 py-3 rounded-lg font-semibold transition-all text-white flex items-center gap-2"
+                style={{ backgroundColor: "#128C7E" }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#0a6f62")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#128C7E")}
+              >
+                <Cpu className="w-5 h-5" />
+                Start with KmerHosting AI Now
+              </button>
+            </div>
+
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Commercial AI Models</h4>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { name: "OpenAI", color: "from-green-600 to-green-700" },
+                    { name: "Alphabet (Google)", color: "from-blue-600 to-blue-700" },
+                    { name: "Anthropic", color: "from-amber-600 to-amber-700" },
+                    { name: "Meta", color: "from-blue-500 to-blue-600" },
+                  ].map((ai, idx) => (
+                    <div key={idx} className={`bg-gradient-to-br ${ai.color} rounded-lg p-4 text-center`}>
+                      <p className="text-sm font-bold text-white">{ai.name}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Open Source Models</h4>
+                <div className="space-y-2 text-sm">
+                  {[
+                    "Llama (Meta)",
+                    "Mistral",
+                    "Alibaba Qwen",
+                    "Baichuan",
+                    "OpenAssistant",
+                  ].map((model, idx) => (
+                    <div key={idx} className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#128C7E" }} />
+                      <span>{model}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Advanced Features Section */}
         <div className="mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
           <div className="text-center mb-12">
@@ -62,127 +265,46 @@ export default function Features() {
             </p>
           </div>
 
-          {/* Scattered Advanced Features */}
-          <div className="relative h-96 flex items-center justify-center mb-12">
-            {/* Feature 1 - Node.js (top left) */}
-            <div className="absolute top-0 left-0 transform -rotate-12 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">Node.js</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">JavaScript runtime</div>
+          {/* Advanced Features Table */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {[
+              advancedFeatures.slice(0, Math.ceil(advancedFeatures.length / 2)),
+              advancedFeatures.slice(Math.ceil(advancedFeatures.length / 2))
+            ].map((featureGroup, groupIdx) => (
+              <div key={groupIdx} className="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-slate-200 dark:border-slate-700" style={{ backgroundColor: "rgba(18, 140, 126, 0.05)" }}>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">Feature</th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">Category</th>
+                      <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">Available</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {featureGroup.map((feature, index) => (
+                      <tr
+                        key={index}
+                        className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                      >
+                        <td className="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">{feature.name}</td>
+                        <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
+                          <span className="px-3 py-1 rounded-full text-xs font-medium" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)", color: "#128C7E" }}>
+                            {feature.category}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-center">
+                          <div className="flex justify-center">
+                            <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: "#128C7E" }}>
+                              <Check className="w-4 h-4 text-white" />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            </div>
-
-            {/* Feature 2 - PHP (top center-right) */}
-            <div className="absolute top-4 right-24 transform rotate-6 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">PHP</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Multiple versions</div>
-              </div>
-            </div>
-
-            {/* Feature 3 - Python (top right) */}
-            <div className="absolute top-8 right-0 transform -rotate-3 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">Python</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Latest versions</div>
-              </div>
-            </div>
-
-            {/* Feature 4 - Ruby (middle left) */}
-            <div className="absolute top-1/3 left-4 transform rotate-3 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">Ruby</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Full support</div>
-              </div>
-            </div>
-
-            {/* Feature 5 - SSH Access (center-left) */}
-            <div className="absolute top-1/2 left-12 transform -translate-y-1/2 -rotate-6 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">SSH Access</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Secure terminal</div>
-              </div>
-            </div>
-
-            {/* Feature 6 - Git (center) */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-2 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">Git</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Version control</div>
-              </div>
-            </div>
-
-            {/* Feature 7 - cPanel Terminal (center-right) */}
-            <div className="absolute top-1/2 right-12 transform -translate-y-1/2 -rotate-2 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">cPanel Terminal</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Web-based CLI</div>
-              </div>
-            </div>
-
-            {/* Feature 8 - PostgreSQL (lower left) */}
-            <div className="absolute bottom-12 left-0 transform rotate-12 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">PostgreSQL</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Advanced database</div>
-              </div>
-            </div>
-
-            {/* Feature 9 - MySQL (lower center-left) */}
-            <div className="absolute bottom-8 left-1/3 transform -translate-x-1/2 -rotate-6 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">MySQL</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">MariaDB included</div>
-              </div>
-            </div>
-
-            {/* Feature 10 - JetBackup (lower center-right) */}
-            <div className="absolute bottom-12 right-1/4 transform rotate-4 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">JetBackup</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Advanced backups</div>
-              </div>
-            </div>
-
-            {/* Feature 11 - Immunify360 (lower right) */}
-            <div className="absolute bottom-8 right-6 transform -rotate-8 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">Immunify360</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Malware protection</div>
-              </div>
-            </div>
-
-            {/* Feature 12 - CPGuard (top left secondary) */}
-            <div className="absolute top-16 left-16 transform rotate-8 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">CPGuard</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Security suite</div>
-              </div>
-            </div>
-
-            {/* Feature 13 - Site Builder (top center) */}
-            <div className="absolute top-12 left-1/2 transform -translate-x-1/2 -rotate-4 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">Site Builder</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Drag & drop</div>
-              </div>
-            </div>
-
-            {/* Feature 14 - Softaculous (middle right) */}
-            <div className="absolute top-2/3 right-4 transform rotate-7 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">Softaculous</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">1-click installer</div>
-              </div>
-            </div>
-
-            {/* Feature 15 - WP-CLI (bottom right secondary) */}
-            <div className="absolute bottom-0 right-20 transform -rotate-5 opacity-80 hover:opacity-100 transition-opacity duration-300">
-              <div className="px-4 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                <div className="text-xs font-bold text-slate-600 dark:text-slate-300">WP-CLI</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">WordPress CLI</div>
-              </div>
-            </div>
+            ))}
           </div>
 
           <div className="bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-xl p-8 border border-slate-200 dark:border-slate-700">
@@ -212,119 +334,40 @@ export default function Features() {
               <p className="text-slate-600 dark:text-slate-400">Trusted by industry leaders and the best in class</p>
             </div>
 
-            {/* Scattered Partner Logos - Grouped Center */}
-            <div className="relative h-96 flex items-center justify-center">
-              {/* Partner 1 - Cloudflare */}
-              <div className="absolute transform -rotate-12 opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ top: '30%', left: '15%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">Cloudflare</div>
+            {/* Partners Table */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {[
+                partnersList.slice(0, Math.ceil(partnersList.length / 2)),
+                partnersList.slice(Math.ceil(partnersList.length / 2))
+              ].map((partnerGroup, groupIdx) => (
+                <div key={groupIdx} className="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-slate-200 dark:border-slate-700" style={{ backgroundColor: "rgba(18, 140, 126, 0.05)" }}>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 dark:text-white">Partner</th>
+                        <th className="px-6 py-4 text-center text-sm font-semibold text-slate-900 dark:text-white">Trusted</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {partnerGroup.map((partner, index) => (
+                        <tr
+                          key={index}
+                          className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                        >
+                          <td className="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">{partner.name}</td>
+                          <td className="px-6 py-4 text-center">
+                            <div className="flex justify-center">
+                              <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: "#128C7E" }}>
+                                <Check className="w-4 h-4 text-white" />
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-              </div>
-
-              {/* Partner 2 - cPanel */}
-              <div className="absolute transform rotate-6 opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ top: '20%', right: '18%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">cPanel</div>
-                </div>
-              </div>
-
-              {/* Partner 3 - DirectAdmin */}
-              <div className="absolute transform -rotate-3 opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ top: '40%', left: '8%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">DirectAdmin</div>
-                </div>
-              </div>
-
-              {/* Partner 4 - SECTIGO */}
-              <div className="absolute transform opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ top: '50%', left: '22%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">SECTIGO</div>
-                </div>
-              </div>
-
-              {/* Partner 5 - CloudLinux */}
-              <div className="absolute transform rotate-12 opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ top: '45%', right: '10%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">CloudLinux</div>
-                </div>
-              </div>
-
-              {/* Partner 6 - Immunify360 */}
-              <div className="absolute transform rotate-3 opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ bottom: '15%', left: '12%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">Immunify360</div>
-                </div>
-              </div>
-
-              {/* Partner 7 - JetBackup */}
-              <div className="absolute transform -rotate-6 opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ bottom: '20%', right: '12%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">JetBackup</div>
-                </div>
-              </div>
-
-              {/* Partner 8 - AWS */}
-              <div className="absolute transform rotate-8 opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ top: '25%', left: '32%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">AWS</div>
-                </div>
-              </div>
-
-              {/* Partner 9 - Google Cloud */}
-              <div className="absolute transform -rotate-4 opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ top: '15%', left: '50%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">Google Cloud</div>
-                </div>
-              </div>
-
-              {/* Partner 10 - LiteSpeed */}
-              <div className="absolute transform -rotate-7 opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ top: '55%', left: '18%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">LiteSpeed</div>
-                </div>
-              </div>
-
-              {/* Partner 11 - Let's Encrypt */}
-              <div className="absolute transform rotate-9 opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ top: '35%', right: '22%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">Let's Encrypt</div>
-                </div>
-              </div>
-
-              {/* Partner 12 - WHM */}
-              <div className="absolute transform rotate-5 opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ bottom: '25%', left: '28%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">WHM</div>
-                </div>
-              </div>
-
-              {/* Partner 13 - ModSecurity */}
-              <div className="absolute transform -rotate-8 opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ bottom: '30%', right: '18%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">ModSecurity</div>
-                </div>
-              </div>
-
-              {/* Partner 14 - nginx */}
-              <div className="absolute transform rotate-11 opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ bottom: '10%', left: '22%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">nginx</div>
-                </div>
-              </div>
-
-              {/* Partner 15 - Docker */}
-              <div className="absolute transform -rotate-9 opacity-80 hover:opacity-100 transition-opacity duration-300" style={{ bottom: '15%', right: '20%' }}>
-                <div className="px-6 py-3 rounded-lg border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300">Docker</div>
-                </div>
-              </div>
-
-              {/* Center point - & more */}
-              <div className="absolute opacity-70 hover:opacity-100 transition-opacity duration-300" style={{ top: '50%', left: '50%' }}>
-                <div className="px-4 py-2 rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-center transform -translate-x-1/2 -translate-y-1/2">
-                  <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">& many more...</div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
