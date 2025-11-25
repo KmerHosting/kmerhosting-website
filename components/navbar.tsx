@@ -1,27 +1,14 @@
 "use client"
 
 import Link from "next/link"
-import { Menu, X, Sun, Moon, User, LogOut, LayoutDashboard, ShoppingCart, Settings, Zap, FileText, Globe, ChevronDown } from "lucide-react"
+import { Menu, X, Sun, Moon, Zap } from "lucide-react"
 import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
-import { useAuth } from "@/lib/auth-context"
-import { NavbarSkeleton } from "@/components/navbar-skeleton"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [isMobileUserMenuOpen, setIsMobileUserMenuOpen] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const { user, isAuthenticated, loading, logout } = useAuth()
 
   // Avoid hydration mismatch: only render theme-dependent UI after mount
   useEffect(() => setMounted(true), [])
@@ -60,69 +47,11 @@ export default function Navbar() {
               {mounted && (resolvedTheme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-300" />)}
             </button>
 
-            {/* Auth buttons or user menu */}
-            {loading ? (
-              <NavbarSkeleton />
-            ) : !isAuthenticated ? (
-              <>
-                <Link href="/auth/login" className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer">
-                  <User className="w-4 h-4" />
-                  Login
-                </Link>
-                <Link href="/auth/signup" className="flex items-center gap-2 px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
-                  <Zap className="w-4 h-4" />
-                  Sign Up
-                </Link>
-              </>
-            ) : isAuthenticated && user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="rounded-full cursor-pointer">
-                    <Avatar className="h-8 w-8">
-                      <AvatarFallback style={{ backgroundColor: "#128C7E", color: "white" }}>
-                        {user.fullName
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")
-                          .toUpperCase()
-                          .slice(0, 2)}
-                      </AvatarFallback>
-                    </Avatar>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
-                  <div className="px-2 py-1.5">
-                    <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{user.fullName}</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">{user.email}</p>
-                  </div>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link href="/dashboard" className="cursor-pointer">
-                      <LayoutDashboard className="w-4 h-4 mr-2" />
-                      Dashboard
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/services" className="cursor-pointer">
-                      <ShoppingCart className="w-4 h-4 mr-2" />
-                      My Services
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link href="/settings" className="cursor-pointer">
-                      <Settings className="w-4 h-4 mr-2" />
-                      Settings
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={logout} className="cursor-pointer">
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : null}
+            {/* CTA Button */}
+            <Link href="#contact" className="flex items-center gap-2 px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
+              <Zap className="w-4 h-4" />
+              Get Started
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -154,69 +83,11 @@ export default function Navbar() {
                 {mounted && (resolvedTheme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-300" />)}
               </button>
 
-              {/* Mobile auth buttons or user menu */}
-              {!loading && !isAuthenticated ? (
-                <>
-                  <Link href="/auth/login" className="flex items-center justify-center gap-2 w-full px-4 py-2 rounded-lg font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer">
-                    <User className="w-4 h-4" />
-                    Login
-                  </Link>
-                  <Link href="/auth/signup" className="flex items-center justify-center gap-2 w-full px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
-                    <Zap className="w-4 h-4" />
-                    Sign Up
-                  </Link>
-                </>
-              ) : !loading && isAuthenticated && user ? (
-                <div className="space-y-2 border-t border-slate-200 dark:border-slate-700 pt-3">
-                  {/* Collapsible User Menu Button */}
-                  <button
-                    onClick={() => setIsMobileUserMenuOpen(!isMobileUserMenuOpen)}
-                    className="w-full flex items-center justify-between px-4 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Avatar className="h-6 w-6">
-                        <AvatarFallback style={{ backgroundColor: "#128C7E", color: "white", fontSize: "10px" }}>
-                          {user.fullName
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")
-                            .toUpperCase()
-                            .slice(0, 2)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <span className="text-sm font-medium">{user.fullName}</span>
-                    </div>
-                    <ChevronDown
-                      className={`w-4 h-4 transition-transform ${isMobileUserMenuOpen ? "rotate-180" : ""}`}
-                    />
-                  </button>
-
-                  {/* Collapsible User Menu Items */}
-                  {isMobileUserMenuOpen && (
-                    <div className="pl-2 space-y-2">
-                      <Link href="/dashboard" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
-                        <LayoutDashboard className="w-4 h-4" />
-                        Dashboard
-                      </Link>
-                      <Link href="/services" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
-                        <ShoppingCart className="w-4 h-4" />
-                        My Services
-                      </Link>
-                      <Link href="/settings" className="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
-                        <Settings className="w-4 h-4" />
-                        Settings
-                      </Link>
-                      <button
-                        onClick={logout}
-                        className="w-full flex items-center gap-2 px-4 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
-                      >
-                        <LogOut className="w-4 h-4" />
-                        Logout
-                      </button>
-                    </div>
-                  )}
-                </div>
-              ) : null}
+              {/* Mobile CTA Button */}
+              <Link href="#contact" className="flex items-center justify-center gap-2 w-full px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
+                <Zap className="w-4 h-4" />
+                Get Started
+              </Link>
             </div>
           </div>
         )}

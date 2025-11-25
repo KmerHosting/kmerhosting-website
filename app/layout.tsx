@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
-import { AuthProvider } from '@/lib/auth-context'
 import { Toaster } from '@/components/ui/sonner'
 import LayoutWrapper from '@/app/layout-wrapper'
 
@@ -115,13 +114,11 @@ export default function RootLayout({
         <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
       <body className={`font-sans antialiased`}>
-        <AuthProvider>
-          <ThemeProvider>
-            <LayoutWrapper>{children}</LayoutWrapper>
-            <Toaster />
-            <Analytics />
-          </ThemeProvider>
-        </AuthProvider>
+        <ThemeProvider>
+          <LayoutWrapper>{children}</LayoutWrapper>
+          <Toaster />
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   )

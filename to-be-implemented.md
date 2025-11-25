@@ -1,1 +1,0 @@
-Now the last features is : for each plan user choose Reseller or Shared (DirectAdmin or Cpanel) ask user to be connected first if not. if he is connected Check plan price and deduct his credit and send plan request to admin and then send a waiting message to user from billing@ and send a message to admin that some user has requested a hosting.
