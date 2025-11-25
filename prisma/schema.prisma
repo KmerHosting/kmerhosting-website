@@ -40,6 +40,8 @@ model User {
   pinCode           String?   // 5-digit PIN for invoice verification
   twoFactorSecret   String?   // 2FA secret key for TOTP
   twoFactorEnabled  Boolean   @default(false)
+  twoFactorOTP      String?   // Hashed OTP for login 2FA
+  twoFactorOTPExpiry DateTime? // OTP expiration time
   referralCode      String?   @unique  // 8-character alphanumeric referral code
   
   // Community & Chat
@@ -215,3 +217,85 @@ model APIKey {
   @@index([key])
 }
 
+// Live Chat Models
+model LiveChatDepartment {
+  id          String    @id @default(cuid())
+  name        String    @unique  // e.g., "Sales", "Support", "Billing", "Technical"
+  description String?
+  icon        String?   // Icon name for UI
+  color       String?   // Color for UI
+  
+  agents      LiveChatAgent[]
+  sessions    LiveChatSession[]
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model LiveChatAgent {
+  id            String    @id @default(cuid())
+  departmentId  String
+  department    LiveChatDepartment @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  
+  name          String
+  email         String    @unique
+  avatar        String?
+  status        String    @default("offline") // "online", "offline", "away", "busy"
+  isActive      Boolean   @default(true)
+  
+  sessions      LiveChatSession[]
+  messages      LiveChatMessage[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  @@index([departmentId])
+}
+
+model LiveChatSession {
+  id              String    @id @default(cuid())
+  departmentId    String
+  department      LiveChatDepartment @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  
+  agentId         String?
+  agent           LiveChatAgent? @relation(fields: [agentId], references: [id], onDelete: SetNull)
+  
+  visitorEmail    String
+  visitorName     String
+  visitorPhone    String?
+  visitorIP       String?
+  
+  status          String    @default("waiting") // "waiting", "active", "closed"
+  subject         String?
+  notes           String?
+  
+  messages        LiveChatMessage[]
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  closedAt        DateTime?
+  
+  @@index([departmentId])
+  @@index([agentId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model LiveChatMessage {
+  id        String    @id @default(cuid())
+  sessionId String
+  session   LiveChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  
+  agentId   String?
+  agent     LiveChatAgent? @relation(fields: [agentId], references: [id], onDelete: SetNull)
+  
+  senderType String    // "visitor" or "agent"
+  senderName String
+  message   String    @db.LongText
+  
+  createdAt DateTime  @default(now())
+  
+  @@index([sessionId])
+  @@index([agentId])
+  @@index([createdAt])
+}

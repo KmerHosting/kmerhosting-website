@@ -75,22 +75,36 @@ export default function HostingTypes() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <div className="flex justify-center gap-8 mb-8">
-            <div className="relative w-56 h-56 bg-white rounded-lg p-4 flex items-center justify-center dark:bg-white">
+            <div className="relative w-56 h-56 bg-white dark:bg-slate-800 rounded-lg p-4 flex items-center justify-center">
               <Image
-                src="/cpanel-white.png"
+                src="/cPanel-logo.webp"
                 alt="cPanel Logo"
                 width={200}
                 height={200}
-                className="object-contain"
+                className="object-contain dark:hidden"
+              />
+              <Image
+                src="/cPanel-white.png"
+                alt="cPanel Logo"
+                width={200}
+                height={200}
+                className="object-contain hidden dark:block"
               />
             </div>
-            <div className="relative w-56 h-56 bg-white rounded-lg p-4 flex items-center justify-center dark:bg-white">
+            <div className="relative w-56 h-56 bg-white dark:bg-slate-800 rounded-lg p-4 flex items-center justify-center">
               <Image
-                src="/directadmin-white.png"
+                src="/DA-logo.png"
                 alt="DirectAdmin Logo"
                 width={200}
                 height={200}
-                className="object-contain"
+                className="object-contain dark:hidden"
+              />
+              <Image
+                src="/DirectAdmin-white.png"
+                alt="DirectAdmin Logo"
+                width={150}
+                height={150}
+                className="object-contain hidden dark:block"
               />
             </div>
           </div>

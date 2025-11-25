@@ -197,7 +197,7 @@ export default function AboutPage() {
               <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
                 Personal websites, blogs, portfolios, small business websites, and WordPress sites
               </p>
-              <p className="text-lg font-bold" style={{ color: "#128C7E" }}>From 1 083 FCFA/month</p>
+              <p className="text-lg font-bold" style={{ color: "#128C7E" }}>From 14 000 FCFA/year</p>
             </Link>
 
             {/* Reseller Hosting */}
@@ -236,7 +236,7 @@ export default function AboutPage() {
               <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
                 Web developers, digital agencies, entrepreneurs looking to start hosting business
               </p>
-              <p className="text-lg font-bold" style={{ color: "#128C7E" }}>From 3 000 FCFA/month</p>
+              <p className="text-lg font-bold" style={{ color: "#128C7E" }}>From 36 000 FCFA/year</p>
             </Link>
 
             {/* VPS Servers */}

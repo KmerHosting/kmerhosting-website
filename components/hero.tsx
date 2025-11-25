@@ -49,13 +49,13 @@ export default function Hero() {
             </div>
             <div>
               <div className="font-bold text-xl" style={{ color: "#128C7E" }}>
-                24/7
+                24/7 (En & Fr)
               </div>
               <div className="text-slate-600 dark:text-slate-400">Support</div>
             </div>
             <div>
               <div className="font-bold text-xl" style={{ color: "#128C7E" }}>
-                Free SSL
+                Free Domain + SSL
               </div>
               <div className="text-slate-600 dark:text-slate-400">All Plans</div>
             </div>

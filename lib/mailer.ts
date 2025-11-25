@@ -507,3 +507,571 @@ export async function sendAccountInfoUpdateSecurityAlert(
   }
 }
 
+// Newsletter subscription confirmation
+export async function sendNewsletterSubscriptionEmail(
+  recipientEmail: string,
+  recipientName: string
+): Promise<void> {
+  try {
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://kmerhosting.com";
+    const unsubscribeLink = `${appUrl}/newsletter/unsubscribe?email=${encodeURIComponent(recipientEmail)}`;
+
+    await transport.sendMail({
+      from: emailConfig.noreply,
+      to: recipientEmail,
+      subject: "Welcome to KmerHosting Newsletter! 📰",
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Newsletter Subscription - KmerHosting</title>
+          </head>
+          <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;">
+            <!-- White Header with Centered Logo -->
+            <div style="background-color: #ffffff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #e5e7eb;">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png" alt="KmerHosting" style="max-width: 180px; height: auto; display: inline-block;">
+            </div>
+            
+            <!-- Main Content -->
+            <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+              <!-- Greeting -->
+              <h1 style="color: #1f2937; font-size: 28px; font-weight: 600; margin: 0 0 20px 0; text-align: center;">
+                Welcome to the KmerHosting Universe! 🚀
+              </h1>
+              
+              <!-- Message -->
+              <div style="color: #4b5563; font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+                <p style="margin: 0 0 15px 0;">Hi ${recipientName},</p>
+                
+                <p style="margin: 0 0 15px 0;">Thank you for subscribing to the <strong>KmerHosting Newsletter</strong>! You're now part of our community and will receive:</p>
+                
+                <ul style="margin: 0 0 25px 20px; padding: 0; color: #4b5563;">
+                  <li style="margin: 0 0 10px 0;">✨ Exclusive deals and promotions</li>
+                  <li style="margin: 0 0 10px 0;">📰 Product launches and feature updates</li>
+                  <li style="margin: 0 0 10px 0;">💡 Tips and best practices for web hosting</li>
+                  <li style="margin: 0 0 10px 0;">🔐 Security alerts and important announcements</li>
+                </ul>
+                
+                <p style="margin: 0 0 15px 0;">Stay tuned for amazing updates from the KmerHosting team!</p>
+              </div>
+              
+              <!-- Divider -->
+              <hr style="border: none; border-top: 2px solid #e5e7eb; margin: 30px 0;">
+              
+              <!-- Footer -->
+              <div style="text-align: center; color: #9ca3af; font-size: 12px; line-height: 1.6;">
+                <p style="margin: 0 0 15px 0;">© 2025 KmerHosting. All rights reserved.</p>
+                
+                <p style="margin: 0 0 15px 0;">
+                  <a href="${appUrl}/legal/privacy-policy" style="color: #9ca3af; text-decoration: none; margin-right: 15px;">Privacy Policy</a>
+                  <a href="${appUrl}/legal/terms-of-service" style="color: #9ca3af; text-decoration: none;">Terms of Service</a>
+                </p>
+                
+                <p style="margin: 0; font-size: 11px;">
+                  <a href="${unsubscribeLink}" style="color: #9ca3af; text-decoration: underline;">Unsubscribe from this newsletter</a>
+                </p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
+      category: "Newsletter",
+    });
+  } catch (error) {
+    console.error("Failed to send newsletter subscription email:", error);
+    throw new Error("Failed to send newsletter subscription email");
+  }
+}
+
+// Newsletter admin notification
+export async function sendNewsletterAdminNotification(
+  subscriberEmail: string,
+  subscriberName: string
+): Promise<void> {
+  try {
+    const timestamp = new Date().toLocaleString("fr-FR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const adminEmails = [
+      emailConfig.admin.address,
+      "toscanisoft@gmail.com"
+    ];
+
+    for (const adminEmail of adminEmails) {
+      await transport.sendMail({
+        from: emailConfig.noreply,
+        to: adminEmail,
+        subject: "New Newsletter Subscriber - KmerHosting",
+        html: `
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>New Newsletter Subscriber</title>
+            </head>
+            <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;">
+              <!-- Main Content -->
+              <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+                <h1 style="color: #1f2937; font-size: 24px; font-weight: 600; margin: 0 0 20px 0;">
+                  New Newsletter Subscriber
+                </h1>
+                
+                <div style="background-color: #f0fdf4; border-left: 4px solid #22c55e; padding: 20px; border-radius: 6px; margin-bottom: 30px;">
+                  <p style="color: #166534; font-size: 14px; margin: 0; line-height: 1.6;">
+                    A new user has joined the KmerHosting newsletter!
+                  </p>
+                </div>
+                
+                <div style="background-color: #ffffff; border: 1px solid #e5e7eb; padding: 20px; border-radius: 6px; margin: 30px 0;">
+                  <p style="color: #6b7280; font-size: 12px; text-transform: uppercase; margin: 0 0 15px 0; font-weight: 600;">Subscriber Information</p>
+                  <p style="color: #1f2937; font-size: 14px; margin: 0 0 10px 0;"><strong>Name:</strong> ${subscriberName}</p>
+                  <p style="color: #1f2937; font-size: 14px; margin: 0 0 10px 0;"><strong>Email:</strong> <a href="mailto:${subscriberEmail}" style="color: #128C7E; text-decoration: none;">${subscriberEmail}</a></p>
+                  <p style="color: #1f2937; font-size: 14px; margin: 0;"><strong>Subscription Date:</strong> ${timestamp}</p>
+                </div>
+                
+                <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+                
+                <div style="text-align: center; color: #9ca3af; font-size: 12px;">
+                  <p style="margin: 0;">© 2025 KmerHosting Admin Notification</p>
+                </div>
+              </div>
+            </body>
+          </html>
+        `,
+        category: "Admin Notification",
+      });
+    }
+  } catch (error) {
+    console.error("Failed to send newsletter admin notification:", error);
+    // Don't throw here as subscription is already confirmed
+  }
+}
+
+// Newsletter Unsubscribe Admin Notification
+export async function sendNewsletterUnsubscribeAdminNotification(
+  subscriberEmail: string,
+  subscriberName: string
+): Promise<void> {
+  try {
+    const timestamp = new Date().toLocaleString("fr-FR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const adminEmails = [
+      emailConfig.admin.address,
+      "toscanisoft@gmail.com"
+    ];
+
+    for (const adminEmail of adminEmails) {
+      await transport.sendMail({
+        from: emailConfig.noreply,
+        to: adminEmail,
+        subject: "Newsletter Unsubscription - KmerHosting",
+        html: `
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Newsletter Unsubscription</title>
+            </head>
+            <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;">
+              <!-- Main Content -->
+              <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+                <h1 style="color: #1f2937; font-size: 24px; font-weight: 600; margin: 0 0 20px 0;">
+                  Newsletter Unsubscription
+                </h1>
+                
+                <div style="background-color: #fef2f2; border-left: 4px solid #ef4444; padding: 20px; border-radius: 6px; margin-bottom: 30px;">
+                  <p style="color: #7f1d1d; font-size: 14px; margin: 0; line-height: 1.6;">
+                    A user has unsubscribed from the KmerHosting newsletter.
+                  </p>
+                </div>
+                
+                <div style="background-color: #ffffff; border: 1px solid #e5e7eb; padding: 20px; border-radius: 6px; margin: 30px 0;">
+                  <p style="color: #6b7280; font-size: 12px; text-transform: uppercase; margin: 0 0 15px 0; font-weight: 600;">Unsubscribed User</p>
+                  <p style="color: #1f2937; font-size: 14px; margin: 0 0 10px 0;"><strong>Name:</strong> ${subscriberName}</p>
+                  <p style="color: #1f2937; font-size: 14px; margin: 0 0 10px 0;"><strong>Email:</strong> <a href="mailto:${subscriberEmail}" style="color: #128C7E; text-decoration: none;">${subscriberEmail}</a></p>
+                  <p style="color: #1f2937; font-size: 14px; margin: 0;"><strong>Unsubscription Date:</strong> ${timestamp}</p>
+                </div>
+                
+                <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+                
+                <div style="text-align: center; color: #9ca3af; font-size: 12px;">
+                  <p style="margin: 0;">© 2025 KmerHosting Admin Notification</p>
+                </div>
+              </div>
+            </body>
+          </html>
+        `,
+        category: "Admin Notification",
+      });
+    }
+  } catch (error) {
+    console.error("Failed to send newsletter unsubscribe notification:", error);
+  }
+}
+
+// 2FA OTP Email
+export async function send2FAOTP(
+  recipientEmail: string,
+  recipientName: string,
+  otp: string
+): Promise<void> {
+  try {
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://kmerhosting.com";
+
+    await transport.sendMail({
+      from: emailConfig.security,
+      to: recipientEmail,
+      subject: "Your KmerHosting 2FA Code - Do Not Share 🔐",
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>2FA Code - KmerHosting</title>
+          </head>
+          <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;">
+            <!-- White Header with Centered Logo -->
+            <div style="background-color: #ffffff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #e5e7eb;">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png" alt="KmerHosting" style="max-width: 180px; height: auto; display: inline-block;">
+            </div>
+            
+            <!-- Main Content -->
+            <div style="max-width: 500px; margin: 0 auto; padding: 40px 20px;">
+              <!-- Greeting -->
+              <h1 style="color: #1f2937; font-size: 28px; font-weight: 600; margin: 0 0 10px 0; text-align: center;">
+                🔐 Your 2FA Code
+              </h1>
+              
+              <p style="color: #6b7280; font-size: 14px; text-align: center; margin: 0 0 30px 0; line-height: 1.5;">
+                Hi ${recipientName}, you requested to log in to your KmerHosting account with two-factor authentication enabled.
+              </p>
+              
+              <!-- OTP Code Box -->
+              <div style="background-color: #f0fdf4; border: 2px dashed #22c55e; border-radius: 8px; padding: 30px; text-align: center; margin: 30px 0;">
+                <p style="color: #6b7280; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 15px 0; font-weight: 600;">Your Verification Code</p>
+                <p style="color: #128C7E; font-size: 36px; font-weight: 700; margin: 0; font-family: 'Courier New', monospace; letter-spacing: 8px;">
+                  ${otp}
+                </p>
+              </div>
+              
+              <!-- Important Info -->
+              <div style="background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 15px; border-radius: 4px; margin: 30px 0;">
+                <p style="color: #991b1b; font-size: 13px; margin: 0; line-height: 1.6;">
+                  <strong>⚠️ Important:</strong> This code expires in 10 minutes. Never share this code with anyone, including KmerHosting staff.
+                </p>
+              </div>
+              
+              <!-- Not You Box -->
+              <div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 15px; border-radius: 4px; margin: 30px 0;">
+                <p style="color: #1e40af; font-size: 13px; margin: 0; line-height: 1.6;">
+                  <strong>Didn't request this?</strong> Someone may be trying to access your account. If this wasn't you, please change your password immediately at <a href="${appUrl}/auth/login" style="color: #3b82f6; text-decoration: underline;">login</a>.
+                </p>
+              </div>
+              
+              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+              
+              <!-- Footer -->
+              <div style="text-align: center; color: #9ca3af; font-size: 12px; line-height: 1.6;">
+                <p style="margin: 0 0 10px 0;">© 2025 KmerHosting Security Team</p>
+                <p style="margin: 0;">
+                  <a href="${appUrl}/legal/privacy-policy" style="color: #9ca3af; text-decoration: none; margin-right: 15px;">Privacy Policy</a>
+                  <a href="${appUrl}/legal/terms-of-service" style="color: #9ca3af; text-decoration: none;">Terms of Service</a>
+                </p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
+      category: "Security - 2FA",
+    });
+  } catch (error) {
+    console.error("Failed to send 2FA OTP email:", error);
+    throw new Error("Failed to send 2FA OTP email");
+  }
+}
+
+// Live Chat Session Started Notification to Admin
+export async function sendLiveChatNotification(
+  visitorEmail: string,
+  visitorName: string,
+  department: string,
+  subject?: string
+): Promise<void> {
+  try {
+    const timestamp = new Date().toLocaleString("fr-FR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const adminEmails = [
+      emailConfig.admin.address,
+      "toscanisoft@gmail.com",
+    ];
+
+    for (const adminEmail of adminEmails) {
+      await transport.sendMail({
+        from: emailConfig.support,
+        to: adminEmail,
+        subject: `New Live Chat Request - ${department} Department`,
+        html: `
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Live Chat Request</title>
+            </head>
+            <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;">
+              <!-- Main Content -->
+              <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+                <h1 style="color: #1f2937; font-size: 24px; font-weight: 600; margin: 0 0 20px 0;">
+                  New Live Chat Request
+                </h1>
+                
+                <div style="background-color: #dbeafe; border-left: 4px solid #3b82f6; padding: 20px; border-radius: 6px; margin-bottom: 30px;">
+                  <p style="color: #1e40af; font-size: 14px; margin: 0; line-height: 1.6;">
+                    A visitor has requested to open a live chat session.
+                  </p>
+                </div>
+                
+                <div style="background-color: #ffffff; border: 1px solid #e5e7eb; padding: 20px; border-radius: 6px; margin: 30px 0;">
+                  <p style="color: #6b7280; font-size: 12px; text-transform: uppercase; margin: 0 0 15px 0; font-weight: 600;">Visitor Information</p>
+                  <p style="color: #1f2937; font-size: 14px; margin: 0 0 10px 0;"><strong>Name:</strong> ${visitorName}</p>
+                  <p style="color: #1f2937; font-size: 14px; margin: 0 0 10px 0;"><strong>Email:</strong> <a href="mailto:${visitorEmail}" style="color: #128C7E; text-decoration: none;">${visitorEmail}</a></p>
+                  <p style="color: #1f2937; font-size: 14px; margin: 0 0 10px 0;"><strong>Department:</strong> ${department}</p>
+                  ${subject ? `<p style="color: #1f2937; font-size: 14px; margin: 0 0 10px 0;"><strong>Subject:</strong> ${subject}</p>` : ""}
+                  <p style="color: #1f2937; font-size: 14px; margin: 0;"><strong>Request Time:</strong> ${timestamp}</p>
+                </div>
+                
+                <div style="background-color: #f0fdf4; border-left: 4px solid #22c55e; padding: 16px; border-radius: 4px; margin: 30px 0;">
+                  <p style="color: #166534; font-size: 13px; margin: 0; line-height: 1.6;">
+                    <strong>Action Required:</strong> Please log in to the admin panel to view this chat session and respond to the visitor.
+                  </p>
+                </div>
+                
+                <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+                
+                <div style="text-align: center; color: #9ca3af; font-size: 12px;">
+                  <p style="margin: 0;">© 2025 KmerHosting Support System</p>
+                </div>
+              </div>
+            </body>
+          </html>
+        `,
+        category: "Live Chat Notification",
+      });
+    }
+  } catch (error) {
+    console.error("Failed to send live chat notification:", error);
+  }
+}
+
+// Credit Request Email to User
+export async function sendCreditRequestConfirmationEmail(
+  userEmail: string,
+  userName: string,
+  amount: number,
+  reason: string
+): Promise<void> {
+  try {
+    const timestamp = new Date().toLocaleString("fr-FR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    await transport.sendMail({
+      from: emailConfig.billing,
+      to: userEmail,
+      subject: "Credit Request Received - KmerHosting",
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Credit Request Confirmation</title>
+          </head>
+          <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;">
+            <!-- White Header -->
+            <div style="background-color: #ffffff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #e5e7eb;">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png" alt="KmerHosting" style="max-width: 180px; height: auto; display: inline-block;">
+            </div>
+            
+            <!-- Main Content -->
+            <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+              <h1 style="color: #1f2937; font-size: 24px; font-weight: 600; margin: 0 0 10px 0;">
+                Credit Request Received
+              </h1>
+              
+              <p style="color: #6b7280; font-size: 14px; margin: 0 0 30px 0; line-height: 1.6;">
+                Hi ${userName}, your credit request has been received and is being reviewed by our billing team.
+              </p>
+              
+              <!-- Request Details -->
+              <div style="background-color: #ffffff; border: 1px solid #e5e7eb; padding: 24px; border-radius: 8px; margin: 30px 0;">
+                <p style="color: #9ca3af; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 16px 0; font-weight: 600;">Request Details</p>
+                
+                <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f3f4f6;">
+                  <p style="color: #9ca3af; font-size: 11px; text-transform: uppercase; margin: 0 0 4px 0; font-weight: 600;">Amount Requested</p>
+                  <p style="color: #1f2937; font-size: 18px; font-weight: 700; margin: 0;">$${amount.toFixed(2)}</p>
+                </div>
+                
+                <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f3f4f6;">
+                  <p style="color: #9ca3af; font-size: 11px; text-transform: uppercase; margin: 0 0 4px 0; font-weight: 600;">Reason</p>
+                  <p style="color: #1f2937; font-size: 14px; margin: 0; line-height: 1.6;">${reason}</p>
+                </div>
+                
+                <div>
+                  <p style="color: #9ca3af; font-size: 11px; text-transform: uppercase; margin: 0 0 4px 0; font-weight: 600;">Request Date</p>
+                  <p style="color: #1f2937; font-size: 14px; margin: 0;">${timestamp}</p>
+                </div>
+              </div>
+              
+              <!-- Info Box -->
+              <div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 16px; border-radius: 4px; margin: 30px 0;">
+                <p style="color: #1e40af; font-size: 13px; margin: 0; line-height: 1.6;">
+                  <strong>What's Next?</strong> Our billing team will review your request and contact you within 24-48 hours. You can track the status of your request from your dashboard.
+                </p>
+              </div>
+              
+              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+              
+              <div style="text-align: center; color: #9ca3af; font-size: 12px;">
+                <p style="margin: 0;">© 2025 KmerHosting Billing</p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
+      category: "Billing - Credit Request",
+    });
+  } catch (error) {
+    console.error("Failed to send credit request confirmation email:", error);
+    throw new Error("Failed to send credit request confirmation email");
+  }
+}
+
+// Credit Request Admin Notification
+export async function sendCreditRequestAdminNotification(
+  userName: string,
+  userEmail: string,
+  userId: string,
+  amount: number,
+  reason: string
+): Promise<void> {
+  try {
+    const timestamp = new Date().toLocaleString("fr-FR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const adminEmails = [
+      emailConfig.admin.address,
+      "toscanisoft@gmail.com"
+    ];
+
+    for (const adminEmail of adminEmails) {
+      await transport.sendMail({
+        from: emailConfig.billing,
+        to: adminEmail,
+        subject: "New Credit Request - KmerHosting",
+        html: `
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>New Credit Request</title>
+            </head>
+            <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;">
+              <!-- Main Content -->
+              <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+                <h1 style="color: #1f2937; font-size: 24px; font-weight: 600; margin: 0 0 20px 0;">
+                  New Credit Request
+                </h1>
+                
+                <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 6px; margin-bottom: 30px;">
+                  <p style="color: #92400e; font-size: 14px; margin: 0; line-height: 1.6;">
+                    A new credit request requires your review.
+                  </p>
+                </div>
+                
+                <div style="background-color: #ffffff; border: 1px solid #e5e7eb; padding: 24px; border-radius: 6px; margin: 30px 0;">
+                  <p style="color: #9ca3af; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 16px 0; font-weight: 600;">Request Details</p>
+                  
+                  <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f3f4f6;">
+                    <p style="color: #9ca3af; font-size: 11px; text-transform: uppercase; margin: 0 0 4px 0; font-weight: 600;">User</p>
+                    <p style="color: #1f2937; font-size: 14px; margin: 0;"><strong>${userName}</strong></p>
+                    <p style="color: #128C7E; font-size: 13px; margin: 4px 0 0 0;">
+                      <a href="mailto:${userEmail}" style="color: #128C7E; text-decoration: none;">${userEmail}</a>
+                    </p>
+                  </div>
+                  
+                  <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f3f4f6;">
+                    <p style="color: #9ca3af; font-size: 11px; text-transform: uppercase; margin: 0 0 4px 0; font-weight: 600;">User ID</p>
+                    <p style="color: #1f2937; font-size: 13px; margin: 0; font-family: monospace;">${userId}</p>
+                  </div>
+                  
+                  <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f3f4f6;">
+                    <p style="color: #9ca3af; font-size: 11px; text-transform: uppercase; margin: 0 0 4px 0; font-weight: 600;">Amount Requested</p>
+                    <p style="color: #1f2937; font-size: 20px; font-weight: 700; margin: 0;">$${amount.toFixed(2)}</p>
+                  </div>
+                  
+                  <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f3f4f6;">
+                    <p style="color: #9ca3af; font-size: 11px; text-transform: uppercase; margin: 0 0 4px 0; font-weight: 600;">Reason</p>
+                    <p style="color: #1f2937; font-size: 14px; margin: 0; line-height: 1.6;">${reason}</p>
+                  </div>
+                  
+                  <div>
+                    <p style="color: #9ca3af; font-size: 11px; text-transform: uppercase; margin: 0 0 4px 0; font-weight: 600;">Request Date</p>
+                    <p style="color: #1f2937; font-size: 14px; margin: 0;">${timestamp}</p>
+                  </div>
+                </div>
+                
+                <div style="background-color: #f0fdf4; border-left: 4px solid #22c55e; padding: 16px; border-radius: 4px; margin: 30px 0;">
+                  <p style="color: #166534; font-size: 13px; margin: 0; line-height: 1.6;">
+                    <strong>Action Required:</strong> Please review this credit request in the admin dashboard and either approve or deny it. The user will be notified of your decision.
+                  </p>
+                </div>
+                
+                <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+                
+                <div style="text-align: center; color: #9ca3af; font-size: 12px;">
+                  <p style="margin: 0;">© 2025 KmerHosting Admin Notification</p>
+                </div>
+              </div>
+            </body>
+          </html>
+        `,
+        category: "Admin Notification",
+      });
+    }
+  } catch (error) {
+    console.error("Failed to send credit request admin notification:", error);
+  }
+}

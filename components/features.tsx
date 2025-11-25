@@ -16,11 +16,6 @@ export default function Features() {
       description: "Free SSL & DDoS protection included",
     },
     {
-      icon: Headphones,
-      title: "Expert Support",
-      description: "24/7 support in French and English",
-    },
-    {
       icon: Zap,
       title: "Easy Management",
       description: "cPanel or DirectAdmin control panels",
@@ -73,7 +68,7 @@ export default function Features() {
           <p className="text-slate-600 dark:text-slate-400">Everything you need for success</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
           {basicFeatures.map((feature, index) => {
             const Icon = feature.icon
             return (
@@ -117,8 +112,8 @@ export default function Features() {
               <div className="inline-block p-3 rounded-full mb-3" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
                 <Check className="w-6 h-6" style={{ color: "#128C7E" }} />
               </div>
-              <h3 className="font-bold text-slate-900 dark:text-white mb-2">World-Class Support</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400">24/7 expert support in French and English</p>
+              <h3 className="font-bold text-slate-900 dark:text-white mb-2">Pro Email Addresses</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">We offer at least 10 professional email addresses in each plan</p>
             </div>
           </div>
         </div>
@@ -307,21 +302,19 @@ export default function Features() {
             ))}
           </div>
 
-          <div className="bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-xl p-8 border border-slate-200 dark:border-slate-700">
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
-                <svg className="w-6 h-6" style={{ color: "#128C7E" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div>
-                <h4 className="text-xl font-bold mb-2 text-slate-900 dark:text-white">
-                  Why Choose KmerHosting?
-                </h4>
-                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                  Professional-grade hosting with developer tools (Node.js, Python, SSH, Git), advanced security (Immunify360), and local support—matching international providers at local prices. <span className="font-semibold" style={{ color: "#128C7E" }}>The smarter choice for serious developers in Cameroon.</span>
-                </p>
-              </div>
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
+              <svg className="w-6 h-6" style={{ color: "#128C7E" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h4 className="text-xl font-bold mb-2 text-slate-900 dark:text-white">
+                Why Choose KmerHosting?
+              </h4>
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                Professional-grade hosting with developer tools (Node.js, Python, SSH, Git), advanced security (Immunify360), and local support—matching international providers at local prices. <span className="font-semibold" style={{ color: "#128C7E" }}>The smarter choice for serious developers in Cameroon.</span>
+              </p>
             </div>
           </div>
 

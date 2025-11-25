@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateJWT, verifyPassword, getAuthCookieOptions } from "@/lib/auth";
+import { generateOTP, getOTPExpiry, hashOTP, generateOTPSessionToken } from "@/lib/two-factor-auth";
+import { send2FAOTP } from "@/lib/mailer";
 import prisma from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
@@ -65,6 +67,47 @@ export async function POST(request: NextRequest) {
         { error: "Invalid email or password" },
         { status: 401 }
       );
+    }
+
+    // Check if user has 2FA enabled
+    if (user.twoFactorEnabled) {
+      try {
+        // Generate OTP
+        const otp = generateOTP();
+        const hashedOTP = hashOTP(otp);
+        const otpExpiry = getOTPExpiry();
+        const sessionToken = generateOTPSessionToken(user.id);
+
+        // Store OTP in database
+        await prisma.user.update({
+          where: { id: user.id },
+          data: {
+            twoFactorOTP: hashedOTP,
+            twoFactorOTPExpiry: otpExpiry,
+          },
+        });
+
+        // Send OTP email
+        await send2FAOTP(user.email, user.fullName, otp);
+
+        console.log("POST /api/auth/login: 2FA OTP sent to", user.email);
+
+        // Return 2FA required response with session token
+        return NextResponse.json(
+          {
+            requiresTwoFactor: true,
+            sessionToken: sessionToken,
+            message: "2FA code sent to your email",
+          },
+          { status: 200 }
+        );
+      } catch (error) {
+        console.error("Failed to send 2FA OTP:", error);
+        return NextResponse.json(
+          { error: "Failed to send 2FA code. Please try again." },
+          { status: 500 }
+        );
+      }
     }
 
     // Generate JWT token

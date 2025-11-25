@@ -5,6 +5,7 @@ import { useAuth } from "@/lib/auth-context";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/navbar";
 import LoadingSpinner from "@/components/loading-spinner";
+import CreditRequestForm from "@/components/credit-request-form";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -270,10 +271,11 @@ export default function SettingsPage() {
         </div>
 
         <Tabs defaultValue="account" className="space-y-6">
-          <TabsList className="grid w-full max-w-3xl grid-cols-5">
+          <TabsList className="grid w-full max-w-4xl grid-cols-6">
             <TabsTrigger value="account">Account Info</TabsTrigger>
             <TabsTrigger value="security">Security</TabsTrigger>
             <TabsTrigger value="preferences">Preferences</TabsTrigger>
+            <TabsTrigger value="credits">Credits</TabsTrigger>
             <TabsTrigger value="credentials">Keys & Credentials</TabsTrigger>
             <TabsTrigger value="danger">Danger Zone</TabsTrigger>
           </TabsList>
@@ -929,6 +931,16 @@ export default function SettingsPage() {
                 </CardContent>
               </Card>
             </div>
+          </TabsContent>
+
+          {/* Credits Tab */}
+          <TabsContent value="credits">
+            {user && (
+              <CreditRequestForm 
+                userName={user.fullName} 
+                userEmail={user.email}
+              />
+            )}
           </TabsContent>
 
           <TabsContent value="danger">

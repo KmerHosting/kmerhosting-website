@@ -3,17 +3,40 @@
 import { CheckCircle2, Mail, Send, Facebook, Twitter, Instagram, Linkedin, Cookie, Youtube, Github } from "lucide-react"
 import { useState } from "react"
 import Image from "next/image"
+import { useCookieBanner } from "@/lib/cookie-context"
 
 export default function Footer() {
+  const { showCookieBanner } = useCookieBanner()
   const [email, setEmail] = useState("")
   const [subscribed, setSubscribed] = useState(false)
-  const [showCookies, setShowCookies] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSubscribed(true)
-    setEmail("")
-    setTimeout(() => setSubscribed(false), 3000)
+    setIsLoading(true)
+
+    try {
+      const response = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      if (response.ok) {
+        setSubscribed(true)
+        setEmail("")
+        setTimeout(() => setSubscribed(false), 5000)
+      }
+    } catch (error) {
+      console.error("Newsletter subscription error:", error)
+      setSubscribed(true)
+      setEmail("")
+      setTimeout(() => setSubscribed(false), 5000)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const services = [
@@ -26,7 +49,7 @@ export default function Footer() {
   return (
     <footer className="text-slate-900 dark:text-white">
       {/* Newsletter Section */}
-      <div className="py-6 px-4 border-b border-slate-200 dark:border-slate-700">
+      <div className="py-6 px-4 border-b border-slate-200 dark:border-slate-700 dark:bg-slate-950">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
             <div className="flex-1">
@@ -42,11 +65,13 @@ export default function Footer() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="flex-1 sm:flex-none px-3 py-2 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 rounded-full border border-slate-300 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-teal-500 transition-all text-sm w-full sm:w-56"
+                disabled={isLoading}
+                className="flex-1 sm:flex-none px-3 py-2 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 rounded-full border border-slate-300 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-teal-500 transition-all text-sm w-full sm:w-56 disabled:opacity-50"
               />
               <button
                 type="submit"
-                className="px-5 py-2 rounded-full font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap bg-blue-600 hover:bg-blue-700 text-white text-sm"
+                disabled={isLoading}
+                className="px-5 py-2 rounded-full font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap bg-blue-600 hover:bg-blue-700 text-white text-sm disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="w-4 h-4" />
                 <span className="hidden sm:inline">Subscribe</span>
@@ -227,15 +252,13 @@ export default function Footer() {
                   </a>
                 </div>
               </div>
-              {showCookies && (
-                <button
-                  onClick={() => setShowCookies(false)}
-                  className="flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 rounded-lg transition-colors text-sm text-slate-900 dark:text-slate-200"
-                >
-                  <Cookie className="w-4 h-4" />
-                  Manage Cookies
-                </button>
-              )}
+              <button
+                onClick={showCookieBanner}
+                className="flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 rounded-lg transition-colors text-sm text-slate-900 dark:text-slate-200"
+              >
+                <Cookie className="w-4 h-4" />
+                Manage Cookies
+              </button>
             </div>
           </div>
 

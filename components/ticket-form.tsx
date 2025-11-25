@@ -323,7 +323,7 @@ export default function TicketForm({
       {!isAuthenticated && (
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
           <p className="text-sm text-blue-900 dark:text-blue-100">
-            💡 <strong>Note:</strong> We recommend creating a KmerHosting account for faster and more efficient support. You'll receive responses directly in your dashboard.
+            <strong>Note:</strong> We recommend creating a KmerHosting account before you open a ticket, for faster and more efficient support. Then you will receive our response directly in your dashboard notification center.
           </p>
         </div>
       )}

@@ -127,19 +127,19 @@ export default function SupportPage() {
                 <div>
                   <p className="text-slate-600 dark:text-slate-400 mb-1">Email</p>
                   <a
-                    href="mailto:support@kmerhosting.com"
+                    href="mailto:info@kmerhosting.com"
                     className="text-teal-600 hover:text-teal-700 font-medium"
                   >
-                    support@kmerhosting.com
+                    info@kmerhosting.com
                   </a>
                 </div>
                 <div>
-                  <p className="text-slate-600 dark:text-slate-400 mb-1">Phone</p>
+                  <p className="text-slate-600 dark:text-slate-400 mb-1">Live chat</p>
                   <a
-                    href="tel:+237694193493"
+                    href="/live-chat"
                     className="text-teal-600 hover:text-teal-700 font-medium"
                   >
-                    +237 6 94 19 34 93
+                    Chat with us online
                   </a>
                 </div>
                 <div>

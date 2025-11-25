@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export default function BackendOverview() {
   return (
-    <section className="py-16 px-4 bg-slate-50 dark:bg-slate-800">
+    <section className="py-16 px-4 bg-white dark:bg-white">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Image */}
@@ -20,10 +20,10 @@ export default function BackendOverview() {
 
           {/* Content */}
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
               Powerful Backend Infrastructure
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 mb-6">
+            <p className="text-slate-600 mb-6">
               Our cutting-edge backend architecture ensures optimal performance, reliability, and scalability for your hosting needs. Built with the latest technologies and best practices.
             </p>
 
@@ -41,7 +41,7 @@ export default function BackendOverview() {
                     className="flex-shrink-0 w-5 h-5 rounded-full mt-0.5"
                     style={{ backgroundColor: "#128C7E" }}
                   />
-                  <span className="text-slate-700 dark:text-slate-300">{feature}</span>
+                  <span className="text-slate-700">{feature}</span>
                 </li>
               ))}
             </ul>

@@ -5,6 +5,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { AuthProvider } from '@/lib/auth-context'
 import { Toaster } from '@/components/ui/sonner'
+import LayoutWrapper from '@/app/layout-wrapper'
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
@@ -116,7 +117,7 @@ export default function RootLayout({
       <body className={`font-sans antialiased`}>
         <AuthProvider>
           <ThemeProvider>
-            {children}
+            <LayoutWrapper>{children}</LayoutWrapper>
             <Toaster />
             <Analytics />
           </ThemeProvider>

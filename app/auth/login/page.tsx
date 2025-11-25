@@ -50,6 +50,16 @@ export default function LoginPage() {
         return;
       }
 
+      const result = await response.json();
+
+      // Check if 2FA is required
+      if (result.requiresTwoFactor) {
+        toast.success("2FA code sent to your email!");
+        // Redirect to 2FA verification page with email
+        router.push(`/auth/verify-2fa?email=${encodeURIComponent(data.email)}`);
+        return;
+      }
+
       toast.success("Logged in successfully!");
       
       // Wait a bit for the cookie to be set, then refresh user in auth context
