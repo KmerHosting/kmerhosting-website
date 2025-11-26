@@ -200,15 +200,16 @@ export default function Features() {
                   <span className="text-slate-700 dark:text-slate-300">No additional setup required</span>
                 </div>
               </div>
-              <button
-                className="px-6 py-3 rounded-lg font-semibold transition-all text-white flex items-center gap-2"
+              <a
+                href="/kmerhosting-ai/"
+                className="px-6 py-3 rounded-lg font-semibold transition-all text-white flex items-center gap-2 cursor-pointer inline-block"
                 style={{ backgroundColor: "#128C7E" }}
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#0a6f62")}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#128C7E")}
               >
                 <Cpu className="w-5 h-5" />
                 Start with KmerHosting AI Now
-              </button>
+              </a>
             </div>
 
             <div className="space-y-6">

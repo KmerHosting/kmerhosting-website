@@ -1,8 +1,14 @@
+"use client"
+
+import { useState } from "react"
 import Link from "next/link"
 import { Server, Shield, Headphones, Zap, Award, Users, Globe, TrendingUp, HardDrive, Database } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import ContactDepartmentDialog from "@/components/contact-department-dialog"
 
 export default function AboutPage() {
+  const [showContactDialog, setShowContactDialog] = useState(false)
+
   const stats = [
     { icon: Users, label: "Happy Clients", value: "3500+" },
     { icon: Server, label: "Servers Running", value: "99.9%", suffix: " Uptime" },
@@ -367,16 +373,18 @@ export default function AboutPage() {
               <Link href="/#pricing">Get Started Today</Link>
             </Button>
             <Button
-              asChild
               size="lg"
               variant="outline"
               className="border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white hover:bg-white/50 dark:hover:bg-slate-700 font-semibold cursor-pointer"
+              onClick={() => setShowContactDialog(true)}
             >
-              <Link href="#contact">Contact Our Team</Link>
+              Contact Our Team
             </Button>
           </div>
         </div>
       </section>
+
+      <ContactDepartmentDialog isOpen={showContactDialog} onClose={() => setShowContactDialog(false)} />
     </main>
   )
 }

@@ -71,7 +71,7 @@ export default function Footer() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="px-5 py-2 rounded-full font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap bg-blue-600 hover:bg-blue-700 text-white text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-5 py-2 rounded-full font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap bg-blue-600 hover:bg-blue-700 text-white text-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 <Send className="w-4 h-4" />
                 <span className="hidden sm:inline">Subscribe</span>
@@ -180,7 +180,7 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="/support" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="mailto:support@kmerhosting.com" className="hover:text-slate-900 dark:hover:text-teal-400 transition cursor-pointer">
                     Support
                   </a>
                 </li>
@@ -218,7 +218,9 @@ export default function Footer() {
               <ul className="space-y-2 text-slate-700 dark:text-slate-400 text-sm">
                 <li className="flex items-start gap-2">
                   <Mail className="w-4 h-4 mt-1 flex-shrink-0" style={{ color: "#128C7E" }} />
-                  <span>info@kmerhosting.com</span>
+                  <a href="mailto:hello@kmerhosting.com" className="hover:text-slate-900 dark:hover:text-teal-400 transition cursor-pointer">
+                    hello@kmerhosting.com
+                  </a>
                 </li>
                 <li>10ème arrêt Nkoabang,<br />Yaoundé, Cameroon</li>
                 <li className="pt-2 font-semibold text-teal-400">24/7 Support Available</li>
@@ -254,7 +256,7 @@ export default function Footer() {
               </div>
               <button
                 onClick={showCookieBanner}
-                className="flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 rounded-lg transition-colors text-sm text-slate-900 dark:text-slate-200"
+                className="flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 rounded-lg transition-colors text-sm text-slate-900 dark:text-slate-200 cursor-pointer"
               >
                 <Cookie className="w-4 h-4" />
                 Manage Cookies

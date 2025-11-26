@@ -1,9 +1,13 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import DemoRequestDialog from "@/components/demo-request-dialog"
 
 export default function Hero() {
+  const [showDemoDialog, setShowDemoDialog] = useState(false)
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 px-4 py-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -28,13 +32,16 @@ export default function Hero() {
           </p>
 
           <div className="flex gap-4 pt-4">
-            <a href="https://kmerhosting.com/customers/store/cpanel-shared-hosting">
-              <Button size="lg" className="text-white font-semibold cursor-pointer hover:opacity-90 transition-opacity" style={{ backgroundColor: "#128C7E" }}>
-                Get Started Today
-              </Button>
-            </a>
+            <Button 
+              size="lg" 
+              className="text-white font-semibold cursor-pointer hover:opacity-90 transition-opacity px-8 py-6" 
+              style={{ backgroundColor: "#128C7E" }}
+              onClick={() => setShowDemoDialog(true)}
+            >
+              Try for Free
+            </Button>
             <a href="/about">
-              <Button size="lg" variant="outline" className="cursor-pointer hover:bg-[#128C7E] hover:!text-white transition-all" style={{ color: "#128C7E", borderColor: "#128C7E" }}>
+              <Button size="lg" variant="outline" className="cursor-pointer hover:bg-[#128C7E] hover:!text-white transition-all px-8 py-6" style={{ color: "#128C7E", borderColor: "#128C7E" }}>
                 Learn More
               </Button>
             </a>
@@ -73,6 +80,8 @@ export default function Hero() {
           />
         </div>
       </div>
+
+      <DemoRequestDialog isOpen={showDemoDialog} onClose={() => setShowDemoDialog(false)} />
     </div>
   )
 }
