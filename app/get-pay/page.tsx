@@ -20,16 +20,22 @@ export default function GetPayPage() {
   const [submitSuccess, setSubmitSuccess] = useState(false)
 
   useEffect(() => {
-    // Check authentication
-    const token = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("authToken="))
-      ?.split("=")[1]
-
-    if (token) {
-      setIsAuthenticated(true)
+    // Check authentication server-side via API (httpOnly cookie)
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("/api/auth/me")
+        if (res.ok) {
+          const data = await res.json()
+          if (data.authenticated) setIsAuthenticated(true)
+        }
+      } catch (err) {
+        console.error("Error checking auth for get-pay:", err)
+      } finally {
+        setIsLoading(false)
+      }
     }
-    setIsLoading(false)
+
+    checkAuth()
   }, [])
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

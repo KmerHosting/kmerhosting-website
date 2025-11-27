@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { PrismaClient } from "@prisma/client"
+import jwt from "jsonwebtoken"
 import { sendPlanSelectionEmail, notifyAdminPlanSelection } from "@/lib/mailer"
 
 const prisma = new PrismaClient()
@@ -34,9 +35,22 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    // Check if user is authenticated and get userId from JWT
+    let userId: string | undefined
+    const token = req.cookies.get("authToken")?.value
+    if (token) {
+      try {
+        const decoded: any = jwt.verify(token, process.env.JWT_SECRET || "default-secret")
+        userId = decoded.userId
+      } catch (err) {
+        console.warn("Invalid or expired JWT token in order creation")
+      }
+    }
+
     // Create order
     const order = await prisma.order.create({
       data: {
+        userId,
         planType,
         planName,
         planPrice,

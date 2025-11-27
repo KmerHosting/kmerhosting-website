@@ -1,11 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react"
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const searchParams = useSearchParams()
   const token = searchParams.get("token")
   
@@ -20,8 +20,40 @@ export default function VerifyEmailPage() {
     if (!token) {
       setStage("error")
       setError("Invalid or missing token")
+    } else {
+      // Verify the token on initial load
+      verifyTokenInitially(token)
     }
   }, [token])
+
+  const verifyTokenInitially = async (verificationToken: string) => {
+    try {
+      const response = await fetch("/api/auth/verify-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          token: verificationToken, 
+          username: "", 
+          password: "", 
+          confirmPassword: "" 
+        }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok && data.readyToComplete) {
+        // Token is valid, proceed to form to enter username and password
+        setStage("complete")
+      } else {
+        // Token is invalid or expired
+        setStage("error")
+        setError(data.error || "Token verification failed")
+      }
+    } catch (err) {
+      setStage("error")
+      setError("An error occurred. Please try again.")
+    }
+  }
 
   const handleCompleteSignup = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -191,5 +223,22 @@ export default function VerifyEmailPage() {
         )}
       </div>
     </main>
+  )
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8 text-center">
+            <Loader2 className="w-8 h-8 mx-auto mb-4 animate-spin" style={{ color: "#128C7E" }} />
+            <p className="text-slate-600 dark:text-slate-400">Loading...</p>
+          </div>
+        </div>
+      </main>
+    }>
+      <VerifyEmailContent />
+    </Suspense>
   )
 }

@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
-import { MailtrapTransport } from "mailtrap";
+// @ts-ignore
+import { MailtrapTransport } from "./mailtrap-transport.js";
 
 const TOKEN = process.env.MAILTRAP_TOKEN;
 

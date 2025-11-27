@@ -9,16 +9,24 @@ export default function DashboardPage() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Check authentication from cookie
-    const token = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("authToken="))
-      ?.split("=")[1]
-
-    if (token) {
-      setIsAuthenticated(true)
+    // Check authentication server-side via API (httpOnly cookie)
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("/api/auth/me")
+        if (res.ok) {
+          const data = await res.json()
+          if (data.authenticated) {
+            setIsAuthenticated(true)
+          }
+        }
+      } catch (err) {
+        console.error("Error checking auth:", err)
+      } finally {
+        setIsLoading(false)
+      }
     }
-    setIsLoading(false)
+
+    checkAuth()
   }, [])
 
   if (isLoading) {

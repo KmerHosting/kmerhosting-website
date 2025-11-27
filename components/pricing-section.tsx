@@ -5,11 +5,18 @@ import { Button } from "@/components/ui/button"
 import { Check, Lightbulb } from "lucide-react"
 import { useState } from "react"
 import { SalesContactDialog } from "@/components/sales-contact-dialog"
+import SelectPlanDialog from "@/components/select-plan-dialog"
 
 export default function PricingSection() {
   const [activeTab, setActiveTab] = useState<"shared" | "reseller">("shared")
   const [sharedControlPanel, setSharedControlPanel] = useState<"cpanel" | "directadmin">("cpanel")
   const [showSalesDialog, setShowSalesDialog] = useState(false)
+  const [isSelectOpen, setIsSelectOpen] = useState(false)
+  const [selectedPlan, setSelectedPlan] = useState<{
+    planType: "shared" | "reseller"
+    planName: string
+    planPrice: number
+  }>({ planType: "shared", planName: "", planPrice: 0 })
 
   const sharedHostingCPanelPlans = [
     {
@@ -413,11 +420,24 @@ export default function PricingSection() {
               </div>
 
               {/* CTA Button */}
-              <a href={`https://kmerhosting.com/customers/store/${activeTab === "shared" ? (sharedControlPanel === "cpanel" ? "cpanel-shared-hosting" : "directadmin-shared-hosting") : "cpanel-reseller-hosting"}`} className="w-full">
-                <Button className="w-full mb-5 font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
+              <div className="w-full">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const numericPrice = parseInt(String(plan.price).replace(/,/g, "")) || 0
+                    setSelectedPlan({
+                      planType: activeTab === "shared" ? "shared" : "reseller",
+                      planName: plan.name,
+                      planPrice: numericPrice,
+                    })
+                    setIsSelectOpen(true)
+                  }}
+                  className="w-full mb-5 font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer rounded-md"
+                  style={{ backgroundColor: "#128C7E" }}
+                >
                   Get Started
-                </Button>
-              </a>
+                </button>
+              </div>
 
               {/* Features List */}
               <div className="space-y-2">
@@ -820,6 +840,13 @@ export default function PricingSection() {
       </div>
     </section>
 
+    <SelectPlanDialog
+      isOpen={isSelectOpen}
+      onClose={() => setIsSelectOpen(false)}
+      planType={selectedPlan.planType}
+      planName={selectedPlan.planName}
+      planPrice={selectedPlan.planPrice}
+    />
     <SalesContactDialog open={showSalesDialog} onOpenChange={setShowSalesDialog} />
     </>
   )

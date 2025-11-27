@@ -11,32 +11,11 @@ export async function POST(req: NextRequest) {
     const { token, username, password, confirmPassword } = await req.json()
 
     // Validation
-    if (!token || !username || !password || !confirmPassword) {
-      return NextResponse.json({ error: "Missing fields" }, { status: 400 })
+    if (!token) {
+      return NextResponse.json({ error: "Missing token" }, { status: 400 })
     }
 
-    if (!username.trim() || username.length < 3) {
-      return NextResponse.json(
-        { error: "Username must be at least 3 characters" },
-        { status: 400 }
-      )
-    }
-
-    if (password !== confirmPassword) {
-      return NextResponse.json(
-        { error: "Passwords do not match" },
-        { status: 400 }
-      )
-    }
-
-    if (password.length < 6) {
-      return NextResponse.json(
-        { error: "Password must be at least 6 characters" },
-        { status: 400 }
-      )
-    }
-
-    // Verify token
+    // Verify token first
     let decoded: any
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET || "default-secret")
@@ -55,6 +34,38 @@ export async function POST(req: NextRequest) {
     if (!verificationToken || verificationToken.expiresAt < new Date()) {
       return NextResponse.json(
         { error: "Token expired" },
+        { status: 400 }
+      )
+    }
+
+    // If username/password are not provided, token is valid - return success for now
+    if (!username || !password || !confirmPassword) {
+      return NextResponse.json({
+        success: true,
+        message: "Token verified. Please provide username and password.",
+        email: decoded.email,
+        readyToComplete: true,
+      })
+    }
+
+    // Validate username and passwords
+    if (!username.trim() || username.length < 3) {
+      return NextResponse.json(
+        { error: "Username must be at least 3 characters" },
+        { status: 400 }
+      )
+    }
+
+    if (password !== confirmPassword) {
+      return NextResponse.json(
+        { error: "Passwords do not match" },
+        { status: 400 }
+      )
+    }
+
+    if (password.length < 6) {
+      return NextResponse.json(
+        { error: "Password must be at least 6 characters" },
         { status: 400 }
       )
     }

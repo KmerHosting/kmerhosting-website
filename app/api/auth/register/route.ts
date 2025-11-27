@@ -7,15 +7,11 @@ const prisma = new PrismaClient()
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, fullName } = await req.json()
+    const { email } = await req.json()
 
     // Validation
     if (!email || !email.includes("@")) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 })
-    }
-
-    if (!fullName || fullName.trim().length === 0) {
-      return NextResponse.json({ error: "Full name is required" }, { status: 400 })
     }
 
     // Check if user already exists
@@ -49,8 +45,9 @@ export async function POST(req: NextRequest) {
     // Generate verification URL
     const verifyUrl = `${process.env.NEXT_PUBLIC_URL || "http://localhost:3000"}/verify-email?token=${token}`
 
-    // Send verification email to user
-    const userEmailResult = await sendVerificationEmail(email, fullName, verifyUrl)
+    // Send verification email to user (use email as display name if fullName not provided)
+    const displayName = email.split("@")[0] || email
+    const userEmailResult = await sendVerificationEmail(email, displayName, verifyUrl)
     if (!userEmailResult.success) {
       throw new Error(userEmailResult.error || "Failed to send verification email")
     }
@@ -58,7 +55,7 @@ export async function POST(req: NextRequest) {
     // Notify admin about new signup
     const adminNotificationResult = await notifyAdminNewUser(
       email,
-      fullName,
+      displayName,
       new Date().toLocaleString()
     )
     if (!adminNotificationResult.success) {
