@@ -1,10 +1,13 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import { Check, ArrowRight, HardDrive, Gauge, Shield, Code, Home } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { SalesContactDialog } from "@/components/sales-contact-dialog"
 
 export default function VPSHostingPage() {
+  const [showSalesDialog, setShowSalesDialog] = useState(false)
   const features = [
     {
       icon: HardDrive,
@@ -98,17 +101,6 @@ export default function VPSHostingPage() {
           <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
             Experience the power and flexibility of Virtual Private Server hosting. Get dedicated resources, complete control, and the ability to scale as your business grows.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="cursor-pointer hover:bg-[#128C7E] hover:text-white transition-all"
-              style={{ color: "#128C7E", borderColor: "#128C7E" }}
-            >
-              <Link href="/about">Learn More</Link>
-            </Button>
-          </div>
         </div>
       </section>
 
@@ -273,17 +265,17 @@ export default function VPSHostingPage() {
             Get a custom VPS solution tailored to your needs. Contact us today for a personalized quote and expert consultation.
           </p>
           <Button
-            asChild
             size="lg"
             className="text-white font-semibold cursor-pointer hover:opacity-90 transition-opacity"
             style={{ backgroundColor: "#128C7E" }}
+            onClick={() => setShowSalesDialog(true)}
           >
-            <Link href="/support">
-              Contact Us for VPS Servers <ArrowRight className="ml-2 w-4 h-4" />
-            </Link>
+            Contact Us for VPS Servers <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
         </div>
       </section>
+
+      <SalesContactDialog open={showSalesDialog} onOpenChange={setShowSalesDialog} />
     </main>
   )
 }

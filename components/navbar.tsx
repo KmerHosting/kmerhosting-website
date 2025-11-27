@@ -4,9 +4,11 @@ import Link from "next/link"
 import { Menu, X, Sun, Moon, Zap } from "lucide-react"
 import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
+import ContactDepartmentDialog from "./contact-department-dialog"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [showContactDialog, setShowContactDialog] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
@@ -37,6 +39,9 @@ export default function Navbar() {
             <Link href="/faq" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
               FAQ
             </Link>
+            <button onClick={() => setShowContactDialog(true)} className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
+              Contact
+            </button>
 
             {/* Theme toggle */}
             <button
@@ -48,7 +53,7 @@ export default function Navbar() {
             </button>
 
             {/* CTA Button */}
-            <Link href="#contact" className="flex items-center gap-2 px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
+            <Link href="/signup" className="flex items-center gap-2 px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
               <Zap className="w-4 h-4" />
               Get Started
             </Link>
@@ -72,6 +77,9 @@ export default function Navbar() {
             <Link href="/faq" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
               FAQ
             </Link>
+            <button onClick={() => { setShowContactDialog(true); setIsOpen(false); }} className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
+              Contact
+            </button>
 
             <div className="flex flex-col gap-3 pt-3">
               {/* Mobile theme toggle */}
@@ -84,7 +92,7 @@ export default function Navbar() {
               </button>
 
               {/* Mobile CTA Button */}
-              <Link href="#contact" className="flex items-center justify-center gap-2 w-full px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
+              <Link href="/signup" className="flex items-center justify-center gap-2 w-full px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
                 <Zap className="w-4 h-4" />
                 Get Started
               </Link>
@@ -92,6 +100,8 @@ export default function Navbar() {
           </div>
         )}
       </div>
+
+      <ContactDepartmentDialog isOpen={showContactDialog} onClose={() => setShowContactDialog(false)} />
     </nav>
   )
 }

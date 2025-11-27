@@ -1,10 +1,13 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
-import { Check, ArrowRight, Database, Cpu, HardDrive, Network, Home } from "lucide-react"
+import { Check, ArrowRight, Server, Zap, Lock, Award, Home, Cpu, Database, HardDrive, Network } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { SalesContactDialog } from "@/components/sales-contact-dialog"
 
 export default function DedicatedServerPage() {
+  const [showSalesDialog, setShowSalesDialog] = useState(false)
   const features = [
     {
       icon: Database,
@@ -110,17 +113,6 @@ export default function DedicatedServerPage() {
           <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
             Get an entire physical server dedicated exclusively to your business. Experience unmatched performance, security, and reliability for your mission-critical applications.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="cursor-pointer hover:bg-[#128C7E] hover:text-white transition-all"
-              style={{ color: "#128C7E", borderColor: "#128C7E" }}
-            >
-              <Link href="/about">Learn More</Link>
-            </Button>
-          </div>
         </div>
         </div>
       </section>
@@ -295,17 +287,17 @@ export default function DedicatedServerPage() {
             Get a custom dedicated server solution designed for your specific needs. Our team will help you choose the perfect configuration.
           </p>
           <Button
-            asChild
             size="lg"
             className="text-white font-semibold cursor-pointer hover:opacity-90 transition-opacity"
             style={{ backgroundColor: "#128C7E" }}
+            onClick={() => setShowSalesDialog(true)}
           >
-            <Link href="/support">
-              Contact Us for Dedicated Servers <ArrowRight className="ml-2 w-4 h-4" />
-            </Link>
+            Contact Us for Dedicated Servers <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
         </div>
       </section>
+
+      <SalesContactDialog open={showSalesDialog} onOpenChange={setShowSalesDialog} />
     </main>
   )
 }

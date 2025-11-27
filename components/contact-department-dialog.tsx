@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { X, Loader2, CheckCircle2 } from "lucide-react"
+import { useState, useEffect } from "react"
+import { X, Loader2, CheckCircle2, Lock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface ContactDepartmentDialogProps {
@@ -53,14 +53,78 @@ export default function ContactDepartmentDialog({ isOpen, onClose }: ContactDepa
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
+  const [captchaAnswer, setCaptchaAnswer] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState("")
+  const [captcha, setCaptcha] = useState<{ num1: number; num2: number; answer: number } | null>(null)
+
+  // Generate random math CAPTCHA
+  const generateCaptcha = () => {
+    const num1 = Math.floor(Math.random() * 10) + 1
+    const num2 = Math.floor(Math.random() * 10) + 1
+    setCaptcha({ num1, num2, answer: num1 + num2 })
+    setCaptchaAnswer("")
+  }
+
+  // Initialize CAPTCHA when dialog opens
+  useEffect(() => {
+    if (isOpen) {
+      generateCaptcha()
+      setSelectedDept("")
+      setFullName("")
+      setEmail("")
+      setMessage("")
+      setCaptchaAnswer("")
+      setIsSuccess(false)
+      setError("")
+    }
+  }, [isOpen])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
     setError("")
+
+    // Validate fields
+    if (!selectedDept) {
+      setError("Please select a department")
+      return
+    }
+    if (!fullName.trim()) {
+      setError("Please enter your full name")
+      return
+    }
+    if (!email.trim()) {
+      setError("Please enter your email address")
+      return
+    }
+    if (!message.trim()) {
+      setError("Please enter a message")
+      return
+    }
+    if (message.trim().length < 10) {
+      setError("Message must be at least 10 characters")
+      return
+    }
+    if (!captchaAnswer) {
+      setError("Please answer the security question")
+      return
+    }
+    if (parseInt(captchaAnswer) !== captcha?.answer) {
+      setError("Incorrect answer to the security question. Please try again.")
+      generateCaptcha()
+      setCaptchaAnswer("")
+      return
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address")
+      return
+    }
+
+    setIsLoading(true)
 
     try {
       const response = await fetch("/api/contact/department", {
@@ -70,9 +134,9 @@ export default function ContactDepartmentDialog({ isOpen, onClose }: ContactDepa
         },
         body: JSON.stringify({
           departmentId: selectedDept,
-          fullName,
-          email,
-          message,
+          fullName: fullName.trim(),
+          email: email.trim(),
+          message: message.trim(),
         }),
       })
 
@@ -103,7 +167,7 @@ export default function ContactDepartmentDialog({ isOpen, onClose }: ContactDepa
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
+    <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none overflow-hidden">
       {/* Overlay */}
       <div
         className="absolute inset-0 bg-black/40 pointer-events-auto"
@@ -111,24 +175,23 @@ export default function ContactDepartmentDialog({ isOpen, onClose }: ContactDepa
       />
 
       {/* Dialog */}
-      <div className="relative bg-white dark:bg-slate-900 rounded-lg shadow-2xl max-w-2xl w-full mx-4 pointer-events-auto overflow-hidden max-h-[90vh] overflow-y-auto">
-        <div className="p-6">
+      <div className="relative bg-white dark:bg-slate-900 rounded-lg shadow-2xl max-w-3xl w-full mx-4 pointer-events-auto overflow-hidden max-h-[85vh] overflow-y-auto"
+        style={{
+          maxWidth: "100%",
+          width: "calc(100% - 32px)",
+          boxSizing: "border-box"
+        }}
+      >
+        <div className="p-4">
           {/* Header with Logo */}
-          <div className="flex items-start justify-between mb-6 pb-4 border-b border-slate-200 dark:border-slate-700">
-            <div className="flex items-start gap-4">
-              <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png"
-                alt="KmerHosting"
-                className="h-8"
-              />
-              <div>
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-                  Contact Our Team
-                </h2>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                  Reach out to the right department for your needs
-                </p>
-              </div>
+          <div className="flex items-start justify-between mb-4 pb-3 border-b border-slate-200 dark:border-slate-700">
+            <div>
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                Contact Our Team
+              </h2>
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
+                Select a department and let us know how we can help
+              </p>
             </div>
             <button
               onClick={onClose}
@@ -140,36 +203,36 @@ export default function ContactDepartmentDialog({ isOpen, onClose }: ContactDepa
           </div>
 
           {isSuccess ? (
-            <div className="text-center py-12">
-              <div className="flex justify-center mb-4">
-                <div className="p-3 rounded-full" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
-                  <CheckCircle2 className="w-8 h-8" style={{ color: "#128C7E" }} />
+            <div className="text-center py-8">
+              <div className="flex justify-center mb-3">
+                <div className="p-2 rounded-full" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
+                  <CheckCircle2 className="w-6 h-6" style={{ color: "#128C7E" }} />
                 </div>
               </div>
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+              <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-1">
                 Request Received!
               </h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
+              <p className="text-xs text-slate-600 dark:text-slate-400 mb-1">
                 Thank you for contacting <strong>{selectedDepartment?.name}</strong> team.
               </p>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
-                We're processing your request and will get back to you at <strong>{email}</strong> shortly.
+              <p className="text-xs text-slate-600 dark:text-slate-400">
+                We'll respond to <strong>{email}</strong> shortly.
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-3">
               {/* Department Selection */}
               <div>
-                <label className="block text-sm font-medium text-slate-900 dark:text-white mb-3">
+                <label className="block text-xs font-medium text-slate-900 dark:text-white mb-2">
                   Select Department *
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                   {departments.map((dept) => (
                     <button
                       key={dept.id}
                       type="button"
                       onClick={() => setSelectedDept(dept.id)}
-                      className="p-4 rounded-lg border-2 transition-all text-left hover:shadow-md"
+                      className="p-2 rounded-md border-2 transition-all text-left hover:shadow-md cursor-pointer"
                       style={{
                         borderColor: selectedDept === dept.id ? "#128C7E" : "#e2e8f0",
                         backgroundColor:
@@ -178,57 +241,59 @@ export default function ContactDepartmentDialog({ isOpen, onClose }: ContactDepa
                             : "transparent",
                       }}
                     >
-                      <div className="font-semibold text-slate-900 dark:text-white">
+                      <div className="font-semibold text-sm text-slate-900 dark:text-white">
                         {dept.name}
                       </div>
-                      <div className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                      <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                         {dept.description}
                       </div>
                     </button>
                   ))}
                 </div>
                 {!selectedDept && error.includes("Department") && (
-                  <p className="text-sm text-red-600 dark:text-red-400 mt-2">{error}</p>
+                  <p className="text-xs text-red-600 dark:text-red-400 mt-2">{error}</p>
                 )}
               </div>
 
-              {/* Full Name */}
-              <div>
-                <label htmlFor="fullName" className="block text-sm font-medium text-slate-900 dark:text-white mb-2">
-                  Full Name *
-                </label>
-                <input
-                  id="fullName"
-                  type="text"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  required
-                  disabled={isLoading}
-                  placeholder="Your full name"
-                  className="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 disabled:opacity-50 transition-all"
-                />
-              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {/* Full Name */}
+                <div>
+                  <label htmlFor="fullName" className="block text-xs font-medium text-slate-900 dark:text-white mb-1">
+                    Full Name *
+                  </label>
+                  <input
+                    id="fullName"
+                    type="text"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    required
+                    disabled={isLoading}
+                    placeholder="Your name"
+                    className="w-full px-3 py-1.5 rounded-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 disabled:opacity-50 transition-all text-sm h-8"
+                  />
+                </div>
 
-              {/* Email */}
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-slate-900 dark:text-white mb-2">
-                  Email Address *
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  disabled={isLoading}
-                  placeholder="your@email.com"
-                  className="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 disabled:opacity-50 transition-all"
-                />
+                {/* Email */}
+                <div>
+                  <label htmlFor="email" className="block text-xs font-medium text-slate-900 dark:text-white mb-1">
+                    Email Address *
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    disabled={isLoading}
+                    placeholder="your@email.com"
+                    className="w-full px-3 py-1.5 rounded-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 disabled:opacity-50 transition-all text-sm h-8"
+                  />
+                </div>
               </div>
 
               {/* Message */}
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-slate-900 dark:text-white mb-2">
+                <label htmlFor="message" className="block text-xs font-medium text-slate-900 dark:text-white mb-1">
                   Message *
                 </label>
                 <textarea
@@ -238,45 +303,59 @@ export default function ContactDepartmentDialog({ isOpen, onClose }: ContactDepa
                   required
                   disabled={isLoading}
                   placeholder="Tell us more about your inquiry..."
-                  rows={5}
-                  className="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 disabled:opacity-50 resize-none transition-all"
+                  rows={2}
+                  className="w-full px-3 py-1.5 rounded-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 disabled:opacity-50 resize-none transition-all text-sm"
                 />
               </div>
 
-              {/* Error Message */}
-              {error && (
-                <div className="p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
-                  <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+              {/* Math CAPTCHA */}
+              {captcha && (
+                <div className="rounded-md bg-blue-50 dark:bg-blue-950 p-2 border border-blue-200 dark:border-blue-800">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Lock className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                    <p className="text-xs font-semibold text-blue-900 dark:text-blue-100">
+                      Security: What is {captcha.num1} + {captcha.num2}?
+                    </p>
+                  </div>
+                  <input
+                    id="captcha"
+                    type="number"
+                    placeholder="Answer"
+                    value={captchaAnswer}
+                    onChange={(e) => setCaptchaAnswer(e.target.value)}
+                    disabled={isLoading}
+                    className="w-full px-3 py-1.5 rounded-md border border-blue-300 dark:border-blue-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-blue-500 dark:placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 transition-all text-sm font-medium"
+                  />
                 </div>
               )}
 
-              {/* Info Message */}
-              <div className="p-4 rounded-lg" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
-                <p className="text-xs text-slate-700 dark:text-slate-300">
-                  Your message will be sent to the selected department. We typically respond within 24 hours during business hours.
-                </p>
-              </div>
+              {/* Error Message */}
+              {error && (
+                <div className="p-2 rounded-md bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+                  <p className="text-xs text-red-600 dark:text-red-400">{error}</p>
+                </div>
+              )}
 
               {/* Buttons */}
-              <div className="flex gap-3 pt-2">
+              <div className="flex gap-2 pt-1">
                 <Button
                   type="button"
                   onClick={onClose}
                   variant="outline"
-                  className="flex-1 cursor-pointer"
+                  className="flex-1 cursor-pointer h-8 text-sm"
                   disabled={isLoading}
                 >
                   Cancel
                 </Button>
                 <Button
                   type="submit"
-                  className="flex-1 cursor-pointer flex items-center justify-center gap-2"
+                  className="flex-1 cursor-pointer flex items-center justify-center gap-2 h-8 text-sm"
                   style={{ backgroundColor: "#128C7E", color: "white" }}
                   disabled={isLoading || !selectedDept}
                 >
                   {isLoading ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="w-3 h-3 animate-spin" />
                       Sending...
                     </>
                   ) : (

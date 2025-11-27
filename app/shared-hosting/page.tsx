@@ -1,10 +1,19 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import { Check, ArrowRight, Users, Zap, Shield, Clock, Home } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import SelectPlanDialog from "@/components/select-plan-dialog"
 
 export default function SharedHostingPage() {
+  const [showPlanDialog, setShowPlanDialog] = useState(false)
+  const [selectedPlan, setSelectedPlan] = useState<{ name: string; price: number } | null>(null)
+
+  const handleSelectPlan = (planName: string, price: number) => {
+    setSelectedPlan({ name: planName, price })
+    setShowPlanDialog(true)
+  }
   const features = [
     {
       icon: Users,
@@ -82,27 +91,6 @@ export default function SharedHostingPage() {
           <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
             Get your website online quickly with our reliable and affordable shared hosting. Perfect for beginners and small businesses looking for an easy-to-use hosting solution.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="text-white font-semibold cursor-pointer"
-              style={{ backgroundColor: "#128C7E" }}
-            >
-              <Link href="https://kmerhosting.com/customers/store/cpanel-shared-hosting">
-                Get Started Now <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="cursor-pointer hover:bg-[#128C7E] hover:text-white transition-all"
-              style={{ color: "#128C7E", borderColor: "#128C7E" }}
-            >
-              <Link href="/#pricing">View Pricing</Link>
-            </Button>
-          </div>
         </div>
       </section>
 
@@ -233,28 +221,34 @@ export default function SharedHostingPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              asChild
               size="lg"
               className="text-white font-semibold cursor-pointer hover:opacity-90 transition-opacity"
               style={{ backgroundColor: "#128C7E" }}
+              onClick={() => handleSelectPlan("Shared Hosting - cPanel", 14000)}
             >
-              <Link href="https://kmerhosting.com/customers/store/cpanel-shared-hosting">
-                Order cPanel Hosting <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
+              Order cPanel Hosting <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
             <Button
-              asChild
               size="lg"
               className="text-white font-semibold cursor-pointer hover:opacity-90 transition-opacity"
               style={{ backgroundColor: "#128C7E" }}
+              onClick={() => handleSelectPlan("Shared Hosting - DirectAdmin", 14000)}
             >
-              <Link href="https://kmerhosting.com/customers/store/directadmin-shared-hosting">
-                Order DirectAdmin Hosting <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
+              Order DirectAdmin Hosting <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
           </div>
         </div>
       </section>
+
+      {selectedPlan && (
+        <SelectPlanDialog
+          isOpen={showPlanDialog}
+          onClose={() => setShowPlanDialog(false)}
+          planType="shared"
+          planName={selectedPlan.name}
+          planPrice={selectedPlan.price}
+        />
+      )}
     </main>
   )
 }

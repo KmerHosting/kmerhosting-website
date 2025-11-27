@@ -4,10 +4,12 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Check, Lightbulb } from "lucide-react"
 import { useState } from "react"
+import { SalesContactDialog } from "@/components/sales-contact-dialog"
 
 export default function PricingSection() {
   const [activeTab, setActiveTab] = useState<"shared" | "reseller">("shared")
   const [sharedControlPanel, setSharedControlPanel] = useState<"cpanel" | "directadmin">("cpanel")
+  const [showSalesDialog, setShowSalesDialog] = useState(false)
 
   const sharedHostingCPanelPlans = [
     {
@@ -293,7 +295,8 @@ export default function PricingSection() {
   const plans = getPlansList()
 
   return (
-    <section id="pricing" className="py-16 px-4 bg-white dark:bg-slate-900">
+    <>
+      <section id="pricing" className="py-16 px-4 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">
@@ -508,11 +511,13 @@ export default function PricingSection() {
             {/* Contact Sales Button */}
             <div className="text-center">
               <p className="text-slate-600 dark:text-slate-300 text-sm mb-4">Need a custom plan tailored to your needs?</p>
-              <a href="mailto:sales@kmerhosting.com" className="inline-block">
-                <Button className="font-semibold py-3 px-8 text-white text-base hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
-                  Contact Sales Team
-                </Button>
-              </a>
+              <Button
+                className="font-semibold py-3 px-8 text-white text-base hover:opacity-90 cursor-pointer"
+                style={{ backgroundColor: "#128C7E" }}
+                onClick={() => setShowSalesDialog(true)}
+              >
+                Contact Sales Team
+              </Button>
             </div>
           </div>
         )}
@@ -552,11 +557,13 @@ export default function PricingSection() {
                 </div>
               </div>
 
-              <a href="mailto:sales@kmerhosting.com" className="w-full">
-                <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
-                  Contact Sales
-                </Button>
-              </a>
+              <Button
+                className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer"
+                style={{ backgroundColor: "#128C7E" }}
+                onClick={() => setShowSalesDialog(true)}
+              >
+                Contact Sales
+              </Button>
 
               <div className="space-y-2 mt-5 pt-5 border-t border-slate-200 dark:border-slate-700">
                 {["Full Root Access", "1 IPv4 Address", "Linux or Windows", "Free SSL Certificate", "24/7 Support"].map((feature, idx) => (
@@ -598,11 +605,13 @@ export default function PricingSection() {
                 </div>
               </div>
 
-              <a href="mailto:sales@kmerhosting.com" className="w-full">
-                <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
-                  Contact Sales
-                </Button>
-              </a>
+              <Button
+                className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer"
+                style={{ backgroundColor: "#128C7E" }}
+                onClick={() => setShowSalesDialog(true)}
+              >
+                Contact Sales
+              </Button>
 
               <div className="space-y-2 mt-5 pt-5 border-t border-slate-200 dark:border-slate-700">
                 {["Full Root Access", "2 IPv4 Addresses", "Linux or Windows", "Free SSL Certificate", "Priority Support", "Weekly Backups"].map((feature, idx) => (
@@ -641,11 +650,13 @@ export default function PricingSection() {
                 </div>
               </div>
 
-              <a href="mailto:sales@kmerhosting.com" className="w-full">
-                <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
-                  Contact Sales
-                </Button>
-              </a>
+              <Button
+                className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer"
+                style={{ backgroundColor: "#128C7E" }}
+                onClick={() => setShowSalesDialog(true)}
+              >
+                Contact Sales
+              </Button>
 
               <div className="space-y-2 mt-5 pt-5 border-t border-slate-200 dark:border-slate-700">
                 {["Full Root Access", "4 IPv4 Addresses", "Linux or Windows", "Free SSL Certificate", "24/7 Priority Support", "Daily Backups"].map((feature, idx) => (
@@ -694,11 +705,13 @@ export default function PricingSection() {
                 </div>
               </div>
 
-              <a href="mailto:sales@kmerhosting.com" className="w-full">
-                <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
-                  Contact Sales
-                </Button>
-              </a>
+              <Button
+                className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer"
+                style={{ backgroundColor: "#128C7E" }}
+                onClick={() => setShowSalesDialog(true)}
+              >
+                Contact Sales
+              </Button>
 
               <div className="space-y-2 mt-5 pt-5 border-t border-slate-200 dark:border-slate-700">
                 {["Full Root Access", "5 IPv4 Addresses", "RAID 1 Configuration", "Remote Management (IPMI)", "DDoS Protection", "99.9% Uptime SLA"].map((feature, idx) => (
@@ -740,11 +753,13 @@ export default function PricingSection() {
                 </div>
               </div>
 
-              <a href="mailto:sales@kmerhosting.com" className="w-full">
-                <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
-                  Contact Sales
-                </Button>
-              </a>
+              <Button
+                className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer"
+                style={{ backgroundColor: "#128C7E" }}
+                onClick={() => setShowSalesDialog(true)}
+              >
+                Contact Sales
+              </Button>
 
               <div className="space-y-2 mt-5 pt-5 border-t border-slate-200 dark:border-slate-700">
                 {["Full Root Access", "8 IPv4 Addresses", "RAID 1 or RAID 10", "Remote Management (IPMI)", "DDoS Protection", "99.9% Uptime SLA", "Priority Support"].map((feature, idx) => (
@@ -783,11 +798,13 @@ export default function PricingSection() {
                 </div>
               </div>
 
-              <a href="mailto:sales@kmerhosting.com" className="w-full">
-                <Button className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer" style={{ backgroundColor: "#128C7E" }}>
-                  Contact Sales
-                </Button>
-              </a>
+              <Button
+                className="w-full font-semibold py-2 text-white text-sm hover:opacity-90 cursor-pointer"
+                style={{ backgroundColor: "#128C7E" }}
+                onClick={() => setShowSalesDialog(true)}
+              >
+                Contact Sales
+              </Button>
 
               <div className="space-y-2 mt-5 pt-5 border-t border-slate-200 dark:border-slate-700">
                 {["Full Root Access", "16 IPv4 Addresses", "Custom RAID Config", "Remote Management (IPMI)", "Advanced DDoS Protection", "99.99% Uptime SLA", "24/7 Dedicated Support", "Hardware Replacement"].map((feature, idx) => (
@@ -802,5 +819,8 @@ export default function PricingSection() {
         </div>
       </div>
     </section>
+
+    <SalesContactDialog open={showSalesDialog} onOpenChange={setShowSalesDialog} />
+    </>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { Server, Shield, Headphones, Zap, Check, Cpu } from "lucide-react"
+import { Server, Shield, Headphones, Zap, Check, Cpu, Brain, Search, Lightbulb, Code2 } from "lucide-react"
 import Image from "next/image"
 
 export default function Features() {
@@ -178,12 +178,12 @@ export default function Features() {
 
         {/* LLM & AI Models Section */}
         <div className="bg-gradient-to-r from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 rounded-2xl p-8 md:p-12 mb-20 border border-slate-200 dark:border-slate-700">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-4">
                 AI-Powered Development with <span style={{ color: "#128C7E" }}>KmerHosting AI</span>
               </h3>
-              <p className="text-slate-700 dark:text-slate-300 mb-6">
+              <p className="text-slate-700 dark:text-slate-300 mb-6 leading-relaxed">
                 Access the most powerful Large Language Models for free with API integration. Leverage cutting-edge AI to accelerate your development workflow and build smarter applications.
               </p>
               <div className="space-y-3 mb-8">
@@ -202,46 +202,47 @@ export default function Features() {
               </div>
               <a
                 href="/kmerhosting-ai/"
-                className="px-6 py-3 rounded-lg font-semibold transition-all text-white flex items-center gap-2 cursor-pointer inline-block"
+                className="px-6 py-2.5 rounded-lg font-medium transition-all text-white cursor-pointer inline-block"
                 style={{ backgroundColor: "#128C7E" }}
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#0a6f62")}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#128C7E")}
               >
-                <Cpu className="w-5 h-5" />
-                Start with KmerHosting AI Now
+                Explore AI Features
               </a>
             </div>
 
             <div className="space-y-6">
               <div>
-                <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Commercial AI Models</h4>
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-wide">Supported AI Providers</h4>
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    { name: "OpenAI", color: "from-green-600 to-green-700" },
-                    { name: "Alphabet (Google)", color: "from-blue-600 to-blue-700" },
-                    { name: "Anthropic", color: "from-amber-600 to-amber-700" },
-                    { name: "Meta", color: "from-blue-500 to-blue-600" },
-                  ].map((ai, idx) => (
-                    <div key={idx} className={`bg-gradient-to-br ${ai.color} rounded-lg p-4 text-center`}>
-                      <p className="text-sm font-bold text-white">{ai.name}</p>
-                    </div>
-                  ))}
+                    { name: "OpenAI", Icon: Brain},
+                    { name: "Google", Icon: Search },
+                    { name: "Anthropic", Icon: Code2 },
+                    { name: "Meta", Icon: Lightbulb },
+                  ].map((ai, idx) => {
+                    const IconComponent = ai.Icon
+                    return (
+                      <div key={idx} className="flex items-center gap-3 p-3 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                        <IconComponent className="w-5 h-5 flex-shrink-0" style={{ color: "#128C7E" }} />
+                        <span className="text-sm font-medium text-slate-900 dark:text-white">{ai.name}</span>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
 
               <div>
-                <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Open Source Models</h4>
-                <div className="space-y-2 text-sm">
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-wide">Open Source Models</h4>
+                <div className="grid grid-cols-2 gap-2">
                   {[
-                    "Llama (Meta)",
+                    "Llama",
                     "Mistral",
-                    "Alibaba Qwen",
+                    "Qwen",
                     "Baichuan",
-                    "OpenAssistant",
                   ].map((model, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
-                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#128C7E" }} />
-                      <span>{model}</span>
+                    <div key={idx} className="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-sm font-medium text-slate-900 dark:text-white text-center border border-slate-200 dark:border-slate-700">
+                      {model}
                     </div>
                   ))}
                 </div>

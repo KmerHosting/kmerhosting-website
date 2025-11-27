@@ -52,6 +52,16 @@ export default function AboutPage() {
 
   return (
     <main className="min-h-screen bg-white dark:bg-slate-900">
+      {/* Back to Home Button */}
+      <div className="py-4 px-4 border-b border-slate-200 dark:border-slate-700">
+        <div className="max-w-4xl mx-auto">
+          <Link href="/" className="inline-flex items-center gap-2 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition">
+            <span>←</span>
+            <span>Back to Home</span>
+          </Link>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="py-20 px-4 bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800">
         <div className="max-w-4xl mx-auto text-center">
@@ -100,11 +110,8 @@ export default function AboutPage() {
                   <svg className="w-12 h-12 mb-4" style={{ color: "#128C7E" }} fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                   </svg>
-                  <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
-                    "At KmerHosting, our mission goes beyond just providing web hosting services. We are committed to empowering Cameroonian businesses and individuals with the digital infrastructure they need to thrive in today's connected world. Every day, we strive to deliver not just hosting, but reliable partnerships that help our clients achieve their online goals. Our focus on local support, competitive pricing, and enterprise-grade features sets us apart in the market. We believe that quality hosting shouldn't be a luxury—it should be accessible to everyone."
-                  </p>
                   <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
-                    "As we continue to grow, we remain dedicated to innovation, security, and exceptional customer service. Thank you for trusting KmerHosting with your online presence."
+                    "At KmerHosting, we're committed to empowering Cameroon's businesses with reliable, affordable hosting. We believe quality hosting shouldn't be a luxury—it should be accessible to everyone. Our focus on local support and competitive pricing sets us apart."
                   </p>
                 </div>
                 <div className="border-t border-slate-200 dark:border-slate-700 pt-4">
@@ -364,14 +371,6 @@ export default function AboutPage() {
             Experience reliable hosting with local support. Let's build your online presence together.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              asChild
-              size="lg" 
-              className="text-white font-semibold cursor-pointer"
-              style={{ backgroundColor: "#128C7E" }}
-            >
-              <Link href="/#pricing">Get Started Today</Link>
-            </Button>
             <Button
               size="lg"
               variant="outline"

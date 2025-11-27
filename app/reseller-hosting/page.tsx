@@ -1,10 +1,19 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
-import { Check, ArrowRight, Server, DollarSign, Settings, TrendingUp, Home } from "lucide-react"
+import { Check, ArrowRight, Package, Zap, Shield, TrendingUp, Home, DollarSign, Server, Settings } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import SelectPlanDialog from "@/components/select-plan-dialog"
 
 export default function ResellerHostingPage() {
+  const [showPlanDialog, setShowPlanDialog] = useState(false)
+  const [selectedPlan, setSelectedPlan] = useState<{ name: string; price: number } | null>(null)
+
+  const handleSelectPlan = (planName: string, price: number) => {
+    setSelectedPlan({ name: planName, price })
+    setShowPlanDialog(true)
+  }
   const features = [
     {
       icon: Server,
@@ -255,17 +264,25 @@ export default function ResellerHostingPage() {
             Join successful entrepreneurs and agencies who are building profitable hosting businesses with KmerHosting.
           </p>
           <Button
-            asChild
             size="lg"
             className="text-white font-semibold cursor-pointer hover:opacity-90 transition-opacity"
             style={{ backgroundColor: "#128C7E" }}
+            onClick={() => handleSelectPlan("Reseller Hosting - Premium", 36000)}
           >
-            <Link href="https://kmerhosting.com/customers/store/cpanel-reseller-hosting">
-              Start Your Business Today <ArrowRight className="ml-2 w-4 h-4" />
-            </Link>
+            Start Your Business Today <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
         </div>
       </section>
+
+      {selectedPlan && (
+        <SelectPlanDialog
+          isOpen={showPlanDialog}
+          onClose={() => setShowPlanDialog(false)}
+          planType="reseller"
+          planName={selectedPlan.name}
+          planPrice={selectedPlan.price}
+        />
+      )}
     </main>
   )
 }

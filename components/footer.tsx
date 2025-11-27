@@ -4,12 +4,14 @@ import { CheckCircle2, Mail, Send, Facebook, Twitter, Instagram, Linkedin, Cooki
 import { useState } from "react"
 import Image from "next/image"
 import { useCookieBanner } from "@/lib/cookie-context"
+import ContactDepartmentDialog from "@/components/contact-department-dialog"
 
 export default function Footer() {
   const { showCookieBanner } = useCookieBanner()
   const [email, setEmail] = useState("")
   const [subscribed, setSubscribed] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [showContactDialog, setShowContactDialog] = useState(false)
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -180,9 +182,12 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="mailto:support@kmerhosting.com" className="hover:text-slate-900 dark:hover:text-teal-400 transition cursor-pointer">
+                  <button
+                    onClick={() => setShowContactDialog(true)}
+                    className="hover:text-slate-900 dark:hover:text-teal-400 transition cursor-pointer font-normal text-left"
+                  >
                     Support
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>
@@ -271,6 +276,8 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      <ContactDepartmentDialog isOpen={showContactDialog} onClose={() => setShowContactDialog(false)} />
     </footer>
   )
 }
