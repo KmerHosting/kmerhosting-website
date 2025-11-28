@@ -40,9 +40,9 @@ export default function LoginPage() {
 
       toast.success("Login successful!", { duration: 5000 })
       
-      // Redirect to dashboard after toast shows
+      // Redirect to customers dashboard after toast shows
       setTimeout(() => {
-        router.push("/dashboard")
+        router.push("/customers/dashboard")
       }, 500)
     } catch (err) {
       setError("An error occurred. Please try again.")

@@ -125,7 +125,7 @@ export default function GetPayPage() {
         setUploadedImages([])
         setDescription("")
         setTimeout(() => {
-          router.push("/dashboard")
+          router.push("/customers/dashboard")
         }, 5000)
       } else {
         alert("Failed to submit proof")
@@ -161,7 +161,7 @@ export default function GetPayPage() {
               You must be logged into a valid KmerHosting account to access this page.
             </p>
             <p className="text-sm text-slate-600 dark:text-slate-400 mb-6 bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-              ✓ You are accessing this page because you are an authenticated KmerHosting user.
+              To avoid scammer and fraud, accessing this page is only for an authenticated KmerHosting user.
               Always verify the URL is <strong>kmerhosting.com</strong>
             </p>
             <Link
@@ -207,7 +207,7 @@ export default function GetPayPage() {
                 You'll see your service in your dashboard once it's activated. If there's any issue, contact us at <strong>support@kmerhosting.com</strong> with subject <strong>"WAITING SERVICES ACTIVATION"</strong>
               </p>
               <Link
-                href="/dashboard"
+                href="/customers/dashboard"
                 className="inline-block px-6 py-2 rounded-lg font-medium text-white"
                 style={{ backgroundColor: "#128C7E" }}
               >

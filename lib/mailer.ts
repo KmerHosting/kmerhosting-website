@@ -662,7 +662,7 @@ export async function sendPaymentProofConfirmation(
               </div>
 
               <div class="button-section">
-                <a href="https://kmerhosting.com/dashboard" class="button">View in Dashboard</a>
+                <a href="https://kmerhosting.com/customers/dashboard" class="button">View in Dashboard</a>
               </div>
 
               <div class="divider"></div>
@@ -958,7 +958,7 @@ export async function sendWelcomeEmail(
   username: string
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    const dashboardUrl = `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`;
+    const dashboardUrl = `${process.env.NEXT_PUBLIC_APP_URL}/customers/dashboard`;
 
     await transport.sendMail({
       from: emailConfig.noreply,
