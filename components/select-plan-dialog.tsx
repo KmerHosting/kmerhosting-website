@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { X, Loader2, CheckCircle2, Lock } from "lucide-react"
+import { toast } from "sonner"
 
 interface SelectPlanDialogProps {
   isOpen: boolean
@@ -71,6 +72,22 @@ export default function SelectPlanDialog({
       return
     }
 
+    // Validate domain extension based on plan
+    const domainExtension = domain.toLowerCase().split(".").pop() || ""
+    const allowedExtensions: Record<string, string[]> = {
+      "Bronze": ["com"],
+      "Silver": ["com"],
+      "Gold": ["com", "org"],
+      "Platinum": ["com", "org", "net", "io", "online", "xyz", "dev", "app", "info", "shop", "site", "store"],
+    }
+
+    const planAllowedExts = allowedExtensions[planName] || ["com"]
+    if (!planAllowedExts.includes(domainExtension)) {
+      const extList = planAllowedExts.map(ext => `.${ext}`).join(", ")
+      setError(`${planName} plan only supports: ${extList}`)
+      return
+    }
+
     if (!captchaAnswer) {
       setError("Please answer the security question")
       return
@@ -107,10 +124,11 @@ export default function SelectPlanDialog({
         return
       }
 
+      toast.success("Order submitted successfully!", { duration: 5000 })
       setIsSuccess(true)
       setTimeout(() => {
         onClose()
-      }, 3000)
+      }, 5000)
     } catch (err) {
       setError("An error occurred. Please try again.")
       setIsLoading(false)

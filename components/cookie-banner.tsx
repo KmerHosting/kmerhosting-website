@@ -149,7 +149,7 @@ export default function CookieBanner({ onClose }: CookieBannerProps) {
                 </div>
                 <button
                   onClick={handleCloseModal}
-                  className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors flex-shrink-0 ml-4"
+                  className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors flex-shrink-0 ml-4 cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>

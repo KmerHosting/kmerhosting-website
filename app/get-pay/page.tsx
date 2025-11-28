@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { Upload, X, AlertCircle, CheckCircle2 } from "lucide-react"
+import { Upload, X, AlertCircle, CheckCircle2, User, Mail, Phone, MapPin, Info } from "lucide-react"
+import { toast } from "sonner"
 
 interface PaymentProof {
   images: File[]
@@ -18,6 +19,10 @@ export default function GetPayPage() {
   const [description, setDescription] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [contactFullName, setContactFullName] = useState("")
+  const [contactEmail, setContactEmail] = useState("")
+  const [contactPhone, setContactPhone] = useState("")
+  const [contactAddress, setContactAddress] = useState("")
 
   useEffect(() => {
     // Check authentication server-side via API (httpOnly cookie)
@@ -26,7 +31,11 @@ export default function GetPayPage() {
         const res = await fetch("/api/auth/me")
         if (res.ok) {
           const data = await res.json()
-          if (data.authenticated) setIsAuthenticated(true)
+          if (data.authenticated) {
+            setIsAuthenticated(true)
+            // Only prefill email
+            setContactEmail(data.user?.email || "")
+          }
         }
       } catch (err) {
         console.error("Error checking auth for get-pay:", err)
@@ -79,6 +88,21 @@ export default function GetPayPage() {
       return
     }
 
+    if (!contactFullName.trim()) {
+      alert("Please enter your full name")
+      return
+    }
+
+    if (!contactPhone.trim()) {
+      alert("Please enter your phone number")
+      return
+    }
+
+    if (!contactAddress.trim()) {
+      alert("Please enter your address")
+      return
+    }
+
     setIsSubmitting(true)
 
     try {
@@ -88,16 +112,21 @@ export default function GetPayPage() {
         body: JSON.stringify({
           images: uploadedImages,
           description: description.trim(),
+          fullName: contactFullName || null,
+          email: contactEmail,
+          phone: contactPhone,
+          address: contactAddress,
         }),
       })
 
       if (response.ok) {
+        toast.success("Payment proof submitted successfully!", { duration: 5000 })
         setSubmitSuccess(true)
         setUploadedImages([])
         setDescription("")
         setTimeout(() => {
           router.push("/dashboard")
-        }, 3000)
+        }, 5000)
       } else {
         alert("Failed to submit proof")
       }
@@ -151,19 +180,11 @@ export default function GetPayPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 py-12 px-4">
       <div className="max-w-3xl mx-auto">
-        {/* Security Notice */}
-        <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-6 rounded-lg mb-8">
-          <h3 className="font-bold text-blue-900 dark:text-blue-100 mb-2">
-            ✓ Authenticated KmerHosting User
-          </h3>
-          <p className="text-sm text-blue-800 dark:text-blue-200 mb-3">
-            You are accessing this page because you are a verified KmerHosting customer and you are logged in. This is our official payment verification page.
-          </p>
-          <p className="text-sm text-blue-800 dark:text-blue-200">
-            <strong>IMPORTANT:</strong> Always verify the URL is <strong>kmerhosting.com</strong>. Any other URLs claiming to be KmerHosting are fake.
-          </p>
+        {/* Minimal Auth Bar */}
+        <div className="border-l-4 border-teal-500 bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-sm mb-8 flex items-center justify-between">
+          <p className="text-xs text-slate-700 dark:text-slate-300">Authenticated user: {contactEmail}</p>
         </div>
-
+        
         {/* Main Content */}
         <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8">
           <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
@@ -180,10 +201,10 @@ export default function GetPayPage() {
                 Payment Proof Submitted!
               </h2>
               <p className="text-slate-600 dark:text-slate-400 mb-6">
-                Thank you! We'll verify your payment and activate your service within 24 hours.
+                Thank you! We'll verify your payment and activate your service within 15 minutes.
               </p>
               <p className="text-sm text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-700 p-4 rounded-lg mb-6">
-                You'll see your service in your dashboard once it's activated. If there's any issue, contact us at <strong>hello@kmerhosting.com</strong> with subject <strong>"WAITING SERVICES ACTIVATION"</strong>
+                You'll see your service in your dashboard once it's activated. If there's any issue, contact us at <strong>support@kmerhosting.com</strong> with subject <strong>"WAITING SERVICES ACTIVATION"</strong>
               </p>
               <Link
                 href="/dashboard"
@@ -196,43 +217,69 @@ export default function GetPayPage() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Payment Instructions */}
-              <div className="bg-slate-50 dark:bg-slate-700 rounded-lg p-6">
-                <h3 className="font-bold text-slate-900 dark:text-white mb-4">
-                  Payment Instructions
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
-                  Please transfer the amount shown in your order to one of our official accounts:
-                </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-slate-900 dark:text-white">Payment Instructions</h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">Transfer the amount shown in your order to one of our official accounts below.</p>
 
-                <div className="space-y-3 bg-white dark:bg-slate-800 p-4 rounded-lg">
-                  <div>
-                    <p className="text-sm font-bold text-slate-900 dark:text-white">
-                      🟠 Orange Money
-                    </p>
-                    <p className="text-base text-slate-700 dark:text-slate-300 font-mono">
-                      +237 694 193 493
-                    </p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
-                      Name: TOSCANI TENEKEU
-                    </p>
+                  <div className="bg-white dark:bg-slate-800 p-4 rounded-md border border-slate-200 dark:border-slate-700">
+                    <div className="flex items-center gap-3 mb-3">
+                      <Phone className="w-4 h-4 text-slate-600" />
+                      <div>
+                        <div className="text-sm font-medium text-slate-900 dark:text-white">Orange Money</div>
+                        <div className="text-xs text-slate-600 dark:text-slate-400 font-mono">+237 694 193 493</div>
+                        <div className="text-xs text-slate-500 dark:text-slate-300">TOSCANI TENEKEU MODJOU</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <Phone className="w-4 h-4 text-slate-600" />
+                      <div>
+                        <div className="text-sm font-medium text-slate-900 dark:text-white">MTN Mobile Money</div>
+                        <div className="text-xs text-slate-600 dark:text-slate-400 font-mono">+237 652 903 110</div>
+                        <div className="text-xs text-slate-500 dark:text-slate-300">TOSCANI TENEKEU MODJOU</div>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-4 flex items-center gap-3">
+                      <Mail className="w-4 h-4 text-slate-600" />
+                      <div>
+                        <div className="text-sm font-medium text-slate-900 dark:text-white">Support Email</div>
+                        <div className="text-xs text-slate-600 dark:text-slate-400 font-mono">support@kmerhosting.com</div>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="border-t border-slate-200 dark:border-slate-700 pt-3">
-                    <p className="text-sm font-bold text-slate-900 dark:text-white">
-                      📱 MTN Mobile Money
-                    </p>
-                    <p className="text-base text-slate-700 dark:text-slate-300 font-mono">
-                      +237 652 903 110
-                    </p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
-                      Name: TOSCANI TENEKEU
-                    </p>
+                  <div className="text-xs text-slate-600 dark:text-slate-400">
+                    <strong>Note:</strong> These official numbers are used to receive your payment. Any other numbers are not associated with KmerHosting.
                   </div>
                 </div>
 
-                <p className="text-xs text-red-600 dark:text-red-400 mt-4 font-bold">
-                  ⚠️ THESE ARE THE ONLY OFFICIAL NUMBERS. Any other numbers claiming to be KmerHosting are fake and will not activate your service.
-                </p>
+                <div className="bg-white dark:bg-slate-800 p-4 rounded-md border border-slate-200 dark:border-slate-700">
+                  <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-3">Your billing details</h4>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="text-xs text-slate-600 dark:text-slate-400 flex items-center gap-2"><User className="w-3 h-3" /> Full name <span className="text-red-500">*</span></label>
+                      <input required value={contactFullName} onChange={(e) => setContactFullName(e.target.value)} placeholder="John Doe" className="w-full mt-1 px-3 py-2 text-sm rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white" />
+                    </div>
+                    <div>
+                      <label className="text-xs text-slate-600 dark:text-slate-400 flex items-center gap-2"><Mail className="w-3 h-3" /> Email</label>
+                      <input value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} placeholder="you@email.com" className="w-full mt-1 px-3 py-2 text-sm rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white" />
+                    </div>
+                    <div>
+                      <label className="text-xs text-slate-600 dark:text-slate-400 flex items-center gap-2"><Phone className="w-3 h-3" /> Phone <span className="text-red-500">*</span></label>
+                      <input required value={contactPhone} onChange={(e) => setContactPhone(e.target.value)} placeholder="e.g., +237 6xx xxx xxx" className="w-full mt-1 px-3 py-2 text-sm rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white" />
+                    </div>
+                    <div>
+                      <label className="text-xs text-slate-600 dark:text-slate-400 flex items-center gap-2"><MapPin className="w-3 h-3" /> Address <span className="text-red-500">*</span></label>
+                      <input required value={contactAddress} onChange={(e) => setContactAddress(e.target.value)} placeholder="Yaounde, Nkoabang, ..." className="w-full mt-1 px-3 py-2 text-sm rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white" />
+                    </div>
+                    <div className="text-xs text-slate-500 dark:text-slate-400 flex items-start gap-2">
+                      <Info className="w-3 h-3 mt-0.5" />
+                      <div>These details are used only to create your invoice and will not be shared publicly.</div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Image Upload */}
@@ -252,7 +299,7 @@ export default function GetPayPage() {
                       <button
                         type="button"
                         onClick={() => removeImage(idx)}
-                        className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                       >
                         <X className="w-4 h-4" />
                       </button>
@@ -317,7 +364,7 @@ export default function GetPayPage() {
               {/* Help Text */}
               <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
                 <p className="text-sm text-amber-900 dark:text-amber-100">
-                  <strong>After submission:</strong> We'll verify your payment within 24 hours. You'll receive a confirmation email and your service will appear in your dashboard. If you experience any delays, contact hello@kmerhosting.com with subject "<strong>WAITING SERVICES ACTIVATION</strong>" and your order ID.
+                  <strong>After submission:</strong> We'll verify your payment within 15 minutes. You'll receive a confirmation email and your service will appear in your dashboard. If you experience any delays, contact support@kmerhosting.com with subject "<strong>WAITING SERVICES ACTIVATION</strong>" and your order ID as message.
                 </p>
               </div>
             </form>

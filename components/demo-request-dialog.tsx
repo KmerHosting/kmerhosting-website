@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { X, Loader2, CheckCircle2, Lock } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { toast } from "sonner"
 
 interface DemoRequestDialogProps {
   isOpen: boolean
@@ -84,13 +85,14 @@ export default function DemoRequestDialog({ isOpen, onClose }: DemoRequestDialog
       })
 
       if (response.ok) {
+        toast.success("Demo request submitted successfully!", { duration: 5000 })
         setIsSuccess(true)
         setEmail("")
         setFullName("")
         setTimeout(() => {
           setIsSuccess(false)
           onClose()
-        }, 3000)
+        }, 5000)
       } else {
         const data = await response.json()
         setError(data.error || "Failed to submit demo request. Please try again.")
@@ -128,7 +130,7 @@ export default function DemoRequestDialog({ isOpen, onClose }: DemoRequestDialog
             </div>
             <button
               onClick={onClose}
-              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors cursor-pointer"
               disabled={isLoading}
             >
               <X className="w-5 h-5" />
@@ -146,7 +148,7 @@ export default function DemoRequestDialog({ isOpen, onClose }: DemoRequestDialog
                 Request Received!
               </h3>
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                We'll send your demo credentials to <strong>{email}</strong> within 24 hours.
+                We'll send your demo credentials to <strong>{email}</strong> within 15 minutes.
               </p>
             </div>
           ) : (

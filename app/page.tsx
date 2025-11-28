@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react"
 import Navbar from "@/components/navbar"
 import Hero from "@/components/hero"
+import LoadingScreen from "@/components/loading-screen"
 import { CardSkeleton } from "@/components/skeletons"
 
 // Lazy load heavy components
@@ -26,7 +27,9 @@ export default function Home() {
   return (
     <main className="bg-background text-foreground">
       <Navbar />
-      <Hero />
+      <Suspense fallback={<LoadingScreen />}>
+        <Hero />
+      </Suspense>
       <Suspense fallback={<SkeletonLoader />}>
         <HostingTypes />
       </Suspense>

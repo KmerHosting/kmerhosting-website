@@ -63,8 +63,21 @@ model PaymentProof {
   imageUrls       String   @default("")  // JSON array of image URLs
   description     String?
   
+  contactFullName String?
+  contactEmail    String?
+  contactPhone    String?
+  contactAddress  String?
+  
   status          String   @default("pending")  // pending, approved, rejected
   
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+}
+
+model NewsletterSubscription {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  status    String   @default("active")  // active, unsubscribed
+  subscribedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

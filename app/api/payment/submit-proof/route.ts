@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const { images, description } = await req.json()
+    const { images, description, fullName: contactFullName, email: contactEmail, phone, address } = await req.json()
 
     if (!images || images.length === 0 || !description) {
       return NextResponse.json(
@@ -60,13 +60,17 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Create payment proof record
+    // Create payment proof record with dedicated contact columns
     await prisma.paymentProof.create({
       data: {
         orderId: order.id,
         userId: decoded.userId,
         imageUrls: JSON.stringify(images),
-        description,
+        description: description,
+        contactFullName: contactFullName || order.fullName,
+        contactEmail: contactEmail || decoded.email || order.email,
+        contactPhone: phone || null,
+        contactAddress: address || null,
         status: "pending",
       },
     })
@@ -90,16 +94,18 @@ export async function POST(req: NextRequest) {
         orderId: order.id,
       })
 
-      // Notify admin about submission
+      // Notify admin about submission with contact info
+      const humanDescription = `Contact Info:\nName: ${contactFullName || order.fullName}\nEmail: ${contactEmail || decoded.email}\nPhone: ${phone || "-"}\nAddress: ${address || "-"}\n\nPayment Note:\n${description}`
+
       await notifyAdminPaymentProofSubmitted(
         user.email,
-        order.fullName,
+        contactFullName || order.fullName,
         {
           planName: order.planName,
           planPrice: order.planPrice,
           orderId: order.id,
         },
-        description,
+        humanDescription,
         images.length
       )
     }

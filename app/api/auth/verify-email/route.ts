@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
 
 export async function POST(req: NextRequest) {
   try {
-    const { token, username, password, confirmPassword } = await req.json()
+    const { token, username, password, confirmPassword, subscribeNewsletter } = await req.json()
 
     // Validation
     if (!token) {
@@ -110,6 +110,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       success: true,
       message: "Account created successfully",
+      email: user.email,
       userId: user.id,
       username: user.username,
     })

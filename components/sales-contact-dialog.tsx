@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { AlertCircle, CheckCircle2, Loader, Lock } from "lucide-react";
 import LoadingSpinner from "./loading-spinner";
+import { toast } from "sonner";
 
 interface SalesContactDialogProps {
   open: boolean;
@@ -117,13 +118,14 @@ export function SalesContactDialog({ open, onOpenChange }: SalesContactDialogPro
         return;
       }
 
+      toast.success("Inquiry sent successfully! We'll get back to you soon.", { duration: 5000 });
       setSuccess(true);
       setLoading(false);
 
-      // Close dialog after 3 seconds
+      // Close dialog after 5 seconds
       setTimeout(() => {
         handleOpenChange(false);
-      }, 3000);
+      }, 5000);
     } catch (err) {
       setError("An error occurred. Please try again later.");
       setLoading(false);

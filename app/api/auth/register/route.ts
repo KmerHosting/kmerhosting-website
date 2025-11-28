@@ -19,11 +19,17 @@ export async function POST(req: NextRequest) {
       where: { email },
     })
 
+    // Security: Always return success message regardless of whether email exists
+    // This prevents user enumeration attacks
+    const successResponse = {
+      success: true,
+      message: "If this email address is not already registered, you will receive a verification email shortly.",
+    }
+
     if (existingUser) {
-      return NextResponse.json(
-        { error: "Email already registered" },
-        { status: 400 }
-      )
+      // Email already exists - don't send email but still return success message
+      console.log("User attempted to register with existing email:", email)
+      return NextResponse.json(successResponse)
     }
 
     // Generate verification token
@@ -63,10 +69,7 @@ export async function POST(req: NextRequest) {
       // Don't fail the request if admin notification fails
     }
 
-    return NextResponse.json({
-      success: true,
-      message: "Verification email sent. Please check your inbox.",
-    })
+    return NextResponse.json(successResponse)
   } catch (error) {
     console.error("Registration error:", error)
     return NextResponse.json(

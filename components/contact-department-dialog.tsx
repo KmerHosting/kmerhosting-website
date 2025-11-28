@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { X, Loader2, CheckCircle2, Lock } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { toast } from "sonner"
 
 interface ContactDepartmentDialogProps {
   isOpen: boolean
@@ -141,6 +142,7 @@ export default function ContactDepartmentDialog({ isOpen, onClose }: ContactDepa
       })
 
       if (response.ok) {
+        toast.success("Message sent successfully!", { duration: 5000 })
         setIsSuccess(true)
         setFullName("")
         setEmail("")
@@ -149,7 +151,7 @@ export default function ContactDepartmentDialog({ isOpen, onClose }: ContactDepa
         setTimeout(() => {
           setIsSuccess(false)
           onClose()
-        }, 3000)
+        }, 5000)
       } else {
         const data = await response.json()
         setError(data.error || "Failed to submit contact form. Please try again.")
@@ -195,7 +197,7 @@ export default function ContactDepartmentDialog({ isOpen, onClose }: ContactDepa
             </div>
             <button
               onClick={onClose}
-              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors flex-shrink-0"
+              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors flex-shrink-0 cursor-pointer"
               disabled={isLoading}
             >
               <X className="w-5 h-5" />
