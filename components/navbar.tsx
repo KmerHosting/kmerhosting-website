@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Menu, X, Sun, Moon, Zap, User, LogOut, LayoutDashboard } from "lucide-react"
+import { Menu, X, Sun, Moon, LogIn, UserPlus, User, LogOut, LayoutDashboard } from "lucide-react"
 import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation"
@@ -144,10 +144,16 @@ export default function Navbar() {
                 )}
               </div>
             ) : !isLoadingAuth ? (
-              <Link href="/signup" className="flex items-center gap-2 px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
-                <Zap className="w-4 h-4" />
-                Get Started
-              </Link>
+              <div className="flex items-center gap-2">
+                <Link href="/login" className="flex items-center gap-2 px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
+                  <LogIn className="w-4 h-4" />
+                  Login
+                </Link>
+                <Link href="/signup" className="flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-all cursor-pointer" style={{ backgroundColor: "#128C7E", color: "white" }}>
+                  <UserPlus className="w-4 h-4" />
+                  Sign up
+                </Link>
+              </div>
             ) : null}
           </div>
 
@@ -221,10 +227,16 @@ export default function Navbar() {
                   </button>
                 </>
               ) : !isLoadingAuth ? (
-                <Link href="/signup" className="flex items-center justify-center gap-2 w-full px-6 py-2 rounded-lg font-medium border-2 transition-all hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer" style={{ borderColor: "#128C7E", color: "#128C7E" }}>
-                  <Zap className="w-4 h-4" />
-                  Get Started
-                </Link>
+                <div className="flex gap-2">
+                  <Link href="/login" className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
+                    <LogIn className="w-4 h-4" />
+                    Login
+                  </Link>
+                  <Link href="/signup" className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg font-medium transition-all cursor-pointer" style={{ backgroundColor: "#128C7E", color: "white" }}>
+                    <UserPlus className="w-4 h-4" />
+                    Sign up
+                  </Link>
+                </div>
               ) : null}
             </div>
           </div>

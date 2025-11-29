@@ -8,7 +8,7 @@ const departments: Record<
   sales: { name: "Sales", email: "sales@kmerhosting.com" },
   support: { name: "Support", email: "support@kmerhosting.com" },
   billing: { name: "Billing", email: "billing@kmerhosting.com" },
-  info: { name: "General Inquiries", email: "hello@kmerhosting.com" },
+  info: { name: "General Inquiries", email: "support@kmerhosting.com" },
   security: { name: "Security", email: "security@kmerhosting.com" },
   migrations: { name: "Migrations", email: "migrations@kmerhosting.com" },
 };

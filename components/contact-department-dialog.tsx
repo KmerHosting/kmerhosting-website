@@ -32,7 +32,7 @@ const departments = [
   {
     id: "info",
     name: "General Inquiries",
-    email: "hello@kmerhosting.com",
+    email: "support@kmerhosting.com",
     description: "For general questions about KmerHosting",
   },
   {

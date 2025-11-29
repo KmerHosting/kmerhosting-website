@@ -223,8 +223,8 @@ export default function Footer() {
               <ul className="space-y-2 text-slate-700 dark:text-slate-400 text-sm">
                 <li className="flex items-start gap-2">
                   <Mail className="w-4 h-4 mt-1 flex-shrink-0" style={{ color: "#128C7E" }} />
-                  <a href="mailto:hello@kmerhosting.com" className="hover:text-slate-900 dark:hover:text-teal-400 transition cursor-pointer">
-                    hello@kmerhosting.com
+                  <a href="mailto:support@kmerhosting.com" className="hover:text-slate-900 dark:hover:text-teal-400 transition cursor-pointer">
+                    support@kmerhosting.com
                   </a>
                 </li>
                 <li>10ème arrêt Nkoabang,<br />Yaoundé, Cameroon</li>
