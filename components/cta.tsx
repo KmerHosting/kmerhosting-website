@@ -26,7 +26,7 @@ export default function CTA() {
       title: "Dedicated Servers",
       description: "Maximum performance and complete control",
       icon: Database,
-      link: "/dedicated-server",
+      link: "/dedicated-servers",
     },
   ]
 

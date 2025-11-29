@@ -463,7 +463,7 @@ export default function DashboardPage() {
               <div>✓ Redundant Power</div>
             </div>
             <Link
-              href="/dedicated-server"
+              href="/dedicated-servers"
               className="text-teal-600 dark:text-teal-400 hover:underline font-medium text-sm"
             >
               View Orders →

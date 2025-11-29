@@ -1,12 +1,17 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, Check, Globe, Zap, Shield, Headphones } from "lucide-react"
-import { useState } from "react"
+import { ArrowRight, Check, Globe, Zap, Shield, Headphones, Sun, Moon } from "lucide-react"
+import { useState, useEffect } from "react"
+import { useTheme } from "next-themes"
 import ContactDepartmentDialog from "@/components/contact-department-dialog"
 
 export default function AboutPage() {
   const [showContactDialog, setShowContactDialog] = useState(false)
+  const { theme, setTheme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => setMounted(true), [])
 
   const features = [
     {
@@ -44,10 +49,19 @@ export default function AboutPage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 to-transparent dark:from-slate-800/50 dark:to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 relative">
-          <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white mb-8 transition">
-            <span>←</span>
-            <span>Back to Home</span>
-          </Link>
+          <div className="flex items-center justify-between mb-8">
+            <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+              <span>←</span>
+              <span>Back to Home</span>
+            </Link>
+            <button
+              aria-label="Toggle theme"
+              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+              className="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            >
+              {mounted && (resolvedTheme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-300" />)}
+            </button>
+          </div>
           
           <div className="max-w-3xl">
             <h1 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
@@ -262,7 +276,7 @@ export default function AboutPage() {
               <p className="mt-6 font-semibold" style={{ color: "#128C7E" }}>Contact for pricing</p>
             </Link>
             
-            <Link href="/dedicated-server" className="group p-8 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-emerald-500 dark:hover:border-emerald-500 transition-all bg-white dark:bg-slate-900">
+            <Link href="/dedicated-servers" className="group p-8 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-emerald-500 dark:hover:border-emerald-500 transition-all bg-white dark:bg-slate-900">
               <div className="flex items-start justify-between mb-4">
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">Dedicated Servers</h3>
                 <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-emerald-500 transition-colors" style={{ color: "#128C7E" }} />

@@ -136,22 +136,22 @@ export default function Footer() {
               <h4 className="font-semibold mb-4">Products</h4>
               <ul className="space-y-2 text-slate-700 dark:text-slate-400">
                 <li>
-                  <a href="https://kmerhosting.com/customers/store/cpanel-shared-hosting" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="/shared-hosting" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     Shared Hosting
                   </a>
                 </li>
                 <li>
-                  <a href="https://kmerhosting.com/customers/store/cpanel-reseller-hosting" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="/reseller-hosting" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     Reseller Hosting
                   </a>
                 </li>
                 <li>
-                  <a href="https://kmerhosting.com/customers/contact.php" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="/vps-hosting" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     VPS Servers
                   </a>
                 </li>
                 <li>
-                  <a href="https://kmerhosting.com/customers/contact.php" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="/dedicated-servers" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     Dedicated Servers
                   </a>
                 </li>

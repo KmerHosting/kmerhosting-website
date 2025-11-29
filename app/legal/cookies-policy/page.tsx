@@ -1,16 +1,34 @@
+"use client"
+
 import Link from "next/link"
-import { Home, Cookie } from "lucide-react"
+import { Home, Cookie, Sun, Moon } from "lucide-react"
+import { useTheme } from "next-themes"
+import { useState, useEffect } from "react"
 
 export default function CookiesPolicyPage() {
+  const { theme, setTheme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => setMounted(true), [])
+
   return (
     <main className="min-h-screen bg-white dark:bg-slate-900">
       {/* Hero Section */}
       <section className="py-20 px-4 bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800">
         <div className="max-w-4xl mx-auto">
-          <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-[#128C7E] transition-colors mb-8 cursor-pointer">
-            <Home className="w-4 h-4" />
-            <span>Back to Home</span>
-          </Link>
+          <div className="flex items-center justify-between mb-8">
+            <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-[#128C7E] transition-colors cursor-pointer">
+              <Home className="w-4 h-4" />
+              <span>Back to Home</span>
+            </Link>
+            <button
+              aria-label="Toggle theme"
+              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+              className="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            >
+              {mounted && (resolvedTheme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-300" />)}
+            </button>
+          </div>
           <div className="flex items-center gap-4 mb-6">
             <div className="p-3 rounded-xl" style={{ backgroundColor: "rgba(18, 140, 126, 0.1)" }}>
               <Cookie className="w-8 h-8" style={{ color: "#128C7E" }} />
