@@ -1237,3 +1237,232 @@ export async function notifyAdminPlanSelection(
   }
 }
 
+// Function to send password reset link
+export async function sendPasswordResetEmail(
+  userEmail: string,
+  fullName: string,
+  resetUrl: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    await transport.sendMail({
+      from: emailConfig.security,
+      to: userEmail,
+      subject: "Reset Your KmerHosting Password",
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <style>
+            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+            .container { max-width: 600px; margin: 0 auto; background: #fff; }
+            .header { background: #fff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #f0f0f0; }
+            .logo { height: 32px; display: inline-block; }
+            .content { padding: 40px 20px; }
+            .content h1 { color: #1a1a1a; font-size: 24px; margin: 0 0 16px 0; }
+            .content p { color: #666; font-size: 14px; line-height: 1.6; margin: 0 0 16px 0; }
+            .cta-button { display: inline-block; background: #128C7E; color: #fff; text-decoration: none; padding: 12px 32px; border-radius: 6px; font-weight: 500; margin: 24px 0; }
+            .code-box { background: #f5f5f5; padding: 12px 16px; border-radius: 6px; font-family: monospace; font-size: 12px; color: #333; word-break: break-all; }
+            .warning-box { background: #fff3cd; padding: 16px; border-left: 3px solid #ffc107; margin: 20px 0; }
+            .warning-box strong { color: #1a1a1a; display: block; margin-bottom: 8px; }
+            .warning-box p { color: #666; margin: 0; font-size: 13px; }
+            .footer { background: #f9f9f9; padding: 24px 20px; border-top: 1px solid #f0f0f0; text-align: center; color: #999; font-size: 12px; }
+            .footer p { margin: 8px 0; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png" alt="KmerHosting" class="logo" />
+            </div>
+            <div class="content">
+              <h1>Reset Your Password</h1>
+              <p>Hello ${fullName},</p>
+              <p>We received a request to reset your KmerHosting password. Click the button below to create a new password.</p>
+              <div style="text-align: center;">
+                <a href="${resetUrl}" class="cta-button">Reset Password</a>
+              </div>
+              <p style="color: #999; font-size: 13px;">Or copy and paste this link:</p>
+              <div class="code-box">${resetUrl}</div>
+              
+              <div class="warning-box">
+                <strong>Security Notice:</strong>
+                <p>This link will expire in 1 hour. If you didn't request a password reset, you can ignore this email or let us know at <a href="mailto:security@kmerhosting.com" style="color: #128C7E; text-decoration: none;">security@kmerhosting.com</a></p>
+              </div>
+
+              <p style="color: #666; font-size: 13px; margin-top: 24px;">For your security, never share this link with anyone. KmerHosting team members will never ask for your password.</p>
+            </div>
+            <div class="footer">
+              <p>© 2025 KmerHosting. All rights reserved.</p>
+              <p>If you have any questions, contact us at <a href="mailto:support@kmerhosting.com" style="color: #128C7E; text-decoration: none;">support@kmerhosting.com</a></p>
+            </div>
+          </div>
+        </body>
+        </html>
+      `,
+    });
+
+    console.log("Password reset email sent to:", userEmail);
+    return { success: true };
+  } catch (error) {
+    console.error("Error sending password reset email:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to send email",
+    };
+  }
+}
+
+// Function to send newsletter confirmation email
+export async function sendNewsletterSubscriptionRequestConfirmationEmail(
+  userEmail: string,
+  confirmUrl: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    await transport.sendMail({
+      from: emailConfig.noreply,
+      to: userEmail,
+      subject: "Confirm Your Newsletter Subscription - KmerHosting",
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <style>
+            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+            .container { max-width: 600px; margin: 0 auto; background: #fff; }
+            .header { background: #fff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #f0f0f0; }
+            .logo { height: 32px; display: inline-block; }
+            .content { padding: 40px 20px; }
+            .content h1 { color: #1a1a1a; font-size: 24px; margin: 0 0 16px 0; }
+            .content p { color: #666; font-size: 14px; line-height: 1.6; margin: 0 0 16px 0; }
+            .cta-button { display: inline-block; background: #128C7E; color: #fff; text-decoration: none; padding: 12px 32px; border-radius: 6px; font-weight: 500; margin: 24px 0; }
+            .code-box { background: #f5f5f5; padding: 12px 16px; border-radius: 6px; font-family: monospace; font-size: 12px; color: #333; word-break: break-all; }
+            .highlight { background: #f9f9f9; padding: 16px; border-left: 3px solid #128C7E; margin: 20px 0; }
+            .highlight p { color: #666; margin: 0; }
+            .footer { background: #f9f9f9; padding: 24px 20px; border-top: 1px solid #f0f0f0; text-align: center; color: #999; font-size: 12px; }
+            .footer p { margin: 8px 0; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png" alt="KmerHosting" class="logo" />
+            </div>
+            <div class="content">
+              <h1>Confirm Your Newsletter Subscription</h1>
+              <p>Thanks for showing interest in KmerHosting! We're excited to have you on our mailing list.</p>
+              
+              <div class="highlight">
+                <p>Click the button below to confirm your subscription and start receiving updates about our hosting solutions, tips, and exclusive offers.</p>
+              </div>
+
+              <div style="text-align: center;">
+                <a href="${confirmUrl}" class="cta-button">Confirm Subscription</a>
+              </div>
+              
+              <p style="color: #999; font-size: 13px;">Or copy and paste this link:</p>
+              <div class="code-box">${confirmUrl}</div>
+
+              <p style="color: #666; font-size: 13px; margin-top: 24px;">This confirmation link will expire in 7 days. If you didn't request this subscription, you can ignore this email.</p>
+              
+              <p style="color: #666; font-size: 13px; margin-top: 16px;">You'll receive updates about:</p>
+              <ul style="color: #666; font-size: 13px; margin-left: 20px;">
+                <li>New hosting features and services</li>
+                <li>Industry news and trends</li>
+                <li>Exclusive promotions and offers</li>
+                <li>Tips for web hosting and domain management</li>
+                <li>Important service updates</li>
+              </ul>
+            </div>
+            <div class="footer">
+              <p>© 2025 KmerHosting. All rights reserved.</p>
+              <p>You're receiving this email because you requested to subscribe to our newsletter.</p>
+            </div>
+          </div>
+        </body>
+        </html>
+      `,
+    });
+
+    console.log("Newsletter confirmation email sent to:", userEmail);
+    return { success: true };
+  } catch (error) {
+    console.error("Error sending newsletter confirmation email:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to send email",
+    };
+  }
+}
+
+// Function to send generic admin notification email
+export async function sendAdminNotificationEmail(
+  adminEmail: string,
+  subject: string,
+  message: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const result = await transport.sendMail({
+      from: emailConfig.noreply,
+      to: adminEmail,
+      subject: subject,
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <style>
+            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+            .container { max-width: 600px; margin: 0 auto; background: #fff; }
+            .header { background: #fff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #f0f0f0; }
+            .logo { height: 32px; display: inline-block; }
+            .content { padding: 40px 20px; }
+            .message-box { background: #f9f9f9; padding: 16px; border-left: 3px solid #128C7E; margin: 20px 0; }
+            .message-box p { color: #666; margin: 0; line-height: 1.6; white-space: pre-wrap; }
+            .footer { background: #f9f9f9; padding: 24px 20px; border-top: 1px solid #f0f0f0; text-align: center; color: #999; font-size: 12px; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png" alt="KmerHosting" class="logo" />
+            </div>
+            <div class="content">
+              <h1 style="color: #1a1a1a; margin-top: 0;">${subject}</h1>
+              
+              <div class="message-box">
+                <p>${message.replace(/\n/g, "<br/>")}</p>
+              </div>
+            </div>
+            <div class="footer">
+              <p>© 2025 KmerHosting. All rights reserved.</p>
+            </div>
+          </div>
+        </body>
+        </html>
+      `,
+    });
+
+    console.log("Admin notification email sent to:", adminEmail);
+    return { success: true };
+  } catch (error) {
+    console.error("Error sending admin notification email:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to send email",
+    };
+  }
+}
+
+// Explicit alias for newsletter-specific admin notifications
+export async function sendAdminNewsletterNotificationEmail(
+  adminEmail: string,
+  subject: string,
+  message: string
+): Promise<{ success: boolean; error?: string }> {
+  return sendAdminNotificationEmail(adminEmail, subject, message);
+}
+

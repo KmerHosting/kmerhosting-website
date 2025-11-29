@@ -1,8 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ArrowLeft, Copy, Eye, EyeOff, Check, Cpu, AlertCircle } from "lucide-react"
+import { ArrowLeft, Copy, Eye, EyeOff, Check, Server, AlertCircle, Sun, Moon, Cpu, Phone } from "lucide-react"
+import { toast } from "sonner"
+import { useTheme } from "next-themes"
+import ContactDepartmentDialog from "@/components/contact-department-dialog"
 
 interface DedicatedService {
   id: string
@@ -25,6 +28,9 @@ interface DedicatedService {
 
 export default function DedicatedServersPage() {
   const [showServices, setShowServices] = useState(false)
+  const [contactDialogOpen, setContactDialogOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme, resolvedTheme } = useTheme()
   const [showPassword, setShowPassword] = useState<Record<string, boolean>>({})
   const [copiedField, setCopiedField] = useState<string | null>(null)
 
@@ -48,8 +54,11 @@ export default function DedicatedServersPage() {
     },
   ]
 
+  useEffect(() => setMounted(true), [])
+
   const copyToClipboard = (text: string, field: string) => {
     navigator.clipboard.writeText(text)
+    toast.success("Copied to clipboard!", { duration: 2000 })
     setCopiedField(field)
     setTimeout(() => setCopiedField(null), 2000)
   }
@@ -66,10 +75,19 @@ export default function DedicatedServersPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <Link href="/customers/dashboard" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white mb-4 transition">
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to Dashboard</span>
-          </Link>
+          <div className="flex items-center justify-between mb-4">
+            <Link href="/customers/dashboard" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back to Dashboard</span>
+            </Link>
+            <button
+              aria-label="Toggle theme"
+              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+              className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            >
+              {mounted && (resolvedTheme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-300" />)}
+            </button>
+          </div>
           <div className="flex items-center justify-between">
             <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">Dedicated Servers</h1>
             <button
@@ -128,9 +146,19 @@ export default function DedicatedServersPage() {
                         </span>
                       </div>
                       {service.suspendReason && (
-                        <div className="flex items-center gap-2 mt-2 text-red-600 dark:text-red-400">
-                          <AlertCircle className="w-4 h-4" />
-                          <span className="text-sm">{service.suspendReason}</span>
+                        <div className="flex items-start gap-2 mt-3 p-4 bg-red-100 dark:bg-red-900/30 rounded-lg border border-red-200 dark:border-red-800">
+                          <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+                          <div className="flex-1">
+                            <p className="text-sm font-semibold text-red-700 dark:text-red-300 mb-2">Suspension Reason</p>
+                            <p className="text-sm text-red-700 dark:text-red-300 mb-3">{service.suspendReason}</p>
+                            <button
+                              onClick={() => setContactDialogOpen(true)}
+                              className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-600 text-white rounded-lg font-medium transition-colors text-sm"
+                            >
+                              <Phone className="w-4 h-4" />
+                              Contact Billing Support
+                            </button>
+                          </div>
                         </div>
                       )}
                     </div>
@@ -272,6 +300,7 @@ export default function DedicatedServersPage() {
           </div>
         )}
       </div>
+      <ContactDepartmentDialog isOpen={contactDialogOpen} onClose={() => setContactDialogOpen(false)} />
     </main>
   )
 }

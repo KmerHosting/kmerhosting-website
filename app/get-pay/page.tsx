@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { Upload, X, AlertCircle, CheckCircle2, User, Mail, Phone, MapPin, Info } from "lucide-react"
+import { Upload, X, AlertCircle, CheckCircle2, User, Mail, Phone, MapPin, Info, Sun, Moon } from "lucide-react"
 import { toast } from "sonner"
+import { useTheme } from "next-themes"
 
 interface PaymentProof {
   images: File[]
@@ -13,6 +14,8 @@ interface PaymentProof {
 
 export default function GetPayPage() {
   const router = useRouter()
+  const { theme, setTheme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
@@ -23,6 +26,8 @@ export default function GetPayPage() {
   const [contactEmail, setContactEmail] = useState("")
   const [contactPhone, setContactPhone] = useState("")
   const [contactAddress, setContactAddress] = useState("")
+
+  useEffect(() => setMounted(true), [])
 
   useEffect(() => {
     // Check authentication server-side via API (httpOnly cookie)
@@ -150,28 +155,47 @@ export default function GetPayPage() {
 
   if (!isAuthenticated) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 flex items-center justify-center p-4">
-        <div className="max-w-md w-full">
-          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8 text-center">
-            <AlertCircle className="w-12 h-12 mx-auto mb-4 text-red-500" />
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
-              Authentication Required
-            </h1>
-            <p className="text-slate-600 dark:text-slate-400 mb-6">
-              You must be logged into a valid KmerHosting account to access this page.
-            </p>
-            <p className="text-sm text-slate-600 dark:text-slate-400 mb-6 bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-              To avoid scammer and fraud, accessing this page is only for an authenticated KmerHosting user.
-              Always verify the URL is <strong>kmerhosting.com</strong>
-            </p>
-            <Link
-              href="/login"
-              className="inline-block px-6 py-2 rounded-lg font-medium text-white transition-all"
-              style={{ backgroundColor: "#128C7E" }}
-            >
-              Go to Login
+      <main className="min-h-screen bg-white dark:bg-slate-950 flex flex-col items-center justify-center p-4">
+        {/* Theme Toggle Button */}
+        <button
+          aria-label="Toggle theme"
+          onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+          className="absolute top-4 right-4 p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+        >
+          {mounted && (resolvedTheme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-300" />)}
+        </button>
+
+        {/* Logo */}
+        <Link href="/" className="mb-8">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png"
+            alt="KmerHosting"
+            className="h-24"
+          />
+        </Link>
+
+        <div className="w-full max-w-sm">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-1">
+            Authentication Required
+          </h1>
+          <p className="text-slate-600 dark:text-slate-400 text-sm mb-6">
+            You must be logged in to access this page
+          </p>
+
+          <Link
+            href="/login"
+            className="w-full px-4 py-2 rounded-md font-medium text-white text-sm transition-colors block text-center"
+            style={{ backgroundColor: "#128C7E" }}
+          >
+            Go to Login
+          </Link>
+
+          <p className="text-slate-600 dark:text-slate-400 text-sm text-center mt-4">
+            Don't have an account?{" "}
+            <Link href="/signup" className="font-medium hover:underline" style={{ color: "#128C7E" }}>
+              Sign up
             </Link>
-          </div>
+          </p>
         </div>
       </main>
     )

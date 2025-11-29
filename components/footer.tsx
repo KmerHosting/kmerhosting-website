@@ -81,9 +81,9 @@ export default function Footer() {
             </form>
           </div>
           {subscribed && (
-            <div className="mt-2 text-green-600 dark:text-green-400 flex items-center gap-2 text-sm">
-              <CheckCircle2 className="w-4 h-4" />
-              <span>Thanks for subscribing!</span>
+            <div className="mt-2 text-green-600 dark:text-green-400 flex flex-col items-left gap-0 text-sm">
+              <span>Thank you for subscribing — please check your inbox (and spam folder) to confirm your subscription.</span>
+              <span>If your account did not exist before, you will receive a confirmation link</span>
             </div>
           )}
         </div>
@@ -177,8 +177,8 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="https://forum.kmerhosting.com" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
-                    Forum
+                  <a href="/customers/chat" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Chat Room
                   </a>
                 </li>
                 <li>

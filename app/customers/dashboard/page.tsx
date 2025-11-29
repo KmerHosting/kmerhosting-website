@@ -17,7 +17,7 @@ export default function DashboardPage() {
   const [isQuickActionsOpen, setIsQuickActionsOpen] = useState(false)
   const [isContactDepartmentOpen, setIsContactDepartmentOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme, resolvedTheme } = useTheme()
   const router = useRouter()
 
   useEffect(() => {
@@ -76,24 +76,47 @@ export default function DashboardPage() {
 
   if (!isAuthenticated) {
     return (
-      <main className="min-h-screen bg-white dark:bg-slate-950 flex items-center justify-center p-4">
-        <div className="max-w-md w-full">
-          <div className="bg-white dark:bg-slate-900 rounded-lg shadow-lg p-8 text-center">
-            <AlertCircle className="w-12 h-12 mx-auto mb-4 text-red-500" />
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
-              Authentication Required
-            </h1>
-            <p className="text-slate-600 dark:text-slate-400 mb-6">
-              You must be logged in to access the dashboard.
-            </p>
-            <Link
-              href="/login"
-              className="inline-block px-6 py-2 rounded-lg font-medium text-white transition-all"
-              style={{ backgroundColor: "#128C7E" }}
-            >
-              Go to Login
+      <main className="min-h-screen bg-white dark:bg-slate-950 flex flex-col items-center justify-center p-4">
+        {/* Theme Toggle Button */}
+        <button
+          aria-label="Toggle theme"
+          onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+          className="absolute top-4 right-4 p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+        >
+          {mounted && (resolvedTheme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-300" />)}
+        </button>
+
+        {/* Logo */}
+        <Link href="/" className="mb-8">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-white3-iwSBPyXwwEwkqAnSXqbITic8Ldae9l.png"
+            alt="KmerHosting"
+            className="h-24"
+          />
+        </Link>
+
+        <div className="w-full max-w-sm">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-1">
+            Authentication Required
+          </h1>
+          <p className="text-slate-600 dark:text-slate-400 text-sm mb-6">
+            You must be logged in to access your dashboard
+          </p>
+
+          <Link
+            href="/login"
+            className="w-full px-4 py-2 rounded-md font-medium text-white text-sm transition-colors block text-center"
+            style={{ backgroundColor: "#128C7E" }}
+          >
+            Go to Login
+          </Link>
+
+          <p className="text-slate-600 dark:text-slate-400 text-sm text-center mt-4">
+            Don't have an account?{" "}
+            <Link href="/signup" className="font-medium hover:underline" style={{ color: "#128C7E" }}>
+              Sign up
             </Link>
-          </div>
+          </p>
         </div>
       </main>
     )
@@ -157,7 +180,7 @@ export default function DashboardPage() {
                       {userInfo?.username || userInfo?.email}
                     </div>
                     <Link
-                      href="#"
+                      href="/customers/profile"
                       className="flex items-center gap-2 px-4 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors text-sm"
                       onClick={() => setIsUserDropdownOpen(false)}
                     >
@@ -165,7 +188,7 @@ export default function DashboardPage() {
                       Profile
                     </Link>
                     <Link
-                      href="#"
+                      href="/customers/settings"
                       className="flex items-center gap-2 px-4 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors text-sm"
                       onClick={() => setIsUserDropdownOpen(false)}
                     >
@@ -220,7 +243,7 @@ export default function DashboardPage() {
                 Welcome, <span className="font-semibold">{userInfo?.username || userInfo?.email}</span>
               </div>
               <Link
-                href="#"
+                href="/customers/profile"
                 className="flex items-center gap-2 px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors text-sm font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -228,7 +251,7 @@ export default function DashboardPage() {
                 Profile
               </Link>
               <Link
-                href="#"
+                href="/customers/settings"
                 className="flex items-center gap-2 px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors text-sm font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -340,20 +363,12 @@ export default function DashboardPage() {
                   Read KmerHosting Documentation
                 </Link>
                 <Link
-                  href="#"
+                  href="/customers/chat"
                   className="flex items-center gap-3 px-4 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors text-sm"
                   onClick={() => setIsQuickActionsOpen(false)}
                 >
                   <Users className="w-4 h-4" />
                   Join Chat Room
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-3 px-4 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors text-sm"
-                  onClick={() => setIsQuickActionsOpen(false)}
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  Join Forum
                 </Link>
                 <Link
                   href="/blog"
@@ -405,10 +420,10 @@ export default function DashboardPage() {
               <div>✓ 24/7 Support</div>
             </div>
             <Link
-              href="/shared-hosting"
+              href="/customers/services/shared-hosting"
               className="text-teal-600 dark:text-teal-400 hover:underline font-medium text-sm"
             >
-              View Orders →
+              View →
             </Link>
           </div>
 
@@ -434,7 +449,7 @@ export default function DashboardPage() {
               <div>✓ DDoS Protection</div>
             </div>
             <Link
-              href="/vps-hosting"
+              href="/customers/services/vps-hosting"
               className="text-teal-600 dark:text-teal-400 hover:underline font-medium text-sm"
             >
               View Orders →
@@ -463,7 +478,7 @@ export default function DashboardPage() {
               <div>✓ Redundant Power</div>
             </div>
             <Link
-              href="/dedicated-servers"
+              href="/customers/services/dedicated-servers"
               className="text-teal-600 dark:text-teal-400 hover:underline font-medium text-sm"
             >
               View Orders →
@@ -496,10 +511,10 @@ export default function DashboardPage() {
               <div>✓ Full Control Panel</div>
             </div>
             <Link
-              href="/reseller-hosting"
+              href="/customers/services/reseller-hosting"
               className="text-teal-600 dark:text-teal-400 hover:underline font-medium text-sm"
             >
-              View Orders →
+              View →
             </Link>
           </div>
         </div>
