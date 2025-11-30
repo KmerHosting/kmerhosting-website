@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
-import { PrismaClient } from "@prisma/client"
 import jwt from "jsonwebtoken"
 import { saveMultipleImages } from "@/lib/file-upload"
 import {
   sendPaymentProofConfirmation,
   notifyAdminPaymentProofSubmitted,
 } from "@/lib/mailer"
-
-const prisma = new PrismaClient()
+import { prisma } from "@/lib/prisma"
 
 export async function POST(req: NextRequest) {
   try {
