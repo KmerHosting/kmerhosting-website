@@ -73,6 +73,7 @@
     "sonner": "^1.7.4",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
+    "uuid": "^13.0.0",
     "zod": "3.25.76"
   },
   "devDependencies": {
@@ -80,6 +81,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/uuid": "^10.0.0",
     "baseline-browser-mapping": "^2.8.32",
     "eslint-plugin-compat": "^6.0.2",
     "postcss": "^8.5",

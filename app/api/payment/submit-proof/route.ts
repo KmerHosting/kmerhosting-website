@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { PrismaClient } from "@prisma/client"
 import jwt from "jsonwebtoken"
+import { saveMultipleImages } from "@/lib/file-upload"
 import {
   sendPaymentProofConfirmation,
   notifyAdminPaymentProofSubmitted,
@@ -40,8 +41,17 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // TODO: Upload images to cloud storage (e.g., AWS S3, Vercel Blob)
-    // For now, we'll store the base64 data directly (not recommended for production)
+    // Save images to local filesystem
+    let imagePaths: string[] = []
+    try {
+      imagePaths = await saveMultipleImages(images, "payment-proofs")
+    } catch (uploadError) {
+      console.error("Image upload failed:", uploadError)
+      return NextResponse.json(
+        { error: "Failed to upload images" },
+        { status: 500 }
+      )
+    }
     
     // Get user's latest order
     const order = await prisma.order.findFirst({
@@ -65,7 +75,7 @@ export async function POST(req: NextRequest) {
       data: {
         orderId: order.id,
         userId: decoded.userId,
-        imageUrls: JSON.stringify(images),
+        imageUrls: JSON.stringify(imagePaths), // Store file paths instead of base64
         description: description,
         contactFullName: contactFullName || order.fullName,
         contactEmail: contactEmail || decoded.email || order.email,
@@ -106,7 +116,7 @@ export async function POST(req: NextRequest) {
           orderId: order.id,
         },
         humanDescription,
-        images.length
+        imagePaths.length
       )
     }
 

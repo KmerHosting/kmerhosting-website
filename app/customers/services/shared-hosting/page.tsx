@@ -2,340 +2,450 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ArrowLeft, Eye, EyeOff, Copy, Check, AlertCircle, Package, Clock, CheckCircle, Lock, Phone, Sun, Moon } from "lucide-react"
+import { ArrowLeft, Server, Globe, AlertCircle, RefreshCw, CheckCircle2 } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { toast } from "sonner"
-import { useTheme } from "next-themes"
-import ContactDepartmentDialog from "@/components/contact-department-dialog"
+
+interface ServiceDomain {
+  id: string
+  domainName: string
+  domainStatus: string
+  purchasePrice: number
+  renewalPrice: number
+  ns1: string
+  ns2: string
+  nextRenewalDate: string
+  createdAt: string
+}
 
 interface Service {
   id: string
+  planType: string
+  panelType: string
   planName: string
-  price: number
-  startDate: string
-  expDate: string
-  status: "Active" | "Pending" | "Suspended"
-  suspendReason?: string
-  features: string[]
-  domainsAssociated: number
-  domainsList: string[]
-  hostingType: "cPanel" | "DirectAdmin"
-  panelUrl: string
-  username: string
-  password: string
+  planPrice: number
+  planStatus: string
+  features: string
+  nextRenewalDate: string
+  associatedDomains: ServiceDomain[]
+  createdAt: string
 }
 
 export default function SharedHostingPage() {
-  const [showEmpty, setShowEmpty] = useState(true)
-  const [contactDialogOpen, setContactDialogOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme, resolvedTheme } = useTheme()
-  const [services, setServices] = useState<Service[]>([
-    {
-      id: "1",
-      planName: "Silver",
-      price: 14000,
-      startDate: "2024-01-15",
-      expDate: "2025-01-15",
-      status: "Suspended",
-      suspendReason: "Payment overdue - Please contact billing to resolve this issue and reactivate your account.",
-      features: ["Unlimited Bandwidth", "Free SSL Certificate", "24/7 Support", "2 Websites"],
-      domainsAssociated: 2,
-      domainsList: ["example.com", "example.net"],
-      hostingType: "cPanel",
-      panelUrl: "https://cp.kmerhosting.com:2083",
-      username: "user_silver",
-      password: "SecurePass123!",
-    },
-  ])
-  const [copiedField, setCopiedField] = useState<string | null>(null)
-  const [showPassword, setShowPassword] = useState<string | null>(null)
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [services, setServices] = useState<Service[]>([])
+  const [expandedService, setExpandedService] = useState<string | null>(null)
 
   useEffect(() => setMounted(true), [])
 
-  const handleCopy = (text: string, field: string) => {
-    navigator.clipboard.writeText(text)
-    toast.success("Copied to clipboard!", { duration: 2000 })
-    setCopiedField(field)
-    setTimeout(() => setCopiedField(null), 2000)
-  }
+  // Check authentication and load services
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("/api/auth/me")
+        if (res.ok) {
+          const data = await res.json()
+          if (data.authenticated) {
+            setIsAuthenticated(true)
+            await loadServices()
+          } else {
+            router.push("/login")
+          }
+        } else {
+          router.push("/login")
+        }
+      } catch (err) {
+        console.error("Auth check error:", err)
+        router.push("/login")
+      } finally {
+        setIsLoading(false)
+      }
+    }
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Active":
-        return "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800"
-      case "Pending":
-        return "bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800"
-      case "Suspended":
-        return "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800"
-      default:
-        return ""
+    checkAuth()
+  }, [router])
+
+  const loadServices = async () => {
+    try {
+      const res = await fetch("/api/customers/services?planType=Shared")
+      if (res.ok) {
+        const data = await res.json()
+        setServices(data.services || [])
+      } else {
+        toast.error("Failed to load services")
+      }
+    } catch (err) {
+      console.error("Error loading services:", err)
+      toast.error("Failed to load services")
     }
   }
 
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "Active":
-        return <CheckCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-      case "Pending":
-        return <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400" />
-      case "Suspended":
-        return <Lock className="w-4 h-4 text-red-600 dark:text-red-400" />
-      default:
-        return null
-    }
+  const handleRefresh = async () => {
+    setIsLoading(true)
+    await loadServices()
+    setIsLoading(false)
+    toast.success("Services refreshed")
+  }
+
+  // Helper: Calculate renewal date (created + 365 days)
+  const calculateRenewalDate = (createdAt: string): Date => {
+    const created = new Date(createdAt)
+    const renewal = new Date(created)
+    renewal.setDate(renewal.getDate() + 365)
+    return renewal
+  }
+
+  // Calculate renewal progress percentage (based on created + 365)
+  const calculateRenewalProgress = (createdAt: string): number => {
+    const created = new Date(createdAt).getTime()
+    const renewal = calculateRenewalDate(createdAt).getTime()
+    const now = Date.now()
+    
+    const total = renewal - created
+    const elapsed = now - created
+    const percentage = Math.min(Math.round((elapsed / total) * 100), 100)
+    
+    return percentage
+  }
+
+  // Calculate days remaining (based on created + 365)
+  const calculateDaysRemaining = (createdAt: string): number => {
+    const renewal = calculateRenewalDate(createdAt).getTime()
+    const now = Date.now()
+    const daysRemaining = Math.ceil((renewal - now) / (1000 * 60 * 60 * 24))
+    
+    return Math.max(daysRemaining, 0)
+  }
+
+  // Calculate domain renewal progress
+  const calculateDomainRenewalProgress = (createdAt: string): number => {
+    return calculateRenewalProgress(createdAt)
+  }
+
+  // Calculate domain days remaining
+  const calculateDomainDaysRemaining = (createdAt: string): number => {
+    return calculateDaysRemaining(createdAt)
+  }
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-white dark:bg-slate-950 flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-slate-300 dark:border-slate-700 border-t-teal-600 dark:border-t-teal-400"></div>
+          <p className="mt-4 text-slate-600 dark:text-slate-400">Loading...</p>
+        </div>
+      </main>
+    )
+  }
+
+  if (!isAuthenticated) {
+    return null
   }
 
   return (
-    <main className="min-h-screen bg-white dark:bg-slate-900 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-white dark:bg-slate-950 py-12">
+      <div className="max-w-5xl mx-auto px-4">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <div>
-            <Link href="/customers/dashboard" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white mb-4 transition">
-              <ArrowLeft className="w-4 h-4" />
-              <span>Back to Dashboard</span>
-            </Link>
-            <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">Shared Hosting</h1>
-          </div>
-          <div className="flex gap-2 items-center">
-            <button
-              aria-label="Toggle theme"
-              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-              className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-            >
-              {mounted && (resolvedTheme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-300" />)}
-            </button>
-            <button
-              onClick={() => setShowEmpty(true)}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${showEmpty ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900" : "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700"}`}
-            >
-              Empty View
-            </button>
-            <button
-              onClick={() => setShowEmpty(false)}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${!showEmpty ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900" : "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700"}`}
-            >
-              With Services
-            </button>
-          </div>
+          <Link
+            href="/customers/dashboard"
+            className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span className="text-sm">Back</span>
+          </Link>
+          <button
+            onClick={handleRefresh}
+            disabled={isLoading}
+            className="p-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg transition disabled:opacity-50"
+            title="Refresh services"
+          >
+            <RefreshCw className="w-5 h-5 text-slate-600 dark:text-slate-400" />
+          </button>
         </div>
 
-        {showEmpty ? (
-          // Empty State
-          <div className="flex flex-col items-center justify-center py-20">
-            <div className="p-4 rounded-full bg-slate-100 dark:bg-slate-800 mb-6">
-              <Package className="w-12 h-12 text-slate-400 dark:text-slate-600" />
-            </div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">No Services Yet</h2>
-            <p className="text-slate-600 dark:text-slate-400 text-center max-w-md mb-8">
-              You don't have any Shared Hosting plans yet. Get started with our affordable hosting solutions.
-            </p>
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 max-w-md mb-8">
-              <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">What is Shared Hosting?</h3>
-              <p className="text-sm text-blue-800 dark:text-blue-200 mb-4">
-                Shared Hosting is perfect for beginners and small businesses. Your website is hosted on a shared server with other websites, making it affordable while still providing reliable performance, free SSL certificates, and 24/7 support.
-              </p>
-              <p className="text-sm font-semibold text-blue-900 dark:text-blue-100">Starting from <span style={{ color: "#128C7E" }}>14,000 FCFA/year</span></p>
-            </div>
-            <Link
-              href="/#pricing"
-              className="px-6 py-3 rounded-lg font-semibold text-white transition-all cursor-pointer"
-              style={{ backgroundColor: "#128C7E" }}
-            >
-              View Plans
-            </Link>
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Shared Hosting Services</h1>
+        <p className="text-slate-600 dark:text-slate-400 mb-8">Manage your shared hosting accounts and domains</p>
+
+        {/* Services List */}
+        {services.length === 0 ? (
+          <div className="text-center py-12 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-200 dark:border-slate-800">
+            <Server className="w-12 h-12 text-slate-400 mx-auto mb-4" />
+            <p className="text-slate-600 dark:text-slate-400">No shared hosting services found</p>
           </div>
         ) : (
-          // Services List
-          <div className="space-y-6">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className={`border-2 rounded-xl p-8 transition-all ${
-                  service.status === "Suspended"
-                    ? `${getStatusColor(service.status)} opacity-60`
-                    : getStatusColor(service.status)
-                }`}
-              >
-                {/* Header */}
-                <div className="flex items-start justify-between mb-6">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{service.planName}</h2>
-                      <div className="flex items-center gap-2">
-                        {getStatusIcon(service.status)}
+          <div className="space-y-4 mb-12">
+            {services.map((service) => {
+              const renewalProgress = calculateRenewalProgress(service.createdAt)
+              const daysRemaining = calculateDaysRemaining(service.createdAt)
+              const features = JSON.parse(service.features || "[]")
+
+              return (
+                <div
+                  key={service.id}
+                  className="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 overflow-hidden"
+                >
+                  {/* Service Header */}
+                  <button
+                    onClick={() =>
+                      setExpandedService(expandedService === service.id ? null : service.id)
+                    }
+                    className="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition text-left"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 bg-teal-100 dark:bg-teal-900/30 rounded-lg">
+                        <Server className="w-5 h-5 text-teal-600 dark:text-teal-400" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                          {service.planName}
+                        </h3>
+                        <p className="text-sm text-slate-600 dark:text-slate-400">
+                          {service.panelType} • {service.associatedDomains.length} domain
+                          {service.associatedDomains.length !== 1 ? "s" : ""}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <p className="text-lg font-semibold text-slate-900 dark:text-white">
+                          ${service.planPrice}/mo
+                        </p>
                         <span
-                          className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                            service.status === "Active"
-                              ? "bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300"
-                              : service.status === "Pending"
-                              ? "bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300"
-                              : "bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300"
+                          className={`text-xs px-2 py-1 rounded-full font-medium ${
+                            service.planStatus === "active"
+                              ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400"
+                              : "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400"
                           }`}
                         >
-                          {service.status}
+                          {service.planStatus}
                         </span>
                       </div>
+                      <svg
+                        className={`w-5 h-5 text-slate-400 transition-transform ${
+                          expandedService === service.id ? "rotate-180" : ""
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                        />
+                      </svg>
                     </div>
-                    {service.status === "Suspended" && service.suspendReason && (
-                      <div className="flex items-start gap-2 mt-3 p-4 bg-red-100 dark:bg-red-900/30 rounded-lg border border-red-200 dark:border-red-800">
-                        <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
-                        <div className="flex-1">
-                          <p className="text-sm font-semibold text-red-700 dark:text-red-300 mb-3">Suspension Reason</p>
-                          <p className="text-sm text-red-700 dark:text-red-300 mb-3">{service.suspendReason}</p>
-                          <button
-                            onClick={() => setContactDialogOpen(true)}
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-600 text-white rounded-lg font-medium transition-colors text-sm"
-                          >
-                            <Phone className="w-4 h-4" />
-                            Contact Billing Support
-                          </button>
+                  </button>
+
+                  {/* Expanded Content */}
+                  {expandedService === service.id && (
+                    <div className="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+                      <div className="px-6 py-6 space-y-6">
+                        {/* Service Info Grid */}
+                        <div className="grid md:grid-cols-3 gap-4">
+                          <div>
+                            <p className="text-xs text-slate-600 dark:text-slate-400 uppercase font-semibold mb-1">
+                              Created
+                            </p>
+                            <p className="text-sm font-medium text-slate-900 dark:text-white">
+                              {new Date(service.createdAt).toLocaleDateString()}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-xs text-slate-600 dark:text-slate-400 uppercase font-semibold mb-1">
+                              Renewal Date
+                            </p>
+                            <p className="text-sm font-medium text-slate-900 dark:text-white">
+                              {calculateRenewalDate(service.createdAt).toLocaleDateString()}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-xs text-slate-600 dark:text-slate-400 uppercase font-semibold mb-1">
+                              Days Remaining
+                            </p>
+                            <p className="text-sm font-medium text-teal-600 dark:text-teal-400">
+                              {calculateDaysRemaining(service.createdAt)} days
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Renewal Progress Bar */}
+                        <div>
+                          <div className="flex items-center justify-between mb-2">
+                            <p className="text-xs text-slate-600 dark:text-slate-400 uppercase font-semibold">
+                              Renewal Progress
+                            </p>
+                            <span className="text-xs font-semibold text-slate-900 dark:text-white">
+                              {renewalProgress}%
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+                            <div
+                              className="bg-gradient-to-r from-green-400 to-green-600 h-2 rounded-full transition-all"
+                              style={{ width: `${renewalProgress}%` }}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Features */}
+                        {features.length > 0 && (
+                          <div>
+                            <p className="text-sm font-semibold text-slate-900 dark:text-white mb-3">
+                              Included Features
+                            </p>
+                            <div className="grid md:grid-cols-2 gap-2">
+                              {features.map((feature: string, idx: number) => (
+                                <div
+                                  key={idx}
+                                  className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300"
+                                >
+                                  <CheckCircle2 className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0" />
+                                  {feature}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Associated Domains */}
+                        <div>
+                          <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">
+                            Associated Domains ({service.associatedDomains.length})
+                          </h4>
+
+                          {service.associatedDomains.length === 0 ? (
+                            <p className="text-sm text-slate-600 dark:text-slate-400">No domains found</p>
+                          ) : (
+                            <div className="space-y-3">
+                              {service.associatedDomains.map((domain) => {
+                                const domainDaysRemaining = calculateDomainDaysRemaining(domain.createdAt)
+                                const domainRenewalProgress = calculateDomainRenewalProgress(domain.createdAt)
+
+                                return (
+                                  <div
+                                    key={domain.id}
+                                    className="bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-700 p-4"
+                                  >
+                                    <div className="flex items-start justify-between mb-3">
+                                      <div className="flex items-center gap-2">
+                                        <Globe className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                                        <span className="font-mono text-sm font-medium text-slate-900 dark:text-white">
+                                          {domain.domainName}
+                                        </span>
+                                      </div>
+                                      <span
+                                        className={`text-xs px-2 py-1 rounded-full font-medium ${
+                                          domain.domainStatus === "active"
+                                            ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400"
+                                            : domain.domainStatus === "pending"
+                                              ? "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400"
+                                              : "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400"
+                                        }`}
+                                      >
+                                        {domain.domainStatus}
+                                      </span>
+                                    </div>
+
+                                    {/* Domain Dates & Renewal Info */}
+                                    <div className="grid grid-cols-3 gap-3 mb-4 text-sm">
+                                      <div>
+                                        <p className="text-slate-600 dark:text-slate-400 text-xs">Created</p>
+                                        <p className="font-semibold text-slate-900 dark:text-white">
+                                          {new Date(domain.createdAt).toLocaleDateString()}
+                                        </p>
+                                      </div>
+                                      <div>
+                                        <p className="text-slate-600 dark:text-slate-400 text-xs">Renews On</p>
+                                        <p className="font-semibold text-slate-900 dark:text-white">
+                                          {calculateRenewalDate(domain.createdAt).toLocaleDateString()}
+                                        </p>
+                                      </div>
+                                      <div>
+                                        <p className="text-slate-600 dark:text-slate-400 text-xs">Days Left</p>
+                                        <p className="font-semibold text-teal-600 dark:text-teal-400">
+                                          {calculateDomainDaysRemaining(domain.createdAt)} days
+                                        </p>
+                                      </div>
+                                    </div>
+
+                                    {/* Renewal Progress Bar */}
+                                    <div className="mb-4">
+                                      <div className="flex items-center justify-between mb-1">
+                                        <p className="text-xs text-slate-600 dark:text-slate-400 font-semibold">
+                                          Renewal Progress
+                                        </p>
+                                        <span className="text-xs font-semibold text-slate-900 dark:text-white">
+                                          {domainRenewalProgress}%
+                                        </span>
+                                      </div>
+                                      <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5">
+                                        <div
+                                          className="bg-gradient-to-r from-blue-400 to-blue-600 h-1.5 rounded-full transition-all"
+                                          style={{ width: `${domainRenewalProgress}%` }}
+                                        />
+                                      </div>
+                                    </div>
+
+                                    {/* Pricing */}
+                                    <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
+                                      <div>
+                                        <p className="text-slate-600 dark:text-slate-400">Purchase Price</p>
+                                        <p className="font-semibold text-slate-900 dark:text-white">
+                                          ${domain.purchasePrice.toFixed(2)}
+                                        </p>
+                                      </div>
+                                      <div>
+                                        <p className="text-slate-600 dark:text-slate-400">Renewal Price</p>
+                                        <p className="font-semibold text-slate-900 dark:text-white">
+                                          ${domain.renewalPrice.toFixed(2)}/yr
+                                        </p>
+                                      </div>
+                                    </div>
+
+                                    {/* Nameservers */}
+                                    <div className="bg-slate-50 dark:bg-slate-800/50 rounded p-3 text-sm">
+                                      <p className="text-slate-600 dark:text-slate-400 font-medium mb-2">
+                                        Nameservers
+                                      </p>
+                                      <div className="space-y-1 font-mono text-slate-900 dark:text-white">
+                                        <p>NS1: {domain.ns1}</p>
+                                        <p>NS2: {domain.ns2}</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                )
+                              })}
+                            </div>
+                          )}
                         </div>
                       </div>
-                    )}
-                  </div>
-                  <div className="text-right">
-                    <p className="text-3xl font-bold" style={{ color: "#128C7E" }}>
-                      {service.price.toLocaleString()}
-                    </p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">FCFA/year</p>
-                  </div>
+                    </div>
+                  )}
                 </div>
-
-                {/* Main Info Grid */}
-                <div className="grid md:grid-cols-2 gap-8 mb-8 pb-8 border-b border-slate-200 dark:border-slate-700">
-                  {/* Left Column */}
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-xs text-slate-600 dark:text-slate-400 uppercase font-semibold mb-1">Hosting Type</p>
-                      <p className="text-lg font-semibold text-slate-900 dark:text-white">{service.hostingType}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-slate-600 dark:text-slate-400 uppercase font-semibold mb-1">Start Date</p>
-                      <p className="text-slate-900 dark:text-white">{new Date(service.startDate).toLocaleDateString()}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-slate-600 dark:text-slate-400 uppercase font-semibold mb-1">Expiration Date</p>
-                      <p className="text-slate-900 dark:text-white">{new Date(service.expDate).toLocaleDateString()}</p>
-                    </div>
-                  </div>
-
-                  {/* Right Column */}
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-xs text-slate-600 dark:text-slate-400 uppercase font-semibold mb-2">Domains Associated</p>
-                      <p className="text-lg font-semibold text-slate-900 dark:text-white mb-3">{service.domainsAssociated}</p>
-                      <div className="space-y-2">
-                        {service.domainsList.map((domain, idx) => (
-                          <p key={idx} className="text-sm text-slate-700 dark:text-slate-300 flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#128C7E" }} />
-                            {domain}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Features */}
-                <div className="mb-8">
-                  <p className="text-sm text-slate-600 dark:text-slate-400 uppercase font-semibold mb-3">Features Included</p>
-                  <div className="grid md:grid-cols-2 gap-3">
-                    {service.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4" style={{ color: "#128C7E" }} />
-                        <span className="text-slate-700 dark:text-slate-300">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Panel Access */}
-                {service.status !== "Suspended" && (
-                  <div className="space-y-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
-                    <p className="font-semibold text-slate-900 dark:text-white mb-4">Control Panel Access</p>
-
-                    {/* Panel URL */}
-                    <div>
-                      <label className="text-xs text-slate-600 dark:text-slate-400 uppercase font-semibold mb-2 block">Panel URL</label>
-                      <div className="flex gap-2">
-                        <input
-                          type="text"
-                          value={service.panelUrl}
-                          readOnly
-                          className="flex-1 px-3 py-2 bg-white dark:bg-slate-700 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-600 rounded-lg text-sm font-mono"
-                        />
-                        <button
-                          onClick={() => handleCopy(service.panelUrl, "url")}
-                          className="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors"
-                        >
-                          {copiedField === "url" ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-slate-600 dark:text-slate-400" />}
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Username */}
-                    <div>
-                      <label className="text-xs text-slate-600 dark:text-slate-400 uppercase font-semibold mb-2 block">Username</label>
-                      <div className="flex gap-2">
-                        <input
-                          type="text"
-                          value={service.username}
-                          readOnly
-                          className="flex-1 px-3 py-2 bg-white dark:bg-slate-700 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-600 rounded-lg text-sm font-mono"
-                        />
-                        <button
-                          onClick={() => handleCopy(service.username, "username")}
-                          className="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors"
-                        >
-                          {copiedField === "username" ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-slate-600 dark:text-slate-400" />}
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Password */}
-                    <div>
-                      <label className="text-xs text-slate-600 dark:text-slate-400 uppercase font-semibold mb-2 block">Password</label>
-                      <div className="flex gap-2">
-                        <input
-                          type={showPassword === service.id ? "text" : "password"}
-                          value={service.password}
-                          readOnly
-                          className="flex-1 px-3 py-2 bg-white dark:bg-slate-700 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-600 rounded-lg text-sm font-mono"
-                        />
-                        <button
-                          onClick={() => setShowPassword(showPassword === service.id ? null : service.id)}
-                          className="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors"
-                        >
-                          {showPassword === service.id ? <EyeOff className="w-4 h-4 text-slate-600 dark:text-slate-400" /> : <Eye className="w-4 h-4 text-slate-600 dark:text-slate-400" />}
-                        </button>
-                        <button
-                          onClick={() => handleCopy(service.password, "password")}
-                          className="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors"
-                        >
-                          {copiedField === "password" ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-slate-600 dark:text-slate-400" />}
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Login Button */}
-                    <a
-                      href={service.panelUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full inline-block px-4 py-2 rounded-lg font-semibold text-white text-center transition-all cursor-pointer mt-4"
-                      style={{ backgroundColor: "#128C7E" }}
-                    >
-                      Login to Control Panel
-                    </a>
-                  </div>
-                )}
-              </div>
-            ))}
+              )
+            })}
           </div>
         )}
+
+        {/* DNS Configuration Footer Banner */}
+        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 flex gap-4">
+          <AlertCircle className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-semibold text-blue-900 dark:text-blue-300 mb-2">DNS Configuration</p>
+            <p className="text-sm text-blue-800 dark:text-blue-400">
+              To change your DNS settings (Nameservers), please contact our support team at{" "}
+              <a href="mailto:support@kmerhosting.com" className="font-semibold hover:underline">
+                support@kmerhosting.com
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
-      <ContactDepartmentDialog isOpen={contactDialogOpen} onClose={() => setContactDialogOpen(false)} />
     </main>
   )
 }
