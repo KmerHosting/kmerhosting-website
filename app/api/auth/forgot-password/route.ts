@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
 import jwt from "jsonwebtoken"
 import { sendPasswordResetEmail } from "@/lib/mailer"
-import { prisma } from "@/lib/prisma"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
 
 export async function POST(req: NextRequest) {
   try {
@@ -31,7 +33,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Delete any existing reset tokens for this email
-    await prisma.passwordReset.deleteMany({
+    await prisma.passwordResets.deleteMany({
       where: { email },
     })
 
@@ -43,7 +45,7 @@ export async function POST(req: NextRequest) {
     )
 
     // Create password reset token record
-    await prisma.passwordReset.create({
+    await prisma.passwordResets.create({
       data: {
         email,
         token,

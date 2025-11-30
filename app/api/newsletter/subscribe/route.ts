@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
+import { PrismaClient } from "@prisma/client"
 import jwt from "jsonwebtoken"
 import { sendNewsletterSubscriptionRequestConfirmationEmail, sendAdminNewsletterNotificationEmail } from "@/lib/mailer"
-import { prisma } from "@/lib/prisma"
 
+const prisma = new PrismaClient()
 const ADMIN_EMAIL = "admin@kmerhosting.com"
 
 export async function POST(request: NextRequest) {

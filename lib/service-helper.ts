@@ -1,6 +1,6 @@
-import { prisma as prismaClient } from "@/lib/prisma"
+import { PrismaClient } from "@prisma/client"
 
-const prisma = prismaClient as any
+const prisma = new PrismaClient()
 
 /**
  * Calculates renewal date (now + 365 days)

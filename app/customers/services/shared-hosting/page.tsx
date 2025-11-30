@@ -90,18 +90,10 @@ export default function SharedHostingPage() {
     toast.success("Services refreshed")
   }
 
-  // Helper: Calculate renewal date (created + 365 days)
-  const calculateRenewalDate = (createdAt: string): Date => {
-    const created = new Date(createdAt)
-    const renewal = new Date(created)
-    renewal.setDate(renewal.getDate() + 365)
-    return renewal
-  }
-
-  // Calculate renewal progress percentage (based on created + 365)
-  const calculateRenewalProgress = (createdAt: string): number => {
+  // Calculate renewal progress percentage
+  const calculateRenewalProgress = (createdAt: string, nextRenewalDate: string): number => {
     const created = new Date(createdAt).getTime()
-    const renewal = calculateRenewalDate(createdAt).getTime()
+    const renewal = new Date(nextRenewalDate).getTime()
     const now = Date.now()
     
     const total = renewal - created
@@ -111,9 +103,9 @@ export default function SharedHostingPage() {
     return percentage
   }
 
-  // Calculate days remaining (based on created + 365)
-  const calculateDaysRemaining = (createdAt: string): number => {
-    const renewal = calculateRenewalDate(createdAt).getTime()
+  // Calculate days remaining
+  const calculateDaysRemaining = (nextRenewalDate: string): number => {
+    const renewal = new Date(nextRenewalDate).getTime()
     const now = Date.now()
     const daysRemaining = Math.ceil((renewal - now) / (1000 * 60 * 60 * 24))
     
@@ -121,13 +113,13 @@ export default function SharedHostingPage() {
   }
 
   // Calculate domain renewal progress
-  const calculateDomainRenewalProgress = (createdAt: string): number => {
-    return calculateRenewalProgress(createdAt)
+  const calculateDomainRenewalProgress = (createdAt: string, nextRenewalDate: string): number => {
+    return calculateRenewalProgress(createdAt, nextRenewalDate)
   }
 
   // Calculate domain days remaining
-  const calculateDomainDaysRemaining = (createdAt: string): number => {
-    return calculateDaysRemaining(createdAt)
+  const calculateDomainDaysRemaining = (nextRenewalDate: string): number => {
+    return calculateDaysRemaining(nextRenewalDate)
   }
 
   if (isLoading) {
@@ -179,8 +171,8 @@ export default function SharedHostingPage() {
         ) : (
           <div className="space-y-4 mb-12">
             {services.map((service) => {
-              const renewalProgress = calculateRenewalProgress(service.createdAt)
-              const daysRemaining = calculateDaysRemaining(service.createdAt)
+              const renewalProgress = calculateRenewalProgress(service.createdAt, service.nextRenewalDate)
+              const daysRemaining = calculateDaysRemaining(service.nextRenewalDate)
               const features = JSON.parse(service.features || "[]")
 
               return (
@@ -261,7 +253,7 @@ export default function SharedHostingPage() {
                               Renewal Date
                             </p>
                             <p className="text-sm font-medium text-slate-900 dark:text-white">
-                              {calculateRenewalDate(service.createdAt).toLocaleDateString()}
+                              {new Date(service.nextRenewalDate).toLocaleDateString()}
                             </p>
                           </div>
                           <div>
@@ -269,7 +261,7 @@ export default function SharedHostingPage() {
                               Days Remaining
                             </p>
                             <p className="text-sm font-medium text-teal-600 dark:text-teal-400">
-                              {calculateDaysRemaining(service.createdAt)} days
+                              {daysRemaining} days
                             </p>
                           </div>
                         </div>
@@ -323,8 +315,8 @@ export default function SharedHostingPage() {
                           ) : (
                             <div className="space-y-3">
                               {service.associatedDomains.map((domain) => {
-                                const domainDaysRemaining = calculateDomainDaysRemaining(domain.createdAt)
-                                const domainRenewalProgress = calculateDomainRenewalProgress(domain.createdAt)
+                                const domainDaysRemaining = calculateDomainDaysRemaining(domain.nextRenewalDate)
+                                const domainRenewalProgress = calculateDomainRenewalProgress(domain.createdAt, domain.nextRenewalDate)
 
                                 return (
                                   <div
@@ -362,13 +354,13 @@ export default function SharedHostingPage() {
                                       <div>
                                         <p className="text-slate-600 dark:text-slate-400 text-xs">Renews On</p>
                                         <p className="font-semibold text-slate-900 dark:text-white">
-                                          {calculateRenewalDate(domain.createdAt).toLocaleDateString()}
+                                          {new Date(domain.nextRenewalDate).toLocaleDateString()}
                                         </p>
                                       </div>
                                       <div>
                                         <p className="text-slate-600 dark:text-slate-400 text-xs">Days Left</p>
                                         <p className="font-semibold text-teal-600 dark:text-teal-400">
-                                          {calculateDomainDaysRemaining(domain.createdAt)} days
+                                          {domainDaysRemaining} days
                                         </p>
                                       </div>
                                     </div>

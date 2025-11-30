@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -150,7 +150,7 @@ model ServiceDomain {
   ns1               String            @default("ns1.kmerhosting.com")
   ns2               String            @default("ns2.kmerhosting.com")
   
-  nextRenewalDate   DateTime          @default(now()) // Domain renewal date (will be updated via code to +365 days)
+  nextRenewalDate   DateTime          @default(dbgenerated("DATE_ADD(NOW(), INTERVAL 365 DAY)")) // Domain renewal date (set to createdAt + 365 days via code)
   
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt

@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from "next/server"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import { sendWelcomeEmail } from "@/lib/mailer"
-import { prisma } from "@/lib/prisma"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
 
 export async function POST(req: NextRequest) {
   try {
