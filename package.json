@@ -7,7 +7,7 @@
     "dev": "next dev --webpack",
     "lint": "eslint .",
     "start": "next start",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate && prisma migrate"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
