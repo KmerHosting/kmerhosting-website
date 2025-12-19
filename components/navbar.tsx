@@ -11,24 +11,28 @@ export default function Navbar() {
   const { theme, setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
+  const slugify = (text: string) => {
+    return text.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')
+  }
+
   const services = [
-    { label: "Shared Hosting", href: "#" },
-    { label: "Reseller Hosting", href: "#" },
-    { label: "VPS Servers", href: "#" },
-    { label: "Cloud VDS", href: "#" },
-    { label: "Dedicated Servers", href: "#" },
-    { label: "Student Hosting", href: "#" },
-    { label: "Email Hosting", href: "#" },
-    { label: "WordPress Hosting", href: "#" },
-    { label: "Laravel Hosting", href: "#" },
-    { label: "LLM & AI Hosting", href: "#" },
+    { label: "Shared Hosting", href: `/pricing#${slugify("Shared Hosting")}` },
+    { label: "Reseller Hosting", href: `/pricing#${slugify("Reseller Hosting")}` },
+    { label: "VPS Servers", href: `/pricing#${slugify("VPS Servers")}` },
+    { label: "Cloud VDS", href: `/pricing#${slugify("Cloud VDS")}` },
+    { label: "Dedicated Servers", href: `/pricing#${slugify("Dedicated Servers")}` },
+    { label: "Student Hosting", href: `/pricing#${slugify("Student Hosting")}` },
+    { label: "Email Hosting", href: `/pricing#${slugify("Email Hosting")}` },
+    { label: "WordPress Hosting", href: `/pricing#${slugify("WordPress Hosting")}` },
+    { label: "Laravel Hosting", href: `/pricing#${slugify("Laravel Hosting")}` },
+    { label: "LLM & AI Hosting", href: `/pricing#${slugify("LLM & AI Hosting")}` },
   ]
 
   // Avoid hydration mismatch: only render theme-dependent UI after mount
   useEffect(() => setMounted(true), [])
 
   return (
-    <nav className="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -45,14 +49,15 @@ export default function Navbar() {
             <div className="relative group">
               <button
                 onClick={() => setShowServicesMenu(!showServicesMenu)}
-                className="flex items-center gap-1 text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer"
+                className="flex items-center gap-1 text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer relative pb-1 group"
               >
                 Services
                 <ChevronDown className="w-4 h-4" />
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
               </button>
 
               {/* Services Dropdown */}
-              <div className="absolute left-0 mt-0 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-slate-200 dark:border-slate-700 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div className="absolute left-0 mt-0 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-2xl border border-slate-200 dark:border-slate-700 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 group-hover:shadow-2xl">
                 {services.map((service, idx) => (
                   <Link
                     key={idx}
@@ -65,17 +70,25 @@ export default function Navbar() {
               </div>
             </div>
 
-            <Link href="#" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
+            <Link href="/pricing" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer relative pb-1 group">
               Pricing
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            <Link href="#" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
+            <Link href="/about" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer relative pb-1 group">
               About Us
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            <Link href="#" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
+            <Link href="/faq" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer relative pb-1 group">
               FAQ
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            <Link href="#" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
+            <Link href="/contact" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer relative pb-1 group">
               Contact
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+            <Link href="/docs" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer relative pb-1 group">
+              Docs
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
             </Link>
 
             {/* Theme toggle */}
@@ -142,17 +155,20 @@ export default function Navbar() {
               )}
             </div>
 
-            <Link href="#" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
+            <Link href="/pricing" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
               Pricing
             </Link>
-            <Link href="#" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
+            <Link href="/about" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
               About Us
             </Link>
-            <Link href="#" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
+            <Link href="/faq" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
               FAQ
             </Link>
             <Link href="/" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer" onClick={() => setIsOpen(false)}>
               Contact
+            </Link>
+            <Link href="/docs" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
+              Docs
             </Link>
 
             <div className="flex flex-col gap-3 pt-3 border-t border-slate-200 dark:border-slate-700">

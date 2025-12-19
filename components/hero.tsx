@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Typewriter } from "@/components/typewriter"
+import { Cloud } from "lucide-react"
 
 export default function Hero() {
   const taglines = [
@@ -14,7 +15,7 @@ export default function Hero() {
   ]
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 px-4 py-20">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 px-4 py-20 pt-32">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
           <div className="flex items-center gap-3">
@@ -38,7 +39,8 @@ export default function Hero() {
 
           <div className="flex gap-4 pt-4">
             <a href="#">
-              <Button size="lg" variant="outline" className="cursor-pointer hover:bg-[#128C7E] hover:!text-white transition-all px-10 py-7 text-base font-semibold border-2" style={{ color: "#128C7E", borderColor: "#128C7E" }}>
+              <Button size="lg" variant="outline" className="cursor-pointer hover:bg-[#128C7E] hover:!text-white transition-all px-10 py-7 text-base font-semibold border-2 flex items-center gap-2 group" style={{ color: "#128C7E", borderColor: "#128C7E" }}>
+                <Cloud className="w-5 h-5 transition-transform duration-300 group-hover:scale-125" />
                 Try for Free
               </Button>
             </a>
@@ -59,7 +61,7 @@ export default function Hero() {
             </div>
             <div>
               <div className="font-bold text-xl" style={{ color: "#128C7E" }}>
-                Free Domain + SSL
+                1 Free Domain .com (Annual billing) + SSL
               </div>
               <div className="text-slate-600 dark:text-slate-400">All Plans</div>
             </div>

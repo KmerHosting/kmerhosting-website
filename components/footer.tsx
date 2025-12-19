@@ -196,22 +196,22 @@ export default function Footer() {
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-slate-700 dark:text-slate-400">
                 <li>
-                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="/about" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     About Us
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="/faq" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     FAQ
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="/blog" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     Blog
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="/support" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     Support
                   </a>
                 </li>
