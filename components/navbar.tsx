@@ -1,66 +1,31 @@
 "use client"
 
 import Link from "next/link"
-import { Menu, X, Sun, Moon, LogIn, UserPlus, User, LogOut, LayoutDashboard } from "lucide-react"
+import { Menu, X, Sun, Moon, ChevronDown, ShoppingCart, LogIn, UserPlus } from "lucide-react"
 import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
-import { useRouter } from "next/navigation"
-import { toast } from "sonner"
-import ContactDepartmentDialog from "./contact-department-dialog"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [showContactDialog, setShowContactDialog] = useState(false)
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [isLoadingAuth, setIsLoadingAuth] = useState(true)
-  const [userInfo, setUserInfo] = useState<{ username?: string; email?: string } | null>(null)
-  const [showUserMenu, setShowUserMenu] = useState(false)
+  const [showServicesMenu, setShowServicesMenu] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const router = useRouter()
+
+  const services = [
+    { label: "Shared Hosting", href: "#" },
+    { label: "Reseller Hosting", href: "#" },
+    { label: "VPS Servers", href: "#" },
+    { label: "Cloud VDS", href: "#" },
+    { label: "Dedicated Servers", href: "#" },
+    { label: "Student Hosting", href: "#" },
+    { label: "Email Hosting", href: "#" },
+    { label: "WordPress Hosting", href: "#" },
+    { label: "Laravel Hosting", href: "#" },
+    { label: "LLM & AI Hosting", href: "#" },
+  ]
 
   // Avoid hydration mismatch: only render theme-dependent UI after mount
   useEffect(() => setMounted(true), [])
-
-  // Check authentication status
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await fetch("/api/auth/me")
-        if (res.ok) {
-          const data = await res.json()
-          if (data.authenticated && data.user) {
-            setIsAuthenticated(true)
-            setUserInfo(data.user)
-          }
-        }
-      } catch (err) {
-        console.error("Auth check error:", err)
-      } finally {
-        setIsLoadingAuth(false)
-      }
-    }
-
-    checkAuth()
-  }, [])
-
-  const handleLogout = async () => {
-    try {
-      const res = await fetch("/api/auth/logout", { method: "POST" })
-      if (res.ok) {
-        toast.success("Logged out successfully!", { duration: 5000 })
-        setIsAuthenticated(false)
-        setUserInfo(null)
-        setShowUserMenu(false)
-        setTimeout(() => {
-          router.push("/")
-        }, 500)
-      }
-    } catch (err) {
-      console.error("Logout error:", err)
-      toast.error("Logout failed", { duration: 5000 })
-    }
-  }
 
   return (
     <nav className="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm">
@@ -77,84 +42,68 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
-            <Link href="#pricing" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
+            <div className="relative group">
+              <button
+                onClick={() => setShowServicesMenu(!showServicesMenu)}
+                className="flex items-center gap-1 text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer"
+              >
+                Services
+                <ChevronDown className="w-4 h-4" />
+              </button>
+
+              {/* Services Dropdown */}
+              <div className="absolute left-0 mt-0 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-slate-200 dark:border-slate-700 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                {services.map((service, idx) => (
+                  <Link
+                    key={idx}
+                    href={service.href}
+                    className="block px-4 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-primary transition-colors text-sm"
+                  >
+                    {service.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <Link href="#" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
               Pricing
             </Link>
-            <Link href="/about" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
+            <Link href="#" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
               About Us
             </Link>
-            <Link href="/faq" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
+            <Link href="#" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
               FAQ
             </Link>
-            <button onClick={() => setShowContactDialog(true)} className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
+            <Link href="#" className="text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
               Contact
-            </button>
+            </Link>
 
             {/* Theme toggle */}
             <button
               aria-label="Toggle theme"
               onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-              className="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer hover:shadow-sm"
             >
               {mounted && (resolvedTheme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-300" />)}
             </button>
 
-            {/* User dropdown or CTA Button */}
-            {isLoadingAuth ? (
-              // Skeleton loader while checking auth
-              <div className="w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-lg animate-pulse"></div>
-            ) : isAuthenticated && userInfo ? (
-              <div className="relative">
-                <button
-                  onClick={() => setShowUserMenu(!showUserMenu)}
-                  className="flex items-center gap-2 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-                >
-                  <User className="w-5 h-5 text-slate-700 dark:text-slate-300" />
-                </button>
+            {/* Cart Button */}
+            <Link href="/cart" className="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors relative">
+              <ShoppingCart className="w-5 h-5 text-slate-700 dark:text-slate-300" />
+              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+            </Link>
 
-                {/* Dropdown menu */}
-                {showUserMenu && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 py-2 z-50">
-                    <div className="px-4 py-2 border-b border-slate-200 dark:border-slate-700">
-                      <p className="font-medium text-slate-900 dark:text-white text-sm">
-                        {userInfo.username || "User"}
-                      </p>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">
-                        {userInfo.email}
-                      </p>
-                    </div>
-
-                    <Link
-                      href="/customers/dashboard"
-                      className="flex items-center gap-2 px-4 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors text-sm"
-                      onClick={() => setShowUserMenu(false)}
-                    >
-                      <LayoutDashboard className="w-4 h-4" />
-                      Dashboard
-                    </Link>
-
-                    <button
-                      onClick={handleLogout}
-                      className="w-full flex items-center gap-2 px-4 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-sm cursor-pointer"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : !isLoadingAuth ? (
-              <div className="flex items-center gap-2">
-                <Link href="/login" className="flex items-center gap-2 px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
-                  <LogIn className="w-4 h-4" />
-                  Login
-                </Link>
-                <Link href="/signup" className="flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-all cursor-pointer" style={{ backgroundColor: "#128C7E", color: "white" }}>
-                  <UserPlus className="w-4 h-4" />
-                  Sign up
-                </Link>
-              </div>
-            ) : null}
+            {/* Auth Buttons */}
+            <div className="flex gap-3 ml-4 pl-4 border-l border-slate-200 dark:border-slate-700">
+              <Link href="/login" className="flex items-center gap-1 px-4 py-2 text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+                <LogIn className="w-4 h-4" />
+                <span className="hidden sm:inline">Login</span>
+              </Link>
+              <Link href="/register" className="flex items-center gap-1 px-4 py-2 text-white font-medium rounded-lg transition-colors cursor-pointer" style={{ backgroundColor: "#128C7E" }} onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#0f6d60")} onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#128C7E")}>
+                <UserPlus className="w-4 h-4" />
+                <span className="hidden sm:inline">Register</span>
+              </Link>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -166,84 +115,76 @@ export default function Navbar() {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden pb-4 space-y-3">
-            <Link href="#pricing" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
+            <div>
+              <button
+                onClick={() => setShowServicesMenu(!showServicesMenu)}
+                className="w-full text-left text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer flex items-center justify-between"
+              >
+                Services
+                <ChevronDown className={`w-4 h-4 transition-transform ${showServicesMenu ? 'rotate-180' : ''}`} />
+              </button>
+              {showServicesMenu && (
+                <div className="pl-4 space-y-2 mt-2 border-l border-slate-200 dark:border-slate-700">
+                  {services.map((service, idx) => (
+                    <Link
+                      key={idx}
+                      href={service.href}
+                      className="block text-slate-600 dark:text-slate-400 hover:text-primary text-sm py-1 cursor-pointer"
+                      onClick={() => {
+                        setIsOpen(false)
+                        setShowServicesMenu(false)
+                      }}
+                    >
+                      {service.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link href="#" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
               Pricing
             </Link>
-            <Link href="/about" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
+            <Link href="#" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
               About Us
             </Link>
-            <Link href="/faq" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
+            <Link href="#" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
               FAQ
             </Link>
-            <button onClick={() => { setShowContactDialog(true); setIsOpen(false); }} className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer">
+            <Link href="/" className="block text-slate-700 dark:text-slate-300 hover:text-primary font-medium py-2 cursor-pointer" onClick={() => setIsOpen(false)}>
               Contact
-            </button>
+            </Link>
 
             <div className="flex flex-col gap-3 pt-3 border-t border-slate-200 dark:border-slate-700">
               {/* Mobile theme toggle */}
               <button
                 aria-label="Toggle theme"
                 onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-                className="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-left"
+                className="px-4 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-left flex items-center gap-2 cursor-pointer hover:shadow-sm"
               >
                 {mounted && (resolvedTheme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700 dark:text-slate-300" />)}
+                <span className="text-slate-700 dark:text-slate-300 font-medium">Theme</span>
               </button>
 
-              {/* Mobile User Menu */}
-              {isLoadingAuth ? (
-                <div className="space-y-2">
-                  <div className="h-4 w-32 bg-slate-200 dark:bg-slate-700 rounded animate-pulse"></div>
-                  <div className="h-4 w-40 bg-slate-200 dark:bg-slate-700 rounded animate-pulse"></div>
-                </div>
-              ) : isAuthenticated && userInfo ? (
-                <>
-                  <div className="px-2 py-2 border border-slate-200 dark:border-slate-700 rounded-lg">
-                    <p className="font-medium text-slate-900 dark:text-white text-sm">
-                      {userInfo.username || "User"}
-                    </p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                      {userInfo.email}
-                    </p>
-                  </div>
+              {/* Mobile Cart */}
+              <Link href="/cart" onClick={() => setIsOpen(false)} className="flex items-center gap-2 px-4 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors font-medium cursor-pointer hover:shadow-sm">
+                <ShoppingCart className="w-5 h-5" />
+                <span>Cart</span>
+              </Link>
 
-                  <Link
-                    href="/customers/dashboard"
-                    className="flex items-center gap-2 px-4 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <LayoutDashboard className="w-4 h-4" />
-                    Dashboard
-                  </Link>
-
-                  <button
-                    onClick={() => {
-                      handleLogout()
-                      setIsOpen(false)
-                    }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
-                  >
-                    <LogOut className="w-4 h-4" />
-                    Logout
-                  </button>
-                </>
-              ) : !isLoadingAuth ? (
-                <div className="flex gap-2">
-                  <Link href="/login" className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-colors cursor-pointer">
-                    <LogIn className="w-4 h-4" />
-                    Login
-                  </Link>
-                  <Link href="/signup" className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg font-medium transition-all cursor-pointer" style={{ backgroundColor: "#128C7E", color: "white" }}>
-                    <UserPlus className="w-4 h-4" />
-                    Sign up
-                  </Link>
-                </div>
-              ) : null}
+              {/* Mobile Auth Buttons */}
+              <Link href="/login" onClick={() => setIsOpen(false)} className="flex items-center justify-center gap-2 px-4 py-3 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium rounded-lg transition-colors cursor-pointer border border-slate-200 dark:border-slate-700 hover:shadow-sm">
+                <LogIn className="w-5 h-5" />
+                <span>Login</span>
+              </Link>
+              <Link href="/register" onClick={() => setIsOpen(false)} className="flex items-center justify-center gap-2 px-4 py-3 text-white font-medium rounded-lg transition-all cursor-pointer hover:shadow-md" style={{ backgroundColor: "#128C7E" }} onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#0f6d60")} onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#128C7E")}>
+                <UserPlus className="w-5 h-5" />
+                <span>Register</span>
+              </Link>
             </div>
           </div>
         )}
       </div>
-
-      <ContactDepartmentDialog isOpen={showContactDialog} onClose={() => setShowContactDialog(false)} />
     </nav>
   ) 
 }

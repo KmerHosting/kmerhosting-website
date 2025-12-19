@@ -1,12 +1,17 @@
 "use client"
 
-import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import DemoRequestDialog from "@/components/demo-request-dialog"
+import { Typewriter } from "@/components/typewriter"
 
 export default function Hero() {
-  const [showDemoDialog, setShowDemoDialog] = useState(false)
+  const taglines = [
+    "Reliable web hosting built for Cameroonians",
+    "Fast hosting with lightning-speed performance",
+    "24/7 Support in English & French",
+    "Free domain and SSL certificate included",
+    "99.9% uptime guarantee",
+  ]
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 px-4 py-20">
@@ -14,13 +19,13 @@ export default function Hero() {
         <div className="space-y-6">
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#128C7E" }}></div>
-            <span className="text-sm font-semibold" style={{ color: "#128C7E" }}>
-              Reliable web hosting built for Cameroonians
+            <span className="text-sm font-semibold min-h-6" style={{ color: "#128C7E" }}>
+              <Typewriter phrases={taglines} speed={40} deleteSpeed={20} delayBetween={2500} />
             </span>
           </div>
 
           <h1 className="text-5xl md:text-6xl font-bold leading-tight text-pretty text-slate-900 dark:text-white">
-            The best web hosting solution
+            Cloud made simpler, faster, and more secure.
             <span className="block" style={{ color: "#128C7E" }}>
               in Cameroon
             </span>
@@ -32,17 +37,9 @@ export default function Hero() {
           </p>
 
           <div className="flex gap-4 pt-4">
-            <Button 
-              size="lg" 
-              className="text-white font-semibold cursor-pointer hover:opacity-90 transition-opacity px-8 py-6" 
-              style={{ backgroundColor: "#128C7E" }}
-              onClick={() => setShowDemoDialog(true)}
-            >
-              Try for Free
-            </Button>
-            <a href="/about">
-              <Button size="lg" variant="outline" className="cursor-pointer hover:bg-[#128C7E] hover:!text-white transition-all px-8 py-6" style={{ color: "#128C7E", borderColor: "#128C7E" }}>
-                Learn More
+            <a href="#">
+              <Button size="lg" variant="outline" className="cursor-pointer hover:bg-[#128C7E] hover:!text-white transition-all px-10 py-7 text-base font-semibold border-2" style={{ color: "#128C7E", borderColor: "#128C7E" }}>
+                Try for Free
               </Button>
             </a>
           </div>
@@ -80,8 +77,6 @@ export default function Hero() {
           />
         </div>
       </div>
-
-      <DemoRequestDialog isOpen={showDemoDialog} onClose={() => setShowDemoDialog(false)} />
     </div>
   )
 }

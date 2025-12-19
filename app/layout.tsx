@@ -2,8 +2,6 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
-import { ThemeProvider } from '@/components/theme-provider'
-import { Toaster } from '@/components/ui/sonner'
 import LayoutWrapper from '@/app/layout-wrapper'
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -114,11 +112,8 @@ export default function RootLayout({
         <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
       <body className={`font-sans antialiased`}>
-        <ThemeProvider>
-          <LayoutWrapper>{children}</LayoutWrapper>
-          <Toaster />
-          <Analytics />
-        </ThemeProvider>
+        <LayoutWrapper>{children}</LayoutWrapper>
+        <Analytics />
       </body>
     </html>
   )

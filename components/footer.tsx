@@ -1,17 +1,13 @@
 "use client"
 
-import { CheckCircle2, Mail, Send, Facebook, Twitter, Instagram, Linkedin, Cookie, Youtube, Github } from "lucide-react"
+import { CheckCircle2, Mail, Send, Facebook, Twitter, Instagram, Linkedin, Youtube, Github, Phone } from "lucide-react"
 import { useState } from "react"
 import Image from "next/image"
-import { useCookieBanner } from "@/lib/cookie-context"
-import ContactDepartmentDialog from "@/components/contact-department-dialog"
 
 export default function Footer() {
-  const { showCookieBanner } = useCookieBanner()
   const [email, setEmail] = useState("")
   const [subscribed, setSubscribed] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [showContactDialog, setShowContactDialog] = useState(false)
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -68,14 +64,17 @@ export default function Footer() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={isLoading}
-                className="flex-1 sm:flex-none px-3 py-2 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 rounded-full border border-slate-300 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-teal-500 transition-all text-sm w-full sm:w-56 disabled:opacity-50"
+                className="flex-1 sm:flex-none px-3 py-2 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 rounded-full border border-slate-300 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-[#128C7E] dark:focus:ring-[#128C7E] transition-all text-sm w-full sm:w-56 disabled:opacity-50"
               />
               <button
                 type="submit"
                 disabled={isLoading}
-                className="px-5 py-2 rounded-full font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap bg-blue-600 hover:bg-blue-700 text-white text-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                className="px-5 py-2 rounded-full font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap text-white text-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer group"
+                style={{ backgroundColor: "#128C7E" }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#0f6d60")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#128C7E")}
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span className="hidden sm:inline">Subscribe</span>
               </button>
             </form>
@@ -136,23 +135,58 @@ export default function Footer() {
               <h4 className="font-semibold mb-4">Products</h4>
               <ul className="space-y-2 text-slate-700 dark:text-slate-400">
                 <li>
-                  <a href="/shared-hosting" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     Shared Hosting
                   </a>
                 </li>
                 <li>
-                  <a href="/reseller-hosting" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     Reseller Hosting
                   </a>
                 </li>
                 <li>
-                  <a href="/vps-hosting" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     VPS Servers
                   </a>
                 </li>
                 <li>
-                  <a href="/dedicated-servers" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    VDS Hosting
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     Dedicated Servers
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Student Hosting
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Email Hosting
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    WordPress Hosting
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Laravel Hosting
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    LLM & AI Hosting
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Domain Checker
                   </a>
                 </li>
               </ul>
@@ -162,32 +196,29 @@ export default function Footer() {
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-slate-700 dark:text-slate-400">
                 <li>
-                  <a href="/about" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     About Us
                   </a>
                 </li>
                 <li>
-                  <a href="/faq" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     FAQ
                   </a>
                 </li>
                 <li>
-                  <a href="https://blog.kmerhosting.com" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     Blog
                   </a>
                 </li>
                 <li>
-                  <a href="/customers/chat" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
-                    Chat Room
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Support
                   </a>
                 </li>
                 <li>
-                  <button
-                    onClick={() => setShowContactDialog(true)}
-                    className="hover:text-slate-900 dark:hover:text-teal-400 transition cursor-pointer font-normal text-left"
-                  >
-                    Support
-                  </button>
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Documentation
+                  </a>
                 </li>
               </ul>
             </div>
@@ -196,23 +227,28 @@ export default function Footer() {
               <h4 className="font-semibold mb-4">Legal</h4>
               <ul className="space-y-2 text-slate-700 dark:text-slate-400">
                 <li>
-                  <a href="/legal/privacy-policy" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a href="/legal/terms-of-service" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     Terms of Service
                   </a>
                 </li>
                 <li>
-                  <a href="/legal/cookies-policy" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     Cookies Policy
                   </a>
                 </li>
                 <li>
-                  <a href="/legal/refund-policy" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
                     Refund Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-slate-900 dark:hover:text-teal-400 transition">
+                    Changelog
                   </a>
                 </li>
               </ul>
@@ -225,6 +261,12 @@ export default function Footer() {
                   <Mail className="w-4 h-4 mt-1 flex-shrink-0" style={{ color: "#128C7E" }} />
                   <a href="mailto:support@kmerhosting.com" className="hover:text-slate-900 dark:hover:text-teal-400 transition cursor-pointer">
                     support@kmerhosting.com
+                  </a>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Phone className="w-4 h-4 mt-1 flex-shrink-0" style={{ color: "#128C7E" }} />
+                  <a href="https://wa.me/237694193493" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 dark:hover:text-teal-400 transition cursor-pointer">
+                    +237 694 193 493
                   </a>
                 </li>
                 <li>10ème arrêt Nkoabang,<br />Yaoundé, Cameroon</li>
@@ -259,13 +301,6 @@ export default function Footer() {
                   </a>
                 </div>
               </div>
-              <button
-                onClick={showCookieBanner}
-                className="flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 rounded-lg transition-colors text-sm text-slate-900 dark:text-slate-200 cursor-pointer"
-              >
-                <Cookie className="w-4 h-4" />
-                Manage Cookies
-              </button>
             </div>
           </div>
 
@@ -276,8 +311,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-
-      <ContactDepartmentDialog isOpen={showContactDialog} onClose={() => setShowContactDialog(false)} />
     </footer>
   )
 }
